@@ -1,0 +1,162 @@
+---
+const suggestions = [
+  { q: "Who is Olanike?", label: "Who is she?" },
+  { q: "What has Olanike built?", label: "What has she built?" },
+  { q: "What is Olanike great at?", label: "What's she great at?" },
+  { q: "How do I get in touch with Olanike?", label: "How do I reach her?" },
+];
+---
+
+<div class="ask-card-wrap" id="ask-card-wrap">
+  <form class="ask-card" id="ask-card" autocomplete="off">
+    <div class="ask-card-inner">
+      <input
+        type="text"
+        name="question"
+        class="ask-input"
+        placeholder="Ask me anything…"
+        maxlength="200"
+        aria-label="Ask a question about Olanike"
+        required
+      />
+      <button type="submit" class="ask-submit" aria-label="Send question">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="ask-suggestions">
+      {suggestions.map((s) => (
+        <button type="button" class="ask-chip" data-q={s.q}>{s.label}</button>
+      ))}
+    </div>
+  </form>
+</div>
+
+<script>
+  import "./askCard.js"
+</script>
+
+<style>
+  .ask-card-wrap {
+    position: fixed;
+    top: var(--ask-card-top, 32vh);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(90vw, 460px);
+    z-index: 50;
+  }
+
+  .ask-card-wrap.busy {
+    pointer-events: none;
+  }
+
+  .ask-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ask-card-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    border-radius: 999px;
+    background: var(--tarot-gradient);
+  }
+
+  .ask-card-inner::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: inherit;
+    background-color: var(--ink);
+    z-index: 0;
+  }
+
+  .ask-input {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--secondary-font);
+    font-size: 0.95rem;
+    padding: 12px 6px 12px 20px;
+  }
+
+  .ask-input::placeholder {
+    color: var(--muted-text);
+  }
+
+  .ask-input:disabled {
+    opacity: 0.6;
+  }
+
+  .ask-submit {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    margin-right: 6px;
+    border: none;
+    border-radius: 50%;
+    background: var(--tarot-gradient);
+    color: var(--ink);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+
+  .ask-submit:hover {
+    transform: scale(1.06);
+  }
+
+  .ask-submit:focus-visible {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 3px #fff4, 0 0 0 5px var(--orchid);
+  }
+
+  .ask-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .ask-chip {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 5px 12px;
+    color: var(--muted-text);
+    font-family: var(--secondary-font);
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .ask-chip:hover,
+  .ask-chip:focus-visible {
+    color: var(--text);
+    border-color: var(--orchid);
+  }
+
+  @media (max-width: 480px) {
+    .ask-card-wrap {
+      top: var(--ask-card-top-mobile, 22vh);
+      width: min(92vw, 360px);
+    }
+
+    .ask-suggestions {
+      display: none;
+    }
+  }
+</style>

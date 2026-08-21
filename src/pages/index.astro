@@ -1,54 +1,16 @@
 ---
-import { getCollection } from 'astro:content'
 import Base from '../layouts/Base.astro'
 import Navigation from '../components/Navigation.astro'
-import TarotCard from '../components/tarotCard/TarotCard.astro'
-
-const projectEntries = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order)
-
-// Position within a category drives the tarot numeral (I, II, III…).
-function getCardPosition(entry, entries) {
-  const sameCategory = entries.filter((e) => e.data.category === entry.data.category)
-  return sameCategory.indexOf(entry) + 1
-}
-
-function toRoman(position) {
-  const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
-  return romanNumerals[position - 1] ?? String(position)
-}
-
-const projects = projectEntries.map((entry) => ({
-  id: entry.id,
-  ...entry.data,
-  numeral: toRoman(getCardPosition(entry, projectEntries)),
-}))
+import AskCard from '../components/AskCard.astro'
+import SmokeResponse from '../components/SmokeResponse.astro'
 ---
 
   <Base>
       <main>
         <Navigation />
-        <section aria-labelledby="projects-heading">
-          <h2 id="projects-heading" class="visually-hidden">Projects</h2>
-          <ul
-            class="cards-row"
-            role="list"
-            style={`--card-count: ${projects.length}`}>
-            {projects.map((project, index) => (
-              <li
-                data-category={project.category}
-                data-id={project.id}
-                style={`--index: ${index}`}
-              >
-                <TarotCard
-                  numeral={project.numeral}
-                  icon={project.icon}
-                  label={project.projTitle}
-                />
-              </li>
-            ))}
-          </ul>
-        </section>
       </main>
+      <AskCard />
+      <SmokeResponse />
       <div class="character-wrapper">
         <video id="character-intro" autoplay muted playsinline preload="auto">
           <source src="/intro_dark.webm" type="video/webm">
@@ -102,95 +64,10 @@ const projects = projectEntries.map((entry) => ({
         padding-top: calc(25vh + 60px);
         gap: 25vh;
       }
-      /*
-       * --Pb: pivot distance below the card bottom = horizontal semi-axis.
-       * --b:  vertical semi-axis; b < Pb flattens the arc.
-       * tx-b/ty-b place the card BOTTOM CENTRE on the ellipse; tx/ty then
-       * back-calculate the card CENTRE by subtracting the rotated half-height.
-       */
-      .cards-row {
-        list-style: none;
-        padding: 0;
-        margin: 0 auto;
-        position: relative;
-        width: clamp(140px, 7.5vw, 260px);
-        height: clamp(235px, 12.5vw, 435px);
-        --step-angle: 22deg;
-        --Pb: 700px;
-        --b: 280px;
-      }
-      @media (max-width: 1024px) {
-        .cards-row {
-          --step-angle: 11deg;
-          --Pb: 280px;
-          --b: 100px;
-        }
-      }
-      .cards-row li.hidden {
-        opacity: 0;
-        pointer-events: none;
-        visibility: hidden;
-        transform: translate(0, 0) rotate(0deg);
-      }
-      .cards-row li.at-center {
-        transform: translate(0, 0) rotate(0deg);
-        pointer-events: none;
-      }
-      .cards-row.is-animating li {
-        transition: transform 0.6s ease;
-      }
-      @media (max-width: 480px) {
-        .cards-row li.hidden {
-          display: none;
-        }
-      }
-      .cards-row li {
-        position: absolute;
-        top: 0;
-        left: 0;
-        --n: calc(var(--index) - (var(--card-count) - 1) / 2);
-        --arc-angle: calc(var(--n) * var(--step-angle));
-        --tx-b: calc(var(--Pb) * sin(var(--arc-angle)));
-        --ty-b: calc(var(--b) * (1 - cos(var(--arc-angle))));
-        --theta: atan2(var(--tx-b), calc(var(--Pb) - var(--ty-b)));
-        --tx: calc(var(--tx-b) - 117.5px * sin(var(--theta)));
-        --ty: calc(117.5px * (1 - cos(var(--theta))) + var(--ty-b));
-        transform: translate(var(--tx), var(--ty)) rotate(var(--theta));
-        transition: transform 0.4s ease, opacity 0.2s ease;
-        z-index: var(--index);
-      }
-      .cards-row li:hover,
-      .cards-row li:focus-within {
-        z-index: calc(var(--card-count) + 1);
-      }
-      @media (max-width: 1024px) {
-        .cards-row li:hover {
-          z-index: var(--index);
-          transform: translate(var(--tx), calc(var(--ty) - 30px)) rotate(var(--theta));
-        }
-      }
       @media (max-width: 480px) {
         main {
           padding-top: 20dvh;
           padding-inline: 16px;
-        }
-        .cards-row {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          width: 100%;
-          height: auto;
-          gap: 1rem;
-        }
-        .cards-row li {
-          position: static;
-          transform: none;
-          transition: none;
-        }
-        .cards-row li:hover,
-        .cards-row li:focus-within {
-          transform: none;
-          z-index: auto;
         }
       }
 
