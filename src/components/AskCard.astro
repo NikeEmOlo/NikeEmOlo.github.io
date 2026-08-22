@@ -1,13 +1,15 @@
 ---
 const suggestions = [
-  { q: "Who is Olanike?", label: "Who is she?" },
-  { q: "What has Olanike built?", label: "What has she built?" },
-  { q: "What is Olanike great at?", label: "What's she great at?" },
-  { q: "How do I get in touch with Olanike?", label: "How do I reach her?" },
+  { q: "Who am I?", label: "Who am I?" },
+  { q: "What am I working on?", label: "What am I working on?" },
+  { q: "Get me a copy of your CV", label: "Get me a copy of your CV" },
+  { q: "How can you reach me?", label: "How can you reach me?" },
 ];
 ---
 
 <div class="ask-card-wrap" id="ask-card-wrap">
+  <p class="ask-label" aria-hidden="true">Nike's avatar</p>
+  <p class="ask-intro" id="ask-intro" aria-live="off">I am Nike's avatar. You come seeking answers.</p>
   <form class="ask-card" id="ask-card" autocomplete="off">
     <div class="ask-card-inner">
       <input
@@ -27,9 +29,12 @@ const suggestions = [
     </div>
     <div class="ask-suggestions">
       {suggestions.map((s) => (
-        <button type="button" class="ask-chip" data-q={s.q}>{s.label}</button>
+        <button type="button" class="ask-chip" data-q={s.q}>
+          <span class="ask-chip-chevron" aria-hidden="true">›</span> {s.label}
+        </button>
       ))}
     </div>
+    <p class="ask-hint">Press <kbd>Enter</kbd> to send, or click here</p>
   </form>
 </div>
 
@@ -40,15 +45,89 @@ const suggestions = [
 <style>
   .ask-card-wrap {
     position: fixed;
-    top: var(--ask-card-top, 32vh);
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(90vw, 460px);
+    left: var(--ask-card-left, 6vw);
+    bottom: var(--ask-card-bottom, 9vh);
+    width: min(85vw, 420px);
     z-index: 50;
   }
 
   .ask-card-wrap.busy {
     pointer-events: none;
+  }
+
+  .ask-label {
+    margin: 0 0 6px;
+    text-align: left;
+    text-transform: uppercase;
+    background: var(--tarot-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-family: var(--secondary-font);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .ask-intro {
+    margin: 0 0 14px;
+    max-width: 30ch;
+    text-align: left;
+    color: var(--text);
+    font-family: var(--secondary-font);
+    font-size: clamp(1.15rem, 3.4vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.25;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .ask-intro::after {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    margin-left: 3px;
+    background: var(--teal-light);
+    vertical-align: text-bottom;
+    animation: ask-cursor-blink 1s steps(1) infinite;
+  }
+
+  @keyframes ask-cursor-blink {
+    50%, 100% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ask-intro::after {
+      animation: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .ask-intro {
+      animation: ask-intro-in 0.8s ease 0.4s forwards;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ask-intro {
+      opacity: 1;
+    }
+  }
+
+  .ask-intro.hidden {
+    opacity: 0;
+  }
+
+  @keyframes ask-intro-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .ask-card {
@@ -58,26 +137,18 @@ const suggestions = [
   }
 
   .ask-card-inner {
-    position: relative;
     display: flex;
     align-items: center;
-    padding: 3px;
-    border-radius: 999px;
-    background: var(--tarot-gradient);
+    gap: 8px;
+    border-bottom: 1.5px solid rgba(207, 207, 223, 0.25);
+    transition: border-color 0.2s ease;
   }
 
-  .ask-card-inner::before {
-    content: '';
-    position: absolute;
-    inset: 3px;
-    border-radius: inherit;
-    background-color: var(--ink);
-    z-index: 0;
+  .ask-card-inner:has(.ask-input:focus) {
+    border-color: var(--teal-light);
   }
 
   .ask-input {
-    position: relative;
-    z-index: 1;
     flex: 1;
     min-width: 0;
     background: transparent;
@@ -85,8 +156,9 @@ const suggestions = [
     outline: none;
     color: var(--text);
     font-family: var(--secondary-font);
-    font-size: 0.95rem;
-    padding: 12px 6px 12px 20px;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    font-weight: 600;
+    padding: 8px 2px;
   }
 
   .ask-input::placeholder {
@@ -98,64 +170,91 @@ const suggestions = [
   }
 
   .ask-submit {
-    position: relative;
-    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: 34px;
-    height: 34px;
-    margin-right: 6px;
+    width: 26px;
+    height: 26px;
+    margin-right: 2px;
     border: none;
     border-radius: 50%;
-    background: var(--tarot-gradient);
-    color: var(--ink);
+    background: transparent;
+    color: var(--teal-light);
     cursor: pointer;
-    transition: transform 0.15s ease;
+    transition: transform 0.15s ease, color 0.15s ease;
   }
 
   .ask-submit:hover {
-    transform: scale(1.06);
+    transform: translateX(2px);
+    color: var(--text);
   }
 
   .ask-submit:focus-visible {
-    outline: 2px solid transparent;
-    box-shadow: 0 0 0 3px #fff4, 0 0 0 5px var(--orchid);
+    outline: 2px solid var(--teal-light);
+    outline-offset: 2px;
   }
 
   .ask-suggestions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 6px;
   }
 
   .ask-chip {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(207, 207, 223, 0.08);
+    border: none;
     border-radius: 999px;
-    padding: 5px 12px;
+    padding: 6px 14px;
     color: var(--muted-text);
     font-family: var(--secondary-font);
     font-size: 0.75rem;
     cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .ask-chip-chevron {
+    color: var(--teal-light);
   }
 
   .ask-chip:hover,
   .ask-chip:focus-visible {
     color: var(--text);
-    border-color: var(--orchid);
+    background: rgba(207, 207, 223, 0.16);
+  }
+
+  .ask-hint {
+    margin: 0;
+    text-align: left;
+    color: var(--muted-text);
+    font-family: var(--secondary-font);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .ask-hint kbd {
+    font-family: inherit;
+  }
+
+  .ask-hint kbd::before {
+    content: '[';
+  }
+
+  .ask-hint kbd::after {
+    content: ']';
   }
 
   @media (max-width: 480px) {
     .ask-card-wrap {
-      top: var(--ask-card-top-mobile, 22vh);
-      width: min(92vw, 360px);
+      left: var(--ask-card-left-mobile, 5vw);
+      bottom: var(--ask-card-bottom-mobile, 6vh);
+      width: min(90vw, 340px);
     }
 
-    .ask-suggestions {
+    .ask-suggestions,
+    .ask-hint {
       display: none;
     }
   }

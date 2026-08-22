@@ -7,8 +7,21 @@ const CHAT_ENDPOINT = import.meta.env.PUBLIC_CHAT_ENDPOINT || "http://localhost:
 const MAX_HISTORY_MESSAGES = 12;
 const REDUCE_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const INTRO_MESSAGES = [
+    "I am Nike's avatar. You come seeking answers.",
+    "I can show you her past, her present, her... website.",
+    "Ask and you shall receive.",
+    "I can guide you in the right direction",
+];
+const TYPE_MS = 38;
+const DELETE_MS = 22;
+const HOLD_MS = 2200;
+const GAP_MS = 400;
+
 let history = [];
 let busy = false;
+let introTimer = null;
+let introIndex = 0;
 
 function flyAway(wrap) {
     return gsap.to(wrap, {
@@ -18,6 +31,60 @@ function flyAway(wrap) {
         duration: REDUCE_MOTION ? 0.01 : 0.5,
         ease: "power2.in",
     });
+}
+
+function stopIntroRotation() {
+    clearTimeout(introTimer);
+    introTimer = null;
+}
+
+function typeIntro(el) {
+    if (REDUCE_MOTION) {
+        el.textContent = INTRO_MESSAGES[introIndex];
+        introIndex = (introIndex + 1) % INTRO_MESSAGES.length;
+        introTimer = setTimeout(() => typeIntro(el), HOLD_MS + 1000);
+        return;
+    }
+
+    const message = INTRO_MESSAGES[introIndex];
+    let charIndex = 0;
+
+    const typeChar = () => {
+        charIndex++;
+        el.textContent = message.slice(0, charIndex);
+        introTimer = setTimeout(charIndex < message.length ? typeChar : holdThenDelete, TYPE_MS);
+    };
+
+    const holdThenDelete = () => {
+        introTimer = setTimeout(runDelete, HOLD_MS);
+    };
+
+    const runDelete = () => {
+        charIndex--;
+        el.textContent = message.slice(0, charIndex);
+        if (charIndex > 0) {
+            introTimer = setTimeout(runDelete, DELETE_MS);
+        } else {
+            introIndex = (introIndex + 1) % INTRO_MESSAGES.length;
+            introTimer = setTimeout(() => typeIntro(el), GAP_MS);
+        }
+    };
+
+    typeChar();
+}
+
+function startIntroRotation() {
+    const el = document.querySelector("#ask-intro");
+    if (!el) return;
+    stopIntroRotation();
+    introIndex = 0;
+    el.classList.remove("hidden");
+    typeIntro(el);
+}
+
+function hideIntro() {
+    stopIntroRotation();
+    document.querySelector("#ask-intro")?.classList.add("hidden");
 }
 
 function flyBack(wrap) {
@@ -54,6 +121,7 @@ async function handleSubmit(event) {
     busy = true;
     input.disabled = true;
     wrap.classList.add("busy");
+    hideIntro();
 
     await flyAway(wrap);
 
@@ -94,6 +162,7 @@ document.addEventListener("astro:page-load", () => {
     if (!form) return;
     history = [];
     busy = false;
+    startIntroRotation();
     form.addEventListener("submit", handleSubmit);
     bindChips(form);
 });
