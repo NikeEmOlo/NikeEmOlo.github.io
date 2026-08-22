@@ -1,0 +1,1122 @@
+---
+const skills = [
+  "AI-Assisted Automation",
+  "Agentic Workflow Design",
+  "API Integration",
+  "Process Design",
+  "Systems Thinking",
+  "HTML / CSS / JavaScript",
+  "Node.js",
+  "Client Delivery & Coordination",
+  "Workshop Facilitation",
+  "Stakeholder Translation",
+];
+
+const experience = [
+  {
+    company: "The Odin Project",
+    location: "Remote",
+    dates: "2024 — Present",
+    role: "Full-Stack Developer (Training)",
+    keywords: "HTML, CSS, JavaScript, Node.js, Data Structures & Algorithms, SOLID Principles",
+  },
+  {
+    company: "Outer Office",
+    location: "Freelance",
+    dates: "2024 — 2025",
+    role: "Freelance Workflow Consultant",
+    keywords: "Workflow Automation, Microsoft Graph, Google Workspace APIs, OpenAI",
+  },
+  {
+    company: "Highgate Transportation",
+    location: "Bristol, UK",
+    dates: "2023 — 2024",
+    role: "Transport Planner",
+    keywords: "Client Reporting, Regulatory Compliance, Transport Planning Research",
+  },
+  {
+    company: "Auckland Transport",
+    location: "Auckland, NZ",
+    dates: "2021 — 2023",
+    role: "Travel Demand Planner",
+    keywords: "20+ Client Organisations, Pilot Programmes, Stakeholder Workshops, KPI Reporting",
+  },
+  {
+    company: "Asahi Beverages, Auckland Council, IFM Electrical & others",
+    location: "Auckland, NZ",
+    dates: "2020 — 2023",
+    role: "Temp Administration, Research & Hospitality",
+    keywords: "Cross-Industry Temp Roles",
+  },
+  {
+    company: "Coster Content Ltd",
+    location: "Manchester, UK",
+    dates: "2018 — 2020",
+    role: "Copywriter",
+    keywords: "Marketing Agency Copywriting",
+  },
+];
+
+const capabilities = [
+  {
+    title: "AI & Automation",
+    icon: "spark",
+    items: ["AI-Assisted Automation", "Agentic Workflow Design (OpenClaw, Claude)", "API Integration (Graph, Workspace, OpenAI)", "MCP"],
+  },
+  {
+    title: "Process & Systems Design",
+    icon: "flow",
+    items: ["Structured Problem-Solving", "Systems Thinking", "Workflow Optimisation", "Prioritisation Across Workstreams"],
+  },
+  {
+    title: "Full-Stack Development",
+    icon: "code",
+    items: ["HTML, CSS, JavaScript, Node.js", "Data Structures & Algorithms", "SOLID Principles", "Security Fundamentals"],
+  },
+  {
+    title: "Client & Stakeholder Delivery",
+    icon: "chat",
+    items: ["Client Delivery & Coordination", "Workshop Delivery & Onboarding", "Translating Technical Concepts", "Documentation & Reporting"],
+  },
+  {
+    title: "Project & Agile Delivery",
+    icon: "check",
+    items: ["Agile Workflows (ICAgile Certified)", "Project Management (PMI Trained)", "Multi-Stakeholder Coordination"],
+  },
+  {
+    title: "Productivity & Collaboration",
+    icon: "grid",
+    items: ["Microsoft 365, Azure, DevOps", "Google Drive, Dropbox"],
+  },
+];
+
+const focusAreas = [
+  "Workflow Automation & AI",
+  "Full-Stack Web Development",
+  "Client Enablement & Training",
+  "Agile & Project Delivery",
+  "Public Sector & Transport",
+  "Research & Reporting",
+];
+
+const nowItems = [
+  "Deepening full-stack fundamentals — data structures, algorithms, SOLID principles — through The Odin Project.",
+  "Designing agentic AI workflows with OpenClaw, Claude, and MCP to remove repetitive work.",
+  "Automating real workflows for a freelance client using Microsoft Graph, Google Workspace, and OpenAI.",
+  "Open to roles where consulting experience and hands-on build skills both add leverage.",
+];
+
+const certificates = [
+  { title: "ICAgile Certified Professional", meta: "Agile workflows and teamwork · 2022" },
+  { title: "Project Management Institute Training", meta: "Practical project management skills · 2022" },
+];
+
+const icons: Record<string, string> = {
+  chat: `<path d="M3 12c0-4.4 4-8 9-8s9 3.6 9 8-4 8-9 8c-1.1 0-2.2-.2-3.2-.5L4 21l1.3-4.3C3.8 15.4 3 13.8 3 12Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+  flow: `<path d="M4 6h5m0 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0Zm4 0h7M9 18h5m0 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0Zm-9-6h16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+  spark: `<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`,
+  code: `<path d="m9 8-4 4 4 4M15 8l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
+  check: `<path d="M4 12.5 9 17l11-11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+  grid: `<path d="M4 4h6v6H4V4Zm10 0h6v6h-6V4ZM4 14h6v6H4v-6Zm10 0h6v6h-6v-6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>`,
+};
+---
+
+<div class="cv-modal" id="cv-modal" aria-hidden="true">
+  <div class="cv-backdrop" data-cv-close></div>
+  <div class="cv-window" role="dialog" aria-modal="true" aria-labelledby="cv-hero-name" tabindex="-1">
+    <div class="cv-rail">
+      <div class="cv-dots">
+        <button class="cv-dot cv-dot-close" data-cv-close aria-label="Close living CV" type="button"></button>
+        <span class="cv-dot cv-dot-mid" aria-hidden="true"></span>
+        <span class="cv-dot cv-dot-end" aria-hidden="true"></span>
+      </div>
+      <span class="cv-rail-label" aria-hidden="true">LIVE_CV.OLANIKE</span>
+    </div>
+
+    <div class="cv-content" id="cv-content">
+      <div class="cv-progress-track" aria-hidden="true"><div class="cv-progress-bar" id="cv-progress"></div></div>
+
+      <header class="cv-topbar">
+        <span class="cv-contact-placeholder">email@yourdomain.com</span>
+        <nav class="cv-nav" aria-label="Living CV sections">
+          <button data-cv-link="cv-about">About</button>
+          <button data-cv-link="cv-experience">Experience</button>
+          <button data-cv-link="cv-capabilities">Capabilities</button>
+          <button data-cv-link="cv-now">Now</button>
+        </nav>
+        <button class="cv-theme-toggle" id="cv-theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <svg class="cv-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          <svg class="cv-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <a class="cv-download" href="/Olanike-Olowo-Fela-CV.pdf" download>
+          Download CV
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2v8m0 0 3-3m-3 3-3-3M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </header>
+
+      <section class="cv-hero">
+        <h1 id="cv-hero-name">Olanike<br />Olowo-Fela<span class="cv-accent-dot">.</span></h1>
+        <div class="cv-tags">
+          <span>Technology Consultant</span>
+          <span class="cv-tag-sep" aria-hidden="true"></span>
+          <span>Full-Stack Developer</span>
+        </div>
+        <div class="cv-scroll-indicator" aria-hidden="true">
+          <span>Scroll</span>
+          <i></i>
+        </div>
+      </section>
+
+      <section class="cv-section cv-reveal" id="cv-about">
+        <div class="cv-grid-2">
+          <div>
+            <h2>about</h2>
+            <p>
+              I design and ship automation that removes repetitive work — including a multi-agent, agentic AI
+              workflow that cut my own job-search time by 83%.
+            </p>
+            <p>
+              That build-first instinct sits on a background in consulting, service delivery, and project
+              coordination, which lets me bridge the gap between technical and client-facing teams. Naturally
+              process-minded and analytical, I bring both to freelance workflow automation work.
+            </p>
+          </div>
+          <div>
+            <h2>edu.</h2>
+            <p class="cv-edu-degree">Integrated Master's in Geography with International Development</p>
+            <p class="cv-edu-school">University of Manchester</p>
+
+            <h2 class="cv-subheading">skills</h2>
+            <div class="cv-pills">
+              {skills.map((skill) => (
+                <span class="cv-pill">{skill}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cv-section cv-reveal" id="cv-experience">
+        <h2>work experience <span class="cv-heading-suffix">8 Years</span></h2>
+        <ul class="cv-timeline">
+          {experience.map((job) => (
+            <li class="cv-reveal">
+              <div class="cv-timeline-left">
+                <strong>{job.company}</strong>
+                <span>{job.location} · {job.dates}</span>
+              </div>
+              <div class="cv-timeline-right">
+                <strong>{job.role}</strong>
+                <span>{job.keywords}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section cv-reveal" id="cv-capabilities">
+        <h2>capability stack</h2>
+        <div class="cv-cards-grid">
+          {capabilities.map((cap) => (
+            <div class="cv-card cv-reveal">
+              <svg class="cv-card-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" set:html={icons[cap.icon]} />
+              <h3>{cap.title}</h3>
+              <ul>
+                {cap.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="cv-section cv-reveal" id="cv-now">
+        <div class="cv-grid-2">
+          <div>
+            <h2>focus areas</h2>
+            <ol class="cv-numbered">
+              {focusAreas.map((area, i) => (
+                <li><span>{String(i + 1).padStart(2, "0")}</span>{area}</li>
+              ))}
+            </ol>
+          </div>
+          <div>
+            <h2>currently</h2>
+            <div class="cv-now-list">
+              {nowItems.map((item) => (
+                <div class="cv-now-item">
+                  <span class="cv-now-dot" aria-hidden="true"></span>
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="cv-divider-band" aria-hidden="true"></div>
+
+      <section class="cv-section cv-reveal" id="cv-certificates">
+        <h2>certificates</h2>
+        <div class="cv-cert-grid">
+          {certificates.map((cert) => (
+            <div class="cv-cert-card cv-reveal">
+              <h3>{cert.title}</h3>
+              <p>{cert.meta}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <footer class="cv-footer cv-reveal">
+        <h2>Let's connect<span class="cv-accent-dot">.</span></h2>
+        <p class="cv-contact-placeholder">email@yourdomain.com</p>
+
+        <div class="cv-social-links">
+          <a
+            class="cv-social-link"
+            href="https://www.linkedin.com/in/NikeEmilyO/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M6.94 8.5H3.56V20.5H6.94V8.5ZM5.25 3.5C4.1 3.5 3.25 4.36 3.25 5.44C3.25 6.5 4.08 7.38 5.22 7.38H5.25C6.42 7.38 7.25 6.5 7.25 5.44C7.23 4.36 6.42 3.5 5.25 3.5ZM20.5 13.62C20.5 10.31 18.74 8.77 16.4 8.77C14.51 8.77 13.67 9.81 13.19 10.54V8.5H9.81C9.86 9.55 9.81 20.5 9.81 20.5H13.19V13.9C13.19 13.55 13.22 13.19 13.32 12.94C13.6 12.24 14.24 11.51 15.32 11.51C16.73 11.51 17.13 12.6 17.13 14.19V20.5H20.5V13.62Z"/>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+
+          <button
+            class="cv-social-link cv-substack-btn"
+            type="button"
+            id="cv-substack-btn"
+            aria-label="Substack (coming soon)"
+          >
+            <span class="cv-substack-smoke" aria-hidden="true"></span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M4 4h16v3H4V4Zm0 5h16v3H4V9Zm0 5h16v8l-8-4.5L4 22v-8Z"/>
+            </svg>
+            <span class="cv-substack-text">
+              <span class="cv-substack-text-default">Substack</span>
+              <span class="cv-substack-text-alt" aria-hidden="true">Coming soon</span>
+            </span>
+            <span class="visually-hidden" id="cv-substack-status" role="status"></span>
+          </button>
+
+          <a class="cv-download" href="/Olanike-Olowo-Fela-CV.pdf" download>Download CV</a>
+        </div>
+
+        <p class="cv-copyright">© 2026 Olanike Olowo-Fela. All rights reserved.</p>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<script>
+  import "./livingCV.js"
+</script>
+
+<style>
+  .cv-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.35s ease, visibility 0s linear 0.35s;
+  }
+
+  .cv-modal.is-open {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+  }
+
+  .cv-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(3, 5, 10, 0.72);
+    backdrop-filter: blur(6px);
+  }
+
+  .cv-window {
+    --cv-bg: var(--ink);
+    --cv-surface: rgba(255, 255, 255, 0.03);
+    --cv-border: rgba(255, 255, 255, 0.08);
+    --cv-line: rgba(255, 255, 255, 0.2);
+    --cv-text: var(--text);
+    --cv-muted: var(--muted-text);
+    --cv-accent: var(--teal-light);
+    --cv-topbar-bg: rgba(8, 14, 28, 0.85);
+    --cv-progress-track: rgba(255, 255, 255, 0.06);
+    --cv-pill-bg: rgba(207, 207, 223, 0.08);
+    --cv-divider-bg: rgba(0, 0, 0, 0.3);
+
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: min(1080px, 90vw);
+    height: 85vh;
+    max-width: 1400px;
+    background: var(--cv-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    transform: scale(0.94) translateY(12px);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, background 0.3s ease;
+  }
+
+  .cv-window[data-theme="light"] {
+    --cv-bg: var(--cream);
+    --cv-surface: rgba(8, 14, 28, 0.04);
+    --cv-border: rgba(8, 14, 28, 0.1);
+    --cv-line: rgba(8, 14, 28, 0.2);
+    --cv-text: var(--ink);
+    --cv-muted: rgba(8, 14, 28, 0.55);
+    /* --teal-light (#7ECECE) is ~1.6:1 against this background — nowhere near
+       the 4.5:1 (text) / 3:1 (icons, borders) WCAG AA minimums. This darker
+       teal holds ~5:1 against --cream so every accent usage stays legible. */
+    --cv-accent: #1b6f6e;
+    --cv-topbar-bg: rgba(242, 239, 232, 0.85);
+    --cv-progress-track: rgba(8, 14, 28, 0.08);
+    --cv-pill-bg: rgba(8, 14, 28, 0.06);
+    --cv-divider-bg: rgba(8, 14, 28, 0.06);
+  }
+
+  .cv-modal.is-open .cv-window {
+    transform: none;
+    opacity: 1;
+  }
+
+  .cv-window::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--tarot-gradient);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* ── Rail ── */
+  .cv-rail {
+    flex-shrink: 0;
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0;
+    background: var(--cv-surface);
+    border-right: 1px solid var(--cv-border);
+  }
+
+  .cv-dots {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cv-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+  }
+
+  .cv-dot-close {
+    background: var(--cv-accent);
+    cursor: pointer;
+  }
+
+  .cv-dot-mid {
+    background: var(--purple);
+  }
+
+  .cv-dot-end {
+    background: var(--orchid);
+  }
+
+  .cv-rail-label {
+    writing-mode: vertical-rl;
+    margin-top: 18px;
+    font-size: 10px;
+    color: var(--cv-muted);
+    letter-spacing: 0.15em;
+    font-family: var(--secondary-font);
+  }
+
+  /* ── Scrollable content ── */
+  .cv-content {
+    flex: 1;
+    min-width: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+  }
+
+  .cv-content::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cv-progress-track {
+    position: sticky;
+    top: 0;
+    height: 2px;
+    background: var(--cv-progress-track);
+    z-index: 21;
+  }
+
+  .cv-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--tarot-gradient);
+  }
+
+  .cv-topbar {
+    position: sticky;
+    top: 2px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 28px;
+    background: var(--cv-topbar-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--cv-border);
+  }
+
+  .cv-contact-placeholder {
+    color: var(--cv-muted);
+    font-family: var(--secondary-font);
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .cv-nav {
+    display: flex;
+    gap: 20px;
+  }
+
+  .cv-nav button {
+    background: none;
+    border: none;
+    padding: 4px 2px;
+    color: var(--cv-muted);
+    font-family: var(--secondary-font);
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-bottom: 1.5px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .cv-nav button:hover,
+  .cv-nav button.is-active {
+    color: var(--cv-text);
+    border-color: var(--cv-accent);
+  }
+
+  .cv-theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--cv-border);
+    background: var(--cv-surface);
+    color: var(--cv-muted);
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .cv-theme-toggle:hover {
+    color: var(--cv-text);
+    border-color: var(--cv-accent);
+  }
+
+  .cv-icon-sun {
+    display: none;
+  }
+
+  .cv-window[data-theme="light"] .cv-icon-sun {
+    display: block;
+  }
+
+  .cv-window[data-theme="light"] .cv-icon-moon {
+    display: none;
+  }
+
+  .cv-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: var(--tarot-gradient);
+    color: var(--white);
+    font-family: var(--secondary-font);
+    font-weight: 700;
+    font-size: 0.78rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.15s ease;
+  }
+
+  .cv-download:hover {
+    transform: scale(1.04);
+  }
+
+  /* ── Hero ── */
+  .cv-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100% - 51px);
+    padding: 40px 60px;
+  }
+
+  .cv-hero h1 {
+    margin: 0;
+    color: var(--cv-text);
+    font-family: var(--boldonse);
+    font-weight: 400;
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
+    line-height: 1.05;
+  }
+
+  .cv-accent-dot {
+    color: var(--cv-accent);
+  }
+
+  .cv-tags {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+    color: var(--cv-muted);
+    font-family: var(--secondary-font);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-wrap: wrap;
+  }
+
+  .cv-tag-sep {
+    width: 24px;
+    height: 1px;
+    background: var(--cv-line);
+  }
+
+  .cv-scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 56px;
+    color: var(--cv-muted);
+    font-family: var(--secondary-font);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .cv-scroll-indicator i {
+    display: block;
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(var(--cv-accent), transparent);
+  }
+
+  /* ── Sections ── */
+  .cv-section {
+    padding: 56px 60px;
+    border-top: 1px solid var(--cv-border);
+  }
+
+  .cv-section h2 {
+    margin: 0 0 24px;
+    color: var(--cv-text);
+    font-family: var(--boldonse);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    text-transform: lowercase;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid transparent;
+    border-image: var(--tarot-gradient) 1;
+  }
+
+  .cv-heading-suffix {
+    font-family: var(--secondary-font);
+    font-size: 1rem;
+    color: var(--cv-muted);
+    text-transform: none;
+  }
+
+  .cv-subheading {
+    margin-top: 32px;
+  }
+
+  .cv-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .cv-grid-2 p {
+    margin: 0 0 14px;
+    color: var(--cv-text);
+    font-family: var(--secondary-font);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .cv-edu-degree {
+    font-weight: 600;
+  }
+
+  .cv-edu-school {
+    color: var(--cv-muted) !important;
+    font-size: 0.85rem !important;
+  }
+
+  .cv-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cv-pill {
+    background: var(--cv-pill-bg);
+    border-radius: 999px;
+    padding: 6px 14px;
+    color: var(--cv-muted);
+    font-family: var(--secondary-font);
+    font-size: 0.75rem;
+  }
+
+  /* ── Timeline ── */
+  .cv-timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .cv-timeline li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--cv-border);
+  }
+
+  .cv-timeline li:last-child {
+    border-bottom: none;
+  }
+
+  .cv-timeline-left,
+  .cv-timeline-right {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cv-timeline-right {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .cv-timeline strong {
+    color: var(--cv-text);
+    font-family: var(--secondary-font);
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .cv-timeline-left span {
+    color: var(--cv-muted);
+    font-family: var(--secondary-font);
+    font-size: 0.8rem;
+  }
+
+  .cv-timeline-right span {
+    color: var(--cv-accent);
+    font-family: var(--secondary-font);
+    font-size: 0.75rem;
+    max-width: 42ch;
+  }
+
+  /* ── Capability cards ── */
+  .cv-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .cv-card {
+    background: var(--cv-surface);
+    border: 1px solid var(--cv-border);
+    border-radius: 14px;
+    padding: 22px;
+  }
+
+  .cv-card-icon {
+    color: var(--cv-accent);
+    margin-bottom: 12px;
+  }
+
+  .cv-card h3 {
+    margin: 0 0 10px;
+    color: var(--cv-text);
+    font-family: var(--secondary-font);
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .cv-card ul {
+    margin: 0;
+    padding-left: 18px;
+    color: var(--cv-muted);
+    font-family: var(--secondary-font);
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  /* ── Now: focus areas + currently ── */
+  .cv-numbered {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cv-numbered li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--cv-border);
+    color: var(--cv-text);
+    font-family: var(--secondary-font);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .cv-numbered li span {
+    color: var(--cv-accent);
+    font-family: var(--secondary-font);
+    font-size: 0.8rem;
+  }
+
+  .cv-now-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .cv-now-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .cv-now-dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background: var(--cv-accent);
+    animation: cv-now-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes cv-now-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(126, 206, 206, 0.35); }
+    50% { box-shadow: 0 0 0 6px rgba(126, 206, 206, 0); }
+  }
+
+  .cv-now-item p {
+    margin: 0;
+    color: var(--cv-text);
+    font-family: var(--secondary-font);
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  /* ── Divider band ── */
+  .cv-divider-band {
+    height: 40px;
+    background: var(--cv-divider-bg);
+    border-top: 1px solid var(--cv-border);
+    border-bottom: 1px solid var(--cv-border);
+  }
+
+  /* ── Certificates ── */
+  .cv-cert-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .cv-cert-card {
+    background: var(--cv-surface);
+    border: 1px solid var(--cv-border);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+
+  .cv-cert-card h3 {
+    margin: 0 0 6px;
+    color: var(--cv-text);
+    font-family: var(--secondary-font);
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+
+  .cv-cert-card p {
+    margin: 0;
+    color: var(--cv-muted);
+    font-family: var(--secondary-font);
+    font-size: 0.78rem;
+  }
+
+  /* ── Footer ── */
+  .cv-footer {
+    padding: 56px 60px 40px;
+    border-top: 1px solid var(--cv-border);
+  }
+
+  .cv-footer h2 {
+    margin: 0 0 16px;
+    color: var(--cv-text);
+    font-family: var(--boldonse);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  }
+
+  .cv-social-links {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .cv-social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--cv-border);
+    background: var(--cv-surface);
+    color: var(--cv-muted);
+    font-family: var(--secondary-font);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .cv-social-link:hover,
+  .cv-social-link:focus-visible {
+    color: var(--cv-text);
+    border-color: var(--cv-accent);
+    transform: translateY(-1px);
+  }
+
+  .cv-social-link svg {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Substack: smoke-fill + label crossfade (no popup) ── */
+  .cv-substack-btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cv-substack-smoke {
+    position: absolute;
+    inset: -50%;
+    z-index: 0;
+    background: var(--tarot-gradient);
+    opacity: 0;
+    filter: blur(12px);
+    transform: scale(0.5);
+    transition: opacity 1.2s ease, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .cv-substack-btn.is-active {
+    color: var(--white);
+    border-color: transparent;
+  }
+
+  .cv-substack-btn.is-active .cv-substack-smoke {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .cv-substack-text {
+    position: relative;
+    z-index: 1;
+    display: inline-grid;
+  }
+
+  .cv-substack-text > span {
+    grid-area: 1 / 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .cv-substack-text-alt {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  .cv-substack-btn.is-active .cv-substack-text-default {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  .cv-substack-btn.is-active .cv-substack-text-alt {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cv-substack-smoke,
+    .cv-substack-text > span {
+      transition-duration: 0.2s;
+      transition-delay: 0s;
+    }
+  }
+
+  .cv-copyright {
+    margin-top: 36px;
+    padding-top: 16px;
+    border-top: 1px solid var(--cv-border);
+    color: var(--cv-muted);
+    font-family: var(--secondary-font);
+    font-size: 0.72rem;
+  }
+
+  /* ── Scroll reveal ── */
+  .cv-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .cv-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cv-reveal {
+      transition: opacity 0.2s ease;
+      transform: none;
+    }
+    .cv-window {
+      transition: opacity 0.2s ease;
+      transform: none;
+    }
+    .cv-now-dot {
+      animation: none;
+    }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 760px) {
+    .cv-window {
+      width: 96vw;
+      height: 92vh;
+      flex-direction: column-reverse;
+    }
+
+    .cv-rail {
+      flex-direction: row;
+      width: 100%;
+      height: 34px;
+      padding: 0 14px;
+      border-right: none;
+      border-top: 1px solid var(--cv-border);
+    }
+
+    .cv-dots {
+      flex-direction: row;
+    }
+
+    .cv-rail-label {
+      display: none;
+    }
+
+    .cv-topbar {
+      flex-wrap: wrap;
+      padding: 12px 20px;
+    }
+
+    .cv-contact-placeholder {
+      display: none;
+    }
+
+    .cv-nav {
+      order: 1;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .cv-hero,
+    .cv-section,
+    .cv-footer {
+      padding: 36px 24px;
+    }
+
+    .cv-social-links {
+      flex-wrap: wrap;
+    }
+
+    .cv-grid-2,
+    .cv-cards-grid,
+    .cv-cert-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cv-timeline li {
+      grid-template-columns: 1fr;
+    }
+
+    .cv-timeline-right {
+      text-align: left;
+      align-items: flex-start;
+    }
+  }
+</style>
