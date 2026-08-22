@@ -89,6 +89,7 @@ hamburger?.addEventListener('click', () => {
 })
 
 navButtons.forEach(b => b.addEventListener('click', closeMenu))
+document.querySelectorAll('#pages-list button, #pages-list a').forEach(b => b.addEventListener('click', closeMenu))
 
 document.addEventListener('click', e => {
     if (e.target instanceof Element && !e.target.closest('nav')) closeMenu()
