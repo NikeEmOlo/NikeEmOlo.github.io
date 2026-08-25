@@ -48,7 +48,7 @@
     calc(50% - ((var(--shift)*2) * var(--pointer-from-left)) + var(--shift)) calc(50% - ((var(--shift)*2) * var(--pointer-from-top)) + var(--shift)), 
     calc( 25% + (var(--pointer-x) / 2 ) ) calc( 25% + (var(--pointer-y) / 2 ) );
   
-  filter: brightness(calc((var(--pointer-from-center)*0.5) + .75)) contrast(2) saturate(1);
+  filter: brightness(calc((var(--pointer-from-center)*0.6) + .9)) contrast(2.8) saturate(2.2);
 
 }
 
@@ -70,7 +70,7 @@
       var(--r-clr-1)
     );
 
-  background-blend-mode: soft-light;
+  background-blend-mode: color-dodge, soft-light;
   
   background-size: 
     var(--glittersize) var(--glittersize), 
@@ -80,8 +80,8 @@
     calc(50% - ((var(--shift)*2) * var(--pointer-from-left)) - var(--shift)) calc(50% - ((var(--shift)*2) * var(--pointer-from-top)) - var(--shift)), 
     var(--pointer-x) var(--pointer-y);
 
-  filter: brightness(calc((var(--pointer-from-center)*0.35) + 0.35)) contrast(2) saturate(1);
-  mix-blend-mode: exclusion;
+  filter: brightness(calc((var(--pointer-from-center)*0.7) + 0.6)) contrast(2.6) saturate(2.2);
+  mix-blend-mode: color-dodge;
 
 }
 
