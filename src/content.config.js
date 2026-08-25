@@ -23,6 +23,11 @@ const projects = defineCollection({
         buttonTxt: z.string().optional(),
         links: z.record(z.string()).optional(),
         active: z.boolean().default(true),
+        cardBg: z.string().optional(),
+        borderColor: z.string().optional(),
+        imageUrl: z.string().optional(),
+        maskUrl: z.string().optional(),
+        holoEffect: z.string().optional(),
     }),
 });
 

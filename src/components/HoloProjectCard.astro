@@ -203,6 +203,10 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         transition: none;
     }
 
+    .card[data-holo-project-card].flipped .card__rotator {
+        transform: rotateY(180deg) !important;
+    }
+
     .card[data-holo-project-card] .card__shine {
         transition: opacity 0.4s ease;
     }

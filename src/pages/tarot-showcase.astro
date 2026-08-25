@@ -17,21 +17,42 @@ import HoloProjectCard from "../components/HoloProjectCard.astro";
         </header>
 
         <section class="card-stage-section">
-            <!-- The Interactive Holographic Project Card -->
-            <div class="card-display-anchor">
-                <HoloProjectCard
-                    title="AUTOMATING UNEMPLOYMENT"
-                    subtitle="Case Study"
-                    category="Agentic Workflow Implementation"
-                    statLabel="RESULTS"
-                    statValue="85% TIME SAVINGS"
-                    iconSrc="/img/robot-icon.svg"
-                    imageUrl="/holo-card/afro-lounger-art.webp"
-                    maskUrl="/holo-card/afro-lounger-mask.png"
-                    cardBg="#4ca5ac"
-                    borderColor="#1d767d"
-                    borderWidth="16px"
-                />
+            <div class="cards-grid">
+                <!-- Card 1: Automating Unemployment -->
+                <div class="card-display-anchor">
+                    <HoloProjectCard
+                        title="AUTOMATING UNEMPLOYMENT"
+                        subtitle="Case Study"
+                        category="Agentic Workflow Implementation"
+                        statLabel="RESULTS"
+                        statValue="85% TIME SAVINGS"
+                        iconSrc="/img/robot-icon.svg"
+                        imageUrl="/holo-card/afro-lounger-art.webp"
+                        maskUrl="/holo-card/afro-lounger-mask.png"
+                        cardBg="#4ca5ac"
+                        borderColor="#1d767d"
+                        borderWidth="16px"
+                        holoEffect="secret_rare_etched"
+                    />
+                </div>
+
+                <!-- Card 2: How I Made This Website -->
+                <div class="card-display-anchor">
+                    <HoloProjectCard
+                        title="HOW I MADE THIS WEBSITE"
+                        subtitle="Case Study"
+                        category="Creative Web & AI Workflows"
+                        statLabel="TECH STACK"
+                        statValue="ASTRO + CSS SHADERS"
+                        iconSrc="/img/robot-icon.svg"
+                        imageUrl="/holo-card/how-i-made-this-website-art.webp"
+                        maskUrl="/holo-card/how-i-made-this-website-mask.png"
+                        cardBg="#93619C"
+                        borderColor="#8353A3"
+                        borderWidth="16px"
+                        holoEffect="secret_rare_etched"
+                    />
+                </div>
             </div>
         </section>
 
@@ -109,23 +130,22 @@ import HoloProjectCard from "../components/HoloProjectCard.astro";
     .card-stage-section {
         position: relative;
         width: 100%;
-        max-width: 900px;
-        min-height: 520px;
+        max-width: 1100px;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: 20px 0;
     }
 
-    .stage-ambient-glow {
-        position: absolute;
-        width: 440px;
-        height: 440px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(0, 242, 254, 0.18) 0%, rgba(247, 37, 133, 0.12) 40%, transparent 70%);
-        filter: blur(40px);
-        pointer-events: none;
-        z-index: 0;
+    .cards-grid {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+        width: 100%;
+        z-index: 1;
     }
 
     .card-display-anchor {

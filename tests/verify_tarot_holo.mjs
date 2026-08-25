@@ -1,4 +1,6 @@
 import { chromium } from "playwright";
+import path from "node:path";
+import fs from "node:fs";
 
 async function main() {
     const browser = await chromium.launch({ headless: true });
@@ -18,31 +20,37 @@ async function main() {
     await page.goto("http://localhost:4321/tarot-showcase", { waitUntil: "networkidle" });
     await page.waitForTimeout(600);
 
+    const tmpDir = path.resolve(process.cwd(), "../../.tmp");
+    const targetDir = fs.existsSync(path.dirname(tmpDir)) ? tmpDir : path.resolve(process.cwd(), ".tmp");
+    fs.mkdirSync(targetDir, { recursive: true });
+
     // 1. Resting Front View
-    await page.screenshot({ path: ".tmp/tarot-1-resting.png" });
-    console.log("Screenshot 1 (Resting): .tmp/tarot-1-resting.png");
+    await page.screenshot({ path: path.join(targetDir, "tarot-1-resting.png") });
+    console.log(`Screenshot 1 (Resting): ${path.join(targetDir, "tarot-1-resting.png")}`);
 
-    const card = page.locator("[data-holo-project-card], [data-poke-holo-card], .card.interactive").first();
-    const box = await card.boundingBox();
+    const cards = page.locator("[data-holo-project-card]");
+    const card1 = cards.nth(0);
+    const card2 = cards.nth(1);
 
-    if (box) {
-        // 2. Hover Top-Right (Tilt + Spectral Color-Dodge Foil)
-        await page.mouse.move(box.x + box.width * 0.85, box.y + box.height * 0.20);
+    const box2 = await card2.boundingBox();
+    if (box2) {
+        // 2. Hover Card 2 Top-Right (Tilt + Spectral Color-Dodge Foil)
+        await page.mouse.move(box2.x + box2.width * 0.85, box2.y + box2.height * 0.20);
         await page.waitForTimeout(400);
-        await page.screenshot({ path: ".tmp/tarot-2-hover-tilt.png" });
-        console.log("Screenshot 2 (Tilt + Foil): .tmp/tarot-2-hover-tilt.png");
+        await page.screenshot({ path: path.join(targetDir, "tarot-2-hover-tilt.png") });
+        console.log(`Screenshot 2 (Tilt + Foil): ${path.join(targetDir, "tarot-2-hover-tilt.png")}`);
 
-        // 3. Hover Bottom-Left (Spotlight Glare shift)
-        await page.mouse.move(box.x + box.width * 0.20, box.y + box.height * 0.80);
+        // 3. Hover Card 2 Bottom-Left (Spotlight Glare shift)
+        await page.mouse.move(box2.x + box2.width * 0.20, box2.y + box2.height * 0.80);
         await page.waitForTimeout(400);
-        await page.screenshot({ path: ".tmp/tarot-3-hover-glare.png" });
-        console.log("Screenshot 3 (Glare shift): .tmp/tarot-3-hover-glare.png");
+        await page.screenshot({ path: path.join(targetDir, "tarot-3-hover-glare.png") });
+        console.log(`Screenshot 3 (Glare shift): ${path.join(targetDir, "tarot-3-hover-glare.png")}`);
 
-        // 4. Click to Flip to Back Face
-        await card.click();
+        // 4. Click Card 2 to Flip to Back Face
+        await card2.click();
         await page.waitForTimeout(500);
-        await page.screenshot({ path: ".tmp/tarot-4-flipped-back.png" });
-        console.log("Screenshot 4 (Flipped Back): .tmp/tarot-4-flipped-back.png");
+        await page.screenshot({ path: path.join(targetDir, "tarot-4-flipped-back.png") });
+        console.log(`Screenshot 4 (Flipped Back): ${path.join(targetDir, "tarot-4-flipped-back.png")}`);
     }
 
     console.log("Errors:", errors);
