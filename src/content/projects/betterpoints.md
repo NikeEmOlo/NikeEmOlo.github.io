@@ -5,6 +5,10 @@ cardTitle: "Delivery Management"
 projType: "case study"
 icon: "crab"
 category: "delivery"
+summary: "Piloting the BetterPoints behaviour-change app with the operational rigour a live customer trial demands."
+tags: {
+    skills: ["Product Pilot", "Behaviour Change"],
+}
 projectOverview: {
     Task: "Placeholder",
     Obstacles: "Placeholder",

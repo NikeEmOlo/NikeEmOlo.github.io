@@ -5,6 +5,10 @@ cardTitle: "This portfolio"
 projType: "case study"
 icon: "crab"
 category: "development"
+summary: "The making-of: how this very site got built — tarot cards, crab and all."
+tags: {
+    skills: ["Astro", "Web Development"],
+}
 projectOverview: {
     Task: "Placeholder",
     Obstacles: "Placeholder",

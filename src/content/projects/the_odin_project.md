@@ -5,6 +5,10 @@ cardTitle: "Full-stack study"
 projType: "overview & timeline"
 icon: "crab"
 category: "development"
+summary: "A self-directed, project-based path from HTML basics to full-stack JavaScript — this site included."
+tags: {
+    skills: ["Full-Stack JavaScript", "Self-Directed Learning"],
+}
 projectOverview: {
     Task: "Placeholder",
     Obstacles: "Placeholder",

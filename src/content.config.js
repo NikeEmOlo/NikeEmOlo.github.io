@@ -13,6 +13,8 @@ const projects = defineCollection({
         projType: z.enum(["case study", "overview & timeline"]),
         icon: z.enum(["crab"]),
         category: z.enum(CATEGORIES),
+        // Short blurb shown on the /projects list card.
+        summary: z.string().optional(),
         tags: z.record(z.array(z.string())).optional(),
         // The case-study page's summary tabs, e.g. { Task: "…", Goal: "…" }.
         projectOverview: z.record(z.string()).optional(),
