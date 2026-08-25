@@ -277,11 +277,36 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         line-height: 1.08;
         letter-spacing: -0.015em;
         text-transform: uppercase;
-        color: #ffffff;
         margin: 0;
         text-align: left;
         max-width: 90%;
         -webkit-font-smoothing: antialiased;
+
+        /* Prismatic Holographic Foil Text */
+        background-image:
+            linear-gradient(
+                calc(-30deg + calc(var(--pointer-from-left, 0.5) * 60deg)),
+                #ffffff 0%,
+                #ffe066 18%,
+                #00f2fe 36%,
+                #f72585 54%,
+                #7209b7 72%,
+                #ffffff 90%,
+                #4facfe 100%
+            ),
+            radial-gradient(
+                circle at var(--pointer-x, 50%) var(--pointer-y, 35%),
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 255, 255, 0.5) 35%,
+                transparent 70%
+            );
+        background-size: 280% 280%, 100% 100%;
+        background-position: calc(var(--pointer-x, 50%) * 1.4) calc(var(--pointer-y, 35%) * 1.4), center center;
+        background-blend-mode: color-dodge;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
     }
 
     .card-subtitle {
@@ -311,11 +336,36 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         font-size: clamp(1.0rem, 1.5vw, 1.3rem);
         line-height: 1.15;
         letter-spacing: -0.015em;
-        color: #ffffff;
         margin: 0;
         text-align: left;
         max-width: 82%;
         -webkit-font-smoothing: antialiased;
+
+        /* Prismatic Holographic Foil Text */
+        background-image:
+            linear-gradient(
+                calc(-30deg + calc(var(--pointer-from-left, 0.5) * 60deg)),
+                #ffffff 0%,
+                #ffe066 18%,
+                #00f2fe 36%,
+                #f72585 54%,
+                #7209b7 72%,
+                #ffffff 90%,
+                #4facfe 100%
+            ),
+            radial-gradient(
+                circle at var(--pointer-x, 50%) var(--pointer-y, 35%),
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 255, 255, 0.5) 35%,
+                transparent 70%
+            );
+        background-size: 280% 280%, 100% 100%;
+        background-position: calc(var(--pointer-x, 50%) * 1.4) calc(var(--pointer-y, 35%) * 1.4), center center;
+        background-blend-mode: color-dodge;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
     }
 
     .stat-and-icon-row {
