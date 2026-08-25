@@ -244,7 +244,7 @@ Shine & Glare Effects
   background-size: cover;
   background-position: center;
 
-  filter: brightness(1.05) contrast(2.8) saturate(1.8);
+  filter: brightness(.92) contrast(2.6) saturate(1.15);
   mix-blend-mode: color-dodge;
 
   opacity: var(--card-opacity);
