@@ -24,7 +24,7 @@ const {
     iconSrc = "/img/robot-icon.svg",
     imageUrl = "/holo-card/afro-lounger-art.webp",
     maskUrl = "/holo-card/afro-lounger-mask.png",
-    backUrl = "/img/tcg-card-back-2x.jpg",
+    backUrl = "/img/card-back-generic.svg",
     cardBg = "#4ca5ac",
     borderColor = "#1d767d",
     borderWidth = "16px",
@@ -205,6 +205,13 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
 
     .card[data-holo-project-card].flipped .card__rotator {
         transform: rotateY(180deg) !important;
+    }
+
+    .card[data-holo-project-card].flipped .card__shine,
+    .card[data-holo-project-card].flipped .card__glare {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
     }
 
     .card[data-holo-project-card] .card__shine {

@@ -202,11 +202,13 @@ button.card__rotator {
   background-color: var(--card-back);
   -webkit-transform: rotateY(180deg) translateZ(1px);
   transform: rotateY(180deg) translateZ(1px);
-  backface-visibility: visible;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .card__front,
 .card__front * {
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
@@ -249,6 +251,9 @@ Shine & Glare Effects
 
   opacity: var(--card-opacity);
 
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
 }
 
 .card__shine:before,
@@ -265,6 +270,9 @@ Shine & Glare Effects
   transform: translateZ(1px);
   border-radius: var(--card-radius);
 
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
 }
 
 .card__shine:after {
@@ -277,6 +285,9 @@ Shine & Glare Effects
   --sunpillar-clr-6: var( --sunpillar-5 );
 
   transform: translateZ(1.2px);
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   
 }
 
@@ -285,6 +296,9 @@ Shine & Glare Effects
   /* make sure the glare doesn't clip */
   transform: translateZ(1.41px);
   overflow: hidden;
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 
   background-image: radial-gradient(
     farthest-corner circle at var(--pointer-x) var(--pointer-y),
