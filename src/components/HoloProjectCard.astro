@@ -1,0 +1,407 @@
+---
+export interface Props {
+    title?: string;
+    subtitle?: string;
+    category?: string;
+    statLabel?: string;
+    statValue?: string;
+    iconSrc?: string;
+    imageUrl?: string;
+    maskUrl?: string;
+    backUrl?: string;
+    cardBg?: string;
+    borderColor?: string;
+    borderWidth?: string;
+    holoEffect?: string;
+}
+
+const {
+    title = "AUTOMATING UNEMPLOYMENT",
+    subtitle = "Case Study",
+    category = "Agentic Workflow Implementation",
+    statLabel = "RESULTS",
+    statValue = "85% TIME SAVINGS",
+    iconSrc = "/img/robot-icon.svg",
+    imageUrl = "/holo-card/afro-lounger-art.webp",
+    maskUrl = "/holo-card/afro-lounger-mask.png",
+    backUrl = "/img/tcg-card-back-2x.jpg",
+    cardBg = "#4ca5ac",
+    borderColor = "#1d767d",
+    borderWidth = "16px",
+    holoEffect = "secret_rare_etched",
+} = Astro.props;
+---
+
+<!-- Reusable Holographic Project Card Component -->
+<div
+    class="card interactive masked"
+    data-rarity="rare secret"
+    data-set="swsh12pt5"
+    data-number="160"
+    data-holo-project-card
+    style={{
+        "--card-bg": cardBg,
+        "--card-border-color": borderColor,
+        "--card-border-width": borderWidth,
+    }}
+>
+    <div class="card__translater">
+        <button class="card__rotator" aria-label={title} tabindex="0">
+            <!-- Card Back Face -->
+            <img
+                class="card__back"
+                src={backUrl}
+                alt="Card back"
+                loading="lazy"
+                width="600"
+                height="921"
+            />
+
+            <!-- Card Front Face -->
+            <div
+                class="card__front card-base-frame"
+                style={{
+                    "--seedx": "0.14597468026856575",
+                    "--seedy": "0.5188117694209767",
+                    "--cosmosbg": "107px 664px",
+                    "--mask": `url(${maskUrl})`,
+                    "--foil": "url(/img/160_foil_etched_swsecret_foil.webp)",
+                }}
+            >
+                <!-- Central Character Artwork -->
+                <div class="artwork-layer" aria-hidden="true">
+                    <img
+                        class="character-artwork"
+                        src={imageUrl}
+                        alt=""
+                        loading="eager"
+                        width="600"
+                        height="921"
+                    />
+                </div>
+
+                <!-- Structured Semantic Card Content Layout -->
+                <div class="card-inner-layout">
+                    <!-- Top Title Section -->
+                    <div class="title-wrap">
+                        <h1 class="card-title">{title}</h1>
+                        <h3 class="card-subtitle">{subtitle}</h3>
+                    </div>
+
+                    <!-- Bottom Info Section -->
+                    <div class="info-wrap">
+                        <h2 class="category">{category}</h2>
+                        <div class="stat-and-icon-row">
+                            <div class="stat-wrap">
+                                <h6 class="stat">{statLabel}</h6>
+                                <h5 class="fig">{statValue}</h5>
+                            </div>
+                            {iconSrc && <img class="icon" src={iconSrc} alt="" />}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multi-Pass Holographic Foil Layers -->
+            <div
+                class="card__shine"
+                style={{
+                    "--seedx": "0.14597468026856575",
+                    "--seedy": "0.5188117694209767",
+                    "--cosmosbg": "107px 664px",
+                    "--mask": `url(${maskUrl})`,
+                    "--foil": "url(/img/160_foil_etched_swsecret_foil.webp)",
+                }}
+            ></div>
+            <div class="card__glare"></div>
+        </button>
+    </div>
+</div>
+
+<style is:global>
+    @import "/css/poke-holo/base.css";
+    @import "/css/poke-holo/cards.css";
+    @import "/css/poke-holo/swsh-pikachu.css";
+
+    /* Root Card Dimensions & 3D Perspective Anchor */
+    .card[data-holo-project-card] {
+        width: clamp(280px, 30vw, 390px);
+        aspect-ratio: 600 / 921;
+        margin: 0 auto;
+        --card-scale: 1;
+        border-radius: 24px;
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    .card[data-holo-project-card] .card__rotator {
+        cursor: pointer;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transform-style: preserve-3d;
+        will-change: transform;
+    }
+
+    .card[data-holo-project-card].interacting .card__rotator {
+        transition: none;
+    }
+
+    .card[data-holo-project-card] .card__shine {
+        transition: opacity 0.4s ease;
+    }
+
+    /* Card Frame & Border Styling */
+    .card-base-frame {
+        background-color: var(--card-bg, #4ca5ac);
+        border: var(--card-border-width, 16px) solid var(--card-border-color, #1d767d);
+        border-radius: 24px;
+        box-sizing: border-box;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Background Artwork Layer */
+    .artwork-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+    }
+
+    .character-artwork {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Exact Semantic Card Layout with Crisp 3D Elevation */
+    .card-inner-layout {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        padding: 20px 22px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        pointer-events: none;
+        user-select: none;
+        transform: translateZ(24px);
+        transform-style: flat;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        backface-visibility: hidden;
+    }
+
+    /* Top Title Block */
+    .title-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        text-align: left;
+    }
+
+    .card-title {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-weight: 700;
+        font-size: clamp(1.25rem, 2.3vw, 1.7rem);
+        line-height: 1.08;
+        letter-spacing: -0.015em;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin: 0;
+        text-align: left;
+        max-width: 90%;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .card-subtitle {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-weight: 700;
+        font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+        line-height: 1.2;
+        color: #0c363d;
+        margin: 0;
+        letter-spacing: -0.01em;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Bottom Info Block */
+    .info-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 8px;
+        text-align: left;
+    }
+
+    .category {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-weight: 700;
+        font-size: clamp(1.0rem, 1.5vw, 1.3rem);
+        line-height: 1.15;
+        letter-spacing: -0.015em;
+        color: #ffffff;
+        margin: 0;
+        text-align: left;
+        max-width: 82%;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .stat-and-icon-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .stat-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        gap: 3px;
+        text-align: left;
+        margin: 0;
+        padding: 0;
+    }
+
+    .stat {
+        font-family: var(--archivo-font, 'Archivo', sans-serif) !important;
+        font-weight: 300 !important;
+        font-size: 0.72rem !important;
+        line-height: 1.1 !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        color: rgba(255, 255, 255, 0.85) !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
+        display: block !important;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .fig {
+        font-family: var(--archivo-font, 'Archivo', sans-serif) !important;
+        font-weight: 400 !important;
+        font-size: clamp(0.95rem, 1.35vw, 1.18rem) !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.01em !important;
+        color: #ffffff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        height: auto !important;
+        display: block !important;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .icon {
+        width: clamp(40px, 4.5vw, 52px);
+        height: auto;
+        max-height: 58px;
+        object-fit: contain;
+        display: block;
+        color: #ffffff;
+    }
+</style>
+
+<script>
+    function mountHoloProjectCards() {
+        document.querySelectorAll("[data-holo-project-card]").forEach((cardEl) => {
+            const card = cardEl;
+            if (card.dataset.holoMounted) return;
+            card.dataset.holoMounted = "true";
+
+            const rotator = card.querySelector(".card__rotator");
+            if (!rotator) return;
+
+            let isFlipped = false;
+
+            // Initialize as active with ambient resting holographic illumination
+            card.classList.add("active");
+            card.style.setProperty("--card-opacity", "0.85");
+            card.style.setProperty("--pointer-x", "50%");
+            card.style.setProperty("--pointer-y", "35%");
+            card.style.setProperty("--pointer-from-center", "0.45");
+            card.style.setProperty("--pointer-from-top", "0.35");
+            card.style.setProperty("--pointer-from-left", "0.5");
+            card.style.setProperty("--rotate-x", "0deg");
+            card.style.setProperty("--rotate-y", "0deg");
+
+            const updatePointer = (e) => {
+                const rect = card.getBoundingClientRect();
+                const absolute = {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top,
+                };
+                const percent = {
+                    x: Math.round((100 / rect.width) * absolute.x * 100) / 100,
+                    y: Math.round((100 / rect.height) * absolute.y * 100) / 100,
+                };
+                const center = {
+                    x: percent.x - 50,
+                    y: percent.y - 50,
+                };
+
+                card.classList.add("interacting");
+                card.classList.add("active");
+                card.style.setProperty("--pointer-x", `${percent.x}%`);
+                card.style.setProperty("--pointer-y", `${percent.y}%`);
+                card.style.setProperty(
+                    "--pointer-from-center",
+                    `${Math.min(Math.max(Math.sqrt((center.x / 50) ** 2 + (center.y / 50) ** 2), 0), 1)}`
+                );
+                card.style.setProperty("--pointer-from-top", `${percent.y / 100}`);
+                card.style.setProperty("--pointer-from-left", `${percent.x / 100}`);
+                card.style.setProperty("--card-opacity", "1");
+                card.style.setProperty("--rotate-x", `${-(center.x / 3.5)}deg`);
+                card.style.setProperty("--rotate-y", `${center.y / 3.5}deg`);
+                card.style.setProperty("--background-x", `${40 + percent.x / 5}%`);
+                card.style.setProperty("--background-y", `${40 + percent.y / 5}%`);
+            };
+
+            card.addEventListener("pointermove", updatePointer);
+            card.addEventListener("pointerenter", (e) => {
+                updatePointer(e);
+            });
+
+            card.addEventListener("pointerleave", () => {
+                card.classList.remove("interacting");
+                // Retain active state and persistent holographic foil illumination
+                card.style.setProperty("--card-opacity", "0.85");
+                card.style.setProperty("--pointer-x", "50%");
+                card.style.setProperty("--pointer-y", "35%");
+                card.style.setProperty("--pointer-from-center", "0.45");
+                card.style.setProperty("--pointer-from-top", "0.35");
+                card.style.setProperty("--pointer-from-left", "0.5");
+                card.style.setProperty("--rotate-x", "0deg");
+                card.style.setProperty("--rotate-y", "0deg");
+            });
+
+            rotator.addEventListener("click", () => {
+                isFlipped = !isFlipped;
+                card.classList.toggle("flipped", isFlipped);
+            });
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", mountHoloProjectCards);
+    document.addEventListener("astro:page-load", mountHoloProjectCards);
+</script>

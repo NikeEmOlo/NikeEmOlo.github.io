@@ -1,0 +1,170 @@
+---
+const { id, order, projTitle, projType, category, summary, tags } = Astro.props;
+
+const chips = tags ? Object.values(tags).flat() : [];
+const paddedOrder = String(order).padStart(2, "0");
+
+// Truncated server-side to a fixed character budget rather than clamped with
+// CSS (-webkit-line-clamp / max-height): confirmed by hand that a summary
+// clamped by height inside this card's flexible (1fr) text column gets
+// measured at the wrong width during Chromium's grid track-sizing pass,
+// silently shrinking the whole card. Fixed-length text has no such ambiguity.
+const SUMMARY_LIMIT = 140;
+const truncatedSummary = summary && summary.length > SUMMARY_LIMIT
+    ? `${summary.slice(0, SUMMARY_LIMIT).replace(/\s+\S*$/, "")}…`
+    : summary;
+---
+
+<li class="project-row" data-id={id} data-category={category} tabindex="0" role="button" aria-haspopup="dialog">
+    <div class="card-surface">
+        <span class="row-thumb" aria-hidden="true"></span>
+
+        <div class="project-detail">
+            <p class="eyebrow">
+                <span class="index">{paddedOrder} · {category}</span>
+                <span class="type-badge">{projType}</span>
+            </p>
+
+            <h3 class="proj-title">{projTitle}</h3>
+
+            {truncatedSummary && <p class="summary">{truncatedSummary}</p>}
+
+            {chips.length > 0 && (
+                <ul class="chip-row" aria-label="Skills and tools">
+                    {chips.map((chip) => <li class="chip">{chip}</li>)}
+                </ul>
+            )}
+        </div>
+    </div>
+</li>
+
+<style>
+    /* .project-row (the <li>, sized by .project-list's auto-height content
+       sizing) deliberately carries NO overflow/radius/background of its own.
+       Confirmed by hand: overflow:hidden on the element whose height is
+       being auto-computed from wrapping text makes Chromium settle on the
+       wrong (too-short) height and silently clip content — true even with
+       no clamping involved, independent of flex/grid/position choices for
+       the thumb. Moving overflow:hidden (and the rest of the visual chrome)
+       onto an inner wrapper, which is simply told to fill its now-correctly-
+       sized parent, sidesteps the bug entirely rather than fighting it. */
+    .project-row {
+        scroll-snap-align: start;
+        cursor: pointer;
+    }
+
+    .card-surface {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 0 6px 18px rgba(40, 60, 90, 0.08);
+        overflow: hidden;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    @media (hover: hover) {
+        .project-row:hover .card-surface {
+            box-shadow: 0 10px 26px rgba(40, 60, 90, 0.14);
+            transform: translateY(-1px);
+        }
+    }
+
+    .project-row:focus-visible .card-surface {
+        outline: 2px solid transparent;
+        box-shadow: 0 0 0 3px rgba(var(--light-accent-rgb), 0.35), 0 6px 18px rgba(40, 60, 90, 0.08);
+    }
+
+    /* Neutral dotted texture, same treatment on every card regardless of
+       category — matches fuch.ai's thumbnails, which read as placeholders
+       for a real illustration rather than a category-coded color block. */
+    .row-thumb {
+        background-color: rgba(8, 14, 28, 0.03);
+        background-image: radial-gradient(rgba(8, 14, 28, 0.16) 1px, transparent 1px);
+        background-size: 10px 10px;
+    }
+
+    @media (max-width: 560px) {
+        .card-surface {
+            grid-template-columns: 64px 1fr;
+        }
+    }
+
+    .project-detail {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 0;
+        padding: 18px;
+        font-family: var(--fw-sans);
+    }
+
+    .eyebrow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5em;
+        margin: 0;
+        font-family: var(--fw-mono);
+        font-size: 0.625rem;
+        font-weight: 500;
+        letter-spacing: 0.075em;
+        text-transform: uppercase;
+        color: var(--fw-muted);
+    }
+
+    .eyebrow .type-badge {
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        color: var(--fw-accent);
+        white-space: nowrap;
+    }
+
+    .proj-title {
+        font-family: var(--fw-sans);
+        font-weight: 600;
+        font-size: 1.1rem;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        color: var(--fw-ink);
+        margin: 0;
+    }
+
+    .summary {
+        margin: 0;
+        max-width: 52ch;
+        font-family: var(--fw-sans);
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: var(--fw-desc);
+    }
+
+    .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        list-style: none;
+        padding: 0;
+        margin: 2px 0 0;
+    }
+
+    .chip {
+        padding: 3px 7px;
+        border-radius: 999px;
+        border: 1px solid var(--fw-border);
+        font-family: var(--fw-mono);
+        font-size: 0.625rem;
+        font-weight: 500;
+        letter-spacing: 0.0375em;
+        text-transform: uppercase;
+        color: var(--fw-muted);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .card-surface {
+            transition: none;
+        }
+    }
+</style>

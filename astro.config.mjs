@@ -20,6 +20,12 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: "Boldonse",
       cssVariable: "--boldonse"
+  },
+  {
+      provider: fontProviders.fontsource(),
+      name: "Archivo",
+      cssVariable: "--archivo-font",
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
   }],
 
   integrations: [mdx()]

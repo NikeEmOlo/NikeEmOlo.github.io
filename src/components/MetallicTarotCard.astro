@@ -1,0 +1,453 @@
+---
+import CrabSVG from "./tarotCard/CrabSVG.astro";
+import TarotCardDecor from "./tarotCard/TarotCardDecor.astro";
+
+export interface Props {
+    id?: string;
+    numeral?: string;
+    title: string;
+    subtitle?: string;
+    category?: string;
+    stat?: string;
+    icon?: "crab" | "sun" | "eye" | "moon" | "astrolabe" | "serpent" | "crystal" | string;
+    accentTheme?: "teal" | "purple" | "amber" | "rose" | "blue" | "cyan" | "emerald" | string;
+}
+
+const {
+    id,
+    numeral = "IV",
+    title,
+    subtitle,
+    category = "Operations",
+    stat = "+100 Efficiency",
+    icon = "crab",
+    accentTheme = "teal",
+} = Astro.props;
+
+const uid = id || title.toLowerCase().replace(/[^a-z0-9]/g, "-");
+
+const THEMES: Record<string, { grad: string; borderGrad: string; glow: string; textGrad: string }> = {
+    teal: {
+        grad: "linear-gradient(135deg, #7ECECE 0%, #2A9D8F 30%, #7B4FA6 70%, #C084D4 100%)",
+        borderGrad: "linear-gradient(var(--glare-angle, 135deg), #7ECECE 0%, #2A9D8F 22%, #7B4FA6 55%, #C084D4 82%, #7ECECE 100%)",
+        glow: "rgba(126, 206, 206, 0.3)",
+        textGrad: "linear-gradient(135deg, #7ECECE 0%, #C084D4 65%, #BE83D3 100%)",
+    },
+    purple: {
+        grad: "linear-gradient(135deg, #BE83D3 0%, #704898 35%, #359E9D 75%, #7ECECE 100%)",
+        borderGrad: "linear-gradient(var(--glare-angle, 135deg), #BE83D3 0%, #704898 25%, #359E9D 65%, #7ECECE 85%, #BE83D3 100%)",
+        glow: "rgba(190, 131, 211, 0.3)",
+        textGrad: "linear-gradient(135deg, #BE83D3 0%, #9B6FC4 50%, #7ECECE 100%)",
+    },
+    amber: {
+        grad: "linear-gradient(135deg, #FBBF24 0%, #E8722C 35%, #704898 75%, #359E9D 100%)",
+        borderGrad: "linear-gradient(var(--glare-angle, 135deg), #FBBF24 0%, #E8722C 30%, #704898 65%, #359E9D 85%, #FBBF24 100%)",
+        glow: "rgba(245, 158, 11, 0.3)",
+        textGrad: "linear-gradient(135deg, #FBBF24 0%, #E8722C 60%, #BE83D3 100%)",
+    },
+    rose: {
+        grad: "linear-gradient(135deg, #FB7185 0%, #E11D48 35%, #704898 70%, #BE83D3 100%)",
+        borderGrad: "linear-gradient(var(--glare-angle, 135deg), #FB7185 0%, #E11D48 25%, #704898 60%, #BE83D3 85%, #FB7185 100%)",
+        glow: "rgba(251, 113, 133, 0.3)",
+        textGrad: "linear-gradient(135deg, #FB7185 0%, #BE83D3 65%, #7ECECE 100%)",
+    },
+    cyan: {
+        grad: "linear-gradient(135deg, #22D3EE 0%, #0891B2 35%, #7ECECE 70%, #704898 100%)",
+        borderGrad: "linear-gradient(var(--glare-angle, 135deg), #22D3EE 0%, #0891B2 25%, #7ECECE 60%, #704898 85%, #22D3EE 100%)",
+        glow: "rgba(34, 211, 238, 0.3)",
+        textGrad: "linear-gradient(135deg, #22D3EE 0%, #7ECECE 50%, #BE83D3 100%)",
+    },
+    emerald: {
+        grad: "linear-gradient(135deg, #34D399 0%, #059669 35%, #359E9D 70%, #704898 100%)",
+        borderGrad: "linear-gradient(var(--glare-angle, 135deg), #34D399 0%, #059669 25%, #359E9D 60%, #704898 85%, #34D399 100%)",
+        glow: "rgba(52, 211, 153, 0.3)",
+        textGrad: "linear-gradient(135deg, #34D399 0%, #359E9D 50%, #BE83D3 100%)",
+    },
+};
+
+const currentTheme = THEMES[accentTheme] || THEMES.teal;
+---
+
+<div
+    class="metallic-card-root"
+    data-metallic-card
+    data-card-id={uid}
+    tabindex="0"
+    role="button"
+    aria-label={`View ${title} project`}
+    style={{
+        "--theme-border": currentTheme.borderGrad,
+        "--theme-glow": currentTheme.glow,
+        "--theme-text-grad": currentTheme.textGrad,
+    }}
+>
+    <!-- 3D Flipper / Perspective Box -->
+    <div class="metallic-card-flipper" data-metallic-flipper>
+        <!-- Outer Metallic Iridescent Bevel Rim -->
+        <div class="metallic-card-border">
+            <!-- Card Body / Dark Midnight Ink Face -->
+            <div class="metallic-card-body">
+                <!-- 1. Authentic Tarot Framing & Sacred Geometry Layer -->
+                <div class="tarot-decor-layer" aria-hidden="true">
+                    <TarotCardDecor />
+                </div>
+
+                <!-- 2. Roman Numeral Header -->
+                <div class="tarot-numeral-header" aria-hidden="true">
+                    <span class="tarot-numeral">{numeral}</span>
+                </div>
+
+                <!-- 3. Cosmic Totem Illustration Area -->
+                <div class="tarot-totem-stage">
+                    <div class="totem-wrapper">
+                        {icon === "sun" ? (
+                            <svg viewBox="0 0 81 58" fill="none" class="totem-svg">
+                                <circle cx="40.5" cy="29" r="14" stroke="url(#totem-grad)" stroke-width="1.6" />
+                                <circle cx="40.5" cy="29" r="8" stroke="url(#totem-grad)" stroke-width="1.2" stroke-dasharray="3 3" />
+                                <circle cx="40.5" cy="29" r="3.5" fill="url(#totem-grad)" />
+                                <!-- Sun Rays -->
+                                <path d="M40.5 8v6M40.5 44v6M19.5 29h6M55.5 29h6M25.6 14.1l4.2 4.3M51.2 39.7l4.2 4.2M25.6 43.9l4.2-4.2M51.2 18.3l4.2-4.2" stroke="url(#totem-grad)" stroke-width="1.4" stroke-linecap="round" />
+                                <defs>
+                                    <linearGradient id="totem-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#7ECECE" />
+                                        <stop offset="50%" stop-color="#704898" />
+                                        <stop offset="100%" stop-color="#BE83D3" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        ) : icon === "eye" ? (
+                            <svg viewBox="0 0 81 58" fill="none" class="totem-svg">
+                                <!-- Sacred Triangle -->
+                                <polygon points="40.5,8 66,48 15,48" stroke="url(#totem-grad)" stroke-width="1.5" />
+                                <!-- Eye Shape -->
+                                <path d="M23 30 C30 20, 51 20, 58 30 C51 40, 30 40, 23 30 Z" stroke="url(#totem-grad)" stroke-width="1.4" fill="none" />
+                                <circle cx="40.5" cy="30" r="5" stroke="url(#totem-grad)" stroke-width="1.2" />
+                                <circle cx="40.5" cy="30" r="2" fill="url(#totem-grad)" />
+                                <!-- Radiating lines -->
+                                <line x1="40.5" y1="2" x2="40.5" y2="7" stroke="url(#totem-grad)" stroke-width="1.2" />
+                                <line x1="28" y1="6" x2="31" y2="10" stroke="url(#totem-grad)" stroke-width="1.2" />
+                                <line x1="53" y1="6" x2="50" y2="10" stroke="url(#totem-grad)" stroke-width="1.2" />
+                                <defs>
+                                    <linearGradient id="totem-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#7ECECE" />
+                                        <stop offset="50%" stop-color="#704898" />
+                                        <stop offset="100%" stop-color="#BE83D3" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        ) : icon === "moon" ? (
+                            <svg viewBox="0 0 81 58" fill="none" class="totem-svg">
+                                <path d="M46 12 C34 14, 26 26, 30 38 C34 46, 44 48, 50 44 C38 46, 30 34, 36 22 C39 16, 43 13, 46 12 Z" fill="url(#totem-grad)" stroke="url(#totem-grad)" stroke-width="1" />
+                                <!-- Stars -->
+                                <polygon points="56,20 57.5,23.5 61,24 58,26.5 59,30 56,28 53,30 54,26.5 51,24 54.5,23.5" fill="url(#totem-grad)" />
+                                <polygon points="20,18 21,20.5 23.5,21 21.5,22.5 22,25 20,23.5 18,25 18.5,22.5 16.5,21 19,20.5" fill="url(#totem-grad)" />
+                                <circle cx="48" cy="36" r="1.5" fill="url(#totem-grad)" />
+                                <defs>
+                                    <linearGradient id="totem-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#7ECECE" />
+                                        <stop offset="50%" stop-color="#704898" />
+                                        <stop offset="100%" stop-color="#BE83D3" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        ) : icon === "astrolabe" ? (
+                            <svg viewBox="0 0 81 58" fill="none" class="totem-svg">
+                                <circle cx="40.5" cy="29" r="18" stroke="url(#totem-grad)" stroke-width="1.4" />
+                                <ellipse cx="40.5" cy="29" rx="18" ry="7" stroke="url(#totem-grad)" stroke-width="1.2" transform="rotate(30 40.5 29)" />
+                                <ellipse cx="40.5" cy="29" rx="18" ry="7" stroke="url(#totem-grad)" stroke-width="1.2" transform="rotate(-30 40.5 29)" />
+                                <circle cx="40.5" cy="29" r="3.5" fill="url(#totem-grad)" />
+                                <line x1="40.5" y1="8" x2="40.5" y2="50" stroke="url(#totem-grad)" stroke-width="1" stroke-dasharray="2 2" />
+                                <defs>
+                                    <linearGradient id="totem-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#7ECECE" />
+                                        <stop offset="50%" stop-color="#704898" />
+                                        <stop offset="100%" stop-color="#BE83D3" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        ) : icon === "serpent" ? (
+                            <svg viewBox="0 0 81 58" fill="none" class="totem-svg">
+                                <path d="M26 29 C26 22, 35 22, 40.5 29 C46 36, 55 36, 55 29 C55 22, 46 22, 40.5 29 C35 36, 26 36, 26 29 Z" stroke="url(#totem-grad)" stroke-width="1.8" />
+                                <circle cx="40.5" cy="29" r="3" fill="url(#totem-grad)" />
+                                <circle cx="26" cy="29" r="1.5" fill="url(#totem-grad)" />
+                                <circle cx="55" cy="29" r="1.5" fill="url(#totem-grad)" />
+                                <defs>
+                                    <linearGradient id="totem-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#7ECECE" />
+                                        <stop offset="50%" stop-color="#704898" />
+                                        <stop offset="100%" stop-color="#BE83D3" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        ) : icon === "crystal" ? (
+                            <svg viewBox="0 0 81 58" fill="none" class="totem-svg">
+                                <polygon points="40.5,10 56,22 40.5,48 25,22" stroke="url(#totem-grad)" stroke-width="1.4" />
+                                <polygon points="40.5,10 40.5,48 33,22" stroke="url(#totem-grad)" stroke-width="1.1" />
+                                <polygon points="40.5,10 40.5,48 48,22" stroke="url(#totem-grad)" stroke-width="1.1" />
+                                <line x1="25" y1="22" x2="56" y2="22" stroke="url(#totem-grad)" stroke-width="1.2" />
+                                <defs>
+                                    <linearGradient id="totem-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#7ECECE" />
+                                        <stop offset="50%" stop-color="#704898" />
+                                        <stop offset="100%" stop-color="#BE83D3" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        ) : (
+                            <CrabSVG />
+                        )}
+                    </div>
+                </div>
+
+                <!-- 4. Lower Project Info & Metadata -->
+                <div class="tarot-metadata-section">
+                    <h3 class="tarot-project-title">{title}</h3>
+                    {subtitle && <p class="tarot-project-subtitle">{subtitle}</p>}
+
+                    <!-- Status Pill -->
+                    <div class="tarot-status-row">
+                        <span class="tarot-category-badge">{category}</span>
+                        <span class="tarot-stat-pill">{stat}</span>
+                    </div>
+                </div>
+
+                <!-- 5. Interactive Specular Metallic Foil Sheen Layer -->
+                <div class="metallic-foil-sheen" data-metallic-glare aria-hidden="true"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .metallic-card-root {
+        position: relative;
+        width: clamp(200px, 15.5vw, 240px);
+        aspect-ratio: 3.6 / 5.2;
+        perspective: 1200px;
+        cursor: pointer;
+        user-select: none;
+        outline: none;
+        --pointer-x: 50%;
+        --pointer-y: 50%;
+        --glare-opacity: 0;
+        --glare-angle: 125deg;
+    }
+
+    .metallic-card-root:focus-visible {
+        outline: 2px solid var(--teal-light, #7ecece);
+        outline-offset: 4px;
+        border-radius: 20px;
+    }
+
+    .metallic-card-flipper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        border-radius: 20px;
+        box-shadow:
+            0 18px 40px -10px rgba(0, 0, 0, 0.75),
+            0 0 20px -5px var(--theme-glow, rgba(126, 206, 206, 0.2));
+        transition: box-shadow 0.3s ease;
+        will-change: transform;
+    }
+
+    .metallic-card-root:hover .metallic-card-flipper {
+        box-shadow:
+            0 26px 54px -8px rgba(0, 0, 0, 0.9),
+            0 0 32px -2px var(--theme-glow, rgba(190, 131, 211, 0.35));
+    }
+
+    /* Outer Metallic Iridescent Gradient Border Bevel */
+    .metallic-card-border {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 3.5px;
+        box-sizing: border-box;
+        border-radius: 20px;
+        background: var(--theme-border);
+        box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Inner Dark Velvet Midnight Ink Face */
+    .metallic-card-body {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #080E1C;
+        border-radius: 16.5px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px 8px 12px;
+        box-sizing: border-box;
+    }
+
+    /* SVG Decor Frame */
+    .tarot-decor-layer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    /* Roman Numeral Header */
+    .tarot-numeral-header {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 3;
+        padding-top: 4px;
+    }
+
+    .tarot-numeral {
+        font-family: var(--main-font, 'David Libre'), 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        background: var(--theme-text-grad);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+    }
+
+    /* Cosmic Totem Illustration Stage */
+    .tarot-totem-stage {
+        position: relative;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        padding: 10px 0;
+    }
+
+    .totem-wrapper {
+        width: 65%;
+        max-width: 120px;
+        aspect-ratio: 81 / 58;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        filter: drop-shadow(0 4px 12px var(--theme-glow, rgba(126, 206, 206, 0.25)));
+        transition: transform 0.3s ease;
+    }
+
+    .metallic-card-root:hover .totem-wrapper {
+        transform: scale(1.06);
+    }
+
+    .totem-wrapper :global(svg),
+    .totem-svg {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Lower Metadata Section */
+    .tarot-metadata-section {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        z-index: 3;
+        padding: 0 6px 2px;
+        box-sizing: border-box;
+        gap: 3px;
+    }
+
+    .tarot-project-title {
+        margin: 0;
+        font-family: var(--secondary-font, 'DM Sans', -apple-system, sans-serif);
+        font-size: clamp(0.85rem, 1.15vw, 0.98rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.015em;
+        line-height: 1.2;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+    }
+
+    .tarot-project-subtitle {
+        margin: 0;
+        font-family: var(--secondary-font, 'DM Sans', -apple-system, sans-serif);
+        font-size: 0.625rem;
+        font-weight: 400;
+        color: rgba(207, 207, 223, 0.75);
+        line-height: 1.25;
+        max-width: 26ch;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .tarot-status-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 4px;
+    }
+
+    .tarot-category-badge {
+        font-family: var(--secondary-font, 'DM Sans', sans-serif);
+        font-size: 0.5625rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--teal-light, #7ecece);
+        background: rgba(126, 206, 206, 0.12);
+        border: 1px solid rgba(126, 206, 206, 0.25);
+        padding: 2px 6px;
+        border-radius: 4px;
+    }
+
+    .tarot-stat-pill {
+        font-family: var(--secondary-font, 'DM Sans', sans-serif);
+        font-size: 0.5625rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Specular Metallic Foil Sheen Overlay (Reacts to cursor light angle) */
+    .metallic-foil-sheen {
+        position: absolute;
+        inset: 0;
+        border-radius: 16.5px;
+        pointer-events: none;
+        z-index: 5;
+        mix-blend-mode: color-dodge;
+        opacity: var(--glare-opacity, 0);
+        background:
+            radial-gradient(
+                farthest-corner circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
+                rgba(255, 255, 255, 0.85) 0%,
+                rgba(255, 255, 255, 0.3) 20%,
+                transparent 55%
+            ),
+            linear-gradient(
+                var(--glare-angle, 125deg),
+                transparent 0%,
+                rgba(190, 131, 211, 0.35) 25%,
+                rgba(53, 158, 157, 0.35) 50%,
+                rgba(126, 206, 206, 0.35) 75%,
+                transparent 100%
+            );
+        transition: opacity 0.2s ease-out;
+    }
+</style>
+
+<script>
+    import { initMetallicTarotCards } from "../lib/metallicCard.js";
+
+    document.addEventListener("astro:page-load", initMetallicTarotCards);
+    document.addEventListener("DOMContentLoaded", initMetallicTarotCards);
+</script>

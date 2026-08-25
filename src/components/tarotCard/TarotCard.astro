@@ -2,12 +2,12 @@
 import CrabSVG from './CrabSVG.astro'
 import CardDecor from './TarotCardDecor.astro'
 
-const { numeral, icon, label } = Astro.props;
+const { numeral, icon, label, size } = Astro.props;
 const icons = Object.fromEntries([['crab', CrabSVG]])
 const IconComponent = icons[icon]
 ---
 
-<button class="card-main" type="button" aria-label={label}>
+<button class:list={["card-main", size === "sm" && "card-main--sm"]} type="button" aria-label={label}>
     <div class="card">
         <CardDecor />
         <h6 class="numeral">{numeral}</h6>
@@ -104,6 +104,31 @@ const IconComponent = icons[icon]
             top: 50%;
             transform: translate(-50%, -50%);
         }
+    }
+
+    /* Compact variant for dense lists (e.g. the /projects rail) — same
+       proportions as the mobile size above, applied regardless of viewport. */
+    .card-main.card-main--sm {
+        width: 64px;
+        height: 108px;
+    }
+
+    .card-main.card-main--sm .card {
+        min-height: 0;
+        height: 100%;
+    }
+
+    .card-main.card-main--sm .numeral {
+        font-size: 11px;
+    }
+
+    .card-main.card-main--sm .icon {
+        width: 58%;
+        height: auto;
+        aspect-ratio: 81 / 58;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
 </style>
 

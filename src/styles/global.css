@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cinzel:wght@400;600;700&display=swap');
+
 /* ------------------------------------Normaliser------------------------------- */
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {
@@ -84,6 +86,18 @@ h1, h2, h3, h4, h5, h6 {
 
   /* ---------- Overview ---------- */
   --overview-bg: #9B6FC4;
+
+  /* ---------- Light surface (pages/components that run on --cream instead
+     of --ink — e.g. the LivingCV modal's light mode, /projects) ---------- */
+  --light-text: var(--ink);
+  --light-muted: rgba(8, 14, 28, 0.4);
+  --light-desc: rgba(8, 14, 28, 0.6);
+  --light-border: rgba(8, 14, 28, 0.1);
+  /* --teal-light (#7ECECE) is ~1.6:1 against --cream — nowhere near the
+     WCAG AA minimums (4.5:1 text / 3:1 icons+borders). This darker teal
+     holds ~5:1, first proven out in LivingCV's light theme. */
+  --light-accent: #1b6f6e;
+  --light-accent-rgb: 27, 111, 110;
 
   /* ---------- Sizing ---------- */
   --tarot-card-w: clamp(140px, 7.5vw, 260px);

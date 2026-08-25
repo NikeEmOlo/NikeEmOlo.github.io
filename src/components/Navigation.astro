@@ -1,3 +1,8 @@
+---
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWith(href));
+---
+
 <nav>
     <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span>
@@ -7,8 +12,8 @@
     <div class="nav-menu" id="nav-menu">
         <ul id="pages-list">
             <li><button id="open-living-cv" class="nav-cv" aria-haspopup="dialog" aria-controls="cv-modal">CV</button></li>
-            <li><a href="/">Home</a></li>
-            <li><button>Projects</button></li>
+            <li><a href="/" aria-current={isCurrent("/") ? "page" : undefined}>Home</a></li>
+            <li><a href="/projects" aria-current={isCurrent("/projects") ? "page" : undefined}>Projects</a></li>
             <li><button>Outer Office</button></li>
             <li><button>Contact</button></li>
         </ul>
@@ -117,7 +122,8 @@
         cursor: pointer;
     }
 
-    button[aria-pressed="true"] {
+    button[aria-pressed="true"],
+    #pages-list a[aria-current="page"] {
         background: var(--text);
         color: black;
     }
