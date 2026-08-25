@@ -12,7 +12,7 @@ export interface Props {
     cardBg?: string;
     borderColor?: string;
     borderWidth?: string;
-    holoEffect?: string;
+    holoEffect?: "secret_rare_etched" | "cosmos_galaxy" | "radiant_laser" | "rainbow_secret" | "shiny_rare" | "v_full_art" | string;
 }
 
 const {
@@ -30,14 +30,59 @@ const {
     borderWidth = "16px",
     holoEffect = "secret_rare_etched",
 } = Astro.props;
+
+const EFFECT_CONFIGS: Record<string, {
+    rarity: string;
+    set?: string;
+    number?: string;
+    foil: string;
+    seedx?: string;
+    seedy?: string;
+    cosmosbg?: string;
+}> = {
+    secret_rare_etched: {
+        rarity: "rare secret",
+        set: "swsh12pt5",
+        number: "160",
+        foil: "/img/160_foil_etched_swsecret_foil.webp",
+        seedx: "0.14597468026856575",
+        seedy: "0.5188117694209767",
+        cosmosbg: "107px 664px",
+    },
+    cosmos_galaxy: {
+        rarity: "rare holo cosmos",
+        foil: "/img/cosmos-bottom.png",
+        seedx: "0.5",
+        seedy: "0.5",
+        cosmosbg: "center",
+    },
+    radiant_laser: {
+        rarity: "radiant holo",
+        foil: "/img/glitter.png",
+    },
+    rainbow_secret: {
+        rarity: "rare rainbow",
+        foil: "/img/glitter.png",
+    },
+    shiny_rare: {
+        rarity: "rare shiny",
+        foil: "/img/glitter.png",
+    },
+    v_full_art: {
+        rarity: "rare ultra",
+        foil: "/img/glitter.png",
+    }
+};
+
+const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_etched"];
 ---
 
 <!-- Reusable Holographic Project Card Component -->
 <div
     class="card interactive masked"
-    data-rarity="rare secret"
-    data-set="swsh12pt5"
-    data-number="160"
+    data-rarity={activeEffect.rarity}
+    data-set={activeEffect.set}
+    data-number={activeEffect.number}
     data-holo-project-card
     style={{
         "--card-bg": cardBg,
@@ -61,11 +106,11 @@ const {
             <div
                 class="card__front card-base-frame"
                 style={{
-                    "--seedx": "0.14597468026856575",
-                    "--seedy": "0.5188117694209767",
-                    "--cosmosbg": "107px 664px",
+                    "--seedx": activeEffect.seedx || "0.14597468026856575",
+                    "--seedy": activeEffect.seedy || "0.5188117694209767",
+                    "--cosmosbg": activeEffect.cosmosbg || "107px 664px",
                     "--mask": `url(${maskUrl})`,
-                    "--foil": "url(/img/160_foil_etched_swsecret_foil.webp)",
+                    "--foil": `url(${activeEffect.foil})`,
                 }}
             >
                 <!-- Central Character Artwork -->
@@ -106,11 +151,11 @@ const {
             <div
                 class="card__shine"
                 style={{
-                    "--seedx": "0.14597468026856575",
-                    "--seedy": "0.5188117694209767",
-                    "--cosmosbg": "107px 664px",
+                    "--seedx": activeEffect.seedx || "0.14597468026856575",
+                    "--seedy": activeEffect.seedy || "0.5188117694209767",
+                    "--cosmosbg": activeEffect.cosmosbg || "107px 664px",
                     "--mask": `url(${maskUrl})`,
-                    "--foil": "url(/img/160_foil_etched_swsecret_foil.webp)",
+                    "--foil": `url(${activeEffect.foil})`,
                 }}
             ></div>
             <div class="card__glare"></div>
@@ -122,6 +167,11 @@ const {
     @import "/css/poke-holo/base.css";
     @import "/css/poke-holo/cards.css";
     @import "/css/poke-holo/swsh-pikachu.css";
+    @import "/css/poke-holo/cosmos-holo.css";
+    @import "/css/poke-holo/radiant-holo.css";
+    @import "/css/poke-holo/rainbow-holo.css";
+    @import "/css/poke-holo/shiny-rare.css";
+    @import "/css/poke-holo/v-full-art.css";
 
     /* Root Card Dimensions & 3D Perspective Anchor */
     .card[data-holo-project-card] {
