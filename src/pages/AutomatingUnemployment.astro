@@ -1,203 +1,1068 @@
 ---
-import Base from '../layouts/Base.astro'
-import ScrollPrompt from "../components/ScrollPrompt.astro"
-import SectionLabel from "../components/text/SectionLabel.astro"
+import { getEntry } from "astro:content";
+import Base from "../layouts/Base.astro";
+
+const project = await getEntry("projects", "automating_unemployment");
+const story = project?.data?.story || {};
+const {
+  heroQuestion,
+  vignette0 = {},
+  vignette1 = {},
+  vignette2 = {},
+  vignette3 = {},
+  vignette4 = {},
+  vignette5 = {},
+  footer = {},
+} = story;
+
+const agents = vignette3?.agents || [];
 ---
 
 <Base>
-    <section class="hero">
-        <ScrollPrompt />
-        <SectionLabel class="accent">A Case Study</SectionLabel>
-        <h1 class="title biggest">Automating <span class="base-gradient">Unemployment</span><span class="accent">.</span></h1>
-        <p class="standfirst">At my peak, I was spending <strong>12 hours per day</strong> searching for a job. Here's how I got three agents to do it for me.</p>
-    </section>
-    <section class="problem">
-        <SectionLabel class="accent">The Problem</SectionLabel>
-        <h2 class="title" id="problem-title">Do you know how time consuming it is being unemployed?</h2>
-        <div class="stat">
-            <p class="stat-metric"><span class="base-gradient">1.5 to 3</span><span class="stat-units">hrs</span></p>
-            <p class="stat-caption">Just to research, tailor, and submit a <span class="orange">single</span> application</p>
+  <div class="height-story-wrap">
+    <!-- Minimalist Top Navigation -->
+    <header class="story-header">
+      <a href="/" class="header-back" aria-label="Return to portfolio deck">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+        <span>Deck</span>
+      </a>
+      <div class="header-case-no">01 // Case Study</div>
+    </header>
+
+    <!-- HERO SECTION (EXACT 1:1 FIGMA CANVAS MATCH) -->
+    <section class="figma-hero-stage" id="hero">
+      <div class="hero-canvas-grid">
+        <!-- LEFT COLUMN: Pure Space + Lounger Character at the bottom -->
+        <div class="hero-col-left">
+          <div class="hero-lounger-anchor">
+            <img
+              src="/img/hero-lounger.webp"
+              alt="Character lounging on deckchair"
+              class="hero-lounger-img"
+            />
+          </div>
         </div>
-        <div class="list-wrap" id="exclusions">
-            <SectionLabel class="label" id="this-excludes">This excludes</SectionLabel>
-            <ul class="horizontal-list">
-                <li>Take home tasks</li>
-                <li>Cognitive and numeric assessments</li>
-                <li>Two or more interviews</li>
-                <li>Travel to interviews</li>
-                <li>Communications</li>
-            </ul>
+
+        <!-- RIGHT COLUMN: Crab & Title in Upper-Mid + Question at the bottom -->
+        <div class="hero-col-right">
+          <div class="hero-right-top">
+            <img
+              src="/img/hero-crab.jpg"
+              alt="Crab Icon"
+              class="hero-crab-glyph"
+            />
+            <h1 class="hero-title-text">
+              <span>Automating</span>
+              <span>Unemployment</span>
+            </h1>
+          </div>
+
+          <div class="hero-right-bottom">
+            <p
+              class="hero-question-text"
+              set:html={heroQuestion ||
+                "Do you know how time consuming it is to beunemployed?<strong>I do.</strong>"}
+            />
+          </div>
         </div>
+      </div>
     </section>
+
+    <div class="line-connector" aria-hidden="true"></div>
+
+    <main class="story-flow">
+      <!-- VIGNETTE 00: THE PEAK -->
+      <section class="vignette" id="v0">
+        <div class="vignette-text">
+          <span class="step-tag">{vignette0.tag || "00 / The Context"}</span>
+          <p class="story-lead" set:html={vignette0.lead} />
+          <p class="story-p" set:html={vignette0.body} />
+        </div>
+        <div class="vignette-illustration">
+          <svg
+            class="line-art"
+            viewBox="0 0 300 300"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="150"
+              cy="150"
+              r="60"
+              stroke="#ffffff"
+              stroke-width="1.5"
+              stroke-dasharray="3 3"></circle>
+            <path
+              d="M150 110v40l28 15"
+              stroke="#ffffff"
+              stroke-width="1.5"
+              stroke-linecap="round"></path>
+            <circle cx="150" cy="150" r="3" fill="#ffffff"></circle>
+            <text
+              x="150"
+              y="75"
+              text-anchor="middle"
+              fill="#71717a"
+              font-size="11"
+              font-family="monospace">12h / DAY MANUAL</text
+            >
+            <text
+              x="150"
+              y="245"
+              text-anchor="middle"
+              fill="#ffffff"
+              font-size="11"
+              font-family="monospace">2h / DAY AGENTIC</text
+            >
+          </svg>
+        </div>
+      </section>
+
+      <div class="line-connector" aria-hidden="true"></div>
+
+      <!-- VIGNETTE 01: THE LONDON DILEMMA -->
+      <section class="vignette reverse" id="v1">
+        <div class="vignette-text">
+          <span class="step-tag">{vignette1.tag || "01 / The Dilemma"}</span>
+          <p class="story-lead" set:html={vignette1.lead} />
+          <ul class="sparse-list">
+            {
+              vignette1.options?.map((opt: string, i: number) => (
+                <li>
+                  <span class="list-num">{i + 1}.</span>
+                  <span set:html={opt} />
+                </li>
+              ))
+            }
+          </ul>
+          <p class="story-p subtle-p" set:html={vignette1.body} />
+        </div>
+
+        <div class="vignette-illustration">
+          <svg
+            class="line-art"
+            viewBox="0 0 300 300"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="150"
+              cy="150"
+              r="70"
+              stroke="#ffffff"
+              stroke-width="1.5"
+              stroke-dasharray="4 4"></circle>
+            <path
+              d="M150 100v50l35 20"
+              stroke="#ffffff"
+              stroke-width="1.5"
+              stroke-linecap="round"></path>
+            <circle cx="150" cy="150" r="3" fill="#ffffff"></circle>
+            <text
+              x="150"
+              y="60"
+              text-anchor="middle"
+              fill="#71717a"
+              font-size="12"
+              font-family="sans-serif">9:00 AM</text
+            >
+            <text
+              x="150"
+              y="250"
+              text-anchor="middle"
+              fill="#71717a"
+              font-size="12"
+              font-family="sans-serif">9:00 PM</text
+            >
+            <text
+              x="50"
+              y="155"
+              text-anchor="middle"
+              fill="#71717a"
+              font-size="13"
+              font-family="sans-serif">12h grind</text
+            >
+            <text
+              x="250"
+              y="155"
+              text-anchor="middle"
+              fill="#ffffff"
+              font-size="13"
+              font-family="sans-serif">2-3 roles</text
+            >
+          </svg>
+        </div>
+      </section>
+
+      <div class="line-connector" aria-hidden="true"></div>
+
+      <!-- VIGNETTE 02: THE AI DOOM LOOP -->
+      <section class="vignette" id="v2">
+        <div class="vignette-illustration">
+          <svg
+            class="line-art"
+            viewBox="0 0 300 300"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M150 70 L230 200 L70 200 Z"
+              stroke="rgba(255,255,255,0.4)"
+              stroke-width="1.5"
+              stroke-dasharray="3 3"></path>
+            <circle
+              cx="150"
+              cy="70"
+              r="14"
+              fill="#000000"
+              stroke="#ffffff"
+              stroke-width="1.5"></circle>
+            <circle cx="150" cy="70" r="3" fill="#ffffff"></circle>
+            <circle
+              cx="230"
+              cy="200"
+              r="14"
+              fill="#000000"
+              stroke="#ffffff"
+              stroke-width="1.5"></circle>
+            <circle cx="230" cy="200" r="3" fill="#ffffff"></circle>
+            <circle
+              cx="70"
+              cy="200"
+              r="14"
+              fill="#000000"
+              stroke="#ffffff"
+              stroke-width="1.5"></circle>
+            <circle cx="70" cy="200" r="3" fill="#ffffff"></circle>
+            <text
+              x="150"
+              y="42"
+              text-anchor="middle"
+              fill="#ffffff"
+              font-size="11"
+              font-family="sans-serif">Candidate AI Blast</text
+            >
+            <text
+              x="245"
+              y="225"
+              text-anchor="middle"
+              fill="#71717a"
+              font-size="11"
+              font-family="sans-serif">Strict ATS Filter</text
+            >
+            <text
+              x="55"
+              y="225"
+              text-anchor="middle"
+              fill="#71717a"
+              font-size="11"
+              font-family="sans-serif">Spiral of Fatigue</text
+            >
+          </svg>
+        </div>
+
+        <div class="vignette-text">
+          <span class="step-tag">{vignette2.tag || "02 / The Realization"}</span
+          >
+          <p class="story-lead" set:html={vignette2.lead} />
+          <p class="story-p" set:html={vignette2.body1} />
+          <p class="story-p" set:html={vignette2.body2} />
+        </div>
+      </section>
+
+      <div class="line-connector" aria-hidden="true"></div>
+
+      <!-- VIGNETTE 03: THE 3 AGENTS -->
+      <section class="vignette agents-vignette" id="v3">
+        <div class="vignette-header-center">
+          <span class="step-tag">{vignette3.tag || "03 / The Team"}</span>
+          <h2 class="vignette-title">
+            {vignette3.title || "Meet the agents."}
+          </h2>
+          <p class="vignette-subtitle">{vignette3.subtitle}</p>
+        </div>
+
+        <div class="agents-line-stage">
+          {
+            agents.map((agent: any, idx: number) => (
+              <>
+                <div class="agent-node">
+                  <div class="node-glyph">
+                    <span>{agent.glyph}</span>
+                  </div>
+                  <div class="agent-meta">
+                    <h3 class="agent-name">{agent.name}</h3>
+                    <span class="agent-role">{agent.role}</span>
+                    <p class="agent-brief">{agent.brief}</p>
+                  </div>
+                </div>
+                {idx < agents.length - 1 && (
+                  <div class="agent-wire" aria-hidden="true" />
+                )}
+              </>
+            ))
+          }
+        </div>
+      </section>
+
+      <div class="line-connector" aria-hidden="true"></div>
+
+      <!-- VIGNETTE 04: HUMAN IN THE LOOP -->
+      <section class="vignette reverse" id="v4">
+        <div class="vignette-text">
+          <span class="step-tag">{vignette4.tag || "04 / The Philosophy"}</span>
+          <p class="story-lead" set:html={vignette4.lead} />
+          <p class="story-p" set:html={vignette4.body1} />
+          <p class="story-p" set:html={vignette4.body2} />
+          <div class="slack-quote-pill">
+            <span class="slack-dot"></span>
+            <span>{vignette4.pill}</span>
+          </div>
+        </div>
+
+        <div class="vignette-illustration">
+          <svg
+            class="line-art"
+            viewBox="0 0 300 300"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="50"
+              y="70"
+              width="200"
+              height="160"
+              rx="12"
+              stroke="#ffffff"
+              stroke-width="1.5"></rect>
+            <circle cx="80" cy="105" r="10" stroke="#ffffff" stroke-width="1.5"
+            ></circle>
+            <path
+              d="M100 100h60"
+              stroke="#ffffff"
+              stroke-width="1.5"
+              stroke-linecap="round"></path>
+            <path
+              d="M100 110h40"
+              stroke="#71717a"
+              stroke-width="1"
+              stroke-linecap="round"></path>
+            <path
+              d="M70 140h160"
+              stroke="rgba(255,255,255,0.15)"
+              stroke-width="1"></path>
+            <path
+              d="M70 160h130"
+              stroke="rgba(255,255,255,0.4)"
+              stroke-width="1.5"
+              stroke-linecap="round"></path>
+            <path
+              d="M70 175h100"
+              stroke="rgba(255,255,255,0.2)"
+              stroke-width="1.5"
+              stroke-linecap="round"></path>
+            <rect
+              x="70"
+              y="195"
+              width="65"
+              height="20"
+              rx="4"
+              stroke="#ffffff"
+              stroke-width="1.5"
+              fill="rgba(255,255,255,0.05)"></rect>
+            <text
+              x="102"
+              y="209"
+              text-anchor="middle"
+              fill="#ffffff"
+              font-size="9"
+              font-family="sans-serif">Approve</text
+            >
+            <rect
+              x="145"
+              y="195"
+              width="55"
+              height="20"
+              rx="4"
+              stroke="rgba(255,255,255,0.2)"
+              stroke-width="1"></rect>
+            <text
+              x="172"
+              y="209"
+              text-anchor="middle"
+              fill="#71717a"
+              font-size="9"
+              font-family="sans-serif">Edit</text
+            >
+          </svg>
+        </div>
+      </section>
+
+      <div class="line-connector" aria-hidden="true"></div>
+
+      <!-- VIGNETTE 05: THE UPSIDE -->
+      <section class="vignette" id="v5">
+        <div class="vignette-illustration">
+          <svg
+            class="line-art"
+            viewBox="0 0 300 300"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M50 240 C 100 240, 140 210, 180 140 C 210 90, 240 60, 260 50"
+              stroke="#ffffff"
+              stroke-width="1.5"
+              stroke-linecap="round"></path>
+            <path
+              d="M50 250h210M50 50v200"
+              stroke="rgba(255,255,255,0.1)"
+              stroke-width="1"></path>
+            <circle cx="260" cy="50" r="4" fill="#ffffff"></circle>
+            <circle
+              cx="260"
+              cy="50"
+              r="10"
+              stroke="rgba(255,255,255,0.3)"
+              stroke-width="1"></circle>
+            <text
+              x="215"
+              y="45"
+              fill="#ffffff"
+              font-size="11"
+              font-family="sans-serif">+10h/day</text
+            >
+          </svg>
+        </div>
+
+        <div class="vignette-text">
+          <span class="step-tag">{vignette5.tag || "05 / The Outcome"}</span>
+          <p class="story-lead" set:html={vignette5.lead} />
+          <p class="story-p" set:html={vignette5.body1} />
+          <p class="story-p" set:html={vignette5.body2} />
+        </div>
+      </section>
+
+      <!-- EPILOGUE / RETURN -->
+      <footer class="story-epilogue">
+        <div class="epilogue-line"></div>
+        <p class="epilogue-closing">
+          {
+            footer.closing ||
+              "Built with OpenClaw, Claude 3.5 Sonnet, Python, and Slack."
+          }
+        </p>
+        <div class="epilogue-links">
+          <a href="/" class="link-deck">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+            <span>{footer.deckLabel || "Return to Tarot Deck"}</span>
+          </a>
+          <a
+            href="https://github.com/NikeEmOlo"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-subtle"
+          >
+            {footer.githubLabel || "View GitHub"}
+          </a>
+        </div>
+      </footer>
+    </main>
+  </div>
 </Base>
 
 <style>
-    body {
-        --cream: #f2efe8;
-        --orange: #e8722c;
-        --muted-text: rgba(8, 14, 28, 0.4);
-        --dark-background: #080e1c;
-        /* This is a background attribute */
-        --base-gradient-vert: linear-gradient(100deg, rgb(155, 111, 196), rgb(53, 158, 157)) text;
-        
-        background-color: var(--cream);
+  /* ---------------------------------------------------- */
+  /* HEIGHT-INSPIRED ULTRA-MINIMALIST DARK DESIGN SYSTEM */
+  /* ---------------------------------------------------- */
+  :root {
+    --bg-void: #000000;
+    --text-pure: #ffffff;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-subtle: #64748b;
+    --wire-line: rgba(255, 255, 255, 0.12);
+
+    --teal: #359e9d;
+    --purple: #704898;
+    --orchid: #be83d3;
+    --orange: #e8722c;
+    --cyan: #00f2fe;
+
+    --tarot-gradient: linear-gradient(
+      135deg,
+      #359e9d 0%,
+      #704898 50%,
+      #be83d3 100%
+    );
+  }
+
+  body {
+    background-color: var(--bg-void) !important;
+    color: var(--text-primary);
+    font-family:
+      var(--secondary-font),
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .height-story-wrap {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #000000;
+  }
+
+  /* ---------------------------------------------------- */
+  /* MINIMALIST HEADER */
+  /* ---------------------------------------------------- */
+  .story-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .header-back,
+  .header-case-no {
+    pointer-events: auto;
+  }
+
+  .header-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+  }
+  .header-back:hover {
+    color: var(--text-pure);
+  }
+
+  .header-case-no {
+    font-size: 0.75rem;
+    font-family: monospace;
+    color: var(--text-subtle);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------------------------------------------------- */
+  /* HERO STAGE (EXACT 1:1 FIGMA CANVAS MATCH) */
+  /* ---------------------------------------------------- */
+  .figma-hero-stage {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    position: relative;
+  }
+
+  .hero-canvas-grid {
+    width: min(92%, 1100px);
+    height: min(80vh, 680px);
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 3rem;
+    position: relative;
+  }
+
+  /* LEFT COLUMN: Pure space + Lounger anchored to bottom */
+  .hero-col-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-left: 2vw;
+    padding-bottom: 2vh;
+  }
+
+  .hero-lounger-anchor {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .hero-lounger-img {
+    width: clamp(230px, 24vw, 300px);
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: screen;
+  }
+
+  /* RIGHT COLUMN: Upper-mid Crab + Title, Bottom Question */
+  .hero-col-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 15vh;
+    padding-bottom: 5vh;
+    padding-left: 3vw;
+  }
+
+  .hero-right-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .hero-crab-glyph {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    mix-blend-mode: screen;
+    opacity: 0.95;
+  }
+
+  .hero-title-text {
+    font-family:
+      var(--secondary-font),
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-right-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero-question-text {
+    font-family:
+      var(--secondary-font),
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: 1.125rem; /* 18px */
+    font-weight: 400;
+    line-height: 1.5;
+    color: #71717a;
+    margin: 0;
+    letter-spacing: -0.015em;
+    max-width: 440px;
+  }
+
+  strong,
+  .height-story-wrap :global(strong) {
+    color: #ffffff !important;
+    font-weight: 500;
+  }
+
+  /* ---------------------------------------------------- */
+  /* STORY FLOW & VIGNETTES */
+  /* ---------------------------------------------------- */
+  .story-flow {
+    width: min(90%, 960px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 120px;
+  }
+
+  .vignette {
+    width: 100%;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+    padding: 60px 0;
+  }
+
+  .vignette.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .vignette-illustration {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .line-art {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+  }
+
+  .vignette-text {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .step-tag {
+    font-size: 0.75rem;
+    font-family: monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-subtle);
+  }
+
+  .story-lead {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: -0.015em;
+    color: #71717a;
+  }
+  .story-lead strong {
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  .story-p {
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.7;
+    color: #71717a;
+    font-weight: 400;
+  }
+  .story-p strong {
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  .subtle-p {
+    color: var(--text-subtle);
+    font-size: 0.95rem;
+  }
+
+  .sparse-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  .sparse-list li {
+    display: flex;
+    gap: 12px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #71717a;
+  }
+  .sparse-list li strong {
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  .list-num {
+    color: #ffffff;
+    font-family: monospace;
+    font-weight: 600;
+  }
+
+  /* Thin Line Connector between stages */
+  .line-connector {
+    width: 1px;
+    height: 100px;
+    background: linear-gradient(
+      180deg,
+      var(--wire-line),
+      rgba(255, 255, 255, 0.02)
+    );
+    margin: 20px 0;
+  }
+
+  /* ---------------------------------------------------- */
+  /* STAGE 03: AGENTS LINE STAGE */
+  /* ---------------------------------------------------- */
+  .agents-vignette {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .vignette-header-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    max-width: 600px;
+  }
+
+  .vignette-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 500;
+    color: var(--text-pure);
+    letter-spacing: -0.02em;
+  }
+
+  .vignette-subtitle {
+    font-size: 1rem;
+    color: #71717a;
+    line-height: 1.5;
+  }
+
+  .agents-line-stage {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .agent-node {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .node-glyph {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.2s ease;
+  }
+  .node-glyph:hover {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .agent-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-pure);
+    margin: 0;
+  }
+
+  .agent-role {
+    font-size: 0.75rem;
+    font-family: monospace;
+    color: var(--text-subtle);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .agent-brief {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #71717a;
+    margin-top: 6px;
+    max-width: 240px;
+  }
+
+  .agent-wire {
+    width: 40px;
+    height: 1px;
+    background: var(--wire-line);
+    margin-top: 22px;
+  }
+
+  /* Inline Code & Slack Quote Pill */
+  code {
+    font-family: monospace;
+    font-size: 0.85em;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .slack-quote-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: #71717a;
+    border: 1px solid var(--wire-line);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    width: fit-content;
+  }
+  .slack-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ffffff;
+  }
+
+  /* ---------------------------------------------------- */
+  /* EPILOGUE & FOOTER */
+  /* ---------------------------------------------------- */
+  .story-epilogue {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .epilogue-line {
+    width: 60px;
+    height: 1px;
+    background: var(--wire-line);
+  }
+
+  .epilogue-closing {
+    font-size: 0.85rem;
+    color: var(--text-subtle);
+  }
+
+  .epilogue-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .link-deck {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-pure);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 18px;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+  }
+  .link-deck:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .link-subtle {
+    color: var(--text-subtle);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .link-subtle:hover {
+    color: var(--text-secondary);
+  }
+
+  /* ---------------------------------------------------- */
+  /* RESPONSIVE LAYOUT */
+  /* ---------------------------------------------------- */
+  @media (max-width: 768px) {
+    .figma-hero-stage {
+      min-height: auto;
+      padding: 100px 20px 40px;
     }
-
-    section {
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-
-
-        &.hero {
-            justify-content: center;
-            position: relative;
-            gap: 2.5em;
-            
-            min-height: 90dvh;
-            background-color: #f2efe8;
-            padding: 80px 24px 150px 24px;
-
-        }
-
-        &.problem {
-            background-color: var(--dark-background);
-            border-radius: 100vh 100vh 0 0;
-            min-height: 100vh;
-            padding-top: 10vh;
-            gap: 5em;
-
-        }
+    .hero-canvas-grid {
+      height: auto;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
     }
-
-        
-    h3.section-title {
-        font-family: var(--secondary-font);
-        font-size: 0.75rem;
-        text-transform: uppercase;
+    .hero-col-right {
+      order: 1;
+      padding: 0;
+      gap: 2rem;
     }
-
-    h1.title {
-        font-family: var(--secondary-font), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-size: 6rem;
-        font-weight: bold;
-        line-height: 0.9;
-        letter-spacing: -0.045em;
-        text-align: center;
-        text-transform: lowercase;
-
-        &.biggest {
-            display: inline;
-            font-weight: 1000;
-            font-size: clamp(54px, 13vw, 190px);
-            margin-bottom: 2rem;
-        }
+    .hero-col-left {
+      order: 2;
+      padding: 0;
+      align-items: center;
     }
-
-    h2.title {
-        font-family: var(--secondary-font);
-        font-size: clamp(30px, 5.2vw, 62px);
-        font-weight: bold;
-        color: white;
-        text-align: center;
-        width: max(50%, 300px);
-        letter-spacing: -0.03em;
-        line-height: 0.9;
-
-        &#problem-title {
-            margin-bottom: 15vh;
-        }
+    .hero-lounger-img {
+      max-width: 220px;
     }
-
-
-    p {
-        font-family: var(--secondary-font);
-        text-align: center;
-
-        &.standfirst {
-            margin-top: .5rem;
-            width: 50vw;
-            font-weight: 500;
-            color: var(--muted-text);
-        }
+    .hero-question-text {
+      font-size: 1rem;
     }
-
-    span {
-        padding: 0;
-        margin: 0;
+    .vignette,
+    .vignette.reverse {
+      flex-direction: column;
+      gap: 2rem;
+      text-align: center;
     }
-
-    div.stat {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        width: 75%;
-
-        .stat-metric {
-            font-size: clamp(58px, 11vw, 128px);
-            font-weight: 400;
-            letter-spacing: -0.05em;
-            line-height: 0.8;
-            padding: 0;
-        }
-
-        span.stat-units {
-            font-size: 3rem;
-            letter-spacing: -0.03em;
-            color: rgb(153, 153, 153);
-        }
-
-        .stat-caption {
-            text-transform: uppercase;
-            text-align: left;
-            font-size: 0.875rem;
-            letter-spacing: 0.02;
-            width: max(20%, 250px);
-            color: rgb(153, 153, 153);
-        }
+    .vignette-text {
+      align-items: center;
     }
-
-    .list-wrap {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 5vh;
-        max-width: 80%;
-
-        .horizontal-list {
-            display: flex;
-            gap: clamp(14px, 5rem, 15vw);
-            justify-content: space-between;
-            padding: 0;
-            flex-wrap: wrap;
-        }
-
-        li {
-            list-style: none;
-            font-family: var(--secondary-font);
-            font-weight: 400;
-            color: rgb(153, 153, 153);
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        li::before {
-            content: url(../assets/icons/star_splash.svg);
-            margin-right: 0.8em;
-            vertical-align: middle;
-        }
+    .sparse-list li {
+      text-align: left;
     }
-
-    @keyframes scroll-cue {
-        0% {
-            transform: translateY(0);
-            opacity: .9;
-        }
-
-        100% {
-            transform: translateY(12px);
-            opacity: .12;
-        }
+    .agents-line-stage {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
     }
+    .agent-wire {
+      width: 1px;
+      height: 30px;
+      margin: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .story-header {
+      padding: 16px 20px;
+    }
+    .header-case-no {
+      display: none;
+    }
+  }
 </style>

@@ -28,7 +28,8 @@ const projects = defineCollection({
         imageUrl: z.string().optional(),
         maskUrl: z.string().optional(),
         holoEffect: z.string().optional(),
-    }),
+        story: z.record(z.any()).optional(),
+    }).passthrough(),
 });
 
 const overviews = defineCollection({

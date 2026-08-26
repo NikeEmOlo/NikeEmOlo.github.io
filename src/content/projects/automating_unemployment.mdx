@@ -6,18 +6,211 @@ projType: "case study"
 icon: "crab"
 category: "operations"
 summary: "A self-built team of AI agents that took a 12-hour-a-day job hunt down to two — an 83% time saving."
-tags: {
-    skills: ["AI Agents", "Automation"],
-}
+tags:
+  {
+    skills:
+      ["AI Agents", "Automation", "Systems Design", "Python", "Slack API"],
+  }
 overview: automating_unemployment
-projectOverview: {
-    Problem: "Job-seekers today have a difficult task ahead of them.",
-    Goal: "Placeholder",
-    How: "Placeholder",
-    Results: "Placeholder",
-}
+projectOverview:
+  {
+    Problem: "12 hours a day lost to repetitive job-hunting friction instead of building and learning.",
+    Goal: "Build an autonomous multi-agent pipeline to handle discovery, filtering, and drafting.",
+    How: "Orchestrated 3 specialized OpenClaw agents in a DOE framework controlled via Slack.",
+    Results: "Reduced daily job search time by 83% (12h to 2h) while maintaining full human oversight.",
+  }
+story:
+  heroQuestion: "Do you know how time consuming it is to be unemployed?  <strong>I do.</strong>"
+  vignette0:
+    tag: "00 / The Context"
+    lead: "At my peak, I was spending <strong>12 hours a day</strong> searching and applying for jobs."
+    body: "By designing a multi-agent, AI-driven workflow, I reduced that time by <strong>83%</strong>."
+
+  vignette1:
+    tag: "01 / The Dilemma"
+    lead: "I was a career changer, studying full-stack development to get a job in tech. I also lived in one of the most expensive cities in the world, London. I had two options:"
+    options:
+      - "<strong>Study first, apply later</strong> — the sensible route, if you don't need to pay rent or eat food."
+      - "<strong>Work and study simultaneously</strong> — the pragmatic path, until the math catches up with you."
+    body: "A single tailored application took <strong>1.5 to 3 hours</strong>. In today's market, job hunting and deep learning were completely incompatible."
+
+  vignette2:
+    tag: "02 / The Realization"
+    lead: "The market is trapped in an <strong>AI doom loop</strong>."
+    body1: "Candidates use AI to blast out generic applications. Companies use AI to filter them out. The cycle accelerates."
+    body2: "Candidates are automating the <em>wrong</em> part of the process. I didn't want generic AI hallucinations—I wanted <strong>system leverage</strong>."
+
+  vignette3:
+    tag: "03 / The Team"
+    title: "Meet the agents."
+    subtitle: "Three autonomous OpenClaw agents operating inside a Directives, Orchestration, and Execution (DOE) framework."
+    agents:
+      - glyph: "G"
+        name: "Giles"
+        role: "The Orchestrator"
+        brief: "Takes directives, manages cron scrapers 3x daily, and filters raw public postings against hard criteria."
+      - glyph: "C"
+        name: "Cordelia"
+        role: "The Tailor"
+        brief: "Runs engineering vibe checks and maps required skills directly to verified facts in my master CV."
+      - glyph: "W"
+        name: "Willow"
+        role: "The Dispatcher"
+        brief: "Constructs interactive Slack notifications and logs every lead to a central Google Sheets tracker."
+
+  vignette4:
+    tag: "04 / The Philosophy"
+    lead: "Human-in-the-loop: <strong>Leverage over laziness</strong>."
+    body1: "Autonomous doesn't mean unaccountable. The agents handle the research, filtering, and synthesis in the background."
+    body2: "Every application is delivered to my private <code>#job-approvals</code> Slack channel for final human review, tone refinement, and manual submission."
+    pill: "100% human-verified submissions · 0% blind spam"
+
+  vignette5:
+    tag: "05 / The Outcome"
+    lead: "The results? <strong>12 hours became 2 hours</strong>."
+    body1: "An <strong>83% reduction</strong> in operational overhead."
+    body2: "Those 10 hours a day were directly reinvested into mastering full-stack engineering, building this portfolio, and delivering business automation consulting for freelance clients at <strong>Outer Office</strong>."
+
+  footer:
+    closing: "Built with OpenClaw, Claude 3.5 Sonnet, Python, and Slack."
+    deckLabel: "Return to Tarot Deck"
+    githubLabel: "View GitHub"
 ---
 
-<section class="project-content">
-    Some text here
-</section>
+# Automating Unemployment
+
+Do you know how time-consuming it is to be unemployed? I do.
+
+Here is how I built an autonomous multi-agent workflow to reclaim **83% of the time** I was spending on the job hunt.
+
+---
+
+## 01 / The Breakdown
+
+### The math ain't mathing
+
+When I first moved to London, I was spending **12 hours a day** searching and applying for jobs.
+
+As a career changer studying full-stack development in one of the world's most expensive cities, I faced a dilemma:
+
+1. **Study first, apply later** — the sensible route, assuming you don't need to pay rent or buy groceries.
+2. **Work and study simultaneously** — the pragmatic choice, until the math caught up with me.
+
+In today's market, option two is nearly impossible. A single tailored application takes anywhere from **1.5 to 3 hours**. Every day demanded:
+
+- **Sifting through hundreds of listings** to filter out scams, ghost jobs, and data miners.
+- **Tailoring CVs and cover letters** to hit arbitrary 95% match thresholds on ATS scanners.
+- **Managing outreach** across recruiters, hiring managers, and peers.
+- **Form gymnastics:** uploading a CV and cover letter, only to re-type every line into custom portal fields just to be parsed by an LLM on the other side.
+
+That excludes take-home assessments, cognitive tests, and multi-stage interview rounds.
+
+Job hunting wasn't just exhausting; it was directly competing with the deep, uninterrupted focus required to master software engineering.
+
+---
+
+## 02 / The Strategy
+
+### Fighting automation with automation
+
+The tech hiring market is trapped in an **AI doom loop**:
+
+1. Candidates face fierce competition, so they turn to AI tools to blast out hundreds of applications.
+2. Companies get swamped with generic volume, so they deploy AI screens to aggressively filter candidates out.
+3. Rejection rates climb, competition spikes, and the cycle accelerates.
+
+It’s an exhausting spiral because most candidates automate the **wrong** part of the process.
+
+Most people use AI to:
+
+1. Generate generic CVs and cookie-cutter cover letters.
+2. Hallucinate answers to application forms.
+
+I already know I write better, more authentic applications than any generic LLM prompt. But what LLMs excel at is rapid synthesis, structuring messy data, and executing logic when paired with deterministic code.
+
+So instead of mass-applying, I designed an AI-driven workflow using Python scripts, scheduled crons, and OpenClaw agents to automate the real operational bottlenecks:
+
+1. **Discovery:** Automated role scraping across target job boards.
+2. **Filtering:** Precision matching against tech stacks, location, and salary floors.
+3. **Due Diligence:** Company research and engineering culture vibe checks.
+4. **Contextual Drafting:** Pulling relevant proof points from my verified master experience.
+5. **Pipeline Ops:** Centralized tracking, Slack alerts, and status monitoring.
+
+---
+
+## 03 / The Architecture
+
+### Meet the Team
+
+```
+[ Job Feeds & Boards ]
+         │
+         ▼
+ ┌───────────────┐
+ │     Giles     │ ── Orchestration & Sourcing (Directives, scrapers, initial filters)
+ └───────┬───────┘
+         │ Matched Roles
+         ▼
+ ┌───────────────┐
+ │   Cordelia    │ ── Contextual Synthesis (Role alignment against verified experience)
+ └───────┬───────┘
+         │ Application Packets
+         ▼
+ ┌───────────────┐
+ │    Willow     │ ── Dispatch & Pipeline Tracking (Slack alerts, CRM / Sheets sync)
+ └───────┬───────┘
+         │
+         ▼
+[ Slack Approval Gate ] ──▶ [ Final Human Submission ]
+```
+
+#### 01. Giles / The Orchestrator
+
+- **Role:** Directs workflow execution, delegates tasks to specialized sub-agents, and maintains system accountability.
+- **Mechanism:** Scheduled cron jobs trigger custom scrapers 3x daily to ingest public job postings matching targeted keywords and criteria.
+
+#### 02. Cordelia / The Tailor
+
+- _(In development)_
+
+#### 03. Willow / The Dispatcher
+
+- _(In development)_
+
+---
+
+## 04 / The Philosophy
+
+### Human-in-the-loop: Leverage over laziness
+
+Autonomous does not mean unaccountable. Fully automated job applications produce impersonal spam—and hiring managers can spot AI boilerplate from a mile away.
+
+This system is built around a non-negotiable **human-in-the-loop gate**:
+
+1. **Autonomous Prep:** Giles, Cordelia, and Willow handle scraping, filtering, and drafting in the background.
+2. **Curated Slack Digest:** I receive actionable notifications with role highlights, culture signals, and drafted materials.
+3. **Human Polish & Dispatch:** I review the match, verify the claims, add personal nuance, and submit the application myself.
+
+The machines do the repetitive data extraction; I retain 100% control over voice, authenticity, and personal connection.
+
+---
+
+## 05 / The Results & Impact
+
+### Reclaiming the engineering cycle
+
+- **83% time reduction:** Daily job hunt overhead dropped from **12 hours down to 2**.
+- **10 hours/day reclaimed:** Reinvested directly into full-stack development, algorithms, and shipping production applications.
+- **Zero application burnout:** High-context applications replaced shotgun submissions, resulting in better responses and zero recruiter fatigue.
+- **Compounding upside:** Freed up energy for technical networking, freelance client delivery with **Outer Office**, and building long-term software projects.
+
+---
+
+## 06 / Tech Stack & Tools
+
+- **Agent Architecture:** OpenClaw running a DOE framework (Directives, Orchestration, Execution)
+- **LLM Engine:** Anthropic Claude (Claude 3.5 Sonnet)
+- **Automation & Scripting:** Python, Scheduled Cron Jobs, Custom Web Scrapers
+- **Interface & Control:** Slack Webhooks & Bot API
+- **Data Management:** Google Sheets API / Workspace Integration
+- **Environment:** Local execution environment
