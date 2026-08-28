@@ -1,0 +1,581 @@
+---
+interface Props {
+  company?: string;
+  title?: string;
+  location?: string;
+  autoPlay?: boolean;
+  showReplay?: boolean;
+}
+
+const {
+  company = "Nota Scam",
+  title = "One junior role please",
+  location = "London, England, United Kingdom",
+  autoPlay = true,
+  showReplay = false,
+} = Astro.props;
+---
+
+<div class="linkedin-card-container" data-autoplay={autoPlay ? "true" : "false"}>
+  <!-- Top Header: Logo, Company Name, More Menu -->
+  <div class="linkedin-header defocus-target">
+    <div class="company-badge">
+      <div class="company-logo-box">
+        <!-- Clean Modern Minimalist Geometric Logo -->
+        <svg
+          class="company-logo-icon"
+          viewBox="0 0 32 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="32" height="32" rx="4" fill="#0A66C2" />
+          <path
+            d="M16 7L24 11.5V20.5L16 25L8 20.5V11.5L16 7Z"
+            stroke="#FFFFFF"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M16 7V25M8 11.5L24 20.5M24 11.5L8 20.5"
+            stroke="#FFFFFF"
+            stroke-width="1.5"
+            stroke-opacity="0.75"
+          />
+        </svg>
+      </div>
+      <span class="company-name">{company}</span>
+    </div>
+
+    <button class="menu-btn" type="button" aria-label="More options">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <circle cx="5" cy="12" r="2"></circle>
+        <circle cx="12" cy="12" r="2"></circle>
+        <circle cx="19" cy="12" r="2"></circle>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Job Title -->
+  <h2 class="job-title defocus-target">{title}</h2>
+
+  <!-- Job Metadata Line (Real flow scaling via dynamic font-size - NO OVERLAPS) -->
+  <div class="job-meta-line">
+    <span class="job-location defocus-target">{location}</span>
+    <span class="meta-dot defocus-target">·</span>
+    <span class="job-time-tag" data-time-tag>1 hour ago</span>
+    <span class="meta-dot defocus-target">·</span>
+    <span class="job-applicants-wrap">
+      <span class="applicant-number" data-applicant-num>10</span>
+      <span class="applicants-label defocus-target">people clicked apply</span>
+    </span>
+  </div>
+
+  <p class="job-sub-meta defocus-target">Responses managed off LinkedIn</p>
+
+  <!-- Tags / Pills -->
+  <div class="job-tags-group defocus-target">
+    <div class="job-pill">
+      <svg class="pill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span>Remote</span>
+    </div>
+
+    <div class="job-pill">
+      <svg class="pill-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span>Full-time</span>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="job-actions-group defocus-target">
+    <button class="btn-apply" type="button">
+      <span>Apply</span>
+      <svg class="apply-icon" width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M11 3H5c-.55 0-1 .45-1 1s.45 1 1 1h3.59L3.29 10.29c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L10 6.41V10c0 .55.45 1 1 1s1-.45 1-1V4c0-.55-.45-1-1-1z"></path>
+      </svg>
+    </button>
+
+    <button class="btn-save" type="button">Save</button>
+
+    <!-- Sandbox Simulation Replay Button -->
+    {showReplay && (
+      <button class="btn-replay-sim" data-replay-btn title="Replay slam impact and application surge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+        </svg>
+        <span>Replay Slam</span>
+      </button>
+    )}
+  </div>
+</div>
+
+<style>
+  :root {
+    --target-scale: 1;
+    --number-motion-blur: 0px;
+  }
+
+  /* Exact LinkedIn UI Standards + Initial Pre-Slam State */
+  .linkedin-card-container {
+    width: 100%;
+    max-width: 680px;
+    background: #ffffff;
+    border: 1px solid #e0dfdc;
+    border-radius: 8px;
+    padding: 24px 28px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, sans-serif;
+    color: rgba(0, 0, 0, 0.9);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+    user-select: none;
+    position: relative;
+    opacity: 0;
+    transform: perspective(1200px) scale(1.6) translateY(-40px) rotateX(10deg);
+    filter: blur(8px);
+    will-change: transform, opacity, filter, box-shadow;
+  }
+
+  /* THE HIGH-IMPACT SLAM & TACTILE SPRING WOBBLE */
+  .linkedin-card-container.is-slammed {
+    animation: slamImpactWobble 0.7s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+  }
+
+  @keyframes slamImpactWobble {
+    0% {
+      opacity: 0;
+      transform: perspective(1200px) scale(1.65) translateY(-50px) rotateX(12deg);
+      filter: blur(8px);
+      box-shadow: 0 50px 100px rgba(0, 0, 0, 0);
+    }
+    38% {
+      /* Hard Impact Ground Hit */
+      opacity: 1;
+      transform: perspective(1200px) scale(0.95, 1.04) translateY(6px) rotateX(-3deg) rotate(-0.75deg);
+      filter: blur(0px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+    55% {
+      /* First Spring Rebound */
+      transform: perspective(1200px) scale(1.025, 0.98) translateY(-3px) rotateX(1.5deg) rotate(0.4deg);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+    72% {
+      /* Second Micro Wobble */
+      transform: perspective(1200px) scale(0.995, 1.005) translateY(1px) rotate(-0.15deg);
+    }
+    88% {
+      /* Settle */
+      transform: perspective(1200px) scale(1.002, 0.998) translateY(0) rotate(0deg);
+    }
+    100% {
+      opacity: 1;
+      transform: perspective(1200px) scale(1) translateY(0) rotate(0deg);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      filter: blur(0px);
+    }
+  }
+
+  /* Header */
+  .linkedin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .company-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .company-logo-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .company-logo-icon {
+    width: 100%;
+    height: 100%;
+  }
+
+  .company-name {
+    font-size: 0.9375rem; /* 15px */
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.9);
+    letter-spacing: -0.01em;
+  }
+
+  .menu-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.6);
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .menu-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  /* Job Title */
+  .job-title {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 700;
+    line-height: 1.33;
+    color: rgba(0, 0, 0, 0.9);
+    margin: 0;
+    margin-top: 2px;
+    letter-spacing: -0.015em;
+  }
+
+  /* Metadata Line - Fixed Vertical Anchoring with In-Flow Typography Scaling */
+  .job-meta-line {
+    font-size: 0.875rem; /* 14px */
+    color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 8px;
+    min-height: 36px;
+    line-height: 1;
+  }
+
+  .meta-dot {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+    align-self: center;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .job-location {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    align-self: center;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  /* Time Tag scaled via in-flow font-size */
+  .job-time-tag {
+    color: #057642; /* LinkedIn Green */
+    font-weight: 600;
+    font-size: calc(14px * var(--target-scale, 1));
+    line-height: 1;
+    white-space: nowrap;
+    will-change: font-size;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .job-time-tag.time-escalated {
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 500;
+  }
+
+  /* Applicant Wrapper */
+  .job-applicants-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    align-self: center;
+    line-height: 1;
+  }
+
+  /* Applicant Number scaled via in-flow font-size + dynamic motion blur */
+  .applicant-number {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: calc(14px * var(--target-scale, 1));
+    line-height: 1;
+    letter-spacing: -0.01em;
+    filter: blur(var(--number-motion-blur, 0px));
+    will-change: font-size, filter;
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+  }
+
+  .applicants-label {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    white-space: nowrap;
+    align-self: center;
+    line-height: 1;
+  }
+
+  .job-sub-meta {
+    font-size: 0.8125rem; /* 13px */
+    color: rgba(0, 0, 0, 0.6);
+    margin: 0;
+    margin-top: -4px;
+  }
+
+  /* Tags / Pills */
+  .job-tags-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .job-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 16px;
+    font-size: 0.875rem; /* 14px */
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.85);
+    background: #ffffff;
+  }
+
+  .pill-check {
+    stroke: rgba(0, 0, 0, 0.85);
+  }
+
+  /* Buttons */
+  .job-actions-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .btn-apply {
+    background: #0a66c2;
+    color: #ffffff;
+    border: none;
+    border-radius: 24px;
+    padding: 6px 18px;
+    font-size: 1rem; /* 16px */
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .btn-apply:hover {
+    background: #004182;
+  }
+  .btn-apply:active {
+    transform: scale(0.98);
+  }
+
+  .btn-save {
+    background: transparent;
+    color: #0a66c2;
+    border: 1px solid #0a66c2;
+    border-radius: 24px;
+    padding: 5px 18px;
+    font-size: 1rem; /* 16px */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn-save:hover {
+    background: rgba(10, 102, 194, 0.08);
+    box-shadow: inset 0 0 0 1px #0a66c2;
+  }
+  .btn-save:active {
+    transform: scale(0.98);
+  }
+
+  .btn-replay-sim {
+    margin-left: auto;
+    background: transparent;
+    border: 1px dashed rgba(0, 0, 0, 0.25);
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-replay-sim:hover {
+    border-color: #0a66c2;
+    color: #0a66c2;
+    background: rgba(10, 102, 194, 0.05);
+  }
+
+  @media (max-width: 520px) {
+    .linkedin-card-container {
+      padding: 18px 16px;
+    }
+    .job-title {
+      font-size: 1.25rem;
+    }
+    .job-actions-group {
+      flex-wrap: wrap;
+    }
+    .btn-replay-sim {
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+      margin-top: 4px;
+    }
+  }
+</style>
+
+<script>
+  function initLinkedInJobSimulation() {
+    const cards = document.querySelectorAll(".linkedin-card-container");
+
+    cards.forEach((card) => {
+      const timeTag = card.querySelector("[data-time-tag]");
+      const applicantNum = card.querySelector("[data-applicant-num]");
+      const replayBtn = card.querySelector("[data-replay-btn]");
+
+      if (!timeTag || !applicantNum) return;
+
+      let animationFrameId = null;
+      let isRunning = false;
+      let surgeTimeoutId = null;
+
+      function triggerSlamAndSurge() {
+        if (isRunning) cancelAnimationFrame(animationFrameId);
+        if (surgeTimeoutId) clearTimeout(surgeTimeoutId);
+        isRunning = false;
+
+        // 1. Trigger the SLAM Impact Animation
+        card.classList.remove("is-slammed");
+        // Force reflow to re-trigger CSS keyframe
+        void card.offsetWidth;
+        card.classList.add("is-slammed");
+
+        // 2. Reset Surge Values
+        card.style.setProperty("--target-scale", "1");
+        card.style.setProperty("--number-motion-blur", "0px");
+        timeTag.textContent = "1 hour ago";
+        timeTag.classList.remove("time-escalated");
+        applicantNum.textContent = "10";
+
+        // 3. Launch exponential applicant surge right as the card settles from the slam (~400ms)
+        surgeTimeoutId = setTimeout(() => {
+          runSurgeSimulation();
+        }, 420);
+      }
+
+      function runSurgeSimulation() {
+        if (isRunning) cancelAnimationFrame(animationFrameId);
+        isRunning = true;
+
+        const startTime = performance.now();
+        const duration = 3200; // 3.2s rapid exponential surge timeline
+
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+
+          // 1. IN-FLOW SCALING: Scales actual font-size (14px -> 28px) in place
+          const scaleEase = Math.pow(progress, 1.15);
+          const currentScale = (1.0 + scaleEase * 1.0).toFixed(3); // Ends at 2.000x (28px)
+          card.style.setProperty("--target-scale", `${currentScale}`);
+
+          // 2. LINEAR TIME PROGRESSION: 1 hour -> 48 hours (2 days)
+          const timeHours = 1 + progress * 47;
+          if (timeHours < 24) {
+            const h = Math.floor(timeHours);
+            timeTag.textContent = `${h} ${h === 1 ? "hour" : "hours"} ago`;
+            timeTag.classList.remove("time-escalated");
+          } else {
+            const days = Math.floor(timeHours / 24);
+            timeTag.textContent = `${days} ${days === 1 ? "day" : "days"} ago`;
+            timeTag.classList.add("time-escalated");
+          }
+          if (progress >= 1) {
+            timeTag.textContent = "2 days ago";
+          }
+
+          // 3. FAST EXPONENTIAL SURGE & MOTION BLUR:
+          // Starts at 10, escalates rapidly into thousands, ends on exactly 6,582
+          const targetFinal = 6582;
+          const startVal = 10;
+          const logRatio = Math.log(targetFinal / startVal); // ln(658.2) ≈ 6.48951
+          const expPower = Math.pow(progress, 1.65) * logRatio;
+          let currentApplicants = Math.round(startVal * Math.exp(expPower));
+
+          // Dynamic Motion Blur based on rate of number acceleration
+          if (progress > 0.25 && progress < 0.94) {
+            const surgeIntensity = Math.sin(((progress - 0.25) / 0.69) * Math.PI);
+            const motionBlurPx = (surgeIntensity * 1.1).toFixed(2);
+            card.style.setProperty("--number-motion-blur", `${motionBlurPx}px`);
+          } else {
+            card.style.setProperty("--number-motion-blur", "0px");
+          }
+
+          if (progress >= 1) {
+            currentApplicants = 6582;
+            card.style.setProperty("--number-motion-blur", "0px");
+          }
+
+          applicantNum.textContent = currentApplicants.toLocaleString();
+
+          if (progress < 1) {
+            animationFrameId = requestAnimationFrame(update);
+          } else {
+            isRunning = false;
+          }
+        }
+
+        animationFrameId = requestAnimationFrame(update);
+      }
+
+      // Replay button listener (re-runs Slam + Surge)
+      if (replayBtn) {
+        replayBtn.addEventListener("click", () => {
+          triggerSlamAndSurge();
+        });
+      }
+
+      // Auto-run trigger as soon as the card reaches viewport threshold
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              triggerSlamAndSurge();
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: "0px 0px -50px 0px",
+          threshold: 0.45,
+        }
+      );
+
+      observer.observe(card);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initLinkedInJobSimulation);
+  document.addEventListener("astro:page-load", initLinkedInJobSimulation);
+</script>

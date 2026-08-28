@@ -1,0 +1,202 @@
+---
+interface Props {
+  type: "boss" | "tailor" | "developer";
+  size?: string;
+  class?: string;
+}
+
+const { type, size = "72px", class: className = "" } = Astro.props;
+---
+
+{
+  type === "boss" && (
+    <!-- 1. THE BOSS / ORCHESTRATOR ICON: Tactical Streetwear Crown & Command Radar -->
+    <svg
+      viewBox="0 0 100 80"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={`width: ${size}; height: auto; display: block;`}
+      class={className}
+      aria-label="Orchestrator Boss Crown Icon"
+    >
+      <!-- Background Command Broadcast Waves (Delegation) -->
+      <path d="M 20 28 C 14 36, 14 48, 20 56" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" opacity="0.6" stroke-dasharray="3 3" />
+      <path d="M 80 28 C 86 36, 86 48, 80 56" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" opacity="0.6" stroke-dasharray="3 3" />
+
+      <!-- Shadow Plane for Crown -->
+      <path
+        d="M 24 58 L 28 26 L 42 42 L 50 20 L 58 42 L 72 26 L 76 58 Z"
+        fill="#B45309"
+      />
+
+      <!-- Main Tactical Boss Crown -->
+      <path
+        d="M 24 54 L 28 22 L 42 38 L 50 16 L 58 38 L 72 22 L 76 54 Z"
+        fill="#FBBF24"
+        stroke="#000000"
+        stroke-width="3"
+        stroke-linejoin="round"
+      />
+
+      <!-- Crown Base Rim -->
+      <rect
+        x="22"
+        y="54"
+        width="56"
+        height="12"
+        rx="4"
+        fill="#F59E0B"
+        stroke="#000000"
+        stroke-width="3"
+      />
+
+      <!-- Glowing Command Star in Center Crown Peak -->
+      <circle cx="50" cy="16" r="3.5" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+      <circle cx="28" cy="22" r="2.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+      <circle cx="72" cy="22" r="2.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+
+      <!-- Command Pedestal / Boss Seal -->
+      <rect x="36" y="66" width="28" height="6" rx="2" fill="#18181B" stroke="#000000" stroke-width="2" />
+
+      <!-- Specular Pill Glints -->
+      <rect x="28" y="57" width="16" height="3" rx="1.5" fill="#FFFFFF" />
+      <rect x="46" y="32" width="8" height="3" rx="1.5" fill="#FFFFFF" transform="rotate(45 46 32)" />
+    </svg>
+  )
+}
+
+{
+  type === "tailor" && (
+    <!-- 2. THE TAILOR ICON: Precision Digital Stylus & Bezier Document Tweaker -->
+    <svg
+      viewBox="0 0 100 80"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={`width: ${size}; height: auto; display: block;`}
+      class={className}
+      aria-label="Digital Tailor Stylus Icon"
+    >
+      <!-- Master Document Pad -->
+      <rect
+        x="18"
+        y="14"
+        width="44"
+        height="54"
+        rx="6"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="3"
+      />
+      <!-- Document Text Lines -->
+      <rect x="26" y="24" width="16" height="3" rx="1.5" fill="#E11D48" />
+      <rect x="26" y="32" width="26" height="2.5" rx="1.25" fill="#A1A1AA" />
+      <rect x="26" y="39" width="22" height="2.5" rx="1.25" fill="#A1A1AA" />
+      <rect x="26" y="46" width="18" height="2.5" rx="1.25" fill="#A1A1AA" />
+
+      <!-- Curved Bezier Tailoring Adjustment Arc -->
+      <path
+        d="M 26 56 C 36 50, 44 62, 54 54"
+        stroke="#E11D48"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-dasharray="3 3"
+      />
+      <!-- Bezier Anchor Points -->
+      <circle cx="26" cy="56" r="2.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+      <circle cx="54" cy="54" r="2.5" fill="#E11D48" stroke="#000000" stroke-width="1.5" />
+
+      <!-- Digital Precision Stylus Pen (Angled) -->
+      <!-- Stylus Shadow -->
+      <path
+        d="M 52 56 L 78 16 L 86 22 L 56 60 Z"
+        fill="#9F1239"
+      />
+      <!-- Stylus Body -->
+      <path
+        d="M 50 54 L 76 14 L 84 20 L 54 58 Z"
+        fill="#E11D48"
+        stroke="#000000"
+        stroke-width="3"
+        stroke-linejoin="round"
+      />
+      <!-- Stylus Metallic Grip & Nib -->
+      <path
+        d="M 50 54 L 46 64 L 54 58 Z"
+        fill="#F4F4F5"
+        stroke="#000000"
+        stroke-width="2.5"
+        stroke-linejoin="round"
+      />
+      <!-- Stylus Laser Calibration Spark at Tip -->
+      <circle cx="45" cy="65" r="2" fill="#E11D48" />
+
+      <!-- Specular Pill Glint on Stylus -->
+      <rect x="62" y="24" width="14" height="2.5" rx="1.25" fill="#FFFFFF" transform="rotate(-56 62 24)" />
+    </svg>
+  )
+}
+
+{
+  type === "developer" && (
+    <!-- 3. THE DEVELOPER / DEBUGGER ICON: Terminal Cyber Bug with Code Brackets & Crosshair -->
+    <svg
+      viewBox="0 0 100 80"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={`width: ${size}; height: auto; display: block;`}
+      class={className}
+      aria-label="Developer Debugger Bug Icon"
+    >
+      <!-- Background Terminal Code Brackets -->
+      <text
+        x="12"
+        y="48"
+        font-family="monospace"
+        font-size="26"
+        font-weight="900"
+        fill="#0D9488"
+        opacity="0.3"
+      >&lt;</text>
+      <text
+        x="74"
+        y="48"
+        font-family="monospace"
+        font-size="26"
+        font-weight="900"
+        fill="#0D9488"
+        opacity="0.3"
+      >&gt;</text>
+
+      <!-- Bug Legs (6 Vector Joints) -->
+      <path d="M 34 32 L 22 26" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 32 44 L 20 44" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 34 56 L 22 62" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+
+      <path d="M 66 32 L 78 26" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 68 44 L 80 44" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 66 56 L 78 62" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+
+      <!-- Bug Body / Cyber Beetle Carapace -->
+      <!-- Shadow Plane -->
+      <ellipse cx="50" cy="46" rx="18" ry="20" fill="#115E59" />
+      
+      <!-- Main Shell Base -->
+      <ellipse cx="50" cy="44" rx="18" ry="20" fill="#14B8A6" stroke="#000000" stroke-width="3" />
+      
+      <!-- Bug Head & Antennae -->
+      <circle cx="50" cy="22" r="10" fill="#0D9488" stroke="#000000" stroke-width="2.5" />
+      <path d="M 46 14 C 44 8, 38 8, 36 10" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+      <path d="M 54 14 C 56 8, 62 8, 64 10" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+
+      <!-- Center Wing Split & Terminal Slash ` / ` on Carapace -->
+      <line x1="50" y1="24" x2="50" y2="64" stroke="#000000" stroke-width="2.5" />
+      <line x1="44" y1="36" x2="56" y2="52" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+
+      <!-- Tactical Debug Scope / Targeting Ring -->
+      <circle cx="50" cy="44" r="8" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="2 2" />
+
+      <!-- Specular Pill Glint -->
+      <rect x="38" y="32" width="6" height="12" rx="3" fill="#FFFFFF" opacity="0.8" />
+    </svg>
+  )
+}

@@ -1,0 +1,188 @@
+---
+interface Props {
+  size?: string;
+  class?: string;
+}
+
+const { size = "100%", class: className = "" } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 320 360"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  style={`width: ${size}; height: auto; display: block;`}
+  class={className}
+>
+  <!-- Ground Cast Shadow (Hard-edged ellipse) -->
+  <ellipse cx="160" cy="334" rx="70" ry="14" fill="#000000" opacity="0.9" />
+
+  <!-- MAIN CHARACTER GROUP -->
+  <g class="willow-figure">
+    
+    <!-- 1. LEGS & SNEAKERS -->
+    <!-- Left Leg & Shoe -->
+    <g class="leg-left">
+      <path d="M 124 235 L 118 286" stroke="#000000" stroke-width="8" stroke-linecap="round" />
+      <path d="M 124 235 L 118 286" stroke="#8C5338" stroke-width="4" stroke-linecap="round" />
+
+      <!-- Sneaker Left -->
+      <path
+        d="M 98 288 C 98 278, 118 276, 134 280 C 142 282, 144 290, 142 300 C 140 308, 128 312, 112 312 C 96 312, 98 298, 98 288 Z"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M 98 294 C 100 284, 112 282, 122 284 C 116 296, 112 308, 102 310 C 98 306, 98 298, 98 294 Z"
+        fill="#0D9488"
+        stroke="#000000"
+        stroke-width="3"
+        stroke-linejoin="round"
+      />
+      <rect x="120" y="284" width="10" height="3" rx="1.5" fill="#FFFFFF" transform="rotate(-15 120 284)" />
+    </g>
+
+    <!-- Right Leg & Shoe -->
+    <g class="leg-right">
+      <path d="M 196 235 L 202 286" stroke="#000000" stroke-width="8" stroke-linecap="round" />
+      <path d="M 196 235 L 202 286" stroke="#8C5338" stroke-width="4" stroke-linecap="round" />
+
+      <!-- Sneaker Right -->
+      <path
+        d="M 178 280 C 194 276, 214 278, 222 288 C 222 298, 224 312, 208 312 C 192 312, 180 308, 178 300 C 176 290, 178 282, 178 280 Z"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M 198 284 C 208 282, 220 284, 222 294 C 222 298, 222 306, 218 310 C 208 308, 204 296, 198 284 Z"
+        fill="#0D9488"
+        stroke="#000000"
+        stroke-width="3"
+        stroke-linejoin="round"
+      />
+      <rect x="186" y="282" width="10" height="3" rx="1.5" fill="#FFFFFF" transform="rotate(15 186 282)" />
+    </g>
+
+    <!-- 2. TEAL SHORTS -->
+    <g class="shorts">
+      <path
+        d="M 112 204 L 208 204 L 216 238 L 178 242 L 160 220 L 142 242 L 104 238 Z"
+        fill="#0D9488"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      <path d="M 160 204 L 160 220" stroke="#000000" stroke-width="3.5" stroke-linecap="round" />
+    </g>
+
+    <!-- 3. WHITE TEE (THE DISPATCHER) -->
+    <g class="torso">
+      <path
+        d="M 118 136 C 118 136, 134 130, 160 130 C 186 130, 202 136, 202 136 L 208 206 L 112 206 Z"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      <!-- Slack / Dispatcher Icon Pill on Chest -->
+      <rect x="146" y="156" width="28" height="18" rx="6" fill="#18181B" stroke="#000000" stroke-width="2" />
+      <circle cx="154" cy="165" r="3" fill="#0D9488" />
+      <circle cx="166" cy="165" r="3" fill="#F59E0B" />
+    </g>
+
+    <!-- 4. ARMS & DISPATCH PAPER AIRPLANE -->
+    <g class="dispatcher-arms">
+      <!-- Left Arm (Resting on Hip) -->
+      <path
+        d="M 118 138 L 92 168 L 112 186 L 126 166 Z"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      <circle cx="114" cy="186" r="9" fill="#8C5338" stroke="#000000" stroke-width="3.5" />
+
+      <!-- Right Arm (Launching Plane Upward) -->
+      <path
+        d="M 202 138 L 236 130 L 254 98 L 236 94 L 194 148 Z"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      <circle cx="248" cy="96" r="9" fill="#8C5338" stroke="#000000" stroke-width="3.5" />
+
+      <!-- Origami Slack / Sheets Dispatch Plane -->
+      <g class="paper-plane" transform="translate(244, 48) rotate(-20)">
+        <!-- Shadow Plane Wing -->
+        <polygon points="0,30 50,0 20,40" fill="#CBD5E1" stroke="#000000" stroke-width="3.5" stroke-linejoin="round" />
+        <!-- Main Upper Wing -->
+        <polygon points="0,30 50,0 35,45" fill="#FFFFFF" stroke="#000000" stroke-width="3.5" stroke-linejoin="round" />
+        <!-- Wing Fold Crease -->
+        <line x1="0" y1="30" x2="50" y2="0" stroke="#000000" stroke-width="3" />
+        <!-- Green Sheets / Slack Dot -->
+        <circle cx="25" cy="22" r="3.5" fill="#0D9488" />
+      </g>
+    </g>
+
+    <!-- 5. HEAD & WAVY HAIR WITH VISOR CAP -->
+    <g class="head-group">
+      <!-- Wavy Hair Back -->
+      <path
+        d="M 160 36 
+           C 126 36, 102 54, 98 84 
+           C 94 108, 92 136, 96 156 
+           C 106 172, 126 176, 140 176 
+           C 152 182, 172 182, 184 176 
+           C 198 176, 218 172, 226 156 
+           C 230 136, 228 108, 224 84 
+           C 220 54, 194 36, 160 36 Z"
+        fill="#3D261C"
+        stroke="#000000"
+        stroke-width="4.5"
+        stroke-linejoin="round"
+      />
+
+      <!-- Blank Faceless Head -->
+      <path
+        d="M 124 90 C 124 72, 140 64, 160 64 C 180 64, 196 72, 196 90 C 196 118, 186 144, 160 144 C 134 144, 124 118, 124 90 Z"
+        fill="#8C5338"
+        stroke="#000000"
+        stroke-width="4"
+      />
+
+      <!-- Curved Smile Line -->
+      <path
+        d="M 152 114 Q 160 121 168 114"
+        stroke="#000000"
+        stroke-width="3.5"
+        stroke-linecap="round"
+        fill="none"
+      />
+
+      <!-- Streetwear Dispatcher Cap (Teal / Black Brim) -->
+      <!-- Cap Crown -->
+      <path
+        d="M 120 74 C 120 48, 140 38, 160 38 C 180 38, 200 48, 200 74 Z"
+        fill="#0D9488"
+        stroke="#000000"
+        stroke-width="4"
+      />
+      <!-- Cap Specular Glint -->
+      <path d="M 142 46 C 150 44, 170 44, 178 46" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+
+      <!-- Cap Brim / Visor (Facing Right) -->
+      <path
+        d="M 120 74 C 140 70, 180 70, 200 74 L 226 78 C 220 86, 180 86, 120 74 Z"
+        fill="#18181B"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+    </g>
+  </g>
+</svg>

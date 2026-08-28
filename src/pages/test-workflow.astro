@@ -1,0 +1,19 @@
+---
+// test-workflow.astro - Isolated Sandbox for testing "How it works" animation
+import Base from "../layouts/Base.astro";
+import HowItWorksWorkflow from "../components/HowItWorksWorkflow.astro";
+---
+
+<Base>
+  <div class="test-wrapper">
+    <HowItWorksWorkflow showTestToolbar={true} />
+  </div>
+</Base>
+
+<style>
+  .test-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background: #09090b;
+  }
+</style>

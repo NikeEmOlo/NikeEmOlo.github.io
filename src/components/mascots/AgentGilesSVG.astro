@@ -1,0 +1,449 @@
+---
+interface Props {
+  size?: string;
+  class?: string;
+}
+
+const { size = "100%", class: className = "" } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 320 360"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  style={`width: ${size}; height: auto; display: block;`}
+  class={className}
+>
+  <defs>
+    <!-- Hard offset ground shadow filter -->
+    <filter id="giles-shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="6" stdDeviation="0" flood-color="#000000" flood-opacity="0.9" />
+    </filter>
+  </defs>
+
+  <!-- Ground Cast Shadow (Hard-edged ellipse) -->
+  <ellipse cx="160" cy="334" rx="72" ry="14" fill="#000000" opacity="0.9" />
+
+  <!-- MAIN CHARACTER GROUP -->
+  <g class="giles-figure">
+    
+    <!-- 1. LEGS & SNEAKERS -->
+    <!-- Left Leg & Shoe -->
+    <g class="leg-left">
+      <!-- Leg -->
+      <path d="M 124 235 L 120 286" stroke="#000000" stroke-width="8" stroke-linecap="round" />
+      <path d="M 124 235 L 120 286" stroke="#8C5338" stroke-width="4" stroke-linecap="round" />
+
+      <!-- Chunky Sneaker Left -->
+      <!-- Shadow Plane -->
+      <path
+        d="M 100 292 C 100 282, 120 280, 136 284 C 144 286, 146 294, 144 304 C 142 312, 130 316, 114 316 C 98 316, 100 302, 100 292 Z"
+        fill="#3F3F46"
+      />
+      <!-- Base Shoe -->
+      <path
+        d="M 100 288 C 100 278, 120 276, 136 280 C 144 282, 146 290, 144 300 C 142 308, 130 312, 114 312 C 98 312, 100 298, 100 288 Z"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      <!-- Sneaker Toe Cap Accent (Amber/Orange) -->
+      <path
+        d="M 100 294 C 102 284, 114 282, 124 284 C 118 296, 114 308, 104 310 C 100 306, 100 298, 100 294 Z"
+        fill="#F59E0B"
+        stroke="#000000"
+        stroke-width="3"
+        stroke-linejoin="round"
+      />
+      <!-- White Specular Glint -->
+      <rect x="122" y="284" width="10" height="3" rx="1.5" fill="#FFFFFF" transform="rotate(-15 122 284)" />
+    </g>
+
+    <!-- Right Leg & Shoe -->
+    <g class="leg-right">
+      <!-- Leg -->
+      <path d="M 196 235 L 200 286" stroke="#000000" stroke-width="8" stroke-linecap="round" />
+      <path d="M 196 235 L 200 286" stroke="#8C5338" stroke-width="4" stroke-linecap="round" />
+
+      <!-- Chunky Sneaker Right -->
+      <!-- Shadow Plane -->
+      <path
+        d="M 176 284 C 192 280, 212 282, 220 292 C 220 302, 222 316, 206 316 C 190 316, 178 312, 176 304 C 174 294, 176 286, 176 284 Z"
+        fill="#3F3F46"
+      />
+      <!-- Base Shoe -->
+      <path
+        d="M 176 280 C 192 276, 212 278, 220 288 C 220 298, 222 312, 206 312 C 190 312, 178 308, 176 300 C 174 290, 176 282, 176 280 Z"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      <!-- Sneaker Toe Cap Accent (Amber/Orange) -->
+      <path
+        d="M 196 284 C 206 282, 218 284, 220 294 C 220 298, 220 306, 216 310 C 206 308, 202 296, 196 284 Z"
+        fill="#F59E0B"
+        stroke="#000000"
+        stroke-width="3"
+        stroke-linejoin="round"
+      />
+      <!-- White Specular Glint -->
+      <rect x="184" y="282" width="10" height="3" rx="1.5" fill="#FFFFFF" transform="rotate(15 184 282)" />
+    </g>
+
+    <!-- 2. SHORTS / CARGO PANTS -->
+    <g class="pants">
+      <!-- Dark Blue Stepped Shadow Plane -->
+      <path
+        d="M 112 208 L 208 208 L 216 244 L 176 248 L 160 224 L 144 248 L 104 244 Z"
+        fill="#1E293B"
+      />
+      <!-- Cyan/Teal Shorts Base -->
+      <path
+        d="M 112 204 L 208 204 L 216 238 L 178 242 L 160 220 L 142 242 L 104 238 Z"
+        fill="#0EA5E9"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      <!-- Pocket seams & center seam -->
+      <path d="M 160 204 L 160 220" stroke="#000000" stroke-width="3.5" stroke-linecap="round" />
+      <path d="M 120 216 L 134 216" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+      <path d="M 186 216 L 200 216" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+    </g>
+
+    <!-- 3. TORSO & HIGH-VIS ORCHESTRATOR UTILITY VEST -->
+    <g class="torso">
+      <!-- Inner White Shirt Base -->
+      <path
+        d="M 118 136 C 118 136, 134 130, 160 130 C 186 130, 202 136, 202 136 L 208 206 L 112 206 Z"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+
+      <!-- Amber High-Vis Orchestrator Vest -->
+      <!-- Vest Back Shadow -->
+      <path
+        d="M 114 138 L 142 138 L 146 208 L 110 208 Z"
+        fill="#D97706"
+      />
+      <path
+        d="M 206 138 L 178 138 L 174 208 L 210 208 Z"
+        fill="#D97706"
+      />
+
+      <!-- Left Vest Flap (Electric Yellow/Amber) -->
+      <path
+        d="M 114 136 L 144 136 L 146 206 L 110 206 Z"
+        fill="#FBBF24"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      <!-- Right Vest Flap (Electric Yellow/Amber) -->
+      <path
+        d="M 206 136 L 176 136 L 174 206 L 210 206 Z"
+        fill="#FBBF24"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+
+      <!-- Reflective Safety Stripes on Vest -->
+      <path d="M 112 168 L 145 168" stroke="#FFFFFF" stroke-width="6" stroke-linecap="square" />
+      <path d="M 112 168 L 145 168" stroke="#000000" stroke-width="2" stroke-dasharray="3 3" />
+      
+      <path d="M 175 168 L 208 168" stroke="#FFFFFF" stroke-width="6" stroke-linecap="square" />
+      <path d="M 175 168 L 208 168" stroke="#000000" stroke-width="2" stroke-dasharray="3 3" />
+
+      <!-- Center Collar Neck Opening -->
+      <path d="M 144 136 Q 160 148 176 136" fill="#8C5338" stroke="#000000" stroke-width="3.5" />
+    </g>
+
+    <!-- 4. LEFT ARM & TRAFFIC MARSHAL WAND (Directing Up/Left) -->
+    <g class="arm-left">
+      <!-- Upper Sleeve -->
+      <path
+        d="M 116 138 L 84 164 L 98 178 L 126 150 Z"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      
+      <!-- Forearm & Hand -->
+      <!-- Arm skin shadow -->
+      <path
+        d="M 88 170 L 52 136 L 62 126 L 98 160 Z"
+        fill="#713F29"
+      />
+      <!-- Arm skin main -->
+      <path
+        d="M 88 166 L 54 132 L 64 122 L 98 156 Z"
+        fill="#8C5338"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      
+      <!-- Hand Fist holding Wand -->
+      <circle cx="56" cy="124" r="11" fill="#8C5338" stroke="#000000" stroke-width="3.5" />
+      <!-- Thumb -->
+      <path d="M 50 120 C 50 114, 58 114, 60 120" fill="#8C5338" stroke="#000000" stroke-width="3" />
+
+      <!-- Glowing Amber Traffic Marshaler Wand (Left Wand) -->
+      <!-- Black Wand Handle -->
+      <rect x="48" y="128" width="10" height="24" rx="4" fill="#18181B" stroke="#000000" stroke-width="3" transform="rotate(-35 48 128)" />
+      
+      <!-- Luminous Wand Tube (Pointing Up-Left) -->
+      <!-- Wand Body -->
+      <rect
+        x="22"
+        y="42"
+        width="14"
+        height="80"
+        rx="7"
+        fill="#FF5238"
+        stroke="#000000"
+        stroke-width="4"
+        transform="rotate(-35 22 42)"
+      />
+      <!-- Stepped Inner Glow Line -->
+      <rect
+        x="26"
+        y="46"
+        width="6"
+        height="72"
+        rx="3"
+        fill="#FFD233"
+        transform="rotate(-35 22 42)"
+      />
+      <!-- Specular White Pill Glint on Wand -->
+      <rect
+        x="27"
+        y="50"
+        width="3"
+        height="28"
+        rx="1.5"
+        fill="#FFFFFF"
+        transform="rotate(-35 22 42)"
+      />
+    </g>
+
+    <!-- 5. RIGHT ARM & TRAFFIC MARSHAL WAND (Directing Out/Right) -->
+    <g class="arm-right">
+      <!-- Upper Sleeve -->
+      <path
+        d="M 204 138 L 236 164 L 222 178 L 194 150 Z"
+        fill="#FFFFFF"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      
+      <!-- Forearm & Hand (Extending Forward/Right) -->
+      <!-- Arm skin shadow -->
+      <path
+        d="M 232 170 L 268 152 L 274 164 L 222 182 Z"
+        fill="#713F29"
+      />
+      <!-- Arm skin main -->
+      <path
+        d="M 232 166 L 268 148 L 274 160 L 222 178 Z"
+        fill="#8C5338"
+        stroke="#000000"
+        stroke-width="4"
+        stroke-linejoin="round"
+      />
+      
+      <!-- Hand Fist holding Wand -->
+      <circle cx="274" cy="154" r="11" fill="#8C5338" stroke="#000000" stroke-width="3.5" />
+      <!-- Thumb -->
+      <path d="M 270 148 C 276 144, 282 148, 280 154" fill="#8C5338" stroke="#000000" stroke-width="3" />
+
+      <!-- Glowing Amber Traffic Marshaler Wand (Right Wand) -->
+      <!-- Black Wand Handle -->
+      <rect x="270" y="158" width="10" height="24" rx="4" fill="#18181B" stroke="#000000" stroke-width="3" transform="rotate(45 270 158)" />
+      
+      <!-- Luminous Wand Tube (Pointing Up-Right) -->
+      <!-- Wand Body -->
+      <rect
+        x="280"
+        y="82"
+        width="14"
+        height="80"
+        rx="7"
+        fill="#FF5238"
+        stroke="#000000"
+        stroke-width="4"
+        transform="rotate(45 280 82)"
+      />
+      <!-- Stepped Inner Glow Line -->
+      <rect
+        x="284"
+        y="86"
+        width="6"
+        height="72"
+        rx="3"
+        fill="#FFD233"
+        transform="rotate(45 280 82)"
+      />
+      <!-- Specular White Pill Glint on Wand -->
+      <rect
+        x="285"
+        y="90"
+        width="3"
+        height="28"
+        rx="1.5"
+        fill="#FFFFFF"
+        transform="rotate(45 280 82)"
+      />
+    </g>
+
+    <!-- 6. HEAD, AFRO PUFF HAIR & HEADPHONES (Exact Mascot Structure) -->
+    <g class="head-group">
+      <!-- Afro Hair Back / Contour (Chunky Rounded Silhouette) -->
+      <!-- Cel Shadow Hair Plane -->
+      <path
+        d="M 160 38 
+           C 130 38, 108 52, 102 74 
+           C 86 78, 72 96, 76 116 
+           C 72 132, 82 152, 98 160 
+           C 106 172, 122 180, 140 180 
+           C 152 186, 172 186, 184 180 
+           C 202 180, 218 172, 226 160 
+           C 242 152, 252 132, 248 116 
+           C 252 96, 238 78, 222 74 
+           C 216 52, 194 38, 160 38 Z"
+        fill="#261A15"
+      />
+      
+      <!-- Main Hair Body -->
+      <path
+        d="M 160 34 
+           C 130 34, 108 48, 102 70 
+           C 86 74, 72 92, 76 112 
+           C 72 128, 82 148, 98 156 
+           C 106 168, 122 176, 140 176 
+           C 152 182, 172 182, 184 176 
+           C 202 176, 218 168, 226 156 
+           C 242 148, 252 128, 248 112 
+           C 252 92, 238 74, 222 70 
+           C 216 48, 194 34, 160 34 Z"
+        fill="#3D261C"
+        stroke="#000000"
+        stroke-width="4.5"
+        stroke-linejoin="round"
+      />
+
+      <!-- Pill-shaped Specular Gloss Glints on Hair -->
+      <path d="M 136 46 C 146 42, 168 42, 180 48" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.8" />
+      <circle cx="120" cy="62" r="3" fill="#FFFFFF" opacity="0.7" />
+      <circle cx="204" cy="62" r="3" fill="#FFFFFF" opacity="0.7" />
+
+      <!-- Blank Faceless Head (Warm Brown Skin) -->
+      <!-- Shadow Plane -->
+      <path
+        d="M 124 94 C 124 76, 140 68, 160 68 C 180 68, 196 76, 196 94 C 196 122, 186 148, 160 148 C 134 148, 124 122, 124 94 Z"
+        fill="#713F29"
+      />
+      <!-- Main Face Base -->
+      <path
+        d="M 124 90 C 124 72, 140 64, 160 64 C 180 64, 196 72, 196 90 C 196 118, 186 144, 160 144 C 134 144, 124 118, 124 90 Z"
+        fill="#8C5338"
+        stroke="#000000"
+        stroke-width="4"
+      />
+
+      <!-- Cute Minimalist Curved Smile Line (NO EYES) -->
+      <path
+        d="M 152 114 Q 160 121 168 114"
+        stroke="#000000"
+        stroke-width="3.5"
+        stroke-linecap="round"
+        fill="none"
+      />
+
+      <!-- 7. OVERSIZED COMMUNICATION HEADPHONES (Golden Orange Glow) -->
+      <!-- Headband Arc -->
+      <path
+        d="M 104 96 C 104 60, 130 52, 160 52 C 190 52, 216 60, 216 96"
+        stroke="#18181B"
+        stroke-width="12"
+        stroke-linecap="round"
+      />
+      <path
+        d="M 104 96 C 104 60, 130 52, 160 52 C 190 52, 216 60, 216 96"
+        stroke="#F59E0B"
+        stroke-width="6"
+        stroke-linecap="round"
+      />
+      <!-- Headband Specular Glint -->
+      <path
+        d="M 142 54 C 152 52, 168 52, 178 54"
+        stroke="#FFFFFF"
+        stroke-width="2.5"
+        stroke-linecap="round"
+      />
+
+      <!-- Left Ear Cup (Oversized Golden Orange) -->
+      <g class="earcup-left">
+        <!-- Ear Cup Outer Shell -->
+        <rect
+          x="94"
+          y="84"
+          width="24"
+          height="42"
+          rx="10"
+          fill="#D97706"
+          stroke="#000000"
+          stroke-width="4"
+        />
+        <!-- Inner Glow Well -->
+        <rect
+          x="98"
+          y="88"
+          width="16"
+          height="34"
+          rx="8"
+          fill="#FBBF24"
+          stroke="#000000"
+          stroke-width="2"
+        />
+        <!-- Capsule Specular Glint -->
+        <rect x="101" y="92" width="4" height="14" rx="2" fill="#FFFFFF" />
+      </g>
+
+      <!-- Right Ear Cup (Oversized Golden Orange) -->
+      <g class="earcup-right">
+        <!-- Ear Cup Outer Shell -->
+        <rect
+          x="202"
+          y="84"
+          width="24"
+          height="42"
+          rx="10"
+          fill="#D97706"
+          stroke="#000000"
+          stroke-width="4"
+        />
+        <!-- Inner Glow Well -->
+        <rect
+          x="206"
+          y="88"
+          width="16"
+          height="34"
+          rx="8"
+          fill="#FBBF24"
+          stroke="#000000"
+          stroke-width="2"
+        />
+        <!-- Capsule Specular Glint -->
+        <rect x="219" y="92" width="4" height="14" rx="2" fill="#FFFFFF" />
+      </g>
+    </g>
+  </g>
+</svg>

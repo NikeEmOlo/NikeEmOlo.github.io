@@ -1,0 +1,424 @@
+---
+interface Props {
+  size?: number | string; // Size in px (e.g. 420)
+  autoSpin?: boolean; // Whether it spins automatically
+  interactive?: boolean; // Enable click & drag DJ scratching
+  scrollBound?: boolean; // Bind rotation to window scroll
+  class?: string;
+}
+
+const {
+  size = 440,
+  autoSpin = true,
+  interactive = true,
+  scrollBound = false,
+  class: className = "",
+} = Astro.props;
+
+const sizePx = typeof size === "number" ? `${size}px` : size;
+---
+
+<div
+  class={`doodle-vinyl-wrapper ${className}`}
+  style={`--vinyl-size: ${sizePx};`}
+  data-vinyl-root
+  data-autospin={autoSpin ? "true" : "false"}
+  data-interactive={interactive ? "true" : "false"}
+  data-scrollbound={scrollBound ? "true" : "false"}
+>
+  <!-- VINYL RECORD SVG STAGE -->
+  <div class="vinyl-deck-stage" data-deck-stage>
+    <!-- SVG Vector Artwork (Entire Record Unified as One Rotating Art Unit) -->
+    <svg
+      class="vinyl-svg"
+      viewBox="0 0 500 500"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="AI Doom Loop 12-Hour Remix Vinyl Record"
+    >
+      <defs>
+        <!-- Conical / Wedge Light Reflections (Specular Vinyl Sheen) -->
+        <linearGradient id="sheenTopLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22" />
+          <stop offset="40%" stop-color="#ffffff" stop-opacity="0.08" />
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+        </linearGradient>
+
+        <linearGradient id="sheenBottomRight" x1="100%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22" />
+          <stop offset="40%" stop-color="#ffffff" stop-opacity="0.08" />
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+        </linearGradient>
+
+        <!-- Pill Specular Glint Gradient -->
+        <linearGradient id="glintGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+          <stop offset="100%" stop-color="#ffffff" stop-opacity="0.75" />
+        </linearGradient>
+      </defs>
+
+      <!-- ============================================================ -->
+      <!-- UNIFIED ROTATING VINYL DISC (ALL ARTWORK SPINS TOGETHER)     -->
+      <!-- ============================================================ -->
+      <g class="vinyl-rotating-body" data-rotating-body>
+        <!-- Outer Disc Rim & Base -->
+        <circle
+          cx="250"
+          cy="250"
+          r="238"
+          fill="#0E0F12"
+          stroke="#000000"
+          stroke-width="8"
+          class="vinyl-outer-disc"
+        />
+
+        <!-- Secondary Outer Bevel Edge -->
+        <circle
+          cx="250"
+          cy="250"
+          r="232"
+          stroke="#1F2228"
+          stroke-width="3"
+          fill="none"
+        />
+
+        <!-- Concentric Sound Grooves (Fine Vector Rings) -->
+        <g class="vinyl-grooves-outer" stroke="rgba(255, 255, 255, 0.09)" stroke-width="1.4" fill="none">
+          <circle cx="250" cy="250" r="226" />
+          <circle cx="250" cy="250" r="218" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1.8" />
+          <circle cx="250" cy="250" r="210" />
+          <circle cx="250" cy="250" r="202" stroke="rgba(255, 255, 255, 0.07)" />
+          <circle cx="250" cy="250" r="194" stroke="rgba(255, 255, 255, 0.13)" stroke-width="1.6" />
+        </g>
+
+        <!-- Song Track Break 1 -->
+        <circle cx="250" cy="250" r="188" stroke="#000000" stroke-width="3" fill="none" />
+        <circle cx="250" cy="250" r="186" stroke="rgba(255, 255, 255, 0.22)" stroke-width="1.2" stroke-dasharray="28 8 14 12" fill="none" />
+
+        <!-- Track Sector 2 (Mid-Grooves) -->
+        <g class="vinyl-grooves-mid" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.4" fill="none">
+          <circle cx="250" cy="250" r="180" />
+          <circle cx="250" cy="250" r="172" stroke="rgba(255, 255, 255, 0.14)" stroke-width="1.7" />
+          <circle cx="250" cy="250" r="164" />
+          <circle cx="250" cy="250" r="156" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" />
+          <circle cx="250" cy="250" r="148" />
+          <circle cx="250" cy="250" r="140" stroke="rgba(255, 255, 255, 0.06)" />
+        </g>
+
+        <!-- Song Track Break 2 -->
+        <circle cx="250" cy="250" r="134" stroke="#000000" stroke-width="2.5" fill="none" />
+        <circle cx="250" cy="250" r="133" stroke="rgba(255, 255, 255, 0.25)" stroke-width="1.2" stroke-dasharray="18 6 32 10" fill="none" />
+
+        <!-- Dead Wax Inner Run-Out Area -->
+        <circle
+          cx="250"
+          cy="250"
+          r="124"
+          fill="none"
+          stroke="#000000"
+          stroke-width="5"
+        />
+        <circle
+          cx="250"
+          cy="250"
+          r="120"
+          fill="#16171B"
+          stroke="#000000"
+          stroke-width="3"
+        />
+
+        <!-- Run-Out Lead Spiral into Center Spindle -->
+        <path
+          d="M 250 128 C 317 128 372 183 372 250 C 372 316 318 369 252 369 C 187 369 135 317 135 252 C 135 190 183 140 245 140 C 304 140 353 189 353 248 C 353 305 307 351 250 351"
+          stroke="rgba(255, 255, 255, 0.16)"
+          stroke-width="1.8"
+          stroke-dasharray="14 4"
+          fill="none"
+        />
+
+        <!-- ============================================================ -->
+        <!-- CENTER STICKER LABEL ARTWORK                                -->
+        <!-- ============================================================ -->
+        <g class="center-label-group">
+          <!-- Label Base Canvas (Split Yellow & Coral Red with Jagged Transition) -->
+          <clipPath id="labelClip">
+            <circle cx="250" cy="250" r="108" />
+          </clipPath>
+
+          <g clip-path="url(#labelClip)">
+            <!-- Top Sunny Yellow Well -->
+            <rect x="135" y="135" width="230" height="230" fill="#FFD233" />
+
+            <!-- Bottom Coral Red Flame / Jagged Burst -->
+            <path
+              d="M135 242L162 258L195 240L222 256L250 236L278 256L305 240L338 258L365 242V370H135V242Z"
+              fill="#FF5238"
+            />
+            <!-- Stepped Cel-Shading Accent on Red Fill -->
+            <path
+              d="M135 272L175 288L220 270L250 286L280 270L325 288L365 272V370H135V272Z"
+              fill="#E03A22"
+              opacity="0.4"
+            />
+
+            <!-- Doodle Lightning Sparks & Stars on Label -->
+            <g class="label-doodles" fill="#000000">
+              <!-- Top Left Sparks -->
+              <path d="M178 182L170 188L174 190L168 198L180 192L176 190L182 184Z" fill="#000000" />
+              <!-- Top Right Sparks -->
+              <path d="M322 182L330 188L326 190L332 198L320 192L324 190L318 184Z" fill="#000000" />
+              <!-- Left Star -->
+              <polygon points="160,214 163,222 171,222 165,227 167,235 160,230 153,235 155,227 149,222 157,222" />
+              <!-- Right Star -->
+              <polygon points="340,204 342,210 348,210 343,214 345,220 340,216 335,220 337,214 332,210 338,210" />
+              <!-- Red Area Doodle Sparks -->
+              <path d="M172 284L166 290L170 292L164 298L174 293L171 291L175 286Z" fill="#000000" />
+              <path d="M328 284L334 290L330 292L336 298L326 293L329 291L325 286Z" fill="#000000" />
+            </g>
+
+            <!-- TYPOGRAPHY: "AI" -->
+            <g class="label-text-ai">
+              <!-- Shadow -->
+              <text x="252" y="196" font-family="Archivo, sans-serif" font-weight="900" font-size="28" fill="#E69800" text-anchor="middle" letter-spacing="0.08em">AI</text>
+              <!-- Front -->
+              <text x="250" y="194" font-family="Archivo, sans-serif" font-weight="900" font-size="28" fill="#000000" text-anchor="middle" letter-spacing="0.08em">AI</text>
+            </g>
+
+            <!-- TYPOGRAPHY: "DOOM LOOP" (Large Chunky Streetwear Typography) -->
+            <g class="label-text-doom-loop">
+              <!-- 3D Stepped Cel Shadow (Deep Red-Orange) -->
+              <text x="253" y="227" font-family="Archivo, sans-serif" font-weight="900" font-size="34" fill="#C9331B" text-anchor="middle" letter-spacing="-0.03em">DOOM</text>
+              <text x="253" y="254" font-family="Archivo, sans-serif" font-weight="900" font-size="34" fill="#C9331B" text-anchor="middle" letter-spacing="-0.03em">LOOP</text>
+              
+              <!-- Front Black Ink Letters -->
+              <text x="250" y="224" font-family="Archivo, sans-serif" font-weight="900" font-size="34" fill="#000000" text-anchor="middle" letter-spacing="-0.03em">DOOM</text>
+              <text x="250" y="251" font-family="Archivo, sans-serif" font-weight="900" font-size="34" fill="#000000" text-anchor="middle" letter-spacing="-0.03em">LOOP</text>
+              
+              <!-- White Capsule / Donut Center Glint in first 'O' -->
+              <circle cx="231" cy="242" r="5" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+            </g>
+
+            <!-- BLACK RIBBON BANNER: "// 12-HOUR REMIX" -->
+            <g class="label-ribbon-banner">
+              <path
+                d="M152 268L158 284L342 272L348 256L152 268Z"
+                fill="#000000"
+              />
+              <text
+                x="250"
+                y="273"
+                font-family="Archivo, sans-serif"
+                font-weight="900"
+                font-size="12.5"
+                fill="#FFFFFF"
+                text-anchor="middle"
+                letter-spacing="0.04em"
+                transform="rotate(-3.6 250 270)"
+              >
+                // 12-HOUR REMIX
+              </text>
+            </g>
+
+            <!-- DEAD ROBOT MASCOT STAMP (Bottom Left) -->
+            <g class="robot-mascot-stamp" transform="translate(208, 290)">
+              <!-- Outer Badge Stroke -->
+              <rect x="0" y="0" width="38" height="30" rx="8" fill="#FF5238" stroke="#000000" stroke-width="3" />
+              <!-- Ears / Screws -->
+              <rect x="-4" y="9" width="4" height="12" rx="2" fill="#000000" />
+              <rect x="38" y="9" width="4" height="12" rx="2" fill="#000000" />
+              <!-- Antenna -->
+              <line x1="19" y1="0" x2="19" y2="-6" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+              <circle cx="19" cy="-8" r="3" fill="#000000" />
+              <!-- Eyes: XX -->
+              <line x1="8" y1="8" x2="14" y2="14" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+              <line x1="14" y1="8" x2="8" y2="14" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+              <line x1="24" y1="8" x2="30" y2="14" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+              <line x1="30" y1="8" x2="24" y2="14" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+              <!-- Grid Teeth Mouth -->
+              <rect x="10" y="19" width="18" height="6" rx="2" fill="none" stroke="#000000" stroke-width="2" />
+              <line x1="14" y1="19" x2="14" y2="25" stroke="#000000" stroke-width="1.5" />
+              <line x1="19" y1="19" x2="19" y2="25" stroke="#000000" stroke-width="1.5" />
+              <line x1="24" y1="19" x2="24" y2="25" stroke="#000000" stroke-width="1.5" />
+            </g>
+
+            <!-- "33 RPM" SCALLOPED BADGE (Bottom Right) -->
+            <g class="rpm-badge-stamp" transform="translate(290, 305)">
+              <circle cx="0" cy="0" r="18" fill="#FFD233" stroke="#000000" stroke-width="2.8" stroke-dasharray="3.5 2.5" />
+              <circle cx="0" cy="0" r="15" fill="#FFD233" stroke="#000000" stroke-width="1.5" />
+              <text x="0" y="-1" font-family="Archivo, sans-serif" font-weight="900" font-size="14" fill="#000000" text-anchor="middle">33</text>
+              <text x="0" y="9" font-family="Archivo, sans-serif" font-weight="800" font-size="7.5" fill="#000000" text-anchor="middle" letter-spacing="0.08em">RPM</text>
+            </g>
+          </g>
+
+          <!-- Label Outer Heavy Vector Border -->
+          <circle
+            cx="250"
+            cy="250"
+            r="108"
+            fill="none"
+            stroke="#000000"
+            stroke-width="5.5"
+          />
+
+          <!-- Spindle Center Hole (White core with metal rim) -->
+          <circle cx="250" cy="250" r="16" fill="#F4F4F5" stroke="#000000" stroke-width="4" />
+          <circle cx="250" cy="250" r="10" fill="#E4E4E7" stroke="#71717A" stroke-width="1.5" />
+          <circle cx="250" cy="250" r="4" fill="#18181B" />
+        </g>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<style>
+  .doodle-vinyl-wrapper {
+    position: relative;
+    width: var(--vinyl-size, 440px);
+    height: var(--vinyl-size, 440px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    touch-action: none;
+  }
+
+  .vinyl-deck-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vinyl-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    filter: drop-shadow(8px 8px 0px #000000); /* Streetwear Doodle Hard Cel-Shadow */
+    transition: filter 0.2s ease, transform 0.2s ease;
+    cursor: grab;
+  }
+
+  .doodle-vinyl-wrapper.is-dragging .vinyl-svg {
+    cursor: grabbing;
+    filter: drop-shadow(14px 14px 0px #000000);
+    transform: scale(1.02);
+  }
+
+  /* ROTATING DISC LAYER (UNIFIED UNIT) */
+  .vinyl-rotating-body {
+    transform-origin: 250px 250px;
+    will-change: transform;
+  }
+</style>
+
+<script>
+  function initDoodleVinylRecords() {
+    const vinyls = document.querySelectorAll<HTMLElement>("[data-vinyl-root]");
+
+    vinyls.forEach((root) => {
+      const rotatingBody = root.querySelector<SVGElement>("[data-rotating-body]");
+      if (!rotatingBody) return;
+
+      const isInteractive = root.dataset.interactive === "true";
+      const isScrollBound = root.dataset.scrollbound === "true";
+      const autoSpin = root.dataset.autospin === "true";
+
+      let currentAngle = 0;
+      let angularVelocity = 0;
+      let isDragging = false;
+      let lastPointerAngle = 0;
+      let lastPointerTime = 0;
+
+      root.classList.add("is-controlled");
+
+      // Auto-spin base speed (~1.35 degrees per frame = smooth 33 RPM)
+      const baseSpeed = autoSpin ? 1.35 : 0;
+
+      function getPointerAngle(e: MouseEvent | TouchEvent): number {
+        const rect = root.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const clientX = "touches" in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
+        const clientY = "touches" in e ? e.touches[0].clientY : (e as MouseEvent).clientY;
+        const rad = Math.atan2(clientY - centerY, clientX - centerX);
+        return (rad * 180) / Math.PI;
+      }
+
+      // ----------------------------------------------------
+      // DRAG & DJ SCRATCHING
+      // ----------------------------------------------------
+      if (isInteractive) {
+        function onPointerDown(e: MouseEvent | TouchEvent) {
+          isDragging = true;
+          root.classList.add("is-dragging");
+          lastPointerAngle = getPointerAngle(e);
+          lastPointerTime = performance.now();
+          angularVelocity = 0;
+        }
+
+        function onPointerMove(e: MouseEvent | TouchEvent) {
+          if (!isDragging) return;
+          const nowAngle = getPointerAngle(e);
+          const nowTime = performance.now();
+          let delta = nowAngle - lastPointerAngle;
+
+          if (delta > 180) delta -= 360;
+          if (delta < -180) delta += 360;
+
+          currentAngle += delta;
+          const dt = Math.max(nowTime - lastPointerTime, 8);
+          angularVelocity = delta / (dt / 16.66);
+
+          lastPointerAngle = nowAngle;
+          lastPointerTime = nowTime;
+        }
+
+        function onPointerUp() {
+          if (!isDragging) return;
+          isDragging = false;
+          root.classList.remove("is-dragging");
+        }
+
+        root.addEventListener("mousedown", onPointerDown as any);
+        window.addEventListener("mousemove", onPointerMove as any);
+        window.addEventListener("mouseup", onPointerUp);
+
+        root.addEventListener("touchstart", onPointerDown as any, { passive: true });
+        window.addEventListener("touchmove", onPointerMove as any, { passive: true });
+        window.addEventListener("touchend", onPointerUp);
+      }
+
+      // ----------------------------------------------------
+      // SCROLL-VELOCITY SCRUBBING
+      // ----------------------------------------------------
+      if (isScrollBound) {
+        let lastScrollY = window.scrollY;
+        window.addEventListener("scroll", () => {
+          const dy = window.scrollY - lastScrollY;
+          currentAngle += dy * 0.5;
+          lastScrollY = window.scrollY;
+        }, { passive: true });
+      }
+
+      // ----------------------------------------------------
+      // MAIN ANIMATION LOOP (ENTIRE RECORD SPINS AS ONE UNIT)
+      // ----------------------------------------------------
+      function renderLoop() {
+        if (!isDragging) {
+          angularVelocity *= 0.94; // Momentum decay
+          currentAngle += baseSpeed + angularVelocity;
+        }
+
+        rotatingBody.style.transform = `rotate(${currentAngle.toFixed(2)}deg)`;
+        requestAnimationFrame(renderLoop);
+      }
+
+      renderLoop();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initDoodleVinylRecords);
+  document.addEventListener("astro:page-load", initDoodleVinylRecords);
+</script>

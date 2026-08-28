@@ -1,17 +1,15 @@
 ---
 import { getEntry } from "astro:content";
 import Base from "../layouts/Base.astro";
+import DoodleLinkedInJobCard from "../components/DoodleLinkedInJobCard.astro";
+import DoodleVinylRecord from "../components/DoodleVinylRecord.astro";
+import AgentTreeIcons from "../components/mascots/AgentTreeIcons.astro";
+import HowItWorksWorkflow from "../components/HowItWorksWorkflow.astro";
 
 const project = await getEntry("projects", "automating_unemployment");
 const story = project?.data?.story || {};
 const {
-  heroQuestion,
-  vignette0 = {},
-  vignette1 = {},
-  vignette2 = {},
   vignette3 = {},
-  vignette4 = {},
-  vignette5 = {},
   footer = {},
 } = story;
 
@@ -21,481 +19,553 @@ const agents = vignette3?.agents || [];
 <Base>
   <div class="height-story-wrap">
     <!-- Minimalist Top Navigation -->
-    <header class="story-header">
-      <a href="/" class="header-back" aria-label="Return to portfolio deck">
+    <header class="story-header" id="storyHeader">
+      <a href="/" class="header-back" id="headerBackBtn" aria-label="Return to portfolio deck">
         <svg
           width="16"
           height="16"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="1.5"
+          stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
         >
           <path d="m15 18-6-6 6-6"></path>
         </svg>
-        <span>Deck</span>
+        <span id="headerBackText">Deck</span>
       </a>
       <div class="header-case-no">01 // Case Study</div>
     </header>
 
-    <!-- HERO SECTION (EXACT 1:1 FIGMA CANVAS MATCH) -->
-    <section class="figma-hero-stage" id="hero">
-      <div class="hero-canvas-grid">
-        <!-- LEFT COLUMN: Pure Space + Lounger Character at the bottom -->
-        <div class="hero-col-left">
-          <div class="hero-lounger-anchor">
+    <!-- ============================================================ -->
+    <!-- 01 // HERO SCROLLYTELLING RUNWAY (STAGE CURTAIN + DILEMMA FRAME) -->
+    <!-- ============================================================ -->
+    <div class="hero-scrolly-runway" id="hero-runway">
+      <section class="figma-hero-stage" id="hero">
+        
+        <!-- FRAME 2: WHITE CANVAS (REVEALED UNDERNEATH THE CURTAIN) -->
+        <div class="dilemma-white-stage" data-dilemma-stage>
+          
+          <!-- STATE A: Dilemma Questions & Choice Stage -->
+          <div class="dilemma-content-wrapper" id="dilemmaQuestionsWrap">
+            
+            <!-- Top-Left Title & Punchline -->
+            <div class="dilemma-header-group" data-dilemma-header>
+              <span class="dilemma-eyebrow">01 // THE REALITY OF UNEMPLOYMENT</span>
+              <h2 class="dilemma-title">
+                Do you know how time consuming it is to be unemployed?
+                <span class="dilemma-punchline">I do.</span>
+              </h2>
+              <p class="dilemma-sub-lead">
+                You're a career changer who has just moved to London. You want to move into tech, and you're currently mid-way through your training. Do you:
+              </p>
+            </div>
+
+            <!-- Centered Choice Stage: Left Option, Center Character, Right Option -->
+            <div class="dilemma-decision-stage" data-dilemma-body>
+              
+              <!-- Option 1 (Selectable Button Card) -->
+              <button
+                class="dilemma-choice-btn choice-left"
+                id="choiceOption1"
+                data-choice="1"
+                type="button"
+                aria-label="Option 1: Finish your training course which will take months, then apply for jobs in the industry you're training for"
+              >
+                <!-- Corner Doodle Sparks -->
+                <div class="card-doodle-spark top-right" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+                    <path d="M16 2 L18.5 11.5 L28 14 L18.5 16.5 L16 26 L13.5 16.5 L4 14 L13.5 11.5 Z" fill="#000000" />
+                    <circle cx="16" cy="14" r="2.5" fill="#FFFFFF" />
+                  </svg>
+                </div>
+
+                <div class="choice-tag-row">
+                  <span class="choice-num-badge">1</span>
+                  <span class="choice-hint">Choice A</span>
+                </div>
+                <p class="choice-main-text">
+                  Finish your training course which will take months, then apply for jobs in the industry you're training for
+                </p>
+                <div class="choice-bottom-bar">
+                  <span class="choice-pick-pill">Pick this one</span>
+                </div>
+              </button>
+
+              <!-- Center Confused Mascot -->
+              <div class="dilemma-center-character">
+                <img
+                  src="/img/au-character-confused.png"
+                  alt="Character standing in confusion choosing between two options"
+                  class="dilemma-standing-img"
+                />
+              </div>
+
+              <!-- Option 2 (Selectable Button Card) -->
+              <button
+                class="dilemma-choice-btn choice-right"
+                id="choiceOption2"
+                data-choice="2"
+                type="button"
+                aria-label="Option 2: Work and train at the same time"
+              >
+                <!-- Corner Doodle Sparks -->
+                <div class="card-doodle-spark top-left" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" width="26" height="26" fill="none">
+                    <path d="M16 2 L18.5 11.5 L28 14 L18.5 16.5 L16 26 L13.5 16.5 L4 14 L13.5 11.5 Z" fill="#000000" />
+                    <circle cx="16" cy="14" r="2.5" fill="#FFFFFF" />
+                  </svg>
+                </div>
+
+                <div class="choice-tag-row">
+                  <span class="choice-num-badge">2</span>
+                  <span class="choice-hint">Choice B</span>
+                </div>
+                <p class="choice-main-text">
+                  Work and train at the same time
+                </p>
+                <div class="choice-bottom-bar">
+                  <span class="choice-pick-pill">Pick this one</span>
+                </div>
+              </button>
+
+            </div>
+          </div>
+
+          <!-- STATE B: The Benefits Frame (Revealed when clicking "wth?") -->
+          <div class="benefits-content-wrapper is-hidden" id="benefitsFrameWrap">
+            
+            <!-- Centered Title Group -->
+            <div class="benefits-header-group">
+              <span class="benefits-eyebrow">02 // AGENTIC WORKFLOW</span>
+              <h2 class="benefits-main-title">
+                The case study shows how I used a multi-agent team to automate the job-hunt, freeing up <span class="benefits-highlight-pill">83% of my time</span>.
+              </h2>
+            </div>
+
+            <!-- Free Text List with Cool Doodle-Pop Urban Icons (No Card Boxes) -->
+            <div class="benefits-free-list">
+              
+              <!-- Benefit 1: Stylised Sparkly Brain -->
+              <div class="benefit-doodle-item">
+                <div class="benefit-doodle-icon-wrap brain-glow">
+                  <svg viewBox="0 0 120 120" width="104" height="104" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 28 L23 18 L26 28 L36 31 L26 34 L23 44 L20 34 L10 31 Z" fill="#000000" />
+                    <circle cx="23" cy="31" r="2.5" fill="#FFFFFF" />
+                    <path d="M96 22 L98 14 L100 22 L108 24 L100 26 L98 34 L96 26 L88 24 Z" fill="#FF1F70" stroke="#000000" stroke-width="2" />
+                    <path d="M102 78 L104 72 L106 78 L112 80 L106 82 L104 88 L102 82 L96 80 Z" fill="#00B3E3" stroke="#000000" stroke-width="1.8" />
+                    <path d="M60 12 L65 24 L56 26 L63 38" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M42 42 C32 42, 24 50, 24 60 C24 68, 30 74, 34 78 C30 84, 35 94, 46 94 C51 94, 55 91, 58 88 C59 88, 59 44, 42 42 Z" fill="#FF1F70" stroke="#000000" stroke-width="3.5" stroke-linejoin="round" />
+                    <path d="M78 42 C88 42, 96 50, 96 60 C96 68, 90 74, 86 78 C90 84, 85 94, 74 94 C69 94, 65 91, 62 88 C61 88, 61 44, 78 42 Z" fill="#FF528F" stroke="#000000" stroke-width="3.5" stroke-linejoin="round" />
+                    <path d="M38 54 C46 54, 48 64, 42 70 C36 76, 44 84, 52 82" stroke="#000000" stroke-width="3.2" stroke-linecap="round" />
+                    <path d="M82 54 C74 54, 72 64, 78 70 C84 76, 76 84, 68 82" stroke="#000000" stroke-width="3.2" stroke-linecap="round" />
+                    <path d="M50 46 C56 50, 56 60, 50 64" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+                    <path d="M70 46 C64 50, 64 60, 70 64" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+                    <ellipse cx="36" cy="48" rx="5" ry="2.5" transform="rotate(-30 36 48)" fill="#FFFFFF" />
+                    <ellipse cx="84" cy="48" rx="5" ry="2.5" transform="rotate(30 84 48)" fill="#FFFFFF" />
+                  </svg>
+                </div>
+                <p class="benefit-item-text">
+                  Free time can be used on personal development and studying, further improving my job prospects.
+                </p>
+              </div>
+
+              <!-- Benefit 2: Zen Chill Sunglasses Smiley -->
+              <div class="benefit-doodle-item">
+                <div class="benefit-doodle-icon-wrap chill-glow">
+                  <svg viewBox="0 0 120 120" width="104" height="104" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M60 10 L60 20 M18 60 L28 60 M92 60 L102 60 M30 30 L38 38 M90 30 L82 38" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+                    <path d="M16 22 L18 16 L20 22 L26 24 L20 26 L18 32 L16 26 L10 24 Z" fill="#D1FF00" stroke="#000000" stroke-width="1.8" />
+                    <path d="M104 26 L106 20 L108 26 L114 28 L108 30 L106 36 L104 30 L98 28 Z" fill="#000000" />
+                    <circle cx="60" cy="64" r="34" fill="#00B3E3" stroke="#000000" stroke-width="3.5" />
+                    <path d="M36 54 L56 54 L54 66 C54 70, 40 70, 38 66 Z" fill="#000000" stroke="#000000" stroke-width="2" />
+                    <path d="M64 54 L84 54 L82 66 C82 70, 68 70, 66 66 Z" fill="#000000" stroke="#000000" stroke-width="2" />
+                    <path d="M54 57 L66 57" stroke="#000000" stroke-width="3.5" stroke-linecap="round" />
+                    <path d="M42 56 L40 64" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+                    <path d="M46 56 L44 60" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+                    <path d="M70 56 L68 64" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+                    <path d="M74 56 L72 60" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+                    <path d="M46 76 C52 85, 68 85, 74 76" stroke="#000000" stroke-width="3.5" stroke-linecap="round" fill="none" />
+                    <ellipse cx="38" cy="74" rx="4" ry="2.5" fill="#FF1F70" />
+                    <ellipse cx="82" cy="74" rx="4" ry="2.5" fill="#FF1F70" />
+                  </svg>
+                </div>
+                <p class="benefit-item-text">
+                  Improved mental clarity and reduced stress
+                </p>
+              </div>
+
+              <!-- Benefit 3: Auto-Mode Rocket Robot -->
+              <div class="benefit-doodle-item">
+                <div class="benefit-doodle-icon-wrap auto-glow">
+                  <svg viewBox="0 0 120 120" width="104" height="104" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 48 L26 48 M10 62 L22 62 M14 76 L28 76" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+                    <path d="M96 20 L98 12 L100 20 L108 22 L100 24 L98 32 L96 24 L88 22 Z" fill="#FF1F70" stroke="#000000" stroke-width="2" />
+                    <path d="M102 68 L104 62 L106 68 L112 70 L106 72 L104 78 L102 72 L96 70 Z" fill="#000000" />
+                    <path d="M60 36 L60 22" stroke="#000000" stroke-width="3.5" stroke-linecap="round" />
+                    <circle cx="60" cy="18" r="5" fill="#FFDA00" stroke="#000000" stroke-width="2.5" />
+                    <path d="M68 14 L73 18 L70 21 L75 25" stroke="#FF1F70" stroke-width="2" stroke-linecap="round" />
+                    <rect x="36" y="36" width="48" height="42" rx="12" fill="#D1FF00" stroke="#000000" stroke-width="3.5" />
+                    <rect x="44" y="46" width="32" height="18" rx="6" fill="#000000" />
+                    <rect x="48" y="52" width="24" height="6" rx="3" fill="#00B3E3" />
+                    <circle cx="60" cy="55" r="3.5" fill="#FFFFFF" />
+                    <rect x="29" y="49" width="7" height="14" rx="3.5" fill="#00B3E3" stroke="#000000" stroke-width="2.5" />
+                    <rect x="84" y="49" width="7" height="14" rx="3.5" fill="#00B3E3" stroke="#000000" stroke-width="2.5" />
+                    <path d="M50 78 L60 98 L70 78 Z" fill="#FF1F70" stroke="#000000" stroke-width="3" stroke-linejoin="round" />
+                    <path d="M54 78 L60 90 L66 78 Z" fill="#FFDA00" />
+                    <ellipse cx="45" cy="42" rx="4" ry="2" fill="#FFFFFF" />
+                  </svg>
+                </div>
+                <p class="benefit-item-text">
+                  Removal of repetitive tasks
+                </p>
+              </div>
+
+            </div>
+
+            <!-- CTA Row -->
+            <div class="benefits-action-row">
+              <button class="benefits-scroll-cta" id="exploreWorkflowBtn" type="button">
+                <span>Explore interactive desktop</span>
+                <span class="cta-arrow-down">↓</span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Dynamic Interactive Pop-up Answer Modal (Overlays entire stage with pure solid white) -->
+          <div class="dilemma-popup-overlay" id="dilemmaAnswerPopup" aria-hidden="true">
+            <div class="dilemma-popup-card">
+              <div class="popup-header-row">
+                <h3 class="popup-answer-title" id="popupTitle">WRONG</h3>
+                <button class="popup-close-btn" id="closePopupBtn" aria-label="Close answer">✕</button>
+              </div>
+              <div class="popup-body-content">
+                <p class="popup-answer-p" id="popupText">
+                  You can't afford food.
+                </p>
+                
+                <!-- Primary Action Button ("try again" / "wth?") -->
+                <div class="popup-action-row">
+                  <button class="popup-action-btn" id="popupActionBtn" type="button">
+                    <span id="popupActionBtnText">try again</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FRAME 1: TEAL STAGE CURTAIN (SLIDES UP LIKE A THEATER CURTAIN ON SCROLL) -->
+        <div class="hero-curtain-layer" id="heroCurtainLayer" data-hero-curtain>
+          <!-- Floating Hero Title -->
+          <div class="hero-float-center" data-hero-title>
+            <h1 class="hero-title-text">
+              <span>Automating</span>
+              <span>Unemployment.</span>
+            </h1>
+          </div>
+
+          <!-- Lounger Character Anchored in Bottom-Right Corner -->
+          <div class="hero-lounger-corner" data-hero-lounger>
             <img
-              src="/img/hero-lounger.webp"
+              src="/img/au-hero-character-cutout.png"
               alt="Character lounging on deckchair"
               class="hero-lounger-img"
             />
           </div>
         </div>
 
-        <!-- RIGHT COLUMN: Crab & Title in Upper-Mid + Question at the bottom -->
-        <div class="hero-col-right">
-          <div class="hero-right-top">
-            <img
-              src="/img/hero-crab.jpg"
-              alt="Crab Icon"
-              class="hero-crab-glyph"
-            />
-            <h1 class="hero-title-text">
-              <span>Automating</span>
-              <span>Unemployment</span>
-            </h1>
+      </section>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 02 // HOW IT WORKS: INTERACTIVE WORKFLOW & DIVE-IN RUNTIME   -->
+    <!-- ============================================================ -->
+    <HowItWorksWorkflow />
+
+    <!-- ============================================================ -->
+    <!-- 03 // MEET THE TEAM: 2-TIER AUTONOMOUS AGENT HIERARCHY      -->
+    <!-- ============================================================ -->
+    <section class="team-hierarchy-section" id="team-section">
+      <div class="team-section-container">
+        <div class="team-header-box">
+          <span class="team-eyebrow">03 // AUTONOMOUS AGENT HIERARCHY</span>
+          <h2 class="team-main-title">Meet the team</h2>
+        </div>
+
+        <!-- Tree Hierarchy Container -->
+        <div class="agent-tree-wrapper">
+          
+          <!-- TOP LEVEL: ROOT AGENT (GILES - THE ORCHESTRATOR / BOSS) -->
+          <div class="tree-root-row">
+            {agents[0] && (
+              <div class="agent-node-card root-node" style="--node-accent: #D97706;">
+                <div class="node-chassis-top">
+                  <div class="node-tag-group">
+                    <span class="node-rivet">+</span>
+                    <span class="node-level-id">AGENT // 01</span>
+                  </div>
+                  <div class="node-status-chip">
+                    <span class="node-live-led" style="background-color: #D97706;" />
+                    <span class="node-status-label">ONLINE</span>
+                    <span class="node-rivet">+</span>
+                  </div>
+                </div>
+
+                <div class="node-chassis-body">
+                  <div class="node-icon-col">
+                    <AgentTreeIcons type="boss" size="52px" />
+                  </div>
+                  <div class="node-info-col">
+                    <div class="node-title-row">
+                      <h3 class="node-agent-name">{agents[0].name}</h3>
+                      <span class="node-chip-badge">ORCHESTRATOR</span>
+                    </div>
+                    <span class="node-agent-role" style="color: #D97706;">{agents[0].role}</span>
+                    <p class="node-brief-text">{agents[0].brief}</p>
+                  </div>
+                </div>
+
+                <div class="node-telemetry-tray">
+                  <span class="telemetry-item"><strong>SCHEDULE:</strong> 3X DAILY CRON</span>
+                  <span class="telemetry-dot">·</span>
+                  <span class="telemetry-item"><strong>FILTER:</strong> 95% SPAM DROPPED</span>
+                </div>
+              </div>
+            )}
           </div>
 
-          <div class="hero-right-bottom">
-            <p
-              class="hero-question-text"
-              set:html={heroQuestion ||
-                "Do you know how time consuming it is to beunemployed?<strong>I do.</strong>"}
+          <!-- CONNECTING FORK BUS SVG (FLOWS FROM GILES TO CORDELIA & WILLOW ONLY) -->
+          <div class="tree-fork-connector" aria-hidden="true">
+            <svg class="tree-conduit-svg" viewBox="0 0 680 44" fill="none">
+              <path d="M 340 0 L 340 22" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+              <path d="M 340 0 L 340 22" stroke="#D97706" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-stem" />
+
+              <path d="M 170 22 L 510 22" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+              <path d="M 170 22 L 510 22" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-split" />
+
+              <path d="M 170 22 L 170 44" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+              <path d="M 170 22 L 170 44" stroke="#E11D48" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-left" />
+
+              <path d="M 510 22 L 510 44" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+              <path d="M 510 22 L 510 44" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-right" />
+
+              <circle r="4" fill="#E11D48" stroke="#000000" stroke-width="1.5">
+                <animateMotion path="M 340 0 L 340 22 L 170 22 L 170 44" dur="2.2s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0; 1; 1; 0" keyTimes="0; 0.08; 0.92; 1" dur="2.2s" repeatCount="indefinite" />
+              </circle>
+
+              <circle r="4" fill="#0D9488" stroke="#000000" stroke-width="1.5">
+                <animateMotion path="M 340 0 L 340 22 L 510 22 L 510 44" dur="2.2s" begin="0.35s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0; 1; 1; 0" keyTimes="0; 0.08; 0.92; 1" dur="2.2s" begin="0.35s" repeatCount="indefinite" />
+              </circle>
+            </svg>
+          </div>
+
+          <!-- BOTTOM LEVEL: 2 SUB-AGENTS -->
+          <div class="tree-branches-row">
+            {agents[1] && (
+              <div class="agent-node-card branch-node" style="--node-accent: #E11D48;">
+                <div class="node-chassis-top">
+                  <div class="node-tag-group">
+                    <span class="node-rivet">+</span>
+                    <span class="node-level-id">SUB-AGENT // 01</span>
+                  </div>
+                  <div class="node-status-chip">
+                    <span class="node-live-led" style="background-color: #E11D48;" />
+                    <span class="node-status-label">ANALYZING</span>
+                    <span class="node-rivet">+</span>
+                  </div>
+                </div>
+
+                <div class="node-chassis-body">
+                  <div class="node-icon-col">
+                    <AgentTreeIcons type="tailor" size="48px" />
+                  </div>
+                  <div class="node-info-col">
+                    <div class="node-title-row">
+                      <h3 class="node-agent-name">{agents[1].name}</h3>
+                      <span class="node-chip-badge">TAILOR & TWEAK</span>
+                    </div>
+                    <span class="node-agent-role" style="color: #E11D48;">{agents[1].role}</span>
+                    <p class="node-brief-text">{agents[1].brief}</p>
+                  </div>
+                </div>
+
+                <div class="node-telemetry-tray">
+                  <span class="telemetry-item"><strong>EVAL:</strong> 100% FACT GROUNDED</span>
+                  <span class="telemetry-dot">·</span>
+                  <span class="telemetry-item"><strong>PRECISION:</strong> ZERO HALLUCINATION</span>
+                </div>
+              </div>
+            )}
+
+            {agents[2] && (
+              <div class="agent-node-card branch-node" style="--node-accent: #0D9488;">
+                <div class="node-chassis-top">
+                  <div class="node-tag-group">
+                    <span class="node-rivet">+</span>
+                    <span class="node-level-id">SUB-AGENT // 02</span>
+                  </div>
+                  <div class="node-status-chip">
+                    <span class="node-live-led" style="background-color: #0D9488;" />
+                    <span class="node-status-label">READY</span>
+                    <span class="node-rivet">+</span>
+                  </div>
+                </div>
+
+                <div class="node-chassis-body">
+                  <div class="node-icon-col">
+                    <AgentTreeIcons type="developer" size="48px" />
+                  </div>
+                  <div class="node-info-col">
+                    <div class="node-title-row">
+                      <h3 class="node-agent-name">{agents[2].name}</h3>
+                      <span class="node-chip-badge">DEV & DEBUG</span>
+                    </div>
+                    <span class="node-agent-role" style="color: #0D9488;">{agents[2].role}</span>
+                    <p class="node-brief-text">{agents[2].brief}</p>
+                  </div>
+                </div>
+
+                <div class="node-telemetry-tray">
+                  <span class="telemetry-item"><strong>CHANNEL:</strong> #JOB-APPROVALS</span>
+                  <span class="telemetry-dot">·</span>
+                  <span class="telemetry-item"><strong>ACTION:</strong> 1-CLICK DISPATCH</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- 04 // THE AI DOOM LOOP & MARKET REALITY                      -->
+    <!-- ============================================================ -->
+    <section class="doom-loop-standalone-section" id="doom-section">
+      <div class="doom-section-container">
+        <!-- Section Header -->
+        <div class="doom-standalone-header">
+          <span class="doom-section-eyebrow">04 // MARKET CONTEXT</span>
+          <h2 class="doom-standalone-title">
+            Job-seekers are trapped in the <strong>"AI doom loop"</strong>.
+          </h2>
+        </div>
+
+        <!-- Vinyl & Lyrical Tracks Layout -->
+        <div class="doom-interactive-layout">
+          <!-- Vinyl Record Column -->
+          <div class="doom-vinyl-column">
+            <DoodleVinylRecord
+              size="min(46vw, 400px)"
+              autoSpin={true}
+              interactive={true}
+            />
+          </div>
+
+          <!-- Lyrical Tracks Column -->
+          <div class="doom-tracks-column">
+            <div class="doom-track-card track-1">
+              <span class="lyric-track-tag">TRACK 01 // SIDE A</span>
+              <p class="doom-wavy-text">
+                Candidates facing a difficult job market turn to AI to help them apply for <strong>more</strong> jobs.
+              </p>
+            </div>
+            <div class="doom-track-card track-2">
+              <span class="lyric-track-tag">TRACK 02 // ACCELERATION</span>
+              <p class="doom-wavy-text">
+                Companies facing huge numbers of applications per job, turn to AI to help them filter candidates.
+              </p>
+            </div>
+            <div class="doom-track-card track-3">
+              <span class="lyric-track-tag">TRACK 03 // LOOP</span>
+              <p class="doom-wavy-text">
+                Competition increases and job-seeking gets harder.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ON REPEAT Stamp & LinkedIn Surge Card -->
+        <div class="doom-extras-row">
+          <div class="doom-stamp-col">
+            <div class="doom-on-repeat-stamp is-slammed">
+              <svg class="on-repeat-svg" viewBox="0 0 270 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="7" y="7" width="248" height="74" rx="14" fill="#000000" />
+                <rect x="3" y="3" width="248" height="74" rx="14" fill="#FFD233" stroke="#000000" stroke-width="3.5" />
+                <rect x="12" y="8" width="230" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.65" />
+                <text x="16" y="26" font-family="monospace" font-size="9" font-weight="900" fill="#000000" letter-spacing="1.5">CYCLE // STATUS</text>
+                <text x="15" y="60" font-family="var(--archivo-font), 'Archivo', -apple-system, sans-serif" font-size="28" font-weight="900" font-style="italic" fill="#000000" letter-spacing="-0.5">ON REPEAT</text>
+                <g transform="translate(182, 18)">
+                  <circle cx="24" cy="24" r="21" fill="#FF5238" stroke="#000000" stroke-width="3" />
+                  <path d="M 17 17 L 29 17 A 6 6 0 0 1 35 23" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" />
+                  <path d="M 27 13 L 32 17 L 27 21" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-linejoin="round" />
+                  <path d="M 31 31 L 19 31 A 6 6 0 0 1 13 25" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" />
+                  <path d="M 21 35 L 16 31 L 21 27" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-linejoin="round" />
+                </g>
+                <path d="M 258 10 L 261 4 L 264 10 L 270 13 L 264 16 L 261 22 L 258 16 L 252 13 Z" fill="#ffffff" stroke="#000000" stroke-width="1.8" />
+                <path d="M 0 66 L 3 60 L 6 66 L 12 69 L 6 72 L 3 78 L 0 72 L -6 69 Z" fill="#FF5238" stroke="#000000" stroke-width="1.8" />
+              </svg>
+            </div>
+          </div>
+          <div class="doom-card-col">
+            <DoodleLinkedInJobCard
+              company="Nota Scam"
+              title="Junior role"
+              location="London, England, United Kingdom"
+              autoPlay={true}
+              showReplay={true}
             />
           </div>
         </div>
       </div>
     </section>
 
-    <div class="line-connector" aria-hidden="true"></div>
-
-    <main class="story-flow">
-      <!-- VIGNETTE 00: THE PEAK -->
-      <section class="vignette" id="v0">
-        <div class="vignette-text">
-          <span class="step-tag">{vignette0.tag || "00 / The Context"}</span>
-          <p class="story-lead" set:html={vignette0.lead} />
-          <p class="story-p" set:html={vignette0.body} />
-        </div>
-        <div class="vignette-illustration">
+    <!-- EPILOGUE / RETURN -->
+    <footer class="story-epilogue">
+      <div class="epilogue-line"></div>
+      <p class="epilogue-closing">
+        {
+          footer.closing ||
+            "Built with OpenClaw, Claude 3.5 Sonnet, Python, and Slack."
+        }
+      </p>
+      <div class="epilogue-links">
+        <a href="/" class="link-deck">
           <svg
-            class="line-art"
-            viewBox="0 0 300 300"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
-            <circle
-              cx="150"
-              cy="150"
-              r="60"
-              stroke="#ffffff"
-              stroke-width="1.5"
-              stroke-dasharray="3 3"></circle>
-            <path
-              d="M150 110v40l28 15"
-              stroke="#ffffff"
-              stroke-width="1.5"
-              stroke-linecap="round"></path>
-            <circle cx="150" cy="150" r="3" fill="#ffffff"></circle>
-            <text
-              x="150"
-              y="75"
-              text-anchor="middle"
-              fill="#71717a"
-              font-size="11"
-              font-family="monospace">12h / DAY MANUAL</text
-            >
-            <text
-              x="150"
-              y="245"
-              text-anchor="middle"
-              fill="#ffffff"
-              font-size="11"
-              font-family="monospace">2h / DAY AGENTIC</text
-            >
+            <path d="m15 18-6-6 6-6"></path>
           </svg>
-        </div>
-      </section>
-
-      <div class="line-connector" aria-hidden="true"></div>
-
-      <!-- VIGNETTE 01: THE LONDON DILEMMA -->
-      <section class="vignette reverse" id="v1">
-        <div class="vignette-text">
-          <span class="step-tag">{vignette1.tag || "01 / The Dilemma"}</span>
-          <p class="story-lead" set:html={vignette1.lead} />
-          <ul class="sparse-list">
-            {
-              vignette1.options?.map((opt: string, i: number) => (
-                <li>
-                  <span class="list-num">{i + 1}.</span>
-                  <span set:html={opt} />
-                </li>
-              ))
-            }
-          </ul>
-          <p class="story-p subtle-p" set:html={vignette1.body} />
-        </div>
-
-        <div class="vignette-illustration">
-          <svg
-            class="line-art"
-            viewBox="0 0 300 300"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="150"
-              cy="150"
-              r="70"
-              stroke="#ffffff"
-              stroke-width="1.5"
-              stroke-dasharray="4 4"></circle>
-            <path
-              d="M150 100v50l35 20"
-              stroke="#ffffff"
-              stroke-width="1.5"
-              stroke-linecap="round"></path>
-            <circle cx="150" cy="150" r="3" fill="#ffffff"></circle>
-            <text
-              x="150"
-              y="60"
-              text-anchor="middle"
-              fill="#71717a"
-              font-size="12"
-              font-family="sans-serif">9:00 AM</text
-            >
-            <text
-              x="150"
-              y="250"
-              text-anchor="middle"
-              fill="#71717a"
-              font-size="12"
-              font-family="sans-serif">9:00 PM</text
-            >
-            <text
-              x="50"
-              y="155"
-              text-anchor="middle"
-              fill="#71717a"
-              font-size="13"
-              font-family="sans-serif">12h grind</text
-            >
-            <text
-              x="250"
-              y="155"
-              text-anchor="middle"
-              fill="#ffffff"
-              font-size="13"
-              font-family="sans-serif">2-3 roles</text
-            >
-          </svg>
-        </div>
-      </section>
-
-      <div class="line-connector" aria-hidden="true"></div>
-
-      <!-- VIGNETTE 02: THE AI DOOM LOOP -->
-      <section class="vignette" id="v2">
-        <div class="vignette-illustration">
-          <svg
-            class="line-art"
-            viewBox="0 0 300 300"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M150 70 L230 200 L70 200 Z"
-              stroke="rgba(255,255,255,0.4)"
-              stroke-width="1.5"
-              stroke-dasharray="3 3"></path>
-            <circle
-              cx="150"
-              cy="70"
-              r="14"
-              fill="#000000"
-              stroke="#ffffff"
-              stroke-width="1.5"></circle>
-            <circle cx="150" cy="70" r="3" fill="#ffffff"></circle>
-            <circle
-              cx="230"
-              cy="200"
-              r="14"
-              fill="#000000"
-              stroke="#ffffff"
-              stroke-width="1.5"></circle>
-            <circle cx="230" cy="200" r="3" fill="#ffffff"></circle>
-            <circle
-              cx="70"
-              cy="200"
-              r="14"
-              fill="#000000"
-              stroke="#ffffff"
-              stroke-width="1.5"></circle>
-            <circle cx="70" cy="200" r="3" fill="#ffffff"></circle>
-            <text
-              x="150"
-              y="42"
-              text-anchor="middle"
-              fill="#ffffff"
-              font-size="11"
-              font-family="sans-serif">Candidate AI Blast</text
-            >
-            <text
-              x="245"
-              y="225"
-              text-anchor="middle"
-              fill="#71717a"
-              font-size="11"
-              font-family="sans-serif">Strict ATS Filter</text
-            >
-            <text
-              x="55"
-              y="225"
-              text-anchor="middle"
-              fill="#71717a"
-              font-size="11"
-              font-family="sans-serif">Spiral of Fatigue</text
-            >
-          </svg>
-        </div>
-
-        <div class="vignette-text">
-          <span class="step-tag">{vignette2.tag || "02 / The Realization"}</span
-          >
-          <p class="story-lead" set:html={vignette2.lead} />
-          <p class="story-p" set:html={vignette2.body1} />
-          <p class="story-p" set:html={vignette2.body2} />
-        </div>
-      </section>
-
-      <div class="line-connector" aria-hidden="true"></div>
-
-      <!-- VIGNETTE 03: THE 3 AGENTS -->
-      <section class="vignette agents-vignette" id="v3">
-        <div class="vignette-header-center">
-          <span class="step-tag">{vignette3.tag || "03 / The Team"}</span>
-          <h2 class="vignette-title">
-            {vignette3.title || "Meet the agents."}
-          </h2>
-          <p class="vignette-subtitle">{vignette3.subtitle}</p>
-        </div>
-
-        <div class="agents-line-stage">
-          {
-            agents.map((agent: any, idx: number) => (
-              <>
-                <div class="agent-node">
-                  <div class="node-glyph">
-                    <span>{agent.glyph}</span>
-                  </div>
-                  <div class="agent-meta">
-                    <h3 class="agent-name">{agent.name}</h3>
-                    <span class="agent-role">{agent.role}</span>
-                    <p class="agent-brief">{agent.brief}</p>
-                  </div>
-                </div>
-                {idx < agents.length - 1 && (
-                  <div class="agent-wire" aria-hidden="true" />
-                )}
-              </>
-            ))
-          }
-        </div>
-      </section>
-
-      <div class="line-connector" aria-hidden="true"></div>
-
-      <!-- VIGNETTE 04: HUMAN IN THE LOOP -->
-      <section class="vignette reverse" id="v4">
-        <div class="vignette-text">
-          <span class="step-tag">{vignette4.tag || "04 / The Philosophy"}</span>
-          <p class="story-lead" set:html={vignette4.lead} />
-          <p class="story-p" set:html={vignette4.body1} />
-          <p class="story-p" set:html={vignette4.body2} />
-          <div class="slack-quote-pill">
-            <span class="slack-dot"></span>
-            <span>{vignette4.pill}</span>
-          </div>
-        </div>
-
-        <div class="vignette-illustration">
-          <svg
-            class="line-art"
-            viewBox="0 0 300 300"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect
-              x="50"
-              y="70"
-              width="200"
-              height="160"
-              rx="12"
-              stroke="#ffffff"
-              stroke-width="1.5"></rect>
-            <circle cx="80" cy="105" r="10" stroke="#ffffff" stroke-width="1.5"
-            ></circle>
-            <path
-              d="M100 100h60"
-              stroke="#ffffff"
-              stroke-width="1.5"
-              stroke-linecap="round"></path>
-            <path
-              d="M100 110h40"
-              stroke="#71717a"
-              stroke-width="1"
-              stroke-linecap="round"></path>
-            <path
-              d="M70 140h160"
-              stroke="rgba(255,255,255,0.15)"
-              stroke-width="1"></path>
-            <path
-              d="M70 160h130"
-              stroke="rgba(255,255,255,0.4)"
-              stroke-width="1.5"
-              stroke-linecap="round"></path>
-            <path
-              d="M70 175h100"
-              stroke="rgba(255,255,255,0.2)"
-              stroke-width="1.5"
-              stroke-linecap="round"></path>
-            <rect
-              x="70"
-              y="195"
-              width="65"
-              height="20"
-              rx="4"
-              stroke="#ffffff"
-              stroke-width="1.5"
-              fill="rgba(255,255,255,0.05)"></rect>
-            <text
-              x="102"
-              y="209"
-              text-anchor="middle"
-              fill="#ffffff"
-              font-size="9"
-              font-family="sans-serif">Approve</text
-            >
-            <rect
-              x="145"
-              y="195"
-              width="55"
-              height="20"
-              rx="4"
-              stroke="rgba(255,255,255,0.2)"
-              stroke-width="1"></rect>
-            <text
-              x="172"
-              y="209"
-              text-anchor="middle"
-              fill="#71717a"
-              font-size="9"
-              font-family="sans-serif">Edit</text
-            >
-          </svg>
-        </div>
-      </section>
-
-      <div class="line-connector" aria-hidden="true"></div>
-
-      <!-- VIGNETTE 05: THE UPSIDE -->
-      <section class="vignette" id="v5">
-        <div class="vignette-illustration">
-          <svg
-            class="line-art"
-            viewBox="0 0 300 300"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M50 240 C 100 240, 140 210, 180 140 C 210 90, 240 60, 260 50"
-              stroke="#ffffff"
-              stroke-width="1.5"
-              stroke-linecap="round"></path>
-            <path
-              d="M50 250h210M50 50v200"
-              stroke="rgba(255,255,255,0.1)"
-              stroke-width="1"></path>
-            <circle cx="260" cy="50" r="4" fill="#ffffff"></circle>
-            <circle
-              cx="260"
-              cy="50"
-              r="10"
-              stroke="rgba(255,255,255,0.3)"
-              stroke-width="1"></circle>
-            <text
-              x="215"
-              y="45"
-              fill="#ffffff"
-              font-size="11"
-              font-family="sans-serif">+10h/day</text
-            >
-          </svg>
-        </div>
-
-        <div class="vignette-text">
-          <span class="step-tag">{vignette5.tag || "05 / The Outcome"}</span>
-          <p class="story-lead" set:html={vignette5.lead} />
-          <p class="story-p" set:html={vignette5.body1} />
-          <p class="story-p" set:html={vignette5.body2} />
-        </div>
-      </section>
-
-      <!-- EPILOGUE / RETURN -->
-      <footer class="story-epilogue">
-        <div class="epilogue-line"></div>
-        <p class="epilogue-closing">
-          {
-            footer.closing ||
-              "Built with OpenClaw, Claude 3.5 Sonnet, Python, and Slack."
-          }
-        </p>
-        <div class="epilogue-links">
-          <a href="/" class="link-deck">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="m15 18-6-6 6-6"></path>
-            </svg>
-            <span>{footer.deckLabel || "Return to Tarot Deck"}</span>
-          </a>
-          <a
-            href="https://github.com/NikeEmOlo"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="link-subtle"
-          >
-            {footer.githubLabel || "View GitHub"}
-          </a>
-        </div>
-      </footer>
-    </main>
+          <span>{footer.deckLabel || "Return to Tarot Deck"}</span>
+        </a>
+        <a
+          href="https://github.com/NikeEmOlo"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-subtle"
+        >
+          {footer.githubLabel || "View GitHub"}
+        </a>
+      </div>
+    </footer>
   </div>
 </Base>
 
 <style>
   /* ---------------------------------------------------- */
-  /* HEIGHT-INSPIRED ULTRA-MINIMALIST DARK DESIGN SYSTEM */
+  /* HEIGHT-INSPIRED ULTRA-MINIMALIST DESIGN SYSTEM       */
   /* ---------------------------------------------------- */
   :root {
     --bg-void: #000000;
@@ -505,25 +575,19 @@ const agents = vignette3?.agents || [];
     --text-subtle: #64748b;
     --wire-line: rgba(255, 255, 255, 0.12);
 
-    --teal: #359e9d;
+    --teal: #5AB2B3;
     --purple: #704898;
     --orchid: #be83d3;
     --orange: #e8722c;
     --cyan: #00f2fe;
-
-    --tarot-gradient: linear-gradient(
-      135deg,
-      #359e9d 0%,
-      #704898 50%,
-      #be83d3 100%
-    );
   }
 
   body {
     background-color: var(--bg-void) !important;
     color: var(--text-primary);
     font-family:
-      var(--secondary-font),
+      var(--archivo-font),
+      "Archivo",
       -apple-system,
       BlinkMacSystemFont,
       "Segoe UI",
@@ -532,7 +596,7 @@ const agents = vignette3?.agents || [];
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   .height-story-wrap {
@@ -545,18 +609,18 @@ const agents = vignette3?.agents || [];
   }
 
   /* ---------------------------------------------------- */
-  /* MINIMALIST HEADER */
+  /* MINIMALIST HEADER                                    */
   /* ---------------------------------------------------- */
   .story-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 24px 36px;
+    padding: 18px 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 50;
+    z-index: 1005;
     pointer-events: none;
   }
 
@@ -569,500 +633,1442 @@ const agents = vignette3?.agents || [];
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--text-secondary);
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid #000000;
+    border-radius: 9999px;
+    padding: 7px 16px;
+    color: #ffffff;
     text-decoration: none;
-    font-size: 0.85rem;
-    transition: color 0.2s ease;
+    font-size: 0.82rem;
+    font-weight: 700;
+    box-shadow: 2px 3px 0px #000000;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
   .header-back:hover {
-    color: var(--text-pure);
+    background: #000000;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 2px 5px 0px #000000;
   }
 
   .header-case-no {
     font-size: 0.75rem;
     font-family: monospace;
-    color: var(--text-subtle);
-    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: #0f172a;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid #000000;
+    border-radius: 9999px;
+    padding: 7px 16px;
+    letter-spacing: 0.06em;
+    box-shadow: 2px 3px 0px #000000;
   }
 
   /* ---------------------------------------------------- */
-  /* HERO STAGE (EXACT 1:1 FIGMA CANVAS MATCH) */
+  /* HERO STAGE (STICKY SCROLLYTELLING RUNWAY)            */
   /* ---------------------------------------------------- */
+  .hero-scrolly-runway {
+    position: relative;
+    width: 100%;
+    height: 250vh; /* Smooth scrollytelling runway */
+    background-color: #FFFFFF;
+  }
+
   .figma-hero-stage {
     width: 100%;
     min-height: 100vh;
-    background-color: #000000;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background-color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 60px 40px;
-    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 5;
   }
 
-  .hero-canvas-grid {
-    width: min(92%, 1100px);
-    height: min(80vh, 680px);
-    display: grid;
-    grid-template-columns: 1fr 1.15fr;
-    gap: 3rem;
-    position: relative;
+  /* ============================================================ */
+  /* FRAME 1: TEAL STAGE CURTAIN (LIFTS ON SCROLL)               */
+  /* ============================================================ */
+  .hero-curtain-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #5AB2B3;
+    z-index: 20;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    will-change: transform;
+    pointer-events: auto;
   }
 
-  /* LEFT COLUMN: Pure space + Lounger anchored to bottom */
-  .hero-col-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    padding-left: 2vw;
-    padding-bottom: 2vh;
-  }
-
-  .hero-lounger-anchor {
-    display: flex;
-    align-items: flex-end;
-  }
-
-  .hero-lounger-img {
-    width: clamp(230px, 24vw, 300px);
-    height: auto;
-    object-fit: contain;
-    mix-blend-mode: screen;
-  }
-
-  /* RIGHT COLUMN: Upper-mid Crab + Title, Bottom Question */
-  .hero-col-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 15vh;
-    padding-bottom: 5vh;
-    padding-left: 3vw;
-  }
-
-  .hero-right-top {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .hero-crab-glyph {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-    mix-blend-mode: screen;
-    opacity: 0.95;
+  .hero-float-center {
+    position: absolute;
+    top: 36%;
+    left: 56%;
+    transform: translate(-50%, -50%);
+    z-index: 8;
+    will-change: opacity, transform;
+    pointer-events: auto;
   }
 
   .hero-title-text {
     font-family:
-      var(--secondary-font),
+      var(--archivo-font),
+      "Archivo",
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    font-size: 0.95rem;
-    font-weight: 500;
-    line-height: 1.3;
+    font-size: 1.0625rem; /* ~17px matching project card font */
+    font-weight: 700; /* Bold Archivo for brand continuity */
+    line-height: 1.35;
     color: #ffffff;
-    letter-spacing: -0.01em;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .hero-right-bottom {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .hero-question-text {
-    font-family:
-      var(--secondary-font),
-      -apple-system,
-      BlinkMacSystemFont,
-      sans-serif;
-    font-size: 1.125rem; /* 18px */
-    font-weight: 400;
-    line-height: 1.5;
-    color: #71717a;
-    margin: 0;
     letter-spacing: -0.015em;
-    max-width: 440px;
-  }
-
-  strong,
-  .height-story-wrap :global(strong) {
-    color: #ffffff !important;
-    font-weight: 500;
-  }
-
-  /* ---------------------------------------------------- */
-  /* STORY FLOW & VIGNETTES */
-  /* ---------------------------------------------------- */
-  .story-flow {
-    width: min(90%, 960px);
+    margin: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding-bottom: 120px;
+    text-align: left;
   }
 
-  .vignette {
-    width: 100%;
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 4rem;
-    padding: 60px 0;
+  .hero-lounger-corner {
+    position: absolute;
+    bottom: clamp(16px, 3vh, 32px);
+    right: clamp(16px, 3vw, 36px);
+    z-index: 9;
+    pointer-events: auto;
+    transform-origin: bottom right;
+    will-change: transform, opacity;
   }
 
-  .vignette.reverse {
-    flex-direction: row-reverse;
-  }
-
-  .vignette-illustration {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .line-art {
-    width: 100%;
-    max-width: 280px;
+  .hero-lounger-img {
+    width: clamp(140px, 17vw, 220px);
     height: auto;
+    display: block;
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.2));
   }
 
-  .vignette-text {
-    flex: 1.2;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .step-tag {
-    font-size: 0.75rem;
-    font-family: monospace;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-subtle);
-  }
-
-  .story-lead {
-    font-size: 1.25rem; /* 20px */
-    font-weight: 400;
-    line-height: 1.55;
-    letter-spacing: -0.015em;
-    color: #71717a;
-  }
-  .story-lead strong {
-    color: #ffffff;
-    font-weight: 500;
-  }
-
-  .story-p {
-    font-size: clamp(1rem, 1.4vw, 1.15rem);
-    line-height: 1.7;
-    color: #71717a;
-    font-weight: 400;
-  }
-  .story-p strong {
-    color: #ffffff;
-    font-weight: 500;
-  }
-
-  .subtle-p {
-    color: var(--text-subtle);
-    font-size: 0.95rem;
-  }
-
-  .sparse-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 0.5rem 0;
-  }
-
-  .sparse-list li {
-    display: flex;
-    gap: 12px;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #71717a;
-  }
-  .sparse-list li strong {
-    color: #ffffff;
-    font-weight: 500;
-  }
-
-  .list-num {
-    color: #ffffff;
-    font-family: monospace;
-    font-weight: 600;
-  }
-
-  /* Thin Line Connector between stages */
-  .line-connector {
-    width: 1px;
-    height: 100px;
-    background: linear-gradient(
-      180deg,
-      var(--wire-line),
-      rgba(255, 255, 255, 0.02)
-    );
-    margin: 20px 0;
-  }
-
-  /* ---------------------------------------------------- */
-  /* STAGE 03: AGENTS LINE STAGE */
-  /* ---------------------------------------------------- */
-  .agents-vignette {
-    flex-direction: column;
-    align-items: center;
-    gap: 3rem;
-    text-align: center;
-  }
-
-  .vignette-header-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    max-width: 600px;
-  }
-
-  .vignette-title {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 500;
-    color: var(--text-pure);
-    letter-spacing: -0.02em;
-  }
-
-  .vignette-subtitle {
-    font-size: 1rem;
-    color: #71717a;
-    line-height: 1.5;
-  }
-
-  .agents-line-stage {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+  /* ============================================================ */
+  /* FRAME 2: WHITE DILEMMA FRAME (UNDERNEATH CURTAIN)           */
+  /* ============================================================ */
+  .dilemma-white-stage {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-
-  .agent-node {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 12px;
-  }
-
-  .node-glyph {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    height: 100%;
+    background-color: #FFFFFF;
+    color: #000000;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.02);
-    transition: all 0.2s ease;
-  }
-  .node-glyph:hover {
-    border-color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
+    padding: clamp(24px, 4vw, 64px);
+    box-sizing: border-box;
   }
 
-  .agent-name {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-pure);
+  .dilemma-content-wrapper {
+    width: 100%;
+    max-width: 1160px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(40px, 6.5vh, 72px);
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .dilemma-header-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 900px;
+  }
+
+  .dilemma-eyebrow {
+    font-family: monospace;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #71717A;
+    text-transform: uppercase;
+  }
+
+  .dilemma-title {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(1.85rem, 3vw, 2.9rem);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    color: #000000;
     margin: 0;
   }
 
-  .agent-role {
-    font-size: 0.75rem;
+  .dilemma-punchline {
+    display: inline-block;
+    background: #FFD233;
+    color: #000000;
+    padding: 2px 14px;
+    border-radius: 8px;
+    border: 2px solid #000000;
+    box-shadow: 2px 3px 0px #000000;
+    font-weight: 900;
+    margin-left: 8px;
+    transform: rotate(-2deg);
+  }
+
+  .dilemma-sub-lead {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+    font-weight: 600;
+    line-height: 1.45;
+    color: #3F3F46;
+    margin: 4px 0 0;
+  }
+
+  /* ---------------------------------------------------- */
+  /* CENTERED DECISION STAGE                              */
+  /* ---------------------------------------------------- */
+  .dilemma-decision-stage {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(16px, 3vw, 40px);
+    width: 100%;
+    position: relative;
+    margin-top: clamp(16px, 3vh, 36px);
+  }
+
+  @media (max-width: 860px) {
+    .dilemma-decision-stage {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  /* SELECTABLE OPTION BUTTON CARDS (STREETWEAR DOODLE-POP) */
+  .dilemma-choice-btn {
+    flex: 1;
+    max-width: 380px;
+    background: #FAF8F5;
+    border: 3px solid #000000;
+    border-radius: 18px;
+    padding: clamp(20px, 2.5vw, 28px);
+    box-shadow: 4px 6px 0px #000000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    min-height: 190px;
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    outline: none;
+    position: relative;
+  }
+
+  /* Choice 1 Hover: Cyber Lime Green from Doodle-Pop Palette */
+  .dilemma-choice-btn.choice-left:hover {
+    transform: translateY(-6px) rotate(-1deg);
+    box-shadow: 6px 11px 0px #000000, 0 14px 28px rgba(209, 255, 0, 0.45);
+    background: var(--doodle-lime, #D1FF00);
+  }
+
+  .dilemma-choice-btn.choice-left:hover .choice-pick-pill {
+    background: #000000;
+    color: var(--doodle-lime, #D1FF00);
+    transform: scale(1.06);
+  }
+
+  /* Choice 2 Hover: Electric Cyan from Doodle-Pop Palette */
+  .dilemma-choice-btn.choice-right:hover {
+    transform: translateY(-6px) rotate(1deg);
+    box-shadow: 6px 11px 0px #000000, 0 14px 28px rgba(0, 179, 227, 0.45);
+    background: var(--doodle-cyan, #00B3E3);
+  }
+
+  .dilemma-choice-btn.choice-right:hover .choice-pick-pill {
+    background: #000000;
+    color: var(--doodle-cyan, #00B3E3);
+    transform: scale(1.06);
+  }
+
+  .dilemma-choice-btn:active,
+  .dilemma-choice-btn.is-selected {
+    transform: translateY(2px);
+    box-shadow: 2px 3px 0px #000000;
+    background: #FFF9E6;
+  }
+
+  /* Corner Doodle Sparks */
+  .card-doodle-spark {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+    transition: opacity 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28), transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  }
+
+  .card-doodle-spark.top-right {
+    top: -14px;
+    right: -14px;
+  }
+
+  .card-doodle-spark.top-left {
+    top: -14px;
+    left: -14px;
+  }
+
+  .dilemma-choice-btn:hover .card-doodle-spark {
+    opacity: 1;
+    transform: scale(1.15) rotate(12deg);
+    animation: doodleSparkWiggle 0.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes doodleSparkWiggle {
+    0% { transform: scale(1.15) rotate(10deg); }
+    100% { transform: scale(1.3) rotate(22deg); }
+  }
+
+  .choice-tag-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .choice-num-badge {
+    background: #000000;
+    color: #FFFFFF;
     font-family: monospace;
-    color: var(--text-subtle);
-    letter-spacing: 0.05em;
+    font-weight: 900;
+    font-size: 0.9rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .choice-hint {
+    font-family: monospace;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #71717A;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    display: block;
-    margin-top: 2px;
   }
 
-  .agent-brief {
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: #71717a;
-    margin-top: 6px;
-    max-width: 240px;
+  .choice-main-text {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(1rem, 1.15vw, 1.12rem);
+    font-weight: 700;
+    line-height: 1.45;
+    color: #0F172A;
+    margin: 0;
   }
 
-  .agent-wire {
-    width: 40px;
-    height: 1px;
-    background: var(--wire-line);
-    margin-top: 22px;
+  .choice-bottom-bar {
+    display: flex;
+    align-items: center;
   }
 
-  /* Inline Code & Slack Quote Pill */
-  code {
+  .choice-pick-pill {
     font-family: monospace;
-    font-size: 0.85em;
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.06);
-    padding: 2px 6px;
-    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #000000;
+    background: #FFD233;
+    border: 2px solid #000000;
+    border-radius: 9999px;
+    padding: 4px 14px;
+    box-shadow: 2px 2px 0px #000000;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
   }
 
-  .slack-quote-pill {
+  /* CENTER CHARACTER */
+  .dilemma-center-character {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dilemma-standing-img {
+    height: clamp(180px, 26vh, 260px);
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.18));
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dilemma-standing-img:hover {
+    transform: scale(1.05) rotate(-1.5deg);
+  }
+
+  /* ---------------------------------------------------- */
+  /* POP-UP ANSWER OVERLAY & MODAL                        */
+  /* ---------------------------------------------------- */
+  .dilemma-popup-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF; /* Pure clean solid white background */
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dilemma-popup-overlay.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .dilemma-popup-card {
+    background: #FAF8F5;
+    border: 3.5px solid #000000;
+    border-radius: 20px;
+    box-shadow: 8px 10px 0px #000000;
+    max-width: 540px;
+    width: 100%;
+    padding: clamp(24px, 3.5vw, 36px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transform: scale(0.92) translateY(12px);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dilemma-popup-overlay.is-visible .dilemma-popup-card {
+    transform: scale(1) translateY(0);
+  }
+
+  .popup-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2.5px solid #000000;
+    padding-bottom: 12px;
+  }
+
+  .popup-answer-title {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+    font-weight: 900;
+    color: #E11D48;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -0.015em;
+  }
+
+  .popup-close-btn {
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 900;
+    color: #000000;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px #000000;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .popup-close-btn:hover {
+    background: var(--doodle-yellow, #FFDA00);
+    transform: scale(1.06);
+  }
+
+  .popup-body-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .popup-answer-p {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: 1.08rem;
+    line-height: 1.55;
+    color: #1F2937;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .popup-action-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+
+  .popup-action-btn {
+    background: var(--doodle-yellow, #FFDA00);
+    color: #000000;
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: 0.98rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border: 2.5px solid #000000;
+    border-radius: 12px;
+    padding: 10px 24px;
+    box-shadow: 3px 4px 0px #000000;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+
+  .popup-action-btn:hover {
+    background: #FFE566;
+    transform: translateY(-2px);
+    box-shadow: 4px 6px 0px #000000;
+  }
+
+  .popup-action-btn:active {
+    transform: translateY(2px);
+    box-shadow: 1px 2px 0px #000000;
+  }
+
+  /* ============================================================ */
+  /* FRAME 2 & 3 STAGE MODES                                     */
+  /* ============================================================ */
+  .dilemma-white-stage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+    color: #000000;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(24px, 4vw, 64px);
+    box-sizing: border-box;
+    transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Bright Streetwear Yellow background for the Agentic Workflow page */
+  .dilemma-white-stage.is-benefits-mode {
+    background-color: var(--doodle-yellow, #FFDA00);
+  }
+
+  /* Shrink sticky hero viewport to 80vh so the real HowItWorks desktop peeks from below */
+  .figma-hero-stage.is-benefits-mode {
+    height: 80vh;
+    min-height: 80vh;
+    transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                min-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ============================================================ */
+  /* FRAME 3: BENEFITS CONTENT WRAPPER                           */
+  /* ============================================================ */
+  .benefits-content-wrapper {
+    width: 100%;
+    max-width: 1180px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    gap: clamp(32px, 5vh, 56px);
+    padding-top: clamp(22vh, 32vh, 38vh);
+    box-sizing: border-box;
+    position: relative;
+    animation: benefitsFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .benefits-content-wrapper.is-hidden,
+  .dilemma-content-wrapper.is-hidden {
+    display: none !important;
+  }
+
+  @keyframes benefitsFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .benefits-header-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  .benefits-eyebrow {
+    font-family: monospace;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    color: #000000;
+    background: #FFFFFF;
+    border: 2px solid #000000;
+    border-radius: 9999px;
+    padding: 3px 12px;
+    box-shadow: 2px 2px 0px #000000;
+    text-transform: uppercase;
+  }
+
+  .benefits-main-title {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: #000000;
+    margin: 0;
+    text-align: center;
+  }
+
+  .benefits-highlight-pill {
+    display: inline-block;
+    background: #000000;
+    color: #FFFFFF;
+    padding: 2px 14px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.4);
+    font-weight: 900;
+    transform: rotate(-1.5deg);
+  }
+
+  /* Free Text Grid with Doodled Icons */
+  .benefits-free-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 3.5vw, 44px);
+    width: 100%;
+    max-width: 1060px;
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+
+  @media (max-width: 860px) {
+    .benefits-free-list {
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+  }
+
+  .benefit-doodle-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .benefit-doodle-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 104px;
+    height: 104px;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
+    cursor: default;
+  }
+
+  .benefit-doodle-icon-wrap:hover {
+    transform: scale(1.14) rotate(4deg);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+  }
+
+  .benefit-item-text {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(0.98rem, 1.15vw, 1.12rem);
+    font-weight: 700;
+    line-height: 1.42;
+    color: #000000;
+    margin: 0;
+    max-width: 310px;
+  }
+
+  .benefits-action-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+    z-index: 10;
+  }
+
+  .benefits-scroll-cta {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.8rem;
-    color: #71717a;
-    border: 1px solid var(--wire-line);
-    padding: 6px 14px;
+    gap: 10px;
+    background: #000000;
+    color: #FFFFFF;
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: 1.02rem;
+    font-weight: 800;
+    border: 2.5px solid #000000;
     border-radius: 9999px;
-    width: fit-content;
-  }
-  .slack-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #ffffff;
+    padding: 10px 24px;
+    box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   }
 
-  /* ---------------------------------------------------- */
-  /* EPILOGUE & FOOTER */
-  /* ---------------------------------------------------- */
-  .story-epilogue {
-    margin-top: 100px;
+  .benefits-scroll-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 6px 0px rgba(0, 0, 0, 0.45);
+    background: #27272A;
+  }
+
+  .cta-arrow-down {
+    font-size: 1.15rem;
+    font-weight: 900;
+    transition: transform 0.2s ease;
+  }
+
+  .benefits-scroll-cta:hover .cta-arrow-down {
+    transform: translateY(3px);
+  }
+
+
+  /* ============================================================ */
+  /* 03 // MEET THE TEAM SECTION                                  */
+  /* ============================================================ */
+  .team-hierarchy-section {
+    width: 100%;
+    background-color: #000000;
+    padding: clamp(80px, 12vh, 140px) 24px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    border-top: 3px solid #000000;
+  }
+
+  .team-section-container {
+    width: 100%;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+  }
+
+  .team-header-box {
     text-align: center;
+    margin-bottom: clamp(32px, 5vh, 56px);
+  }
+
+  .team-eyebrow {
+    font-size: 11px;
+    font-family: monospace;
+    letter-spacing: 0.14em;
+    color: #71717a;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .team-main-title {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(2.4rem, 4vw, 4.2rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: #FFFFFF;
+    margin: 0;
+  }
+
+  .agent-tree-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(94vw, 860px);
+    box-sizing: border-box;
+  }
+
+  .tree-root-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .tree-fork-connector {
+    width: 100%;
+    max-width: 680px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    margin: -2px 0;
+  }
+
+  .tree-conduit-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .dash-stem,
+  .dash-split,
+  .dash-left,
+  .dash-right {
+    animation: treeConduitDash 1.5s linear infinite;
+  }
+
+  @keyframes treeConduitDash {
+    to {
+      stroke-dashoffset: -16;
+    }
+  }
+
+  .tree-branches-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(20px, 3.5vw, 40px);
+    width: 100%;
+    max-width: 780px;
+    z-index: 2;
+  }
+
+  @media (max-width: 680px) {
+    .tree-branches-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .agent-node-card {
+    background: #18181B;
+    border: 2.5px solid #000000;
+    border-radius: 14px;
+    box-shadow:
+      4px 5px 0px #000000,
+      0 8px 20px rgba(0, 0, 0, 0.4);
+    transition:
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .agent-node-card.root-node {
+    width: min(100%, 480px);
+  }
+
+  .agent-node-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      6px 8px 0px #000000,
+      0 14px 28px rgba(0, 0, 0, 0.6);
+  }
+
+  .node-chassis-top {
+    background: #27272A;
+    border-bottom: 2px solid #000000;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .node-tag-group,
+  .node-status-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .node-rivet {
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 900;
+    color: #71717A;
+    line-height: 1;
+  }
+
+  .node-level-id {
+    font-family: monospace;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: #A1A1AA;
+  }
+
+  .node-live-led {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 1.5px solid #000000;
+    animation: ledPulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes ledPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+
+  .node-status-label {
+    font-family: monospace;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: #A1A1AA;
+  }
+
+  .node-chassis-body {
+    padding: 16px 18px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .node-icon-col {
+    flex-shrink: 0;
+  }
+
+  .node-info-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .node-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .node-agent-name {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+
+  .node-chip-badge {
+    background: #000000;
+    color: #FFD233;
+    border: 1.5px solid #FFD233;
+    border-radius: 6px;
+    padding: 2px 7px;
+    font-family: monospace;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .node-agent-role {
+    font-family: monospace;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .node-brief-text {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: #A1A1AA;
+    margin: 0;
+  }
+
+  .node-telemetry-tray {
+    background: #09090B;
+    border-top: 1.5px solid #27272A;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: monospace;
+    font-size: 0.68rem;
+    color: #71717A;
+  }
+
+  .node-telemetry-tray strong {
+    color: #D4D4D8;
+  }
+
+  .telemetry-dot {
+    color: #52525B;
+  }
+
+  /* ============================================================ */
+  /* 04 // THE AI DOOM LOOP & MARKET REALITY                      */
+  /* ============================================================ */
+  .doom-loop-standalone-section {
+    width: 100%;
+    background-color: #5AB2B3;
+    padding: clamp(80px, 12vh, 140px) 24px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    border-top: 3.5px solid #000000;
+  }
+
+  .doom-section-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(36px, 6vh, 64px);
+  }
+
+  .doom-standalone-header {
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .doom-section-eyebrow {
+    font-size: 11px;
+    font-family: monospace;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 800;
+  }
+
+  .doom-standalone-title {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(2rem, 3.6vw, 3.4rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    margin: 0;
+  }
+
+  .doom-standalone-title strong {
+    font-weight: 800;
+  }
+
+  .doom-interactive-layout {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .doom-interactive-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .doom-vinyl-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .doom-tracks-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .doom-track-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 14px;
+    padding: 16px 20px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.3);
+  }
+
+  .lyric-track-tag {
+    font-family: monospace;
+    font-size: 0.8125rem;
+    font-weight: 800;
+    color: #FFD233;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .doom-wavy-text {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(0.98rem, 1.2vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.48;
+    color: #FFFFFF;
+    margin: 0;
+  }
+
+  .doom-wavy-text strong {
+    font-weight: 800;
+  }
+
+  .doom-extras-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+  }
+
+  @media (max-width: 860px) {
+    .doom-extras-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .doom-stamp-col {
+    display: flex;
+    justify-content: center;
+  }
+
+  .doom-on-repeat-stamp {
+    width: clamp(220px, 22vw, 300px);
+  }
+
+  .on-repeat-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .doom-card-col {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ---------------------------------------------------- */
+  /* EPILOGUE & FOOTER                                    */
+  /* ---------------------------------------------------- */
+  .story-epilogue {
+    width: 100%;
+    max-width: 900px;
+    padding: 80px 24px 100px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 28px;
+    background-color: #000000;
   }
 
   .epilogue-line {
     width: 60px;
-    height: 1px;
-    background: var(--wire-line);
+    height: 3px;
+    background: #3F3F46;
+    border-radius: 9999px;
   }
 
   .epilogue-closing {
-    font-size: 0.85rem;
-    color: var(--text-subtle);
+    font-size: 0.95rem;
+    color: #71717A;
+    margin: 0;
   }
 
   .epilogue-links {
     display: flex;
+    gap: 16px;
     align-items: center;
-    gap: 20px;
   }
 
-  .link-deck {
+  .link-deck,
+  .link-subtle {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--text-pure);
+    font-size: 0.85rem;
+    font-weight: 700;
     text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 8px 18px;
     border-radius: 9999px;
-    transition: all 0.2s ease;
+    padding: 8px 18px;
+    border: 2px solid #000000;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .link-deck {
+    background: #FFFFFF;
+    color: #000000;
+    box-shadow: 2px 3px 0px #000000;
   }
   .link-deck:hover {
-    border-color: #ffffff;
-    color: #ffffff;
-    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 2px 5px 0px #000000;
   }
 
   .link-subtle {
-    color: var(--text-subtle);
-    font-size: 0.85rem;
-    text-decoration: none;
-    transition: color 0.2s ease;
+    background: #18181B;
+    color: #FFFFFF;
+    border-color: #3F3F46;
   }
   .link-subtle:hover {
-    color: var(--text-secondary);
-  }
-
-  /* ---------------------------------------------------- */
-  /* RESPONSIVE LAYOUT */
-  /* ---------------------------------------------------- */
-  @media (max-width: 768px) {
-    .figma-hero-stage {
-      min-height: auto;
-      padding: 100px 20px 40px;
-    }
-    .hero-canvas-grid {
-      height: auto;
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    .hero-col-right {
-      order: 1;
-      padding: 0;
-      gap: 2rem;
-    }
-    .hero-col-left {
-      order: 2;
-      padding: 0;
-      align-items: center;
-    }
-    .hero-lounger-img {
-      max-width: 220px;
-    }
-    .hero-question-text {
-      font-size: 1rem;
-    }
-    .vignette,
-    .vignette.reverse {
-      flex-direction: column;
-      gap: 2rem;
-      text-align: center;
-    }
-    .vignette-text {
-      align-items: center;
-    }
-    .sparse-list li {
-      text-align: left;
-    }
-    .agents-line-stage {
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-    .agent-wire {
-      width: 1px;
-      height: 30px;
-      margin: 0;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .story-header {
-      padding: 16px 20px;
-    }
-    .header-case-no {
-      display: none;
-    }
+    background: #27272A;
+    transform: translateY(-2px);
   }
 </style>
+
+<script>
+  function initAUScrollytelling() {
+    const runway = document.getElementById("hero-runway");
+    const curtain = document.getElementById("heroCurtainLayer");
+    const titleEl = document.querySelector("[data-hero-title]");
+    const dilemmaHeader = document.querySelector("[data-dilemma-header]");
+    const dilemmaBody = document.querySelector("[data-dilemma-body]");
+
+    // Interactive choice selection & dynamic pop-up logic
+    let selectionAttempts = 0;
+    const dilemmaStageEl = document.querySelector("[data-dilemma-stage]");
+    const choice1Btn = document.getElementById("choiceOption1");
+    const choice2Btn = document.getElementById("choiceOption2");
+    const answerPopup = document.getElementById("dilemmaAnswerPopup");
+    const closePopupBtn = document.getElementById("closePopupBtn");
+    const popupTitle = document.getElementById("popupTitle");
+    const popupText = document.getElementById("popupText");
+    const popupActionBtn = document.getElementById("popupActionBtn");
+    const popupActionBtnText = document.getElementById("popupActionBtnText");
+    const dilemmaQuestionsWrap = document.getElementById("dilemmaQuestionsWrap");
+    const benefitsFrameWrap = document.getElementById("benefitsFrameWrap");
+    const exploreWorkflowBtn = document.getElementById("exploreWorkflowBtn");
+    const benefitsDesktopPeek = document.getElementById("benefitsDesktopPeek");
+
+    function openAnswerPopup(choiceNumber: string) {
+      selectionAttempts += 1;
+
+      if (choice1Btn) choice1Btn.classList.toggle("is-selected", choiceNumber === "1");
+      if (choice2Btn) choice2Btn.classList.toggle("is-selected", choiceNumber === "2");
+
+      if (selectionAttempts === 1) {
+        // First selection: title = "WRONG", button = "try again"
+        if (popupTitle) popupTitle.textContent = "WRONG";
+        if (popupActionBtnText) popupActionBtnText.textContent = "try again";
+
+        if (choiceNumber === "1") {
+          if (popupText) popupText.textContent = "You can't afford food";
+        } else {
+          if (popupText) {
+            popupText.textContent =
+              "You spend around 12 hours a day searching for and applying for jobs, leaving no time to complete your training.";
+          }
+        }
+      } else {
+        // Second selection: title = "ALSO WRONG", button = "wth?"
+        if (popupTitle) popupTitle.textContent = "ALSO WRONG";
+        if (popupActionBtnText) popupActionBtnText.textContent = "wth?";
+
+        if (choiceNumber === "1") {
+          if (popupText) popupText.textContent = "You can't afford food";
+        } else {
+          if (popupText) {
+            popupText.textContent =
+              "You spend around 12 hours a day searching for and applying for jobs, leaving no time to complete your training.";
+          }
+        }
+      }
+
+      if (answerPopup) {
+        answerPopup.classList.add("is-visible");
+        answerPopup.setAttribute("aria-hidden", "false");
+      }
+    }
+
+    function closeAnswerPopup() {
+      if (answerPopup) {
+        answerPopup.classList.remove("is-visible");
+        answerPopup.setAttribute("aria-hidden", "true");
+      }
+      if (choice1Btn) choice1Btn.classList.remove("is-selected");
+      if (choice2Btn) choice2Btn.classList.remove("is-selected");
+    }
+
+    function navigateToHowItWorks() {
+      const howItWorks =
+        document.getElementById("how-it-works") ||
+        document.getElementById("how-it-works-hero-canvas") ||
+        document.querySelector(".how-it-works-section");
+      if (howItWorks) {
+        howItWorks.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollBy({ top: window.innerHeight * 1.5, behavior: "smooth" });
+      }
+    }
+
+    function handlePopupAction() {
+      const currentBtnText = popupActionBtnText?.textContent?.trim().toLowerCase();
+      if (currentBtnText === "try again") {
+        closeAnswerPopup();
+      } else if (currentBtnText === "wth?" || currentBtnText === "wtf" || currentBtnText === "wth") {
+        // Transition to Frame 3: The Benefits Frame!
+        closeAnswerPopup();
+        if (dilemmaStageEl) dilemmaStageEl.classList.add("is-benefits-mode");
+        if (dilemmaQuestionsWrap) dilemmaQuestionsWrap.classList.add("is-hidden");
+        if (benefitsFrameWrap) benefitsFrameWrap.classList.remove("is-hidden");
+      } else {
+        closeAnswerPopup();
+      }
+    }
+
+    if (choice1Btn) choice1Btn.addEventListener("click", () => openAnswerPopup("1"));
+    if (choice2Btn) choice2Btn.addEventListener("click", () => openAnswerPopup("2"));
+    if (closePopupBtn) closePopupBtn.addEventListener("click", closeAnswerPopup);
+    if (popupActionBtn) popupActionBtn.addEventListener("click", handlePopupAction);
+    if (answerPopup) {
+      answerPopup.addEventListener("click", (e) => {
+        if (e.target === answerPopup) closeAnswerPopup();
+      });
+    }
+
+    if (exploreWorkflowBtn) exploreWorkflowBtn.addEventListener("click", navigateToHowItWorks);
+    if (benefitsDesktopPeek) benefitsDesktopPeek.addEventListener("click", navigateToHowItWorks);
+
+    if (!runway || !curtain) return;
+
+    function onScroll() {
+      const rect = runway.getBoundingClientRect();
+      const runwayHeight = rect.height - window.innerHeight;
+      if (runwayHeight <= 0) return;
+
+      const scrolled = -rect.top;
+      // Scroll progress from 0.0 -> 1.0
+      const p = Math.min(Math.max(scrolled / runwayHeight, 0), 1);
+
+      // 1. STAGE CURTAIN LIFT (p: 0.00 -> 0.40)
+      if (p <= 0.40) {
+        const curtainP = p / 0.38;
+        const translateY = Math.min(curtainP * 105, 105);
+        curtain.style.transform = `translateY(-${translateY.toFixed(2)}%)`;
+        curtain.style.pointerEvents = curtainP >= 0.95 ? "none" : "auto";
+
+        // Fade title slightly as curtain pulls up
+        if (titleEl) {
+          const titleOp = Math.max(0, 1 - curtainP * 1.2);
+          (titleEl as HTMLElement).style.opacity = titleOp.toFixed(3);
+        }
+      } else {
+        curtain.style.transform = `translateY(-105%)`;
+        curtain.style.pointerEvents = "none";
+        if (titleEl) (titleEl as HTMLElement).style.opacity = "0";
+      }
+
+      // 2. DILEMMA REVEAL UNDERNEATH (p: 0.15 -> 0.60)
+      if (p >= 0.15) {
+        if (dilemmaHeader) {
+          const headOp = Math.min((p - 0.15) / 0.15, 1);
+          (dilemmaHeader as HTMLElement).style.opacity = headOp.toFixed(3);
+        }
+        if (dilemmaBody) {
+          const bodyOp = Math.min((p - 0.25) / 0.18, 1);
+          (dilemmaBody as HTMLElement).style.opacity = bodyOp.toFixed(3);
+        }
+      } else {
+        if (dilemmaHeader) (dilemmaHeader as HTMLElement).style.opacity = "0.4";
+        if (dilemmaBody) (dilemmaBody as HTMLElement).style.opacity = "0.2";
+      }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initAUScrollytelling();
+  });
+  document.addEventListener("astro:page-load", () => {
+    initAUScrollytelling();
+  });
+</script>
