@@ -5307,6 +5307,13 @@ const { showTestToolbar = false } = Astro.props;
     display: flex;
     align-items: center;
     gap: 10px;
+    /* The app strip is the expendable half: let it be squeezed and clipped
+       rather than shoving the clock out past the right edge of the taskbar.
+       Clipped on the inline axis only, so the active-app dot that sits just
+       below each button (bottom: -2px) still shows. */
+    min-width: 0;
+    overflow-x: clip;
+    overflow-y: visible;
   }
 
   .taskbar-win-btn {
@@ -5399,6 +5406,8 @@ const { showTestToolbar = false } = Astro.props;
     display: flex;
     align-items: center;
     gap: 14px;
+    /* Systray + clock are the half that must stay legible. */
+    flex-shrink: 0;
   }
 
   .systray-icons {
@@ -5679,6 +5688,27 @@ const { showTestToolbar = false } = Astro.props;
     }
     .taskbar-search-pill {
       display: none;
+    }
+    /* Not enough taskbar left for the full systray and a date: keep the
+       clock digits, drop the rest. */
+    .systray-icons {
+      display: none;
+    }
+    .clock-date {
+      display: none;
+    }
+    .taskbar-clock-col {
+      padding: 4px 8px;
+    }
+    .taskbar-right-group {
+      gap: 8px;
+    }
+    .mockup-taskbar {
+      gap: 8px;
+      padding: 0 10px;
+    }
+    .taskbar-apps-container {
+      min-width: 0;
     }
     .anim-test-toolbar {
       top: 10px;
