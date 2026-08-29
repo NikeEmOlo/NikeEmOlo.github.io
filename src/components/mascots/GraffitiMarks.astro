@@ -1,0 +1,239 @@
+---
+// GraffitiMarks.astro - Spray-paint street-art bullets from the Freepik
+// graffiti set (double chevron, soft crown, star, spiked crown).
+//
+// Uses the real artwork when it is present in public/img/graffiti/, and
+// falls back to a hand-traced vector version otherwise, so the page never
+// renders a broken image. Drop these files in to switch over — no code
+// change needed:
+//
+//   public/img/graffiti/chevrons.png
+//   public/img/graffiti/star.png
+//   public/img/graffiti/crown-soft.png
+//   public/img/graffiti/crown-spike.png
+//
+// The supplied PNGs are cut out with real alpha (verified: transparent
+// corners, zero opaque-white pixels), so they composite normally. Do not
+// set blend="multiply" for these — on the yellow curtain it would multiply
+// the gold against the background and darken it away from the source
+// colour. multiply is only useful for art on an opaque white ground.
+import fs from "node:fs";
+import path from "node:path";
+
+interface Props {
+  type: "chevrons" | "star" | "crown-soft" | "crown-spike";
+  size?: string;
+  fill?: string;
+  blend?: string;
+  class?: string;
+}
+
+const {
+  type,
+  size = "84px",
+  fill = "#FFFFFF",
+  blend = "normal",
+  class: className = "",
+} = Astro.props;
+
+// Resolved at build time: prefer the real artwork, trace is the fallback.
+const assetHref = `/img/graffiti/${type}.png`;
+let hasArtwork = false;
+try {
+  hasArtwork = fs.existsSync(
+    path.join(process.cwd(), "public", "img", "graffiti", `${type}.png`),
+  );
+} catch {
+  hasArtwork = false;
+}
+
+const INK = "#000000";
+
+// Vary the noise seed per mark so no two read as the same stencil.
+const seeds: Record<string, number> = {
+  chevrons: 3,
+  star: 11,
+  "crown-soft": 19,
+  "crown-spike": 27,
+};
+const seed = seeds[type] ?? 5;
+const fid = `gm-spray-${type}`;
+---
+
+{
+  hasArtwork ? (
+    <img
+      src={assetHref}
+      alt=""
+      aria-hidden="true"
+      class={className}
+      style={`width: ${size}; height: ${size}; display: block; object-fit: contain; mix-blend-mode: ${blend};`}
+      /* Not lazy: these live inside the transformed, fixed curtain, where the
+         lazy-load intersection check does not fire and the marks never load. */
+      decoding="async"
+    />
+  ) : (
+<svg
+  viewBox="0 0 100 100"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  style={`width: ${size}; height: ${size}; display: block; overflow: visible;`}
+  class={className}
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <filter
+      id={fid}
+      x="-35%"
+      y="-35%"
+      width="170%"
+      height="170%"
+      color-interpolation-filters="sRGB"
+    >
+      {/* Chew up the outline so no edge is mechanically straight */}
+      <feTurbulence
+        type="fractalNoise"
+        baseFrequency="0.82"
+        numOctaves="4"
+        seed={seed}
+        result="grain"
+      />
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="grain"
+        scale="2.6"
+        xChannelSelector="R"
+        yChannelSelector="G"
+        result="rough"
+      />
+
+      {/* Overspray: blur a copy, then punch sparse noise through it */}
+      <feGaussianBlur in="rough" stdDeviation="2.6" result="halo" />
+      <feTurbulence
+        type="fractalNoise"
+        baseFrequency="0.45"
+        numOctaves="3"
+        seed={seed + 4}
+        result="speck"
+      />
+      <feColorMatrix
+        in="speck"
+        type="matrix"
+        values="0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                2.2 0 0 0 -0.72"
+        result="speckAlpha"
+      />
+      <feComposite in="halo" in2="speckAlpha" operator="in" result="mist" />
+
+      <feMerge>
+        <feMergeNode in="mist" />
+        <feMergeNode in="rough" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g filter={`url(#${fid})`}>
+    {
+      type === "chevrons" && (
+        <>
+          {/* leading chevron: solid */}
+          <path d="M 6 24 L 30 50 L 6 76 L 24 76 L 48 50 L 24 24 Z" fill={INK} />
+          {/* trailing chevron: filled with a struck outline */}
+          <path
+            d="M 50 24 L 74 50 L 50 76 L 68 76 L 92 50 L 68 24 Z"
+            fill={fill}
+            stroke={INK}
+            stroke-width="4.5"
+            stroke-linejoin="round"
+          />
+        </>
+      )
+    }
+
+    {
+      type === "star" && (
+        <>
+          <path
+            d="M 50 5 L 60.4 32.4 L 89.8 33.6 L 66.6 51.8 L 74.6 80.2
+               L 50 63.8 L 25.4 80.2 L 33.4 51.8 L 10.2 33.6 L 39.6 32.4 Z"
+            fill={fill}
+            stroke={INK}
+            stroke-width="5.5"
+            stroke-linejoin="round"
+          />
+          {/* paint run down the face */}
+          <path
+            d="M 53 27 C 53 39, 52 49, 53 59"
+            stroke={INK}
+            stroke-width="3.8"
+            stroke-linecap="round"
+          />
+          <circle cx="53" cy="62" r="3.6" fill={INK} />
+        </>
+      )
+    }
+
+    {
+      type === "crown-soft" && (
+        <>
+          {/* two round lobes either side of a taller centre peak, hollow */}
+          <path
+            d="M 14 76 C 11 52, 14 28, 24 27
+               C 32 26, 36 42, 41 52
+               C 45 40, 50 21, 57 21
+               C 64 21, 68 40, 72 52
+               C 77 42, 81 26, 88 28
+               C 95 30, 92 56, 89 76"
+            stroke={INK}
+            stroke-width="5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M 14 78 C 38 84, 64 84, 89 78"
+            stroke={INK}
+            stroke-width="5"
+            stroke-linecap="round"
+          />
+          {/* flick marks thrown off the top, the right one running */}
+          <path d="M 22 15 C 23 10, 25 7, 27 4" stroke={INK} stroke-width="4.2" stroke-linecap="round" />
+          <path d="M 55 12 C 55 8, 56 6, 57 3" stroke={INK} stroke-width="4.2" stroke-linecap="round" />
+          <path d="M 84 14 C 86 10, 88 7, 90 4" stroke={INK} stroke-width="4.2" stroke-linecap="round" />
+          <path d="M 90 9 C 91 14, 91 18, 91 21" stroke={INK} stroke-width="1.8" stroke-linecap="round" />
+        </>
+      )
+    }
+
+    {
+      type === "crown-spike" && (
+        <>
+          {/* sharp peaks, thin line — the source's sketchier crown */}
+          <path
+            d="M 13 67 L 19 16 L 32 45 L 46 11 L 59 45 L 73 17 L 80 46 L 87 67"
+            stroke={INK}
+            stroke-width="3.6"
+            stroke-linecap="round"
+            stroke-linejoin="miter"
+          />
+          {/* baseline sweeping right into a curl */}
+          <path
+            d="M 14 70 C 38 79, 64 79, 84 71 C 91 68, 89 62, 82 64"
+            stroke={INK}
+            stroke-width="3.6"
+            stroke-linecap="round"
+          />
+          {/* runs off the baseline */}
+          <path d="M 40 74 L 40 83" stroke={INK} stroke-width="2.6" stroke-linecap="round" />
+          <circle cx="40" cy="85" r="2.2" fill={INK} />
+          <path d="M 57 76 L 57 81" stroke={INK} stroke-width="3" stroke-linecap="round" />
+          <circle cx="57" cy="84" r="3.2" fill={INK} />
+        </>
+      )
+    }
+  </g>
+</svg>
+  )
+}
