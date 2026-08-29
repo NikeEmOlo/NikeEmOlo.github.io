@@ -14,11 +14,25 @@ const { showTestToolbar = false } = Astro.props;
       
       <!-- Section Header -->
       <div class="how-header-overlay" data-how-header>
-        <span class="how-eyebrow">04 // WORKFLOW EXECUTION</span>
+        <span class="how-eyebrow">03 // WORKFLOW EXECUTION</span>
         <h2 class="how-main-title">How it works</h2>
-        <p class="how-subtitle">From unattended morning trigger to tailored dispatch in seconds.</p>
+        <p class="how-subtitle"><span class="how-subtitle-pill">This desktop is interactive</span> Click the files and icons to find out more about what was built, or hit Preview to watch a live run.</p>
       </div>
 
+
+      <!-- The runway is long, so say plainly that there is more below -->
+      <div class="how-scroll-cue" id="howScrollCue" aria-hidden="true">
+        <span class="how-scroll-cue-text">Keep scrolling</span>
+        <svg class="how-scroll-cue-arrow" viewBox="0 0 24 24" fill="none">
+          <path d="M12 4 L12 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+          <path d="M6 13 L12 19 L18 13" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+
+      <!-- OPTIONAL STAGE CURTAIN LAYER: sits above the header but below the -->
+      <!-- desktop mockup, so a caller can wipe the stage while leaving the  -->
+      <!-- device poking out in front. Renders nothing when unused.          -->
+      <slot name="stage-curtain" />
 
       <!-- INTERACTIVE ANIMATION TEST CONTROLS (ONLY RENDERED IN SANDBOX) -->
       {showTestToolbar && (
@@ -63,9 +77,25 @@ const { showTestToolbar = false } = Astro.props;
 
               <!-- Desktop Document Icons (Clickable) -->
               <div class="os-desktop-icons">
-                
+
+                <!-- Desktop File 0: README.md - design decisions writeup -->
+                <div class="os-icon-item" data-file-key="readme" role="button" tabindex="0" aria-label="Click to read the design decisions">
+                  <div class="os-icon-glyph">
+                    <svg viewBox="0 0 28 34" fill="none">
+                      <path d="M 3 2 L 18 2 L 25 9 L 25 32 L 3 32 Z" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+                      <path d="M 18 2 L 18 9 L 25 9 Z" fill="#E4E4E7" stroke="#000000" stroke-width="1.5" />
+                      <line x1="6" y1="13" x2="15" y2="13" stroke="#71717A" stroke-width="1.8" stroke-linecap="round" />
+                      <rect x="5.5" y="17" width="17" height="11" rx="2" fill="#0F172A" stroke="#000000" stroke-width="1.5" />
+                      <path d="M 8.5 25 L 8.5 19.5 L 11 22.5 L 13.5 19.5 L 13.5 25" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      <path d="M 17.5 19.5 L 17.5 24 M 15.5 22 L 17.5 24.5 L 19.5 22" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </div>
+                  <span class="os-icon-label">README.md</span>
+                  <span class="os-icon-tip" aria-hidden="true">Click to read the design decisions</span>
+                </div>
+
                 <!-- Desktop File 1: master_cv -->
-                <div class="os-icon-item" data-file-key="master_cv" title="Open master_cv.md properties">
+                <div class="os-icon-item" data-file-key="master_cv" role="button" tabindex="0" aria-label="Click to open the ground-truth CV">
                   <div class="os-icon-glyph">
                     <svg viewBox="0 0 28 34" fill="none">
                       <path d="M 3 2 L 18 2 L 25 9 L 25 32 L 3 32 Z" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
@@ -76,10 +106,11 @@ const { showTestToolbar = false } = Astro.props;
                     </svg>
                   </div>
                   <span class="os-icon-label">master_cv</span>
+                  <span class="os-icon-tip" aria-hidden="true">Click to open the ground-truth CV</span>
                 </div>
 
                 <!-- Desktop File 2: job_scraper.py -->
-                <div class="os-icon-item" data-file-key="job_scraper" title="Open job_scraper.py properties">
+                <div class="os-icon-item" data-file-key="job_scraper" role="button" tabindex="0" aria-label="Click to see how jobs get scraped">
                   <div class="os-icon-glyph">
                     <svg viewBox="0 0 28 34" fill="none">
                       <path d="M 3 2 L 25 2 L 25 32 L 3 32 Z" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
@@ -90,10 +121,11 @@ const { showTestToolbar = false } = Astro.props;
                     </svg>
                   </div>
                   <span class="os-icon-label">job_scraper.py</span>
+                  <span class="os-icon-tip" aria-hidden="true">Click to see how jobs get scraped</span>
                 </div>
 
                 <!-- Desktop File 3: scoring_metric.py -->
-                <div class="os-icon-item" data-file-key="scoring_metric" title="Open scoring_metric.py properties">
+                <div class="os-icon-item" data-file-key="scoring_metric" role="button" tabindex="0" aria-label="Click to see how jobs get scored">
                   <div class="os-icon-glyph">
                     <svg viewBox="0 0 28 34" fill="none">
                       <path d="M 3 2 L 25 2 L 25 32 L 3 32 Z" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
@@ -104,10 +136,11 @@ const { showTestToolbar = false } = Astro.props;
                     </svg>
                   </div>
                   <span class="os-icon-label">scoring_metric.py</span>
+                  <span class="os-icon-tip" aria-hidden="true">Click to see how jobs get scored</span>
                 </div>
 
                 <!-- Desktop File 4: mission_control.html -->
-                <div class="os-icon-item" data-file-key="mission_control_html" title="Launch Mission Control Dashboard">
+                <div class="os-icon-item" data-file-key="mission_control_html" role="button" tabindex="0" aria-label="Click to launch the live dashboard">
                   <div class="os-icon-glyph">
                     <svg viewBox="0 0 28 34" fill="none">
                       <path d="M 3 2 L 25 2 L 25 32 L 3 32 Z" fill="#1E293B" stroke="#000000" stroke-width="2" />
@@ -117,10 +150,11 @@ const { showTestToolbar = false } = Astro.props;
                     </svg>
                   </div>
                   <span class="os-icon-label">mission_control.html</span>
+                  <span class="os-icon-tip" aria-hidden="true">Click to launch the live dashboard</span>
                 </div>
 
                 <!-- Desktop Shortcut: Files Explorer -->
-                <div class="os-icon-item" id="desktopFolderBtn" title="Open File Explorer">
+                <div class="os-icon-item" id="desktopFolderBtn" role="button" tabindex="0" aria-label="Click to browse the workspace files">
                   <div class="os-icon-glyph">
                     <svg viewBox="0 0 28 34" fill="none">
                       <path d="M 2 8 L 10 8 L 13 11 L 26 11 L 26 28 L 2 28 Z" fill="#F59E0B" stroke="#000000" stroke-width="2" />
@@ -128,6 +162,7 @@ const { showTestToolbar = false } = Astro.props;
                     </svg>
                   </div>
                   <span class="os-icon-label">Files</span>
+                  <span class="os-icon-tip" aria-hidden="true">Click to browse the workspace files</span>
                 </div>
 
               </div>
@@ -292,7 +327,7 @@ const { showTestToolbar = false } = Astro.props;
                 <header class="master-cv-topbar">
                   <div class="master-cv-top-left">
                     <button class="cv-back-to-notes-btn is-hidden" id="masterCvBackBtn" title="Back to note">← Back to Notes</button>
-                    <span class="mcv-contact-email">nike.emily.olo@gmail.com</span>
+                    <span class="mcv-contact-email">nike.emily@pm.me</span>
                     <nav class="master-cv-nav">
                       <button class="cv-nav-btn" data-target="mcv-about">About</button>
                       <button class="cv-nav-btn" data-target="mcv-experience">Experience</button>
@@ -852,7 +887,7 @@ const { showTestToolbar = false } = Astro.props;
                     <p>Hi Nike, I saw your "Automating Unemployment" multi-agent case study and would love to connect with you</p>
                   </div>
                   <div class="mail-action-row">
-                    <a href="mailto:nike.emily.olo@gmail.com?subject=Let's%20chat!&body=Hi%20Nike%2C%20I%20saw%20your%20%22Automating%20Unemployment%22%20multi-agent%20case%20study%20and%20would%20love%20to%20connect%20with%20you" class="mail-send-btn">
+                    <a href="mailto:nike.emily@pm.me?subject=Let's%20chat!&body=Hi%20Nike%2C%20I%20saw%20your%20%22Automating%20Unemployment%22%20multi-agent%20case%20study%20and%20would%20love%20to%20connect%20with%20you" class="mail-send-btn">
                       🚀 Open In Email Client
                     </a>
                     <button class="mail-copy-btn" id="copyEmailBtn">📋 Copy Email Address</button>
@@ -1187,8 +1222,8 @@ const { showTestToolbar = false } = Astro.props;
               <!-- LEFT: WINDOWS LOGO + SEARCH + 4 SPECIFIC APPS -->
               <div class="taskbar-left-group">
                 
-                <!-- Windows Logo Button (Static / Does nothing) -->
-                <div class="taskbar-win-btn" title="Windows Start (Visual only)">
+                <!-- Windows Logo Button - opens README.md -->
+                <div class="taskbar-win-btn is-interactive" id="taskbarStartBtn" role="button" tabindex="0" aria-label="Click me · README, opens the design notes">
                   <svg class="win-logo-svg" viewBox="0 0 28 28" fill="none">
                     <rect x="2" y="2" width="10.5" height="10.5" rx="1.5" fill="#0078D4" stroke="#000000" stroke-width="2" />
                     <rect x="15.5" y="2" width="10.5" height="10.5" rx="1.5" fill="#0078D4" stroke="#000000" stroke-width="2" />
@@ -1197,7 +1232,7 @@ const { showTestToolbar = false } = Astro.props;
                     <rect x="4" y="4" width="4" height="2" rx="1" fill="#FFFFFF" opacity="0.8" />
                     <rect x="17.5" y="4" width="4" height="2" rx="1" fill="#FFFFFF" opacity="0.8" />
                   </svg>
-                </div>
+                <span class="tb-tip" aria-hidden="true">Click me · README</span></div>
 
                 <!-- Search Input Pill (Static / Does nothing) -->
                 <div class="taskbar-search-pill" title="Search (Visual only)">
@@ -1212,13 +1247,13 @@ const { showTestToolbar = false } = Astro.props;
                 <div class="taskbar-apps-container">
                   
                   <!-- App 1: Email (Opens Email Modal) -->
-                  <button class="taskbar-app-btn" id="taskbarEmailBtn" title="Compose Email / Contact Nike">
+                  <button class="taskbar-app-btn" id="taskbarEmailBtn" aria-label="Click me · Email">
                     <svg viewBox="0 0 28 28" fill="none">
                       <rect x="3" y="5" width="22" height="18" rx="3" fill="#2563EB" stroke="#000000" stroke-width="2" />
                       <path d="M 4 7 L 14 15 L 24 7" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" />
                       <rect x="5" y="7" width="5" height="2" rx="1" fill="#93C5FD" opacity="0.8" />
                     </svg>
-                  </button>
+                  <span class="tb-tip" aria-hidden="true">Click me · Email</span></button>
 
                   <!-- App 2: Internet (Opens LinkedIn Profile) -->
                   <a
@@ -1235,38 +1270,40 @@ const { showTestToolbar = false } = Astro.props;
                       <line x1="3" y1="14" x2="25" y2="14" stroke="#000000" stroke-width="1.8" />
                       <rect x="7" y="6" width="4.5" height="2.5" rx="1" fill="#FFFFFF" opacity="0.9" />
                     </svg>
-                  </a>
+                  <span class="tb-tip" aria-hidden="true">Click me · Web</span></a>
 
                   <!-- App 3: Files (Opens File Explorer Modal) -->
-                  <button class="taskbar-app-btn" id="taskbarFilesBtn" title="Open File Explorer (C:\job_seeker_runtime)">
+                  <button class="taskbar-app-btn" id="taskbarFilesBtn" aria-label="Click me · Files">
                     <svg viewBox="0 0 28 28" fill="none">
                       <path d="M 3 6 L 11 6 L 13 9 L 25 9 L 25 22 L 3 22 Z" fill="#F59E0B" stroke="#000000" stroke-width="2" stroke-linejoin="round" />
                       <path d="M 3 11 L 25 11 L 25 22 L 3 22 Z" fill="#FBBF24" stroke="#000000" stroke-width="2" />
                       <rect x="5" y="13" width="5" height="2" rx="1" fill="#FFFFFF" opacity="0.9" />
                     </svg>
-                  </button>
+                  <span class="tb-tip" aria-hidden="true">Click me · Files</span></button>
 
                   <!-- App 4: Terminal (Toggles Hacker Terminal Console) -->
-                  <button class="taskbar-app-btn is-active-app" id="taskbarTerminalBtn" title="Toggle Hacker Terminal Console">
+                  <button class="taskbar-app-btn is-active-app" id="taskbarTerminalBtn" aria-label="Click me · Terminal">
                     <svg viewBox="0 0 28 28" fill="none">
                       <rect x="3" y="4" width="22" height="20" rx="3" fill="#18181B" stroke="#000000" stroke-width="2" />
                       <path d="M 7 10 L 12 14 L 7 18" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                       <line x1="14" y1="18" x2="20" y2="18" stroke="#22C55E" stroke-width="2" stroke-linecap="round" />
                     </svg>
                     <span class="app-active-dot"></span>
-                  </button>
+                  <span class="tb-tip" aria-hidden="true">Click me · Terminal</span></button>
 
                   <!-- App 5: Slack (Toggles Giles Slack Notification) -->
-                  <button class="taskbar-app-btn" id="taskbarSlackBtn" title="Slack (#job-pipeline)">
+                  <button class="taskbar-app-btn" id="taskbarSlackBtn" aria-label="Click me · Slack">
                     <svg viewBox="0 0 28 28" fill="none">
                       <rect x="2" y="2" width="24" height="24" rx="5" fill="#4A154B" stroke="#000000" stroke-width="1.8" />
-                      <path d="M 7 12.5 A 2 2 0 0 1 9 10.5 L 11 10.5 L 11 12.5 A 2 2 0 0 1 9 14.5 A 2 2 0 0 1 7 12.5 Z" fill="#E01E5A" />
-                      <path d="M 9.5 8 A 2 2 0 0 1 11.5 6 A 2 2 0 0 1 13.5 8 L 13.5 12 L 9.5 12 A 2 2 0 0 1 7.5 10 A 2 2 0 0 1 9.5 8 Z" fill="#36C5F0" />
-                      <path d="M 13.5 19 A 2 2 0 0 1 15.5 21 A 2 2 0 0 1 13.5 23 L 11.5 23 L 11.5 19 A 2 2 0 0 1 13.5 17 A 2 2 0 0 1 15.5 19 Z" fill="#2EB67D" />
-                      <path d="M 18 14.5 A 2 2 0 0 1 20 16.5 A 2 2 0 0 1 18 18.5 L 14 18.5 L 14 14.5 A 2 2 0 0 1 16 12.5 A 2 2 0 0 1 18 14.5 Z" fill="#ECB22E" />
+                      <g transform="translate(6.6 6.6) scale(0.1205)">
+                        <path d="M25.8 77.6c0 7.1-5.8 12.9-12.9 12.9S0 84.7 0 77.6s5.8-12.9 12.9-12.9h12.9v12.9zm6.5 0c0-7.1 5.8-12.9 12.9-12.9s12.9 5.8 12.9 12.9v32.3c0 7.1-5.8 12.9-12.9 12.9s-12.9-5.8-12.9-12.9V77.6z" fill="#E01E5A" />
+                        <path d="M45.2 25.8c-7.1 0-12.9-5.8-12.9-12.9S38.1 0 45.2 0s12.9 5.8 12.9 12.9v12.9H45.2zm0 6.5c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9H12.9C5.8 58.1 0 52.3 0 45.2s5.8-12.9 12.9-12.9h32.3z" fill="#36C5F0" />
+                        <path d="M97 45.2c0-7.1 5.8-12.9 12.9-12.9s12.9 5.8 12.9 12.9-5.8 12.9-12.9 12.9H97V45.2zm-6.5 0c0 7.1-5.8 12.9-12.9 12.9s-12.9-5.8-12.9-12.9V12.9C64.7 5.8 70.5 0 77.6 0s12.9 5.8 12.9 12.9v32.3z" fill="#2EB67D" />
+                        <path d="M77.6 97c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9-12.9-5.8-12.9-12.9V97h12.9zm0-6.5c-7.1 0-12.9-5.8-12.9-12.9s5.8-12.9 12.9-12.9h32.3c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9H77.6z" fill="#ECB22E" />
+                      </g>
                     </svg>
                     <span class="app-active-dot" id="slackActiveDot"></span>
-                  </button>
+                  <span class="tb-tip" aria-hidden="true">Click me · Slack</span></button>
 
                 </div>
               </div>
@@ -1297,82 +1334,140 @@ const { showTestToolbar = false } = Astro.props;
     </div>
   </div>
 
-  <!-- THE VERTICAL WORKFLOW PIPELINE (UNFOLDS BELOW) -->
-  <div class="workflow-vertical-steps-section">
-    <div class="workflow-steps-container">
-      
-      <!-- Step 01 -->
-      <div class="vertical-step-card" data-reveal>
-        <div class="step-badge-col">
-          <span class="step-num">01</span>
-          <div class="step-stem-line"></div>
-        </div>
-        <div class="step-content-box">
-          <div class="step-header-row">
-            <span class="step-time-chip">08:00 AM · AUTOMATED INGESTION</span>
-            <span class="step-status-tag green">TRIAGE ACTIVE</span>
-          </div>
-          <h3 class="step-title">Multi-Board Scraping & 95% Spam Purge</h3>
-          <p class="step-description">
-            The orchestrator pulls live postings across 18 target RSS feeds and company career APIs. 
-            Before any LLM token is spent, aggressive rule-based filters purge recruiter spam, ghost listings, and salary mismatches.
-          </p>
-          <div class="step-metric-tray">
-            <div class="metric-pill"><strong>IN:</strong> 184 POSTINGS</div>
-            <div class="metric-pill"><strong>PURGED:</strong> 177 SPAM</div>
-            <div class="metric-pill highlight"><strong>SAVED:</strong> 7 TARGETS</div>
-          </div>
-        </div>
+  <!-- THE WORKFLOW, WRITTEN DOWN: TILE CHAIN WITH ANIMATED CONNECTORS -->
+  <section class="workflow-steps-section" id="workflow-steps">
+    <div class="wf-steps-container">
+
+      <div class="wf-steps-header">
+        <span class="wf-steps-eyebrow">The workflow, written down</span>
+        <h2 class="wf-steps-title">
+          If you don't want to play with the cool interactive desktop, I guess you
+          can read this instead <span class="wf-cough">*cough*</span> boring
+          <span class="wf-cough">*cough*</span>
+        </h2>
       </div>
 
-      <!-- Step 02 -->
-      <div class="vertical-step-card" data-reveal data-reveal-delay="1">
-        <div class="step-badge-col">
-          <span class="step-num">02</span>
-          <div class="step-stem-line"></div>
-        </div>
-        <div class="step-content-box">
-          <div class="step-header-row">
-            <span class="step-time-chip">08:00:03 AM · BESPOKE TAILORING</span>
-            <span class="step-status-tag coral">PRECISION FIT</span>
+      <ol class="wf-chain">
+        <li class="wf-node" style="--wf-accent: var(--doodle-yellow, #FFDA00); --wf-ink: #000000;">
+          <div class="wf-node-card">
+            <div class="wf-node-top">
+              <span class="wf-step-num">01</span>
+              <span class="wf-node-tag">CRON &middot; 3&times; DAILY</span>
+            </div>
+            <h3 class="wf-node-title">Giles starts the run</h3>
+            <p class="wf-node-lead">Giles is the orchestrator. He runs on a schedule three times a day, hands each job to the right agent, watches for errors, and pushes triage alerts into Slack and Mission Control.</p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-01">
+              <span class="wf-expand-label">Read more</span>
+              <span class="wf-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="wf-detail" id="wf-detail-01" hidden>
+              <p class="wf-detail-p">His agent file, GILES.md, sets out how he delegates, monitors the cron schedule, supervises error states, and dispatches alerts. Nothing else in the workflow decides when to run. That is his job alone.</p>
+            </div>
           </div>
-          <h3 class="step-title">Fact-Grounded CV & Cover Letter Generation</h3>
-          <p class="step-description">
-            Cordelia analyzes the target job brief against your verified Master CV. It extracts key requirements and drafts 
-            custom bullet points and tailored cover letters with strict anti-hallucination guardrails.
-          </p>
-          <div class="step-metric-tray">
-            <div class="metric-pill"><strong>ATS MATCH:</strong> 96.4%</div>
-            <div class="metric-pill"><strong>HALLUCINATIONS:</strong> 0%</div>
-            <div class="metric-pill highlight"><strong>LATENCY:</strong> 1.2s / DOC</div>
+          <span class="wf-connector" aria-hidden="true"></span>
+        </li>
+        <li class="wf-node" style="--wf-accent: var(--doodle-cyan, #00B3E3); --wf-ink: #000000;">
+          <div class="wf-node-card">
+            <div class="wf-node-top">
+              <span class="wf-step-num">02</span>
+              <span class="wf-node-tag">Ingestion</span>
+            </div>
+            <h3 class="wf-node-title">job_scraper.py pulls new listings</h3>
+            <p class="wf-node-lead">Scrapes newly listed public jobs and parses them into structured JSON. It only pulls listings that match specific keywords and that appeared since the last run.</p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-02">
+              <span class="wf-expand-label">Read more</span>
+              <span class="wf-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="wf-detail" id="wf-detail-02" hidden>
+              <p class="wf-detail-p">Willow built this script from a single prompt, running on Opus, which is worth paying for on complex software engineering. Each run updates the <code>last_run</code> timestamp, which is what stops the same listing being processed twice.</p>
+            </div>
           </div>
-        </div>
-      </div>
+          <span class="wf-connector" aria-hidden="true"></span>
+        </li>
+        <li class="wf-node" style="--wf-accent: var(--doodle-lime, #D1FF00); --wf-ink: #000000;">
+          <div class="wf-node-card">
+            <div class="wf-node-top">
+              <span class="wf-step-num">03</span>
+              <span class="wf-node-tag">No LLM spend yet</span>
+            </div>
+            <h3 class="wf-node-title">scoring_metric.py filters and scores</h3>
+            <p class="wf-node-lead">Anything outside my industry or role requirements is dropped, along with listings that look like scams or data-mining exercises. Whatever survives gets a weighted score.</p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-03">
+              <span class="wf-expand-label">Read more</span>
+              <span class="wf-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="wf-detail" id="wf-detail-03" hidden>
+              <p class="wf-detail-p">The metric weighs salary, office / hybrid / remote, industry, keyword matching, and location or distance. I set the criteria out in a markdown file and handed it to Cordelia on Sonnet, since a task shaped like this does not need Opus. It was tested against real listings before going into production. All of it runs in plain Python before any model is called, which is where most of the cost saving comes from.</p>
+            </div>
+          </div>
+          <span class="wf-connector" aria-hidden="true"></span>
+        </li>
+        <li class="wf-node" style="--wf-accent: var(--doodle-pink, #FF1F70); --wf-ink: #FFFFFF;">
+          <div class="wf-node-card">
+            <div class="wf-node-top">
+              <span class="wf-step-num">04</span>
+              <span class="wf-node-tag">LLM due diligence</span>
+            </div>
+            <h3 class="wf-node-title">Cordelia runs the vibe check</h3>
+            <p class="wf-node-lead">Only the short list reaches an LLM. Cordelia judges whether a role actually suits me and gives it a final score.</p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-04">
+              <span class="wf-expand-label">Read more</span>
+              <span class="wf-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="wf-detail" id="wf-detail-04" hidden>
+              <p class="wf-detail-p">Her agent file describes my ideal role, what I value in a company, my ethics, the kinds of projects and industries I want, and the things that get a listing thrown out immediately. It is pre-application due diligence, outsourced. LLMs are not fully predictable, so this is never treated as the final word.</p>
+            </div>
+          </div>
+          <span class="wf-connector" aria-hidden="true"></span>
+        </li>
+        <li class="wf-node" style="--wf-accent: var(--doodle-purple, #7A00FF); --wf-ink: #FFFFFF;">
+          <div class="wf-node-card">
+            <div class="wf-node-top">
+              <span class="wf-step-num">05</span>
+              <span class="wf-node-tag">Human in the loop</span>
+            </div>
+            <h3 class="wf-node-title">Mission Control: I decide</h3>
+            <p class="wf-node-lead">Priority jobs land on the Mission Control jobs board. I read the reasoning behind each score and choose which roles are worth going after.</p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-05">
+              <span class="wf-expand-label">Read more</span>
+              <span class="wf-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="wf-detail" id="wf-detail-05" hidden>
+              <p class="wf-detail-p">Selecting a role is what triggers the tailoring step. The dashboard was built by Willow on Opus from my prompts, and it covers more than just this workflow. Keeping a person at this point is deliberate: it is the last cheap moment to catch a bad call.</p>
+            </div>
+          </div>
+          <span class="wf-connector" aria-hidden="true"></span>
+        </li>
+        <li class="wf-node is-last" style="--wf-accent: var(--doodle-cyan, #00B3E3); --wf-ink: #000000;">
+          <div class="wf-node-card">
+            <div class="wf-node-top">
+              <span class="wf-step-num">06</span>
+              <span class="wf-node-tag">Grounded output</span>
+            </div>
+            <h3 class="wf-node-title">Cordelia tailors the CV</h3>
+            <p class="wf-node-lead">Cordelia writes a CV aimed at the specific job description, using master_cv.md as the template.</p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-06">
+              <span class="wf-expand-label">Read more</span>
+              <span class="wf-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="wf-detail" id="wf-detail-06" hidden>
+              <p class="wf-detail-p"><code>master_cv.md</code> is the verified single source of truth for career history, skills and metrics. It exists so that nothing can be invented. Employers filter with applicant tracking systems that demand very high keyword matches, so a generic CV rarely reaches a human. This saves hours on every application.</p>
+            </div>
+          </div>
+          <span class="wf-connector" aria-hidden="true"></span>
+        </li>
+      </ol>
 
-      <!-- Step 03 -->
-      <div class="vertical-step-card" data-reveal data-reveal-delay="2">
-        <div class="step-badge-col">
-          <span class="step-num">03</span>
-        </div>
-        <div class="step-content-box">
-          <div class="step-header-row">
-            <span class="step-time-chip">08:00:05 AM · HEADLESS DISPATCH</span>
-            <span class="step-status-tag teal">DISPATCHED</span>
-          </div>
-          <h3 class="step-title">1-Click Verification & Automated Submission</h3>
-          <p class="step-description">
-            Willow formats the final PDFs, fills complex multi-step ATS application forms via headless browser bots, 
-            and drops a clean Slack summary for your final 1-click confirmation.
-          </p>
-          <div class="step-metric-tray">
-            <div class="metric-pill"><strong>TIME SAVED:</strong> 4.8 HRS / DAY</div>
-            <div class="metric-pill highlight"><strong>STATUS:</strong> APPLIED ✅</div>
-          </div>
-        </div>
-      </div>
-
+      <p class="wf-chain-footnote">
+        The workflow stops here. Nothing is submitted on my behalf: I read the
+        tailored CV, check the reasoning behind the score, and apply myself to
+        selected jobs. For more information, view
+        <button class="wf-readme-link" type="button" id="wfReadmeLink">README</button>
+        in the interactive desktop.
+      </p>
     </div>
-  </div>
+  </section>
+
 </section>
 
 <style>
@@ -1390,6 +1485,14 @@ const { showTestToolbar = false } = Astro.props;
     position: relative;
     width: 100%;
     height: 220vh; /* Controlled sticky runway */
+  }
+
+  /* `position: sticky` makes this stage a stacking context, so the fullscreen
+     desktop's z-index cannot escape it. Without lifting the stage itself, the
+     workflow steps that follow (a later positioned sibling) paint over the
+     desktop as soon as they scroll into view. */
+  .how-sticky-viewport.has-fullscreen-desktop {
+    z-index: 999;
   }
 
   .how-sticky-viewport {
@@ -1451,51 +1554,19 @@ const { showTestToolbar = false } = Astro.props;
   }
 
   .how-subtitle {
-    font-size: 0.9rem;
-    color: #52525b;
-    margin: 0;
-    font-weight: 500;
-  }
-
-  /* Floating Exit Fullscreen Button */
-  .os-fullscreen-exit-btn {
-    position: fixed;
-    top: 20px;
-    right: 28px;
-    z-index: 100;
-    background: rgba(15, 23, 42, 0.92);
-    border: 2px solid #000000;
-    border-radius: 9999px;
-    padding: 8px 18px;
-    color: #ffffff;
-    font-family: monospace;
-    font-size: 0.82rem;
-    font-weight: 700;
-    box-shadow: 2px 3px 0px #000000;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, background 0.15s ease, box-shadow 0.15s ease;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-
-  .os-fullscreen-exit-btn.is-visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-
-  .os-fullscreen-exit-btn:hover {
-    background: #000000;
-    transform: translateY(-2px);
-    box-shadow: 2px 5px 0px #000000;
-  }
-
-  .os-fullscreen-exit-btn:active {
-    transform: translateY(1px);
-    box-shadow: 1px 2px 0px #000000;
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+    font-weight: 600;
+    line-height: 1.45;
+    color: #3f3f46;
+    margin: 8px auto 0;
+    max-width: 54ch;
+    text-wrap: balance;
   }
 
   /* ---------------------------------------------------- */
@@ -1508,7 +1579,9 @@ const { showTestToolbar = false } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    /* Above the header (20) and any stage-curtain (25) so the device stays
+       in front when a curtain wipes the stage. */
+    z-index: 30;
     box-sizing: border-box;
     transition: transform 1.25s cubic-bezier(0.25, 1, 0.35, 1), box-shadow 1.25s ease;
   }
@@ -1921,6 +1994,26 @@ const { showTestToolbar = false } = Astro.props;
   .os-modal-titlebar.mail-bar {
     background: #2563eb;
     color: #ffffff;
+  }
+
+  .taskbar-win-btn.is-interactive {
+    cursor: pointer;
+    border-radius: 6px;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+
+  .taskbar-win-btn.is-interactive:hover {
+    transform: translateY(-2px) scale(1.06);
+    background: rgba(255, 255, 255, 0.55);
+  }
+
+  .taskbar-win-btn.is-interactive:active {
+    transform: translateY(1px) scale(0.98);
+  }
+
+  .taskbar-win-btn.is-interactive:focus-visible {
+    outline: 2px solid #0078d4;
+    outline-offset: 2px;
   }
 
   .os-window-modal.email-modal {
@@ -2399,6 +2492,186 @@ const { showTestToolbar = false } = Astro.props;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
+  }
+
+  /* Pill in the subtitle, matching the "I do" / "83% of my time" treatment */
+  .how-subtitle-pill {
+    display: inline-block;
+    background: #ffd233;
+    color: #000000;
+    padding: 2px 12px;
+    border-radius: 8px;
+    border: 2px solid #000000;
+    box-shadow: 2px 3px 0px #000000;
+    font-weight: 900;
+    transform: rotate(-1.5deg);
+    margin-right: 4px;
+  }
+
+  /* ---------------------------------------------------- */
+  /* KEEP-SCROLLING CUE                                    */
+  /* ---------------------------------------------------- */
+  .how-scroll-cue {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #000000;
+    color: var(--doodle-yellow, #ffda00);
+    border: 2.5px solid #000000;
+    border-radius: 9999px;
+    padding: 7px 16px;
+    font-family: monospace;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    animation: cueBob 1.9s ease-in-out infinite;
+  }
+
+  .how-scroll-cue-arrow {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+
+  @keyframes cueBob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(5px); }
+  }
+
+  /* Gone once the runway is nearly done, and while the desktop is fullscreen */
+  .how-scroll-cue.is-done,
+  .how-sticky-viewport.has-fullscreen-desktop .how-scroll-cue {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .how-scroll-cue { animation: none; transform: translateX(-50%); }
+  }
+
+  /* ---------------------------------------------------- */
+  /* "THIS IS CLICKABLE" AFFORDANCES                       */
+  /* ---------------------------------------------------- */
+  .os-icon-tip,
+  .tb-tip {
+    position: absolute;
+    z-index: 60;
+    pointer-events: none;
+    white-space: nowrap;
+    font-family: monospace;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    color: var(--doodle-yellow, #ffda00);
+    background: #000000;
+    border: 2px solid #000000;
+    border-radius: 7px;
+    padding: 5px 9px;
+    box-shadow: 2px 3px 0px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transition: opacity 0.16s ease, transform 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Desktop icons sit in a left rail, so the tip opens to the right */
+  .os-icon-tip {
+    left: calc(100% + 6px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-6px) scale(0.96);
+  }
+
+  .os-icon-item:hover .os-icon-tip,
+  .os-icon-item:focus-visible .os-icon-tip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0) scale(1);
+  }
+
+  /* Taskbar runs along the bottom, so the tip opens upward */
+  .tb-tip {
+    bottom: calc(100% + 9px);
+    left: 50%;
+    transform: translateX(-50%) translateY(5px) scale(0.96);
+  }
+
+  /* Leftmost button: centring pushes the tip off the screen edge */
+  #taskbarStartBtn .tb-tip {
+    left: 0;
+    transform: translateX(0) translateY(5px) scale(0.96);
+  }
+
+  #taskbarStartBtn:hover .tb-tip,
+  #taskbarStartBtn:focus-visible .tb-tip {
+    transform: translateX(0) translateY(0) scale(1);
+  }
+
+  .taskbar-app-btn:hover .tb-tip,
+  .taskbar-app-btn:focus-visible .tb-tip,
+  .taskbar-win-btn.is-interactive:hover .tb-tip,
+  .taskbar-win-btn.is-interactive:focus-visible .tb-tip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  /* Occasional nudge so the bar reads as live. Long cycle, short active
+     window, and every button offset so they never fire together. */
+  /* The hop sits at the head of the cycle, so each button fires exactly at its
+     own delay. Six buttons 0.55s apart run the sequence in ~3.8s, then the
+     10s cycle leaves roughly 6s of quiet before it comes round again. */
+  @keyframes tbNudge {
+    0% { transform: translateY(0) scale(1); }
+    1.6% { transform: translateY(-7px) scale(1.14); }
+    3.2% { transform: translateY(0) scale(0.96); }
+    4.2% { transform: translateY(-3px) scale(1.04); }
+    5%, 100% { transform: translateY(0) scale(1); }
+  }
+
+  .taskbar-app-btn,
+  .taskbar-win-btn.is-interactive {
+    animation: tbNudge 10s ease-in-out infinite;
+  }
+
+  #taskbarStartBtn { animation-delay: 0s; }
+  #taskbarEmailBtn { animation-delay: 0.55s; }
+  #taskbarInternetBtn { animation-delay: 1.1s; }
+  #taskbarFilesBtn { animation-delay: 1.65s; }
+  #taskbarTerminalBtn { animation-delay: 2.2s; }
+  #taskbarSlackBtn { animation-delay: 2.75s; }
+
+  /* Hand control back to the hover state while pointing at a button */
+  .taskbar-app-btn:hover,
+  .taskbar-win-btn.is-interactive:hover {
+    animation: none;
+  }
+
+  /* Pulsing ring on the workspace tip so it reads as a call to action */
+  .os-interactive-hint-badge::after {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: 13px;
+    border: 2.5px solid var(--doodle-pink, #ff1f70);
+    opacity: 0;
+    pointer-events: none;
+    animation: hintRing 2.4s ease-out infinite;
+  }
+
+  @keyframes hintRing {
+    0% { transform: scale(1); opacity: 0.85; }
+    70%, 100% { transform: scale(1.16); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .taskbar-app-btn,
+    .taskbar-win-btn.is-interactive { animation: none; }
+    .os-interactive-hint-badge::after { animation: none; opacity: 0; }
   }
 
   @media (max-width: 640px) {
@@ -3520,6 +3793,10 @@ const { showTestToolbar = false } = Astro.props;
     color: #000000;
     cursor: pointer;
     box-shadow: 2px 3px 0px #000000;
+    /* Width is pinned in JS before the label swaps to "Copied!", otherwise the
+       send button (flex: 1) grows into the space this one gives up. */
+    white-space: nowrap;
+    flex: 0 0 auto;
   }
 
 
@@ -3755,7 +4032,7 @@ const { showTestToolbar = false } = Astro.props;
     top: 72px; /* Clearance below 01 // Case Study tag at top: 18px */
     right: 22px;
     left: auto;
-    background: #ffffff;
+    background: var(--doodle-yellow, #ffda00);
     border: 2.5px solid #000000;
     border-radius: 8px; /* Square sticker card shape */
     padding: 8px 12px;
@@ -5517,145 +5794,401 @@ const { showTestToolbar = false } = Astro.props;
   }
 
   /* ---------------------------------------------------- */
-  /* VERTICAL STEPS CONTAINER (BELOW TERMINAL)            */
+  /* THE WORKFLOW, WRITTEN DOWN (TILE CHAIN)              */
   /* ---------------------------------------------------- */
-  .workflow-vertical-steps-section {
+  .workflow-steps-section {
     position: relative;
     width: 100%;
-    padding: 80px 24px 120px 24px;
+    padding: clamp(64px, 10vh, 120px) 24px clamp(80px, 12vh, 140px);
     background: #ffffff;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
+    border-top: 3px solid #000000;
   }
 
-  .workflow-steps-container {
+  .wf-steps-container {
     width: 100%;
-    max-width: 780px;
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
+    max-width: 1120px;
   }
 
-  .vertical-step-card {
-    display: flex;
-    gap: 28px;
-    position: relative;
+  .wf-steps-header {
+    text-align: center;
+    margin-bottom: clamp(34px, 5vh, 56px);
   }
 
-  .step-badge-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .step-num {
-    width: 44px;
-    height: 44px;
-    background: #ffd233;
-    border: 3px solid #000000;
-    border-radius: 10px;
-    color: #000000;
+  .wf-steps-eyebrow {
+    display: inline-block;
     font-family: monospace;
-    font-size: 1.15rem;
+    font-size: 0.7rem;
     font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #000000;
+    background: #ffd233;
+    border: 2px solid #000000;
+    border-radius: 9999px;
+    padding: 3px 13px;
+    box-shadow: 2px 2px 0px #000000;
+    margin-bottom: 14px;
+  }
+
+  .wf-steps-title {
+    font-family: var(--archivo-font), "Archivo", sans-serif;
+    font-size: clamp(1.25rem, 2.4vw, 1.95rem);
+    font-weight: 800;
+    line-height: 1.28;
+    letter-spacing: -0.02em;
+    color: #000000;
+    margin: 0 auto;
+    max-width: 30ch;
+    text-wrap: balance;
+  }
+
+  .wf-cough {
+    font-family: monospace;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 0.78em;
+    color: #71717a;
+  }
+
+  .wf-chain {
+    --wf-gap: clamp(30px, 4vw, 58px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--wf-gap);
+    grid-template-columns: 1fr;
+  }
+
+  .wf-node {
+    position: relative;
+    display: flex;
+  }
+
+  .wf-node-card {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: #faf8f5;
+    border: 3px solid #000000;
+    border-radius: 16px;
+    box-shadow: 4px 6px 0px #000000;
+    padding: clamp(16px, 2.4vw, 22px);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  }
+
+  .wf-node-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 5px 9px 0px #000000;
+  }
+
+  .wf-node-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .wf-step-num {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 3px 4px 0px #000000;
-  }
-
-  .step-stem-line {
-    width: 3px;
-    flex: 1;
-    background: repeating-linear-gradient(to bottom, #d4d4d8 0px, #d4d4d8 6px, transparent 6px, transparent 12px);
-    margin-top: 12px;
-  }
-
-  .step-content-box {
-    flex: 1;
-    background: #ffffff;
-    border: 3px solid #000000;
-    border-radius: 12px;
-    padding: 24px 28px;
-    box-shadow: 6px 8px 0px #000000;
-  }
-
-  .step-header-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .step-time-chip {
+    background: #000000;
+    color: #ffffff;
     font-family: monospace;
-    font-size: 0.72rem;
-    font-weight: 800;
-    color: #71717a;
+    font-size: 0.82rem;
+    font-weight: 900;
+    border-radius: 9px;
+  }
+
+  .wf-node-tag {
+    font-family: monospace;
+    font-size: 0.62rem;
+    font-weight: 900;
     letter-spacing: 0.08em;
-  }
-
-  .step-status-tag {
-    font-family: monospace;
-    font-size: 0.65rem;
-    font-weight: 800;
-    padding: 3px 8px;
+    text-transform: uppercase;
+    color: var(--wf-ink, #ffffff);
+    background: var(--wf-accent, #000000);
     border: 2px solid #000000;
-    border-radius: 6px;
-    color: #000000;
+    border-radius: 9999px;
+    padding: 3px 10px;
+    box-shadow: 2px 2px 0px #000000;
   }
 
-  .step-status-tag.green { background: #22c55e; }
-  .step-status-tag.coral { background: #e11d48; color: #ffffff; }
-  .step-status-tag.teal { background: #0d9488; color: #ffffff; }
-
-  .step-title {
-    font-family:
-      var(--archivo-font),
-      "Archivo",
-      -apple-system,
-      sans-serif;
-    font-size: 1.35rem;
+  .wf-node-title {
+    font-family: var(--archivo-font), "Archivo", sans-serif;
+    font-size: clamp(1.02rem, 1.5vw, 1.2rem);
     font-weight: 800;
+    letter-spacing: -0.015em;
     color: #000000;
-    margin: 0 0 10px 0;
+    margin: 0 0 6px;
   }
 
-  .step-description {
-    font-size: 0.92rem;
+  .wf-node-lead {
+    font-size: 0.9rem;
     line-height: 1.55;
-    color: #52525b;
-    margin: 0 0 18px 0;
+    color: #27272a;
+    margin: 0;
   }
 
-  .step-metric-tray {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-top: 14px;
-    border-top: 1.5px solid #e4e4e7;
-  }
-
-  .metric-pill {
-    font-family: monospace;
-    font-size: 0.7rem;
-    color: #18181b;
-    background: #f4f4f5;
-    border: 1.5px solid #000000;
-    border-radius: 6px;
-    padding: 4px 8px;
-    font-weight: 700;
-  }
-
-  .metric-pill.highlight {
+  .wf-expand-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 14px;
     background: #ffd233;
-    border-color: #000000;
+    border: 2.5px solid #000000;
+    border-radius: 9999px;
+    padding: 5px 14px;
+    font-family: monospace;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: #000000;
+    cursor: pointer;
+    box-shadow: 2px 3px 0px #000000;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+
+  .wf-expand-btn:hover {
+    background: #ffe066;
+    transform: translateY(-2px);
+    box-shadow: 3px 5px 0px #000000;
+  }
+
+  .wf-expand-btn:active {
+    transform: translateY(1px);
+    box-shadow: 1px 2px 0px #000000;
+  }
+
+  .wf-chevron {
+    font-size: 0.85rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+
+  .wf-expand-btn[aria-expanded="true"] .wf-chevron {
+    transform: rotate(180deg);
+  }
+
+  .wf-detail {
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 2px dashed rgba(0, 0, 0, 0.25);
+  }
+
+  .wf-detail:not([hidden]) {
+    animation: wfDetailIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes wfDetailIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .wf-detail-p {
+    font-size: 0.87rem;
+    line-height: 1.62;
+    color: #3f3f46;
+    margin: 0;
+  }
+
+  .wf-detail-p code {
+    font-family: monospace;
+    font-size: 0.92em;
+    background: #e4e4e7;
+    border: 1px solid #d4d4d8;
+    border-radius: 4px;
+    padding: 1px 5px;
+  }
+
+  /* The pipeline. Geometry is set per breakpoint below so the run can snake
+     through the grid; only the paint lives here. */
+  .wf-connector {
+    position: absolute;
+    background: #000000;
+    border-radius: 999px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wf-connector::before {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 999px;
+    background-repeat: repeat;
+  }
+
+  .wf-connector::after {
+    content: "";
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--wf-accent, #000000);
+    border: 2px solid #000000;
+    box-sizing: border-box;
+  }
+
+  .wf-node.is-last .wf-connector {
+    display: none;
+  }
+
+  /* Orientation is driven by custom properties so the same connector can run
+     horizontally or vertically depending on where the snake turns. */
+  .wf-connector::before {
+    background-image: repeating-linear-gradient(
+      var(--wf-dir, 180deg), var(--wf-accent) 0 5px, transparent 5px 11px);
+    animation: var(--wf-flow, wfFlowV) 0.9s linear infinite;
+  }
+
+  .wf-connector::after {
+    animation: var(--wf-bead, wfBeadV) 1.9s linear infinite;
+    animation-direction: var(--wf-bead-dir, normal);
+  }
+
+  @keyframes wfFlowH { to { background-position: 11px 0; } }
+  @keyframes wfFlowV { to { background-position: 0 11px; } }
+  @keyframes wfBeadH { from { left: -4px; } to { left: calc(100% - 7px); } }
+  @keyframes wfBeadV { from { top: -4px; } to { top: calc(100% - 7px); } }
+
+  /* ---- one column: straight down (mobile default) ---- */
+  .wf-connector {
+    --wf-dir: 180deg;
+    --wf-flow: wfFlowV;
+    --wf-bead: wfBeadV;
+    top: 100%;
+    left: 50%;
+    width: 9px;
+    height: var(--wf-gap);
+    transform: translateX(-50%);
+  }
+  .wf-connector::after { left: 50%; margin-left: -5.5px; }
+
+  /* ---- two columns: snake across, down, back ---- */
+  @media (min-width: 620px) {
+    .wf-chain { grid-template-columns: repeat(2, 1fr); }
+    .wf-node:nth-child(1) { grid-area: 1 / 1; }
+    .wf-node:nth-child(2) { grid-area: 1 / 2; }
+    .wf-node:nth-child(3) { grid-area: 2 / 2; }
+    .wf-node:nth-child(4) { grid-area: 2 / 1; }
+    .wf-node:nth-child(5) { grid-area: 3 / 1; }
+    .wf-node:nth-child(6) { grid-area: 3 / 2; }
+
+    .wf-node:nth-child(1) .wf-connector,
+    .wf-node:nth-child(5) .wf-connector {
+      --wf-dir: 90deg; --wf-flow: wfFlowH; --wf-bead: wfBeadH; --wf-bead-dir: normal;
+      top: 50%; left: 100%; right: auto;
+      width: var(--wf-gap); height: 9px;
+      transform: translateY(-50%);
+    }
+    .wf-node:nth-child(3) .wf-connector {
+      --wf-dir: 90deg; --wf-flow: wfFlowH; --wf-bead: wfBeadH; --wf-bead-dir: reverse;
+      top: 50%; right: 100%; left: auto;
+      width: var(--wf-gap); height: 9px;
+      transform: translateY(-50%);
+    }
+    .wf-node:nth-child(2) .wf-connector,
+    .wf-node:nth-child(4) .wf-connector {
+      --wf-dir: 180deg; --wf-flow: wfFlowV; --wf-bead: wfBeadV; --wf-bead-dir: normal;
+      top: 100%; left: 50%; right: auto;
+      width: 9px; height: var(--wf-gap);
+      transform: translateX(-50%);
+    }
+    .wf-node:nth-child(1) .wf-connector::after,
+    .wf-node:nth-child(3) .wf-connector::after,
+    .wf-node:nth-child(5) .wf-connector::after {
+      top: 50%; margin-top: -5.5px; left: auto; margin-left: 0;
+    }
+    .wf-node:nth-child(2) .wf-connector::after,
+    .wf-node:nth-child(4) .wf-connector::after {
+      left: 50%; margin-left: -5.5px; top: auto; margin-top: 0;
+    }
+  }
+
+  /* ---- three columns: across the top, down, back along the bottom ---- */
+  @media (min-width: 900px) {
+    .wf-chain { grid-template-columns: repeat(3, 1fr); }
+    .wf-node:nth-child(1) { grid-area: 1 / 1; }
+    .wf-node:nth-child(2) { grid-area: 1 / 2; }
+    .wf-node:nth-child(3) { grid-area: 1 / 3; }
+    .wf-node:nth-child(4) { grid-area: 2 / 3; }
+    .wf-node:nth-child(5) { grid-area: 2 / 2; }
+    .wf-node:nth-child(6) { grid-area: 2 / 1; }
+
+    .wf-node:nth-child(1) .wf-connector,
+    .wf-node:nth-child(2) .wf-connector {
+      --wf-dir: 90deg; --wf-flow: wfFlowH; --wf-bead: wfBeadH; --wf-bead-dir: normal;
+      top: 50%; left: 100%; right: auto;
+      width: var(--wf-gap); height: 9px;
+      transform: translateY(-50%);
+    }
+    .wf-node:nth-child(3) .wf-connector {
+      --wf-dir: 180deg; --wf-flow: wfFlowV; --wf-bead: wfBeadV; --wf-bead-dir: normal;
+      top: 100%; left: 50%; right: auto;
+      width: 9px; height: var(--wf-gap);
+      transform: translateX(-50%);
+    }
+    .wf-node:nth-child(4) .wf-connector,
+    .wf-node:nth-child(5) .wf-connector {
+      --wf-dir: 90deg; --wf-flow: wfFlowH; --wf-bead: wfBeadH; --wf-bead-dir: reverse;
+      top: 50%; right: 100%; left: auto;
+      width: var(--wf-gap); height: 9px;
+      transform: translateY(-50%);
+    }
+    .wf-node:nth-child(1) .wf-connector::after,
+    .wf-node:nth-child(2) .wf-connector::after,
+    .wf-node:nth-child(4) .wf-connector::after,
+    .wf-node:nth-child(5) .wf-connector::after {
+      top: 50%; margin-top: -5.5px; left: auto; margin-left: 0;
+    }
+    .wf-node:nth-child(3) .wf-connector::after {
+      left: 50%; margin-left: -5.5px; top: auto; margin-top: 0;
+    }
+  }
+
+  .wf-readme-link {
+    font: inherit;
+    font-family: monospace;
     font-weight: 800;
+    font-style: normal;
+    color: #000000;
+    background: transparent;
+    border: none;
+    padding: 0 2px;
+    cursor: pointer;
+    box-shadow: inset 0 -0.55em 0 var(--doodle-yellow, #ffda00);
+    transition: box-shadow 0.18s ease;
+  }
+
+  .wf-readme-link:hover,
+  .wf-readme-link:focus-visible {
+    box-shadow: inset 0 -1.05em 0 var(--doodle-yellow, #ffda00);
+  }
+
+  .wf-chain-footnote {
+    margin: clamp(28px, 4vh, 44px) auto 0;
+    max-width: 52ch;
+    text-align: center;
+    font-size: 0.87rem;
+    line-height: 1.6;
+    color: #52525b;
+    font-style: italic;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wf-connector::before { animation: none; }
+    .wf-connector::after { display: none; }
+    .wf-detail:not([hidden]) { animation: none; }
+    .wf-node-card:hover { transform: none; }
   }
 
   @media (max-width: 640px) {
@@ -5718,6 +6251,21 @@ const { showTestToolbar = false } = Astro.props;
     // Shared Component Interactive State
     let isAutoPlaying = false;
     let has8AMHit = false;
+    const scrollCue = document.getElementById("howScrollCue");
+
+    // The cron toast used to need a scroll far enough into the runway, and
+    // testers routinely stopped before that. Now it also fires on a timer once
+    // the desktop has been sitting in view.
+    function fire8AM() {
+      if (has8AMHit) return;
+      has8AMHit = true;
+      if (clockDigits) {
+        clockDigits.textContent = "08:00 AM";
+        clockDigits.style.color = "#16a34a";
+      }
+      playChime();
+      if (toastNotification) toastNotification.classList.add("is-visible");
+    }
     let hasTerminalRun = false;
     let hasSlackTriggered = false;
     let currentMorph = 0;
@@ -5736,6 +6284,76 @@ const { showTestToolbar = false } = Astro.props;
           headerBackBtn.setAttribute("title", "Return to portfolio deck");
         }
       }
+    }
+
+    // Timer route into the cron toast: once the desktop stage has been in view
+    // for a few seconds, fire it regardless of how far the user scrolled.
+    const stageForToast = document.getElementById("how-sticky-viewport");
+    if (stageForToast && !stageForToast.hasAttribute("data-toast-timer")) {
+      stageForToast.setAttribute("data-toast-timer", "1");
+      let toastTimerId: number | null = null;
+      const toastObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !has8AMHit) {
+              if (toastTimerId === null) {
+                toastTimerId = window.setTimeout(() => {
+                  fire8AM();
+                  toastObserver.disconnect();
+                }, 3000);
+              }
+            } else if (toastTimerId !== null) {
+              // Scrolled away before it fired; start again on the next look
+              clearTimeout(toastTimerId);
+              toastTimerId = null;
+            }
+          });
+        },
+        { threshold: 0.6 },
+      );
+      toastObserver.observe(stageForToast);
+    }
+
+    // Expandable detail on the written-down workflow tiles. Bound defensively:
+    // initHowItWorks runs on both DOMContentLoaded and astro:page-load.
+    document.querySelectorAll(".wf-expand-btn").forEach((btn) => {
+      const el = btn as HTMLElement;
+      if (el.dataset.wfBound) return;
+      el.dataset.wfBound = "1";
+      el.addEventListener("click", () => {
+        const panel = document.getElementById(el.getAttribute("aria-controls") || "");
+        if (!panel) return;
+        const isOpen = el.getAttribute("aria-expanded") === "true";
+        el.setAttribute("aria-expanded", String(!isOpen));
+        panel.hidden = isOpen;
+        const label = el.querySelector(".wf-expand-label");
+        if (label) label.textContent = isOpen ? "Read more" : "Show less";
+      });
+    });
+
+    // Setting overflow on <body> alone does not stop the page scrolling, since
+    // <html> is the scrolling element. The page could therefore keep moving
+    // underneath the fullscreen desktop.
+    function setPageScrollLocked(locked: boolean) {
+      const root = document.documentElement;
+      if (locked) {
+        const gutter = window.innerWidth - root.clientWidth;
+        root.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
+        // Hiding the scrollbar would otherwise shift the layout on exit
+        if (gutter > 0) root.style.paddingRight = `${gutter}px`;
+      } else {
+        root.style.overflow = "";
+        document.body.style.overflow = "";
+        root.style.paddingRight = "";
+      }
+    }
+
+    // Lift the sticky stage so the fullscreen desktop can paint above the
+    // workflow steps below it (see .has-fullscreen-desktop).
+    function setDesktopStageOnTop(on: boolean) {
+      const stage = document.getElementById("how-sticky-viewport");
+      if (stage) stage.classList.toggle("has-fullscreen-desktop", on);
     }
 
     function enterFullscreen(playWorkflow = false) {
@@ -5766,7 +6384,8 @@ const { showTestToolbar = false } = Astro.props;
       }
 
       // Lock main document scroll so page background doesn't move/cover desktop
-      document.body.style.overflow = "hidden";
+      setPageScrollLocked(true);
+      setDesktopStageOnTop(true);
 
       if (playWorkflow) {
         if (terminalConsole) terminalConsole.classList.add("is-active");
@@ -5836,6 +6455,63 @@ const { showTestToolbar = false } = Astro.props;
     const copyMasterCvMarkdownBtn = document.getElementById("copyMasterCvMarkdownBtn");
     const downloadMasterCvBtn = document.getElementById("downloadMasterCvBtn");
 
+    const taskbarStartBtn = document.getElementById("taskbarStartBtn");
+
+    // README.md: design rationale for the workflow. Rendered through the same
+    // Notes modal as every other desktop file so the styling stays identical.
+    const readmeFile = {
+      key: "readme",
+      name: "README.md",
+      type: "Design Decisions & Rationale",
+      icon: "📄",
+      tag: "DOCS",
+      path: "openClaw\\workspace\\README.md",
+      role: "Workflow Design Rationale",
+      sections: [
+        {
+          title: "Why isn't the whole process automated?",
+          content: `<p class="info-section-p">The agents could go one step further and submit the applications for me, but is that really the right call?</p><p class="info-section-p">Recognising AI's strengths and weaknesses is half the battle when designing workflows that work.</p><p class="info-section-p">AI is better at:</p>
+          <ul class="info-section-list">
+            <li>Coding tasks</li>
+            <li>Speed</li>
+            <li>Debugging</li>
+          </ul>
+          <p class="info-section-p">It's not so good at creativity, tone of voice, and producing consistent, repeatable outputs. AI can be unpredictable, and often wrong. Letting it represent me to an employer introduces risks I wasn't willing to accept, and there's every chance it could say something stupid.</p><p class="info-section-p">Having a human in the loop, where I can read over tailored CVs and check the AI's reasoning for each score, keeps the standard of applications high. Quality matters.</p>`
+        },
+        {
+          title: "What is the benefit of three agents?",
+          content: `<p class="info-section-p">Each agent comes with its own agent files, including <a class="file-jump-link" data-open-file="giles">GILES.md</a>, <a class="file-jump-link" data-open-file="cordelia">CORDELIA.md</a> and <a class="file-jump-link" data-open-file="willow">WILLOW.md</a>.</p><p class="info-section-p">Each agent can be tailored to run on a specific model, which can save costs, improve the results for specific tasks, or both. Splitting the job three ways is what makes that possible, and it is where a lot of the effectiveness of the workflow came from.</p>`
+        },
+        {
+          title: "How did I manage costs?",
+          content: `<ol class="info-section-list">
+            <li>Converting prompts into repeatable code that is free to run and produces predictable results</li>
+            <li>Using open source software (OpenClaw), which allows greater flexibility in model usage</li>
+            <li>Managing context windows</li>
+            <li>Careful model selection, using a model capable enough for each task rather than the most expensive flagship for everything</li>
+            <li>Reducing the volume of information that reaches the LLM at all</li>
+          </ol>
+          <p class="info-section-p">The last one does most of the work. Cordelia only runs a <a class="file-jump-link" data-open-file="vibe_check">vibe check</a> on a short list of roles, because <a class="file-jump-link" data-open-file="scoring_metric">scoring_metric</a> has already filtered the rest out in plain Python. That is where the savings come from.</p>`
+        },
+        {
+          title: "How do I communicate with the agents?",
+          content: `<p class="info-section-p">Through Slack or Telegram, so I can monitor the workflow and ask for fixes or new features from anywhere. Cloudflare gives me remote access to the Mission Control dashboard, which is hosted locally.</p>`
+        },
+        {
+          title: "How is it kept secure?",
+          content: `<p class="info-section-p">The agents operate on a virtual computer, completely separated from my personal files. For this task that was considered enough, since the agents have no need to log into accounts or access personal information.</p>`
+        },
+        {
+          title: "How can I improve this workflow?",
+          content: `<p class="info-section-p">The next addition is an API connection to an email account. Mail from my personal account would auto-forward to the agent's own address, keeping the separation intact.</p><p class="info-section-p">Anything successful reaches me through Slack, and jobs I have applied for that are pending a response get tracked through Mission Control. Everything is consolidated into one easy-to-manage location, which removes another chunk of the work involved.</p>`
+        }
+      ]
+    };
+
+    function openReadme() {
+      openFileInfo(readmeFile);
+    }
+
     // Slack Notification Elements
     const slackNotification = document.getElementById("osSlackNotification") as HTMLElement;
     const closeSlackBtn = document.getElementById("closeSlackBtn");
@@ -5900,6 +6576,7 @@ const { showTestToolbar = false } = Astro.props;
     const playBtn = document.getElementById("playAnimBtn");
     const resetBtn = document.getElementById("resetAnimBtn");
     const scrubSlider = document.getElementById("animScrubSlider") as HTMLInputElement;
+    const pctLabel = document.getElementById("animPctLabel");
     if (!zoomContainer) return;
 
     let animFrameId: number | null = null;
@@ -6321,6 +6998,7 @@ const { showTestToolbar = false } = Astro.props;
       playClickSound();
       if (masterCvModal) masterCvModal.classList.remove("is-open");
     }
+
 
     // Open File Info Modal Function
     function openFileInfo(file: any, isBackNav = false) {
@@ -7073,7 +7751,6 @@ const { showTestToolbar = false } = Astro.props;
     }
 
     const startWorkflowBtn = document.getElementById("startWorkflowBtn");
-    const exitFullscreenBtn = document.getElementById("exitFullscreenBtn");
 
     // Apply morph state (0 = floating mockup, 1 = full viewport bleed)
     function applyMorph(morph: number) {
@@ -7101,7 +7778,6 @@ const { showTestToolbar = false } = Astro.props;
           wallpaperStage.style.height = "calc(100vh - 48px)";
           wallpaperStage.style.aspectRatio = "unset";
         }
-        if (exitFullscreenBtn) exitFullscreenBtn.classList.add("is-visible");
       } else if (morph > 0.001) {
         const currentH = baseH + (winH - baseH) * morph;
         const currentWallH = (baseH - 48 - (42 * (1 - morph))) + ((winH - 48) - (baseH - 48 - 42)) * morph;
@@ -7114,10 +7790,6 @@ const { showTestToolbar = false } = Astro.props;
           wallpaperStage.style.height = `${currentWallH.toFixed(1)}px`;
           wallpaperStage.style.aspectRatio = "unset";
         }
-        if (exitFullscreenBtn) {
-          if (morph > 0.35) exitFullscreenBtn.classList.add("is-visible");
-          else exitFullscreenBtn.classList.remove("is-visible");
-        }
       } else {
         zoomContainer.style.height = "auto";
         zoomContainer.style.width = "min(74vw, 1040px, calc((100vh - 200px) * (16 / 9)))";
@@ -7128,7 +7800,6 @@ const { showTestToolbar = false } = Astro.props;
           wallpaperStage.style.height = "auto";
           wallpaperStage.style.aspectRatio = "16 / 9";
         }
-        if (exitFullscreenBtn) exitFullscreenBtn.classList.remove("is-visible");
       }
 
       if (morph > 0.08) {
@@ -7164,7 +7835,8 @@ const { showTestToolbar = false } = Astro.props;
       }
 
       // Lock main document scroll so page background doesn't move/cover desktop
-      document.body.style.overflow = "hidden";
+      setPageScrollLocked(true);
+      setDesktopStageOnTop(true);
 
       // Reveal terminal console immediately and stream logs
       if (terminalConsole) {
@@ -7285,7 +7957,8 @@ const { showTestToolbar = false } = Astro.props;
           zoomContainer.classList.remove("is-fullscreen");
           zoomContainer.classList.remove("is-collapsing");
         }
-        document.body.style.overflow = "";
+        setPageScrollLocked(false);
+        setDesktopStageOnTop(false);
 
         if (toastNotification) toastNotification.classList.add("is-visible");
         if (startWorkflowBtn) {
@@ -7442,16 +8115,12 @@ const { showTestToolbar = false } = Astro.props;
         return;
       }
 
-      // Once user scrolls to/into sticky runway: trigger 08:00 AM alarm & toast
-      if (progress >= 0.04 && !has8AMHit) {
-        has8AMHit = true;
-        if (clockDigits) {
-          clockDigits.textContent = "08:00 AM";
-          clockDigits.style.color = "#16a34a";
-        }
-        playChime();
-        if (toastNotification) toastNotification.classList.add("is-visible");
-      }
+      // Scroll route into the 08:00 alarm. fire8AM() is shared with the timer
+      // fallback below, so whichever happens first wins and it only runs once.
+      if (progress >= 0.04) fire8AM();
+
+      // Fade the keep-scrolling cue once the runway is nearly spent
+      if (scrollCue) scrollCue.classList.toggle("is-done", progress > 0.82);
     }
 
     // Manual Slider Scrub
@@ -7505,12 +8174,6 @@ const { showTestToolbar = false } = Astro.props;
     }
 
     // Exit Fullscreen Button Trigger
-    if (exitFullscreenBtn) {
-      exitFullscreenBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        exitFullscreen();
-      });
-    }
 
     // Escape Key Listener to exit fullscreen
     window.addEventListener("keydown", (e) => {
@@ -7679,6 +8342,8 @@ const { showTestToolbar = false } = Astro.props;
           openExplorer();
         } else if (key === "master_cv") {
           openMasterCvModal();
+        } else if (key === "readme") {
+          openReadme();
         } else if (key) {
           // Find file in explorer database
           for (const fKey of Object.keys(explorerFoldersDB)) {
@@ -7691,6 +8356,31 @@ const { showTestToolbar = false } = Astro.props;
         }
       });
     });
+
+    // Footnote shortcut: opens the desktop straight onto the README
+    const wfReadmeLink = document.getElementById("wfReadmeLink");
+    if (wfReadmeLink) {
+      wfReadmeLink.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openReadme();
+      });
+    }
+
+    // Taskbar Start button opens README.md
+    if (taskbarStartBtn) {
+      taskbarStartBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openReadme();
+      });
+      taskbarStartBtn.addEventListener("keydown", (e) => {
+        const key = (e as KeyboardEvent).key;
+        if (key === "Enter" || key === " ") {
+          e.preventDefault();
+          e.stopPropagation();
+          openReadme();
+        }
+      });
+    }
 
     // Master CV modal triggers
     if (closeMasterCvBtn) closeMasterCvBtn.addEventListener("click", closeMasterCvModal);
@@ -7827,7 +8517,15 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
     if (copyEmailBtn) {
       copyEmailBtn.addEventListener("click", () => {
         playClickSound();
-        navigator.clipboard?.writeText("nike.emily.olo@gmail.com").catch(() => {});
+        navigator.clipboard?.writeText("nike.emily@pm.me").catch(() => {});
+        // Pin the width at its full-label size before shortening the text, so
+        // the row doesn't reflow around the shorter "Copied!" state.
+        if (!copyEmailBtn.style.minWidth) {
+          // Exact width, not rounded up: a ceil would still shift the row by a
+          // fraction of a pixel.
+          const w = copyEmailBtn.getBoundingClientRect().width;
+          if (w) copyEmailBtn.style.minWidth = `${w}px`;
+        }
         copyEmailBtn.textContent = "✅ Copied!";
         setTimeout(() => {
           copyEmailBtn.textContent = "📋 Copy Email Address";

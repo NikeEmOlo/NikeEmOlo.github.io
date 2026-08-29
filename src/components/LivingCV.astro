@@ -137,7 +137,7 @@ const icons: Record<string, string> = {
       <div class="cv-progress-track" aria-hidden="true"><div class="cv-progress-bar" id="cv-progress"></div></div>
 
       <header class="cv-topbar">
-        <span class="cv-contact-placeholder">email@yourdomain.com</span>
+        <a class="cv-contact-placeholder" href="mailto:nike.emily@pm.me">nike.emily@pm.me</a>
         <nav class="cv-nav" aria-label="Living CV sections">
           <button data-cv-link="cv-about">About</button>
           <button data-cv-link="cv-experience">Experience</button>
@@ -278,7 +278,7 @@ const icons: Record<string, string> = {
 
       <footer class="cv-footer cv-reveal">
         <h2>Let's connect<span class="cv-accent-dot">.</span></h2>
-        <p class="cv-contact-placeholder">email@yourdomain.com</p>
+        <p class="cv-footer-email"><a href="mailto:nike.emily@pm.me">nike.emily@pm.me</a></p>
 
         <div class="cv-social-links">
           <a
@@ -509,6 +509,32 @@ const icons: Record<string, string> = {
     font-family: var(--secondary-font);
     font-size: 0.75rem;
     white-space: nowrap;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a.cv-contact-placeholder:hover {
+    color: var(--cv-text);
+    text-decoration: underline;
+  }
+
+  .cv-footer-email {
+    margin: 0;
+    font-family: var(--secondary-font);
+    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  }
+
+  .cv-footer-email a {
+    color: var(--cv-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--cv-border);
+    padding-bottom: 2px;
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .cv-footer-email a:hover {
+    border-bottom-color: currentColor;
+    opacity: 0.75;
   }
 
   .cv-nav {

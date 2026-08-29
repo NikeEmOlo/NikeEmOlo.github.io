@@ -2,8 +2,8 @@
 import { getEntry } from "astro:content";
 import Base from "../layouts/Base.astro";
 import DoodleLinkedInJobCard from "../components/DoodleLinkedInJobCard.astro";
-import DoodleVinylRecord from "../components/DoodleVinylRecord.astro";
 import AgentTreeIcons from "../components/mascots/AgentTreeIcons.astro";
+import GraffitiMarks from "../components/mascots/GraffitiMarks.astro";
 import HowItWorksWorkflow from "../components/HowItWorksWorkflow.astro";
 
 const project = await getEntry("projects", "automating_unemployment");
@@ -133,107 +133,6 @@ const agents = vignette3?.agents || [];
             </div>
           </div>
 
-          <!-- STATE B: The Benefits Frame (Revealed when clicking "wth?") -->
-          <div class="benefits-content-wrapper is-hidden" id="benefitsFrameWrap">
-            
-            <!-- Centered Title Group -->
-            <div class="benefits-header-group">
-              <span class="benefits-eyebrow">02 // AGENTIC WORKFLOW</span>
-              <h2 class="benefits-main-title">
-                The case study shows how I used a multi-agent team to automate the job-hunt, freeing up <span class="benefits-highlight-pill">83% of my time</span>.
-              </h2>
-            </div>
-
-            <!-- Free Text List with Cool Doodle-Pop Urban Icons (No Card Boxes) -->
-            <div class="benefits-free-list">
-              
-              <!-- Benefit 1: Stylised Sparkly Brain -->
-              <div class="benefit-doodle-item">
-                <div class="benefit-doodle-icon-wrap brain-glow">
-                  <svg viewBox="0 0 120 120" width="104" height="104" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 28 L23 18 L26 28 L36 31 L26 34 L23 44 L20 34 L10 31 Z" fill="#000000" />
-                    <circle cx="23" cy="31" r="2.5" fill="#FFFFFF" />
-                    <path d="M96 22 L98 14 L100 22 L108 24 L100 26 L98 34 L96 26 L88 24 Z" fill="#FF1F70" stroke="#000000" stroke-width="2" />
-                    <path d="M102 78 L104 72 L106 78 L112 80 L106 82 L104 88 L102 82 L96 80 Z" fill="#00B3E3" stroke="#000000" stroke-width="1.8" />
-                    <path d="M60 12 L65 24 L56 26 L63 38" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M42 42 C32 42, 24 50, 24 60 C24 68, 30 74, 34 78 C30 84, 35 94, 46 94 C51 94, 55 91, 58 88 C59 88, 59 44, 42 42 Z" fill="#FF1F70" stroke="#000000" stroke-width="3.5" stroke-linejoin="round" />
-                    <path d="M78 42 C88 42, 96 50, 96 60 C96 68, 90 74, 86 78 C90 84, 85 94, 74 94 C69 94, 65 91, 62 88 C61 88, 61 44, 78 42 Z" fill="#FF528F" stroke="#000000" stroke-width="3.5" stroke-linejoin="round" />
-                    <path d="M38 54 C46 54, 48 64, 42 70 C36 76, 44 84, 52 82" stroke="#000000" stroke-width="3.2" stroke-linecap="round" />
-                    <path d="M82 54 C74 54, 72 64, 78 70 C84 76, 76 84, 68 82" stroke="#000000" stroke-width="3.2" stroke-linecap="round" />
-                    <path d="M50 46 C56 50, 56 60, 50 64" stroke="#000000" stroke-width="3" stroke-linecap="round" />
-                    <path d="M70 46 C64 50, 64 60, 70 64" stroke="#000000" stroke-width="3" stroke-linecap="round" />
-                    <ellipse cx="36" cy="48" rx="5" ry="2.5" transform="rotate(-30 36 48)" fill="#FFFFFF" />
-                    <ellipse cx="84" cy="48" rx="5" ry="2.5" transform="rotate(30 84 48)" fill="#FFFFFF" />
-                  </svg>
-                </div>
-                <p class="benefit-item-text">
-                  Free time can be used on personal development and studying, further improving my job prospects.
-                </p>
-              </div>
-
-              <!-- Benefit 2: Zen Chill Sunglasses Smiley -->
-              <div class="benefit-doodle-item">
-                <div class="benefit-doodle-icon-wrap chill-glow">
-                  <svg viewBox="0 0 120 120" width="104" height="104" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M60 10 L60 20 M18 60 L28 60 M92 60 L102 60 M30 30 L38 38 M90 30 L82 38" stroke="#000000" stroke-width="3" stroke-linecap="round" />
-                    <path d="M16 22 L18 16 L20 22 L26 24 L20 26 L18 32 L16 26 L10 24 Z" fill="#D1FF00" stroke="#000000" stroke-width="1.8" />
-                    <path d="M104 26 L106 20 L108 26 L114 28 L108 30 L106 36 L104 30 L98 28 Z" fill="#000000" />
-                    <circle cx="60" cy="64" r="34" fill="#00B3E3" stroke="#000000" stroke-width="3.5" />
-                    <path d="M36 54 L56 54 L54 66 C54 70, 40 70, 38 66 Z" fill="#000000" stroke="#000000" stroke-width="2" />
-                    <path d="M64 54 L84 54 L82 66 C82 70, 68 70, 66 66 Z" fill="#000000" stroke="#000000" stroke-width="2" />
-                    <path d="M54 57 L66 57" stroke="#000000" stroke-width="3.5" stroke-linecap="round" />
-                    <path d="M42 56 L40 64" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-                    <path d="M46 56 L44 60" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
-                    <path d="M70 56 L68 64" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
-                    <path d="M74 56 L72 60" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
-                    <path d="M46 76 C52 85, 68 85, 74 76" stroke="#000000" stroke-width="3.5" stroke-linecap="round" fill="none" />
-                    <ellipse cx="38" cy="74" rx="4" ry="2.5" fill="#FF1F70" />
-                    <ellipse cx="82" cy="74" rx="4" ry="2.5" fill="#FF1F70" />
-                  </svg>
-                </div>
-                <p class="benefit-item-text">
-                  Improved mental clarity and reduced stress
-                </p>
-              </div>
-
-              <!-- Benefit 3: Auto-Mode Rocket Robot -->
-              <div class="benefit-doodle-item">
-                <div class="benefit-doodle-icon-wrap auto-glow">
-                  <svg viewBox="0 0 120 120" width="104" height="104" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 48 L26 48 M10 62 L22 62 M14 76 L28 76" stroke="#000000" stroke-width="3" stroke-linecap="round" />
-                    <path d="M96 20 L98 12 L100 20 L108 22 L100 24 L98 32 L96 24 L88 22 Z" fill="#FF1F70" stroke="#000000" stroke-width="2" />
-                    <path d="M102 68 L104 62 L106 68 L112 70 L106 72 L104 78 L102 72 L96 70 Z" fill="#000000" />
-                    <path d="M60 36 L60 22" stroke="#000000" stroke-width="3.5" stroke-linecap="round" />
-                    <circle cx="60" cy="18" r="5" fill="#FFDA00" stroke="#000000" stroke-width="2.5" />
-                    <path d="M68 14 L73 18 L70 21 L75 25" stroke="#FF1F70" stroke-width="2" stroke-linecap="round" />
-                    <rect x="36" y="36" width="48" height="42" rx="12" fill="#D1FF00" stroke="#000000" stroke-width="3.5" />
-                    <rect x="44" y="46" width="32" height="18" rx="6" fill="#000000" />
-                    <rect x="48" y="52" width="24" height="6" rx="3" fill="#00B3E3" />
-                    <circle cx="60" cy="55" r="3.5" fill="#FFFFFF" />
-                    <rect x="29" y="49" width="7" height="14" rx="3.5" fill="#00B3E3" stroke="#000000" stroke-width="2.5" />
-                    <rect x="84" y="49" width="7" height="14" rx="3.5" fill="#00B3E3" stroke="#000000" stroke-width="2.5" />
-                    <path d="M50 78 L60 98 L70 78 Z" fill="#FF1F70" stroke="#000000" stroke-width="3" stroke-linejoin="round" />
-                    <path d="M54 78 L60 90 L66 78 Z" fill="#FFDA00" />
-                    <ellipse cx="45" cy="42" rx="4" ry="2" fill="#FFFFFF" />
-                  </svg>
-                </div>
-                <p class="benefit-item-text">
-                  Removal of repetitive tasks
-                </p>
-              </div>
-
-            </div>
-
-            <!-- CTA Row -->
-            <div class="benefits-action-row">
-              <button class="benefits-scroll-cta" id="exploreWorkflowBtn" type="button">
-                <span>Explore interactive desktop</span>
-                <span class="cta-arrow-down">↓</span>
-              </button>
-            </div>
-
-          </div>
-
           <!-- Dynamic Interactive Pop-up Answer Modal (Overlays entire stage with pure solid white) -->
           <div class="dilemma-popup-overlay" id="dilemmaAnswerPopup" aria-hidden="true">
             <div class="dilemma-popup-card">
@@ -282,17 +181,79 @@ const agents = vignette3?.agents || [];
     </div>
 
     <!-- ============================================================ -->
-    <!-- 02 // HOW IT WORKS: INTERACTIVE WORKFLOW & DIVE-IN RUNTIME   -->
+    <!-- 02 // AGENTIC WORKFLOW BENEFITS (OWN SCROLLABLE SECTION)     -->
     <!-- ============================================================ -->
-    <HowItWorksWorkflow />
+    <!-- Scroll runway for the benefits curtain. The curtain itself is rendered -->
+    <!-- into the How It Works stage below so it can sit in front of that       -->
+    <!-- section's title but behind its device mockup.                          -->
+    <div class="benefits-scrolly-runway" id="benefitsFrameWrap"></div>
 
     <!-- ============================================================ -->
-    <!-- 03 // MEET THE TEAM: 2-TIER AUTONOMOUS AGENT HIERARCHY      -->
+    <!-- 03 // HOW IT WORKS: INTERACTIVE WORKFLOW & DIVE-IN RUNTIME   -->
+    <!-- Pulled up beneath the yellow curtain so the desktop peeks at -->
+    <!-- the bottom, then is revealed as the curtain rises.           -->
+    <!-- ============================================================ -->
+    <div class="how-it-works-lift">
+      <HowItWorksWorkflow>
+
+        <!-- YELLOW CURTAIN (LIFTS ON SCROLL TO REVEAL "HOW IT WORKS" BENEATH) -->
+        <div slot="stage-curtain" class="benefits-curtain-layer" id="benefitsCurtainLayer">
+          <div class="benefits-content-wrapper">
+
+            <!-- Centered Title Group -->
+            <div class="benefits-header-group">
+              <span class="benefits-eyebrow">Automating Unemployment</span>
+              <h2 class="benefits-main-title">
+                This case study details how I designed a multi-agent AI team to automate the job-hunt, freeing up <span class="benefits-highlight-pill">83% of my time</span>.
+              </h2>
+            </div>
+
+            <!-- Graffiti-bulleted payoff row -->
+            <ul class="benefits-free-list">
+
+              <li class="benefit-doodle-item">
+                <span class="benefit-mark"><GraffitiMarks type="chevrons" size="100%" /></span>
+                <p class="benefit-item-text">More free time to study</p>
+              </li>
+
+              <li class="benefit-doodle-item">
+                <span class="benefit-mark"><GraffitiMarks type="crown-soft" size="100%" /></span>
+                <p class="benefit-item-text">More studying <em>=</em> better job prospects</p>
+              </li>
+
+              <li class="benefit-doodle-item">
+                <span class="benefit-mark"><GraffitiMarks type="star" size="100%" /></span>
+                <p class="benefit-item-text">Less stress, improved mental clarity</p>
+              </li>
+
+              <li class="benefit-doodle-item">
+                <span class="benefit-mark"><GraffitiMarks type="crown-spike" size="100%" /></span>
+                <p class="benefit-item-text">Time spent on the jobs with the biggest ROI</p>
+              </li>
+
+            </ul>
+
+            <!-- CTA Row -->
+            <div class="benefits-action-row">
+              <button class="benefits-scroll-cta" id="exploreWorkflowBtn" type="button">
+                <span>Explore how it works</span>
+                <span class="cta-arrow-down">↓</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </HowItWorksWorkflow>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 04 // MEET THE TEAM: 2-TIER AUTONOMOUS AGENT HIERARCHY      -->
     <!-- ============================================================ -->
     <section class="team-hierarchy-section" id="team-section">
       <div class="team-section-container">
         <div class="team-header-box">
-          <span class="team-eyebrow">03 // AUTONOMOUS AGENT HIERARCHY</span>
+          <span class="team-eyebrow">04 // AUTONOMOUS AGENT HIERARCHY</span>
           <h2 class="team-main-title">Meet the team</h2>
         </div>
 
@@ -444,84 +405,60 @@ const agents = vignette3?.agents || [];
     </section>
 
     <!-- ============================================================ -->
-    <!-- 04 // THE AI DOOM LOOP & MARKET REALITY                      -->
+    <!-- 05 // THE AI DOOM LOOP & MARKET REALITY                      -->
     <!-- ============================================================ -->
     <section class="doom-loop-standalone-section" id="doom-section">
       <div class="doom-section-container">
         <!-- Section Header -->
         <div class="doom-standalone-header">
-          <span class="doom-section-eyebrow">04 // MARKET CONTEXT</span>
+          <span class="doom-section-eyebrow">05 // MARKET CONTEXT</span>
           <h2 class="doom-standalone-title">
-            Job-seekers are trapped in the <strong>"AI doom loop"</strong>.
+            How this can help other candidates
           </h2>
+          <p class="doom-standalone-lead">
+            Job seekers are stuck in the <strong>"AI doom loop"</strong>. This workflow
+            provides a way for candidates to maintain the quality of their
+            applications, and their sanity, in a difficult job market.
+          </p>
         </div>
 
-        <!-- Vinyl & Lyrical Tracks Layout -->
-        <div class="doom-interactive-layout">
-          <!-- Vinyl Record Column -->
-          <div class="doom-vinyl-column">
-            <DoodleVinylRecord
-              size="min(46vw, 400px)"
-              autoSpin={true}
-              interactive={true}
-            />
-          </div>
+        <!-- The listing lands in the middle, the loop assembles around it -->
+        <div class="doom-orbit" data-doom-orbit>
+          <ul class="doom-orbit-notes">
+          <li class="doom-orbit-note note-1" style="--i: 0; --note-accent: var(--doodle-pink, #FF1F70);">
+            <span class="doom-note-num">01</span>
+            <p class="doom-note-text">A competitive job market pushes candidates to reach for AI. With it they write CVs and fill in application forms, applying for far more jobs than they could manually. But what happens to the quality of those applications?</p>
+          </li>
+          <li class="doom-orbit-note note-2" style="--i: 1; --note-accent: var(--doodle-cyan, #00B3E3);">
+            <span class="doom-note-num">02</span>
+            <p class="doom-note-text">Employers receive thousands of applications per role, often filled with obviously AI-generated content, so they turn to AI to filter the vast majority of candidates out.</p>
+          </li>
+          <li class="doom-orbit-note note-3" style="--i: 2; --note-accent: var(--doodle-lime, #D1FF00);">
+            <span class="doom-note-num">03</span>
+            <p class="doom-note-text">Those filters push the competition higher still. Applicant tracking systems now demand match rates as high as 95% against their requirements, scoring keywords rather than people.</p>
+          </li>
+          <li class="doom-orbit-note note-4" style="--i: 3; --note-accent: var(--doodle-yellow, #FFDA00);">
+            <span class="doom-note-num">04</span>
+            <p class="doom-note-text">Competition climbs, candidates have to do more to get noticed, and so they reach for AI. Round it goes again.</p>
+          </li>
+          </ul>
 
-          <!-- Lyrical Tracks Column -->
-          <div class="doom-tracks-column">
-            <div class="doom-track-card track-1">
-              <span class="lyric-track-tag">TRACK 01 // SIDE A</span>
-              <p class="doom-wavy-text">
-                Candidates facing a difficult job market turn to AI to help them apply for <strong>more</strong> jobs.
-              </p>
-            </div>
-            <div class="doom-track-card track-2">
-              <span class="lyric-track-tag">TRACK 02 // ACCELERATION</span>
-              <p class="doom-wavy-text">
-                Companies facing huge numbers of applications per job, turn to AI to help them filter candidates.
-              </p>
-            </div>
-            <div class="doom-track-card track-3">
-              <span class="lyric-track-tag">TRACK 03 // LOOP</span>
-              <p class="doom-wavy-text">
-                Competition increases and job-seeking gets harder.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- ON REPEAT Stamp & LinkedIn Surge Card -->
-        <div class="doom-extras-row">
-          <div class="doom-stamp-col">
-            <div class="doom-on-repeat-stamp is-slammed">
-              <svg class="on-repeat-svg" viewBox="0 0 270 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="7" y="7" width="248" height="74" rx="14" fill="#000000" />
-                <rect x="3" y="3" width="248" height="74" rx="14" fill="#FFD233" stroke="#000000" stroke-width="3.5" />
-                <rect x="12" y="8" width="230" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.65" />
-                <text x="16" y="26" font-family="monospace" font-size="9" font-weight="900" fill="#000000" letter-spacing="1.5">CYCLE // STATUS</text>
-                <text x="15" y="60" font-family="var(--archivo-font), 'Archivo', -apple-system, sans-serif" font-size="28" font-weight="900" font-style="italic" fill="#000000" letter-spacing="-0.5">ON REPEAT</text>
-                <g transform="translate(182, 18)">
-                  <circle cx="24" cy="24" r="21" fill="#FF5238" stroke="#000000" stroke-width="3" />
-                  <path d="M 17 17 L 29 17 A 6 6 0 0 1 35 23" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" />
-                  <path d="M 27 13 L 32 17 L 27 21" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-linejoin="round" />
-                  <path d="M 31 31 L 19 31 A 6 6 0 0 1 13 25" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" />
-                  <path d="M 21 35 L 16 31 L 21 27" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-linejoin="round" />
-                </g>
-                <path d="M 258 10 L 261 4 L 264 10 L 270 13 L 264 16 L 261 22 L 258 16 L 252 13 Z" fill="#ffffff" stroke="#000000" stroke-width="1.8" />
-                <path d="M 0 66 L 3 60 L 6 66 L 12 69 L 6 72 L 3 78 L 0 72 L -6 69 Z" fill="#FF5238" stroke="#000000" stroke-width="1.8" />
-              </svg>
-            </div>
-          </div>
-          <div class="doom-card-col">
+          <div class="doom-orbit-centre">
             <DoodleLinkedInJobCard
               company="Nota Scam"
               title="Junior role"
               location="London, England, United Kingdom"
-              autoPlay={true}
-              showReplay={true}
+              autoPlay={false}
+              showReplay={false}
             />
           </div>
         </div>
+
+        <p class="doom-closing">
+          The point isn't "don't use AI" to escape this cycle. Candidates are left
+          with no other choice. The point is to use AI smarter, focusing on what it
+          is actually good at.
+        </p>
       </div>
     </section>
 
@@ -1178,7 +1115,7 @@ const agents = vignette3?.agents || [];
   }
 
   /* ============================================================ */
-  /* FRAME 2 & 3 STAGE MODES                                     */
+  /* FRAME 2: STAGE                                               */
   /* ============================================================ */
   .dilemma-white-stage {
     position: absolute;
@@ -1193,55 +1130,66 @@ const agents = vignette3?.agents || [];
     justify-content: center;
     padding: clamp(24px, 4vw, 64px);
     box-sizing: border-box;
-    transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Bright Streetwear Yellow background for the Agentic Workflow page */
-  .dilemma-white-stage.is-benefits-mode {
+  /* ============================================================ */
+  /* BENEFITS: STAGE-CURTAIN RUNWAY                               */
+  /* The yellow panel is a curtain that lifts on scroll, revealing */
+  /* the real "How it works" section pulled up underneath it.     */
+  /* --benefits-lift  = how far we scroll to raise the curtain, and how far   */
+  /*   How-It-Works starts below the fold — which sets how much of the device */
+  /*   peeks out in front of the curtain. Measured by syncBenefitsLift().     */
+  /* ============================================================ */
+  /* Pure scroll spacer — supplies the distance the curtain travels. */
+  .benefits-scrolly-runway {
+    --benefits-lift: 62vh;
+    position: relative;
+    width: 100%;
+    height: calc(100vh + var(--benefits-lift));
+  }
+
+  /* Rendered into the How It Works stage via its stage-curtain slot, so it
+     shares that stage's stacking context: above .how-header-overlay (20),
+     below .desktop-zoom-container (30). Fixed so it fills the viewport even
+     though the stage it lives in is still sliding up underneath it. */
+  .benefits-curtain-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 25;
     background-color: var(--doodle-yellow, #FFDA00);
+    border-bottom: 3px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(32px, 6vh, 64px) 24px;
+    box-sizing: border-box;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    will-change: transform;
   }
 
-  /* Shrink sticky hero viewport to 80vh so the real HowItWorks desktop peeks from below */
-  .figma-hero-stage.is-benefits-mode {
-    height: 80vh;
-    min-height: 80vh;
-    transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                min-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  /* How It Works is lifted so its top sits --benefits-lift below the fold, */
+  /* letting the desktop peek out under the curtain's hem. */
+  .how-it-works-lift {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    margin-top: -100vh;
   }
 
-  /* ============================================================ */
-  /* FRAME 3: BENEFITS CONTENT WRAPPER                           */
-  /* ============================================================ */
   .benefits-content-wrapper {
     width: 100%;
     max-width: 1180px;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     text-align: center;
-    gap: clamp(32px, 5vh, 56px);
-    padding-top: clamp(22vh, 32vh, 38vh);
+    gap: clamp(44px, 7.5vh, 88px);
     box-sizing: border-box;
     position: relative;
-    animation: benefitsFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .benefits-content-wrapper.is-hidden,
-  .dilemma-content-wrapper.is-hidden {
-    display: none !important;
-  }
-
-  @keyframes benefitsFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   .benefits-header-group {
@@ -1296,45 +1244,71 @@ const agents = vignette3?.agents || [];
     transform: rotate(-1.5deg);
   }
 
-  /* Free Text Grid with Doodled Icons */
+  /* Payoff row: four graffiti-bulleted columns, split by hand-drawn rules */
   .benefits-free-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(20px, 3.5vw, 44px);
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(14px, 2.2vw, 34px);
     width: 100%;
-    max-width: 1060px;
+    max-width: 1120px;
     margin: 0 auto;
-    align-items: flex-start;
-  }
-
-  @media (max-width: 860px) {
-    .benefits-free-list {
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
+    padding: 0;
+    list-style: none;
+    align-items: stretch;
   }
 
   .benefit-doodle-item {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 12px;
+    gap: clamp(10px, 1.6vh, 18px);
+    padding: 4px clamp(6px, 1vw, 14px);
   }
 
-  .benefit-doodle-icon-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 104px;
-    height: 104px;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
-    cursor: default;
+  /* Dashed rule between columns, drawn on the gap rather than as a border */
+  .benefit-doodle-item + .benefit-doodle-item::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * clamp(7px, 1.1vw, 17px));
+    top: 8%;
+    bottom: 8%;
+    width: 2px;
+    background-image: linear-gradient(
+      to bottom,
+      #000000 0 8px,
+      transparent 8px 16px
+    );
+    opacity: 0.32;
   }
 
-  .benefit-doodle-icon-wrap:hover {
-    transform: scale(1.14) rotate(4deg);
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+  .benefit-mark {
+    display: block;
+    width: clamp(48px, 5.2vw, 76px);
+    height: clamp(48px, 5.2vw, 76px);
+    flex-shrink: 0;
+    /* Sits square at rest; the tilt is the hover payoff */
+    transform: rotate(0deg);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Kick alternating directions so a scan across the row feels hand-thrown */
+  .benefit-doodle-item:hover .benefit-mark {
+    transform: rotate(-6deg) scale(1.08);
+  }
+
+  .benefit-doodle-item:nth-child(even):hover .benefit-mark {
+    transform: rotate(6deg) scale(1.08);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .benefit-mark,
+    .benefit-doodle-item:hover .benefit-mark,
+    .benefit-doodle-item:nth-child(even):hover .benefit-mark {
+      transform: none;
+      transition: none;
+    }
   }
 
   .benefit-item-text {
@@ -1344,12 +1318,57 @@ const agents = vignette3?.agents || [];
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    font-size: clamp(0.98rem, 1.15vw, 1.12rem);
+    font-size: clamp(0.92rem, 1.05vw, 1.08rem);
     font-weight: 700;
-    line-height: 1.42;
+    line-height: 1.34;
+    letter-spacing: -0.01em;
     color: #000000;
     margin: 0;
-    max-width: 310px;
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+
+  /* The "=" just carries extra weight, no chip */
+  .benefit-item-text em {
+    font-style: normal;
+    font-weight: 900;
+  }
+
+  @media (max-width: 900px) {
+    .benefits-free-list {
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(18px, 3vh, 28px) 20px;
+    }
+    /* Rule only between the two columns, not across the row break */
+    .benefit-doodle-item + .benefit-doodle-item::before {
+      display: none;
+    }
+    .benefit-doodle-item:nth-child(even)::before {
+      display: block;
+      left: -10px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .benefits-free-list {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .benefit-doodle-item {
+      flex-direction: row;
+      text-align: left;
+      gap: 14px;
+    }
+    .benefit-doodle-item:nth-child(even)::before {
+      display: none;
+    }
+    .benefit-mark {
+      width: 46px;
+      height: 46px;
+    }
+    .benefit-item-text {
+      max-width: none;
+    }
   }
 
   .benefits-action-row {
@@ -1399,7 +1418,7 @@ const agents = vignette3?.agents || [];
 
 
   /* ============================================================ */
-  /* 03 // MEET THE TEAM SECTION                                  */
+  /* 04 // MEET THE TEAM SECTION                                  */
   /* ============================================================ */
   .team-hierarchy-section {
     width: 100%;
@@ -1678,7 +1697,7 @@ const agents = vignette3?.agents || [];
   }
 
   /* ============================================================ */
-  /* 04 // THE AI DOOM LOOP & MARKET REALITY                      */
+  /* 05 // THE AI DOOM LOOP & MARKET REALITY                      */
   /* ============================================================ */
   .doom-loop-standalone-section {
     width: 100%;
@@ -1692,7 +1711,7 @@ const agents = vignette3?.agents || [];
 
   .doom-section-container {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1260px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1722,115 +1741,186 @@ const agents = vignette3?.agents || [];
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    font-size: clamp(2rem, 3.6vw, 3.4rem);
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    font-size: clamp(2rem, 3.4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
     color: #FFFFFF;
     margin: 0;
+    text-wrap: balance;
   }
 
   .doom-standalone-title strong {
     font-weight: 800;
   }
 
-  .doom-interactive-layout {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: clamp(32px, 5vw, 64px);
-    align-items: center;
-  }
-
-  @media (max-width: 860px) {
-    .doom-interactive-layout {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .doom-vinyl-column {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .doom-tracks-column {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .doom-track-card {
-    background: rgba(0, 0, 0, 0.4);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 14px;
-    padding: 16px 20px;
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.3);
-  }
-
-  .lyric-track-tag {
-    font-family: monospace;
-    font-size: 0.8125rem;
-    font-weight: 800;
-    color: #FFD233;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .doom-wavy-text {
+  .doom-standalone-lead {
     font-family:
       var(--archivo-font),
       "Archivo",
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    font-size: clamp(0.98rem, 1.2vw, 1.15rem);
-    font-weight: 400;
-    line-height: 1.48;
-    color: #FFFFFF;
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    font-weight: 500;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.92);
+    margin: 14px auto 0;
+    max-width: 52ch;
+    text-wrap: balance;
+  }
+
+  .doom-standalone-lead strong {
+    font-weight: 800;
+    color: #ffffff;
+  }
+
+  /* ---------------------------------------------------- */
+  /* THE LOOP: LISTING LANDS CENTRE, NOTES ASSEMBLE ROUND  */
+  /* ---------------------------------------------------- */
+  .doom-orbit {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 560px) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: clamp(18px, 2.6vw, 40px);
+    align-items: center;
+    justify-items: center;
+  }
+
+  .doom-orbit-notes {
+    display: contents;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .doom-orbit-centre {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    /* The grid centres its items, which would size this to content and shrink
+       the card; stretch it so the listing fills the full centre track. */
+    justify-self: stretch;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* The card slams in; hold its ground so the notes do not jump */
+    min-height: 100%;
+  }
+
+  .doom-orbit-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    max-width: 320px;
+    background: #ffffff;
+    border: 2.5px solid #000000;
+    border-radius: 14px;
+    box-shadow: 4px 5px 0px #000000;
+    padding: 14px 16px;
+    box-sizing: border-box;
+  }
+
+  .doom-orbit-note.note-1 { grid-column: 1; grid-row: 1; }
+  .doom-orbit-note.note-2 { grid-column: 3; grid-row: 1; }
+  .doom-orbit-note.note-3 { grid-column: 1; grid-row: 2; }
+  .doom-orbit-note.note-4 { grid-column: 3; grid-row: 2; }
+
+  .doom-note-num {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--note-accent, #FFDA00);
+    border: 2.5px solid #000000;
+    border-radius: 9px;
+    box-shadow: 2px 2px 0px #000000;
+    font-family: monospace;
+    font-size: 0.78rem;
+    font-weight: 900;
+    color: #000000;
+  }
+
+  .doom-note-text {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: #18181b;
     margin: 0;
   }
 
-  .doom-wavy-text strong {
-    font-weight: 800;
+  /* Sequential reveal, kicked off once the section is on screen. The delay
+     offset leaves room for the listing to land first.
+     The hidden state is scoped to .is-armed, which only JS adds, so the notes
+     stay readable if the script never runs. */
+  .doom-orbit.is-armed .doom-orbit-note {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
   }
 
-  .doom-extras-row {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(24px, 4vw, 48px);
-    align-items: center;
+  .doom-orbit.is-armed.is-live .doom-orbit-note {
+    animation: doomNoteIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i) * 260ms + 460ms);
   }
 
-  @media (max-width: 860px) {
-    .doom-extras-row {
+  @keyframes doomNoteIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.95); }
+    60%  { opacity: 1; transform: translateY(-3px) scale(1.02); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .doom-closing {
+    font-family:
+      var(--archivo-font),
+      "Archivo",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+    font-weight: 500;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.92);
+    text-align: center;
+    max-width: 60ch;
+    margin: 0 auto;
+    text-wrap: balance;
+  }
+
+  @media (max-width: 900px) {
+    .doom-orbit {
       grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 18px;
+    }
+    .doom-orbit-centre {
+      grid-column: 1;
+      grid-row: 1;
+      min-height: 0;
+      margin-bottom: 6px;
+    }
+    .doom-orbit-note.note-1,
+    .doom-orbit-note.note-2,
+    .doom-orbit-note.note-3,
+    .doom-orbit-note.note-4 {
+      grid-column: 1;
+      grid-row: auto;
+      max-width: 460px;
+      width: 100%;
     }
   }
 
-  .doom-stamp-col {
-    display: flex;
-    justify-content: center;
-  }
-
-  .doom-on-repeat-stamp {
-    width: clamp(220px, 22vw, 300px);
-  }
-
-  .on-repeat-svg {
-    width: 100%;
-    height: auto;
-    overflow: visible;
-  }
-
-  .doom-card-col {
-    display: flex;
-    justify-content: center;
+  @media (prefers-reduced-motion: reduce) {
+    .doom-orbit.is-armed .doom-orbit-note { opacity: 1; transform: none; }
+    .doom-orbit.is-armed.is-live .doom-orbit-note { animation: none; }
   }
 
   /* ---------------------------------------------------- */
@@ -1913,7 +2003,7 @@ const agents = vignette3?.agents || [];
 
     // Interactive choice selection & dynamic pop-up logic
     let selectionAttempts = 0;
-    const dilemmaStageEl = document.querySelector("[data-dilemma-stage]");
+    let lastChoice: string | null = null;
     const choice1Btn = document.getElementById("choiceOption1");
     const choice2Btn = document.getElementById("choiceOption2");
     const answerPopup = document.getElementById("dilemmaAnswerPopup");
@@ -1922,13 +2012,19 @@ const agents = vignette3?.agents || [];
     const popupText = document.getElementById("popupText");
     const popupActionBtn = document.getElementById("popupActionBtn");
     const popupActionBtnText = document.getElementById("popupActionBtnText");
-    const dilemmaQuestionsWrap = document.getElementById("dilemmaQuestionsWrap");
     const benefitsFrameWrap = document.getElementById("benefitsFrameWrap");
+    const benefitsRunway = benefitsFrameWrap;
+    const benefitsCurtainLayer = document.getElementById("benefitsCurtainLayer");
     const exploreWorkflowBtn = document.getElementById("exploreWorkflowBtn");
-    const benefitsDesktopPeek = document.getElementById("benefitsDesktopPeek");
 
     function openAnswerPopup(choiceNumber: string) {
-      selectionAttempts += 1;
+      // Only advance to "ALSO WRONG" when the user switches their choice.
+      // Re-picking the same option keeps showing "WRONG" / "try again".
+      const isRepeatChoice = lastChoice !== null && choiceNumber === lastChoice;
+      if (!isRepeatChoice) {
+        selectionAttempts += 1;
+      }
+      lastChoice = choiceNumber;
 
       if (choice1Btn) choice1Btn.classList.toggle("is-selected", choiceNumber === "1");
       if (choice2Btn) choice2Btn.classList.toggle("is-selected", choiceNumber === "2");
@@ -1976,16 +2072,17 @@ const agents = vignette3?.agents || [];
       if (choice2Btn) choice2Btn.classList.remove("is-selected");
     }
 
-    function navigateToHowItWorks() {
-      const howItWorks =
-        document.getElementById("how-it-works") ||
-        document.getElementById("how-it-works-hero-canvas") ||
-        document.querySelector(".how-it-works-section");
-      if (howItWorks) {
-        howItWorks.scrollIntoView({ behavior: "smooth" });
-      } else {
-        window.scrollBy({ top: window.innerHeight * 1.5, behavior: "smooth" });
-      }
+    // Scroll to the end of the benefits runway: the curtain finishes lifting
+    // exactly as the How It Works stage settles into place.
+    function raiseBenefitsCurtain() {
+      if (!benefitsRunway) return;
+      const rect = benefitsRunway.getBoundingClientRect();
+      const liftDistance = rect.height - window.innerHeight;
+      if (liftDistance <= 0) return;
+      window.scrollTo({
+        top: window.scrollY + rect.top + liftDistance,
+        behavior: "smooth",
+      });
     }
 
     function handlePopupAction() {
@@ -1993,11 +2090,9 @@ const agents = vignette3?.agents || [];
       if (currentBtnText === "try again") {
         closeAnswerPopup();
       } else if (currentBtnText === "wth?" || currentBtnText === "wtf" || currentBtnText === "wth") {
-        // Transition to Frame 3: The Benefits Frame!
+        // Scroll down to the Benefits section (its own page, reachable by scrolling)
         closeAnswerPopup();
-        if (dilemmaStageEl) dilemmaStageEl.classList.add("is-benefits-mode");
-        if (dilemmaQuestionsWrap) dilemmaQuestionsWrap.classList.add("is-hidden");
-        if (benefitsFrameWrap) benefitsFrameWrap.classList.remove("is-hidden");
+        if (benefitsFrameWrap) benefitsFrameWrap.scrollIntoView({ behavior: "smooth" });
       } else {
         closeAnswerPopup();
       }
@@ -2013,8 +2108,84 @@ const agents = vignette3?.agents || [];
       });
     }
 
-    if (exploreWorkflowBtn) exploreWorkflowBtn.addEventListener("click", navigateToHowItWorks);
-    if (benefitsDesktopPeek) benefitsDesktopPeek.addEventListener("click", navigateToHowItWorks);
+    if (exploreWorkflowBtn) exploreWorkflowBtn.addEventListener("click", raiseBenefitsCurtain);
+
+    // Doom loop: land the listing first, then let the notes assemble around it.
+    // autoPlay is off on the card so the two stay in step.
+    const doomOrbit = document.querySelector("[data-doom-orbit]");
+    if (doomOrbit && !doomOrbit.hasAttribute("data-doom-bound")) {
+      doomOrbit.setAttribute("data-doom-bound", "1");
+      // Only hide the notes once we know JS is running to reveal them again
+      doomOrbit.classList.add("is-armed");
+      const doomCard = doomOrbit.querySelector(".doodle-card-container");
+      const orbitObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            doomOrbit.classList.add("is-live");
+            if (doomCard) doomCard.dispatchEvent(new CustomEvent("doodle:slam"));
+            orbitObserver.disconnect();
+          });
+        },
+        // Watch the card, not the whole orbit: stacked on a phone the orbit is
+        // several screens tall, where a ratio threshold may never be met.
+        { threshold: 0.4, rootMargin: "0px 0px -40px 0px" },
+      );
+      orbitObserver.observe(doomCard || doomOrbit);
+    }
+
+    // The desktop sits some way down inside the How It Works stage. Measure that
+    // offset so the curtain hem lands just above the mockup's top bezel, leaving
+    // the device peeking out at the bottom of the benefits screen at any size.
+    function syncBenefitsLift() {
+      if (!benefitsRunway) return;
+      const howViewport = document.querySelector(".how-sticky-viewport");
+      const mockup = document.querySelector(".device-screen-mockup");
+      const zoom = document.querySelector("[data-desktop-zoom]");
+      // Skip while the desktop is scaled up ("dive in" mode) — the measurement
+      // would be taken from a transformed box.
+      if (!howViewport || !mockup) return;
+      if (zoom && zoom.classList.contains("is-fullscreen")) return;
+
+      const vh = window.innerHeight;
+      const peek = vh * 0.15;
+      const desktopOffset =
+        mockup.getBoundingClientRect().top - howViewport.getBoundingClientRect().top;
+      const lift = Math.round(vh - peek - desktopOffset + 10);
+      benefitsRunway.style.setProperty(
+        "--benefits-lift",
+        `${Math.max(lift, Math.round(vh * 0.35))}px`,
+      );
+    }
+
+    // Benefits curtain lift, driven by scroll through its own runway.
+    function onBenefitsScroll() {
+      if (!benefitsRunway || !benefitsCurtainLayer) return;
+      const rect = benefitsRunway.getBoundingClientRect();
+      const liftDistance = rect.height - window.innerHeight;
+      if (liftDistance <= 0) return;
+
+      // The curtain is viewport-fixed, so before its runway reaches the top it
+      // has to ride up with the runway the way an ordinary section would.
+      if (rect.top > 0) {
+        benefitsCurtainLayer.style.transform = `translateY(${rect.top.toFixed(2)}px)`;
+        benefitsCurtainLayer.style.pointerEvents = "auto";
+        return;
+      }
+
+      const p = Math.min(Math.max(-rect.top / liftDistance, 0), 1);
+      const translateY = Math.min(p * 105, 105);
+      benefitsCurtainLayer.style.transform = `translateY(-${translateY.toFixed(2)}%)`;
+      benefitsCurtainLayer.style.pointerEvents = p >= 0.95 ? "none" : "auto";
+    }
+
+    window.addEventListener("scroll", onBenefitsScroll, { passive: true });
+    window.addEventListener("resize", () => {
+      syncBenefitsLift();
+      onBenefitsScroll();
+    });
+    syncBenefitsLift();
+    onBenefitsScroll();
 
     if (!runway || !curtain) return;
 
