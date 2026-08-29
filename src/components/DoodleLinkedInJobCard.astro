@@ -149,6 +149,17 @@ const {
     max-width: 720px;
     display: flex;
     justify-content: center;
+    /* How far the card is scaled up before it slams down. The scaled box is
+       what the browser counts as scrollable overflow, so this is capped on
+       narrow viewports (see the small-screen block at the bottom). */
+    --doodle-entry-scale: 1.65;
+    --doodle-entry-lift: -55px;
+    --doodle-entry-lift-start: -60px;
+    /* Belt-and-braces: the entry transform is decoration and must never be
+       able to widen the document. Clipped horizontally only, with room left
+       for the 7px cel-shadow; vertical overhang (crown, dust) stays visible. */
+    overflow-x: clip;
+    overflow-clip-margin: 16px;
   }
 
   /* Comic Impact Dust Shockwave */
@@ -189,6 +200,7 @@ const {
     box-shadow: 7px 7px 0px #000000;
     font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, sans-serif;
     color: rgba(0, 0, 0, 0.9);
+    max-width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -199,7 +211,8 @@ const {
     z-index: 5;
     /* Initial state before slam */
     opacity: 0;
-    transform: perspective(1000px) scale(1.65) translateY(-55px) rotate(-2deg);
+    transform: perspective(1000px) scale(var(--doodle-entry-scale, 1.65))
+      translateY(var(--doodle-entry-lift, -55px)) rotate(-2deg);
     filter: blur(8px);
     will-change: transform, opacity, filter, box-shadow;
   }
@@ -224,7 +237,8 @@ const {
   @keyframes cartoonSlamImpact {
     0% {
       opacity: 0;
-      transform: perspective(1000px) scale(1.65) translateY(-60px) rotate(-3deg);
+      transform: perspective(1000px) scale(var(--doodle-entry-scale, 1.65))
+        translateY(var(--doodle-entry-lift-start, -60px)) rotate(-3deg);
       filter: blur(8px);
       box-shadow: 20px 30px 0px rgba(0, 0, 0, 0);
     }
@@ -562,6 +576,19 @@ const {
     font-weight: 700;
     color: #9CA3AF;
     letter-spacing: 0.1em;
+  }
+
+  /* Once the card goes full-bleed in a single column there is no side room
+     left for a 1.65x scale-up: the scaled box is counted as scrollable
+     overflow and drags the whole document sideways. Drop the scale-up and
+     let the drop, rotation, blur and the squash/stretch settle carry the
+     slam instead. */
+  @media (max-width: 860px) {
+    .doodle-card-wrapper {
+      --doodle-entry-scale: 1;
+      --doodle-entry-lift: -68px;
+      --doodle-entry-lift-start: -74px;
+    }
   }
 
   @media (max-width: 580px) {
