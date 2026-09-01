@@ -16,17 +16,17 @@ export interface Props {
 }
 
 const {
-    title = "AUTOMATING UNEMPLOYMENT",
+    title = "PROJECT TITLE",
     subtitle = "Case Study",
-    category = "Agentic Workflow Implementation",
-    statLabel = "RESULTS",
-    statValue = "85% TIME SAVINGS",
-    iconSrc = "/img/robot-icon.svg",
-    imageUrl = "/holo-card/afro-lounger-art.webp",
-    maskUrl = "/holo-card/afro-lounger-mask.png",
+    category = "Category",
+    statLabel = "STAT",
+    statValue = "—",
+    iconSrc,
+    imageUrl,
+    maskUrl,
     backUrl = "/img/card-back-generic.svg",
-    cardBg = "#4ca5ac",
-    borderColor = "#1d767d",
+    cardBg = "#27272A",
+    borderColor = "#000000",
     borderWidth = "16px",
     holoEffect = "secret_rare_etched",
 } = Astro.props;
@@ -79,7 +79,7 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
 
 <!-- Reusable Holographic Project Card Component -->
 <div
-    class="card interactive masked"
+    class:list={["card", "interactive", imageUrl && maskUrl && "masked"]}
     data-rarity={activeEffect.rarity}
     data-set={activeEffect.set}
     data-number={activeEffect.number}
@@ -113,17 +113,21 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
                     "--foil": `url(${activeEffect.foil})`,
                 }}
             >
-                <!-- Central Character Artwork -->
-                <div class="artwork-layer" aria-hidden="true">
-                    <img
-                        class="character-artwork"
-                        src={imageUrl}
-                        alt=""
-                        loading="eager"
-                        width="600"
-                        height="921"
-                    />
-                </div>
+                <!-- Central Character Artwork — omitted entirely when a
+                     project has no bespoke art yet; the card still renders
+                     as a clean color-blocked frame via cardBg/borderColor. -->
+                {imageUrl && (
+                    <div class="artwork-layer" aria-hidden="true">
+                        <img
+                            class="character-artwork"
+                            src={imageUrl}
+                            alt=""
+                            loading="eager"
+                            width="600"
+                            height="921"
+                        />
+                    </div>
+                )}
 
                 <!-- Structured Semantic Card Content Layout -->
                 <div class="card-inner-layout">
@@ -216,6 +220,40 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
 
     .card[data-holo-project-card] .card__shine {
         transition: opacity 0.4s ease;
+    }
+
+    /* Deck integration: the deck's own controller (deckController.js) owns
+       all position/rotation for cards inside .deck-card-item, applying its
+       transform to that wrapper element. While a card sits in the
+       draw/discard stack (.is-deck-stack), neutralize its own inner
+       transforms so the two systems never compose into a double rotation,
+       and suppress the pointer-driven holo shine/glare so only the active
+       hero card shows the skeuomorphic tilt/shine reaction
+       (mountHoloProjectCards() below gates the pointer listeners the same
+       way). The active hero card (.is-active-hero) keeps its own
+       card__rotator transform live — the wrapper's own rotateY sits at 0deg
+       while a card is centered/active, so the card's pointer-tilt composes
+       cleanly on top of it with nothing to conflict with. */
+    .deck-card-item.is-deck-stack .card__translater,
+    .deck-card-item.is-deck-stack .card__rotator {
+        transform: none !important;
+    }
+
+    /* Fill the deck's own sizing box instead of imposing this card's
+       standalone clamp() width — .deck-card-item controls dimensions (and
+       is what deckController.js measures via getBoundingClientRect) when
+       the card is deck-managed, exactly like HoloCard's fill-parent
+       pattern. */
+    .deck-card-item .card[data-holo-project-card] {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    .deck-card-item.is-deck-stack .card__shine,
+    .deck-card-item.is-deck-stack .card__glare {
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
 
     /* Card Frame & Border Styling */
@@ -393,6 +431,15 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
             const rotator = card.querySelector(".card__rotator");
             if (!rotator) return;
 
+            // Deck-managed cards: deckController.js already owns click (open
+            // modal / deal to card) and rotation for every card in the deck,
+            // and only the currently centered card should show the
+            // tilt/shine reaction — mirrors HoloCard.astro's own
+            // `is-active-hero` gating.
+            const deckItem = card.closest(".deck-card-item");
+            const isDeckManaged = !!deckItem;
+            const isDeckActive = () => !deckItem || deckItem.classList.contains("is-active-hero");
+
             let isFlipped = false;
 
             // Initialize as active with ambient resting holographic illumination
@@ -407,6 +454,7 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
             card.style.setProperty("--rotate-y", "0deg");
 
             const updatePointer = (e) => {
+                if (!isDeckActive()) return;
                 const rect = card.getBoundingClientRect();
                 const absolute = {
                     x: e.clientX - rect.left,
@@ -456,10 +504,18 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
                 card.style.setProperty("--rotate-y", "0deg");
             });
 
-            rotator.addEventListener("click", () => {
-                isFlipped = !isFlipped;
-                card.classList.toggle("flipped", isFlipped);
-            });
+            // Deck cards get their face-up/face-down flip entirely from
+            // deckController's own wrapper rotation as they transit the
+            // deck — a second, independent click-flip here would fire
+            // alongside deckController's click-opens-modal handler on the
+            // same click and fight it. Only attach it for standalone usage
+            // (Sandbox, tarot-showcase).
+            if (!isDeckManaged) {
+                rotator.addEventListener("click", () => {
+                    isFlipped = !isFlipped;
+                    card.classList.toggle("flipped", isFlipped);
+                });
+            }
         });
     }
 

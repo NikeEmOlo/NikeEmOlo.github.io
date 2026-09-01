@@ -104,7 +104,12 @@ function updateNavMode() {
     const naturalWidth = nav.offsetWidth
     nav.style.width = ''
 
-    if (naturalWidth >= window.innerWidth) {
+    // nav is fixed-position, anchored via `right: 1.25rem` — that offset has
+    // to count against the available width too, or the nav's left edge can
+    // go negative (overflow off-screen) at widths where naturalWidth alone
+    // still looks like it fits against window.innerWidth.
+    const rightOffset = parseFloat(getComputedStyle(nav).right) || 0
+    if (naturalWidth + rightOffset >= window.innerWidth) {
         nav.classList.add('is-mobile')
     } else if (wasMobile) {
         closeMenu()

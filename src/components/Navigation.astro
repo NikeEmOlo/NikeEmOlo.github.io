@@ -11,11 +11,10 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
     </button>
     <div class="nav-menu" id="nav-menu">
         <ul id="pages-list">
-            <li><button id="open-living-cv" class="nav-cv" aria-haspopup="dialog" aria-controls="cv-modal">CV</button></li>
-            <li><a href="/" aria-current={isCurrent("/") ? "page" : undefined}>Home</a></li>
-            <li><a href="/projects" aria-current={isCurrent("/projects") ? "page" : undefined}>Projects</a></li>
-            <li><button>Outer Office</button></li>
-            <li><button>Contact</button></li>
+            <li><button id="open-living-cv" class="nav-cv" style="--accent: var(--doodle-pink, #FF1F70)" aria-haspopup="dialog" aria-controls="cv-modal">CV</button></li>
+            <li><a href="/" style="--accent: var(--doodle-lime, #D1FF00)" aria-current={isCurrent("/") ? "page" : undefined}>Home</a></li>
+            <li><button style="--accent: var(--doodle-yellow, #FFDA00)">Outer Office</button></li>
+            <li><button style="--accent: var(--doodle-purple, #7A00FF)">Contact</button></li>
         </ul>
     </div>
         <button class="close-btn">Close</button>
@@ -34,9 +33,14 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         align-items: center;
         width: fit-content;
         min-height: 40px;
-        border-radius: 16px;
-        padding: 0 8px;
+        border-radius: 9999px;
+        padding: 6px;
         z-index: 200;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 2px solid #000000;
+        box-shadow: 2px 3px 0px #000000;
 
         .close-btn {
             display: none;
@@ -53,28 +57,7 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
             color: #ffffff4b;
         }
 
-        /* Swap the border gradient to match the darkened portal world (navy → purple) */
-        &::before {
-            background: linear-gradient(0.3turn, #1a27566e 0%, #16245e75 100%);
-        }
-    }
-
-    nav::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        padding: 2px;
-        background: var(--tarot-gradient);
-        -webkit-mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        pointer-events: none;
+        background: rgba(15, 15, 20, 0.85);
     }
 
     .nav-menu {
@@ -93,39 +76,50 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
 
     ul {
         display: flex;
-        gap: 0.25rem;
+        gap: 6px;
         list-style: none;
         padding: 0;
         margin: 0;
-    }
-
-    #pages-list button,
-    #pages-list a {
-        color: var(--muted-text)
     }
 
     button,
     #pages-list a {
         display: flex;
         align-items: center;
-        background: none;
-        padding: 6px 8px;
-        border: none;
-        border-radius: 8px;
-        color: var(--text);
+        background: #ffffff;
+        padding: 6px 14px;
+        border: 2px solid #000000;
+        border-radius: 9999px;
+        color: #000000;
         font-family: var(--secondary-font);
+        font-weight: 700;
         text-transform: capitalize;
         text-decoration: none;
-        font-size: .85rem;
+        font-size: .8rem;
         line-height: 1;
         white-space: nowrap;
         cursor: pointer;
+        box-shadow: 2px 2px 0px #000000;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    button:hover,
+    #pages-list a:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 0px #000000, 0 6px 14px color-mix(in srgb, var(--accent, var(--doodle-cyan, #00B3E3)) 45%, transparent);
+    }
+
+    button:active,
+    #pages-list a:active {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 0px #000000;
     }
 
     button[aria-pressed="true"],
     #pages-list a[aria-current="page"] {
-        background: var(--text);
-        color: black;
+        background: var(--doodle-cyan, #00B3E3);
+        color: #000000;
+        border-color: #000000;
     }
 
     .nav-cv::before {
@@ -154,7 +148,7 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         width: 36px;
         height: 36px;
         padding: 7px;
-        border-radius: 8px;
+        border-radius: 9999px;
     }
 
     .hamburger span {
@@ -162,7 +156,7 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         width: 20px;
         height: 2px;
         border-radius: 2px;
-        background: var(--tarot-gradient);
+        background: #000000;
         transition: transform 0.25s ease, opacity 0.25s ease;
         transform-origin: center;
     }
@@ -181,8 +175,8 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
 
     /* ── Collapsed (hamburger) layout ── */
     nav.is-mobile {
-        padding: 0 4px;
-        border-radius: 12px;
+        padding: 4px;
+        border-radius: 16px;
     }
 
     nav.is-mobile .hamburger {
@@ -197,28 +191,11 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         flex-direction: column;
         align-items: stretch;
         padding: 8px;
-        border-radius: 12px;
-        background-color: var(--ink);
+        border-radius: 16px;
+        background-color: #ffffff;
+        border: 2px solid #000000;
+        box-shadow: 3px 4px 0px #000000;
         z-index: 100;
-    }
-
-    /* Gradient border on the dropdown */
-    nav.is-mobile .nav-menu::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        border-radius: 12px;
-        padding: 2px;
-        background: var(--tarot-gradient);
-        -webkit-mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        pointer-events: none;
     }
 
     nav.is-mobile:has(.hamburger[aria-expanded="true"]) .nav-menu {

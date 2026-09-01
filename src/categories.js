@@ -3,28 +3,27 @@
 // and the navigation renders tabs in this order.
 export const CATEGORIES = ['development', 'delivery', 'operations']
 
-// Per-category display label and deck palette for the /projects page. Each
-// gradient stays within the existing brand hues (teal / purple / orange are
-// all already tokens in global.css) rather than introducing new colors — the
-// three categories just get a distinct weighting of the palette so the deck
-// reads as visibly re-themed without breaking brand consistency.
+// Per-category display label and deck accent for the home page. Accents are
+// drawn from the doodle-pop palette (global.css) — cyan stays reserved as
+// the site's primary/active-state color, so each category gets one of the
+// other three.
 export const CATEGORY_META = {
     development: {
         label: 'Development',
         description: 'Full-stack builds, tooling, and this site itself.',
-        gradient: 'linear-gradient(0.3turn, #2A9D8F 0%, #359E9D 50%, #7ECECE 100%)',
-        accent: '#7ECECE',
+        gradient: 'linear-gradient(0.3turn, #88A600 0%, #D1FF00 50%, #E5FF66 100%)',
+        accent: '#D1FF00',
     },
     delivery: {
         label: 'Delivery',
         description: 'Client-facing programmes, shipped and supported.',
-        gradient: 'linear-gradient(0.3turn, #704898 0%, #7B4FA6 50%, #BE83D3 100%)',
-        accent: '#BE83D3',
+        gradient: 'linear-gradient(0.3turn, #A61449 0%, #FF1F70 50%, #FF6FA0 100%)',
+        accent: '#FF1F70',
     },
     operations: {
         label: 'Operations',
         description: 'Process fixes and the systems behind the work.',
-        gradient: 'linear-gradient(0.3turn, #C85F22 0%, #E8722C 50%, #F4A468 100%)',
-        accent: '#F4A468',
+        gradient: 'linear-gradient(0.3turn, #A68E00 0%, #FFDA00 50%, #FFE666 100%)',
+        accent: '#FFDA00',
     },
 }

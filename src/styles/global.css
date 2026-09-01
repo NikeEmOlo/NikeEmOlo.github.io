@@ -63,7 +63,7 @@ h1, h2, h3, h4, h5, h6 {
   --archivo-font: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* ---------- Brand ---------- */
-  --teal: #359E9D;          /* primary */
+  --teal: #359E9D;
   --teal-light: #7ECECE;
   --purple: #704898;
   --orchid: #BE83D3;
@@ -73,9 +73,12 @@ h1, h2, h3, h4, h5, h6 {
   --dark-background: #080e1c;
   /* light purple */
 
-  /* ---------- Doodle-Pop Palette (Vibrant Neo-Pop Graffiti Energy) ---------- */
+  /* ---------- Doodle-Pop Palette (Vibrant Neo-Pop Graffiti Energy) ----------
+     PRIMARY colour scheme. --doodle-cyan is the lead accent — use it first
+     for hero backgrounds, primary CTAs, and card fills; the other four round
+     out the set for secondary accents. */
   --doodle-pink: #FF1F70;
-  --doodle-cyan: #00B3E3;
+  --doodle-cyan: #00B3E3;    /* primary */
   --doodle-lime: #D1FF00;
   --doodle-yellow: #FFDA00;
   --doodle-purple: #7A00FF;

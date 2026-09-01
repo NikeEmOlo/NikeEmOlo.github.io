@@ -21,11 +21,15 @@ links: {
     odinHome: "https://www.theodinproject.com",
     github: "https://github.com/NikeEmOlo",
 }
-cardBg: "#93619C"
-borderColor: "#8353A3"
+cardBg: "#7A00FF"
+borderColor: "#4F00A6"
 imageUrl: "/holo-card/how-i-made-this-website-art.webp"
 maskUrl: "/holo-card/how-i-made-this-website-mask.png"
 holoEffect: "secret_rare_etched"
+iconSrc: "/img/robot-icon.svg"
+holoCategory: "Creative Web & AI Workflows"
+holoStatLabel: "TECH STACK"
+holoStatValue: "ASTRO + CSS SHADERS"
 ---
 
 some text here?

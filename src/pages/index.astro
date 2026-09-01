@@ -1,147 +1,475 @@
 ---
 import Base from '../layouts/Base.astro'
 import Navigation from '../components/Navigation.astro'
-import AskCard from '../components/AskCard.astro'
-import SmokeResponse from '../components/SmokeResponse.astro'
+import CategoryRail from '../components/CategoryRail.astro'
+import HoloProjectCard from '../components/HoloProjectCard.astro'
+import ProjectModal from '../components/ProjectModal.astro'
 import LivingCV from '../components/LivingCV.astro'
+import { getCollection, render } from 'astro:content'
+import { CATEGORIES } from '../categories.js'
+
+const rawProjects = (await getCollection('projects', ({ data }) => data.active))
+    .sort((a, b) => a.data.order - b.data.order)
+
+// Harmonic Mystic Tarot Color Presets — still used by ProjectModal's embedded
+// HoloCard showcase (see ProjectModal.astro); the deck itself now renders
+// HoloProjectCard using each project's own cardBg/borderColor instead.
+const ORB_PALETTE: Array<"purple" | "teal" | "amber" | "rose" | "blue" | "cyan" | "coral" | "emerald"> = [
+    "purple",
+    "teal",
+    "amber",
+    "rose",
+    "blue",
+    "cyan",
+    "coral",
+    "emerald",
+]
+
+const PROJ_TYPE_LABEL: Record<string, string> = {
+    "case study": "Case Study",
+    "overview & timeline": "Overview & Timeline",
+}
+
+const projects = await Promise.all(
+    rawProjects.map(async (project, index) => {
+        const { Content } = await render(project)
+        const orbColor = ORB_PALETTE[index % ORB_PALETTE.length]
+
+        let stat = "+100 Tranquility"
+        if (project.data.category === "operations") stat = "+100 Efficiency"
+        else if (project.data.category === "delivery") stat = "+100 Delivery"
+        else if (project.data.category === "development") stat = "+100 Full-Stack"
+
+        return {
+            project,
+            Content,
+            orbColor,
+            stat,
+        }
+    })
+)
+
+const counts = Object.fromEntries(
+    CATEGORIES.map((category) => [category, projects.filter((p) => p.project.data.category === category).length])
+)
+
+const employers = [
+    "The Odin Project",
+    "Outer Office",
+    "Highgate Transportation",
+    "Auckland Transport",
+    "Asahi Beverages",
+    "Auckland Council",
+    "IFM Electrical",
+    "Coster Content Ltd",
+]
 ---
 
-  <Base>
-      <main>
+<Base>
+    <main class="home-page">
+        <!-- Top Navigation -->
         <Navigation />
-      </main>
-      <AskCard />
-      <SmokeResponse />
-      <LivingCV />
-      <div class="character-wrapper">
-        <video id="character-intro" autoplay muted playsinline preload="auto">
-          <source src="/intro_dark.webm" type="video/webm">
-        </video>
-        <video id="character-idle" muted playsinline loop preload="auto">
-          <source src="/idle_dark.webm" type="video/webm">
-        </video>
-      </div>
 
+        <!-- Header Section -->
+        <div class="intro">
+            <div class="identity-block">
+                <p class="identity-name">Olanike Olowo-Fela.</p>
+                <p class="identity-tagline">Technology Consultant · Full-Stack Developer</p>
+            </div>
+
+            <header class="work-header">
+                <p class="work-eyebrow">Selected Work</p>
+                <h1 class="work-headline">
+                    <strong>8 years</strong> of hands-on delivery — from AI-assisted automation to national transport programmes — where I've been, and what I built.
+                </h1>
+            </header>
+        </div>
+
+        <p id="filter-announcement" class="visually-hidden" role="status" aria-live="polite"></p>
+
+        <!-- Main Work Stage: Category Rail (Left) + Doodle-Pop Card Deck (Right) -->
+        <div class="work-stage">
+            <CategoryRail counts={counts} total={projects.length} />
+
+            <section class="deck-section" aria-label="Selected work card deck">
+                <!-- Stack Labels & Controls -->
+                <div class="deck-header">
+                    <div class="deck-stack-indicators" aria-hidden="true">
+                        <span class="stack-indicator-label discard-label">Discard Pile</span>
+                        <span class="stack-indicator-sep">⇄</span>
+                        <span class="stack-indicator-label draw-label">Draw Deck</span>
+                    </div>
+
+                    <div class="deck-controls">
+                        <button type="button" class="nav-arrow-btn" id="carouselPrevBtn" aria-label="Return card to deck">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                                <path d="M15 18l-6-6 6-6" />
+                            </svg>
+                        </button>
+                        <button type="button" class="nav-arrow-btn" id="carouselNextBtn" aria-label="Deal next card">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3D Dual-Stack Dealing Stage -->
+                <div class="deck-stage-wrapper">
+                    <div
+                        class="deck-stage"
+                        data-deck-stage
+                        tabindex="0"
+                        role="region"
+                        aria-label="Project card dealing deck. Drag or scroll to deal cards from deck to discard."
+                    >
+                        {projects.map(({ project, stat }) => (
+                            <div
+                                class="deck-card-item"
+                                data-project-id={project.id}
+                                data-category={project.data.category}
+                                role="button"
+                                tabindex="0"
+                                aria-label={`View ${project.data.projTitle} project details`}
+                            >
+                                <HoloProjectCard
+                                    title={project.data.projTitle}
+                                    subtitle={PROJ_TYPE_LABEL[project.data.projType] || "Case Study"}
+                                    category={project.data.holoCategory}
+                                    statLabel={project.data.holoStatLabel || "RESULTS"}
+                                    statValue={project.data.holoStatValue || stat}
+                                    iconSrc={project.data.iconSrc}
+                                    imageUrl={project.data.imageUrl}
+                                    maskUrl={project.data.maskUrl}
+                                    cardBg={project.data.cardBg}
+                                    borderColor={project.data.borderColor}
+                                    holoEffect={project.data.holoEffect}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Trusted By Strip -->
+        <footer class="trusted-by">
+            <span class="trusted-by-label">Trusted by</span>
+            {employers.map((name, i) => (
+                <>
+                    <span class="trusted-by-name">{name}</span>
+                    {i < employers.length - 1 && <span class="trusted-by-sep" aria-hidden="true">·</span>}
+                </>
+            ))}
+        </footer>
+
+        <!-- Sandbox-Style Two-Column Detail Modal -->
+        <ProjectModal projects={projects} />
+    </main>
+
+    <LivingCV />
 
     <script>
-      import "../index.js"
+        import { initTarotDeckEngine } from "../lib/deckController.js"
+
+        document.addEventListener("astro:page-load", initTarotDeckEngine)
+        document.addEventListener("DOMContentLoaded", initTarotDeckEngine)
     </script>
+</Base>
 
-
-    <style>
-      @property --bg-1 { syntax: '<color>'; initial-value: #091A1B; inherits: false; }
-      @property --bg-2 { syntax: '<color>'; initial-value: #070F11; inherits: false; }
-      @property --bg-3 { syntax: '<color>'; initial-value: #050A0E; inherits: false; }
-      @property --bg-4 { syntax: '<color>'; initial-value: #03050A; inherits: false; }
-
-      body {
-        display: flex;
-        flex-direction: column;
-        overflow-x: clip;
-        padding: 0;
-        background: radial-gradient(
-          in oklab
-          ellipse 50vw 130vh at 50vw 90vh,
-          var(--bg-1) 5%,
-          var(--bg-2) 35%,
-          var(--bg-3) 52%,
-          var(--bg-4) 70%) fixed;
-        transition: --bg-1 2s ease, --bg-2 2s ease, --bg-3 2s ease, --bg-4 2s ease;
-      }
-
-      body.fill-background {
-        --bg-1: var(--overview-bg);
-        --bg-2: var(--overview-bg);
-        --bg-3: var(--overview-bg);
-        --bg-4: var(--overview-bg);
-      }
-      main {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        width: 100%;
+<style>
+    /* Doodle-Pop cream canvas — warm off-white ground so the deck's bold
+       color-blocked cards and thick black linework read clearly, matching
+       the AU case-study page's white dilemma stage. */
+    body {
+        background: #FAF8F5;
+        color: #0F172A;
         min-height: 100dvh;
-        padding: 40px;
-        padding-top: calc(25vh + 60px);
-        gap: 25vh;
-      }
-      @media (max-width: 480px) {
-        main {
-          padding-top: 20dvh;
-          padding-inline: 16px;
-        }
-      }
+        overflow-x: hidden;
+    }
 
-      /* Flip-to-page transition overlay (built in tarotInteractions.js, appended
-         to <body>, so these rules must be global). */
-      :global(.flip-overlay) {
-        position: fixed;
-        inset: 0;
-        z-index: 1000;
+    .home-page {
+        --pw-ink: #0F172A;
+        --pw-muted: #64748B;
+        --pw-border: rgba(15, 23, 42, 0.12);
+        --pw-accent: var(--doodle-cyan, #00B3E3);
+        --pw-sans: var(--archivo-font, 'Archivo', -apple-system, sans-serif);
+
+        display: flex;
+        flex-direction: column;
+        height: 100dvh;
+        padding: clamp(56px, 6.5vh, 80px) clamp(24px, 4vw, 56px) clamp(16px, 2vh, 24px);
+        gap: clamp(14px, 1.8vh, 22px);
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    /* Intro Block */
+    .intro {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .identity-block {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .identity-name {
+        font-family: var(--pw-sans);
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+        color: #0F172A;
+        margin: 0;
+    }
+
+    .identity-tagline {
+        font-family: var(--pw-sans);
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--pw-muted);
+        margin: 0;
+    }
+
+    .work-header {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 6px;
+    }
+
+    .work-eyebrow {
+        display: inline-flex;
+        align-self: flex-start;
+        font-family: monospace;
+        font-weight: 800;
+        font-size: 0.6875rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #000000;
+        background: var(--pw-accent);
+        border: 2px solid #000000;
+        border-radius: 9999px;
+        padding: 2px 12px;
+        box-shadow: 2px 2px 0px #000000;
+        margin: 0;
+    }
+
+    .work-headline {
+        max-width: 54ch;
+        font-family: var(--pw-sans);
+        font-weight: 600;
+        font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+        line-height: 1.45;
+        color: #334155;
+        letter-spacing: -0.01em;
+        margin: 0;
+    }
+
+    .work-headline strong {
+        font-weight: 900;
+        color: #0F172A;
+    }
+
+    /* Work Stage: Category Rail on Left & Card Deck on Right */
+    .work-stage {
+        display: grid;
+        grid-template-columns: 200px minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(24px, 3.5vw, 48px);
+        width: 100%;
+        flex: 1;
+        min-height: 0;
+    }
+
+    /* Deck Section */
+    .deck-section {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        min-width: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .deck-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 20;
         pointer-events: none;
-      }
-      :global(.flip-scaler) {
-        perspective: 1600px;
-        will-change: top, left, width, height;
-      }
-      :global(.flip-card) {
+    }
+
+    .deck-stack-indicators {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: monospace;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #64748B;
+        opacity: 0.85;
+    }
+
+    .stack-indicator-sep {
+        color: var(--pw-accent);
+        font-size: 0.85rem;
+    }
+
+    .deck-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        pointer-events: auto;
+    }
+
+    .nav-arrow-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 2px solid #000000;
+        color: #0F172A;
+        box-shadow: 2px 2px 0px #000000;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .nav-arrow-btn:hover {
+        background: var(--pw-accent);
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 0px #000000;
+    }
+
+    .nav-arrow-btn:active {
+        transform: translate(1px, 1px);
+        box-shadow: 1px 1px 0px #000000;
+    }
+
+    /* Deck Stage 3D Perspective Area */
+    .deck-stage-wrapper {
         position: relative;
         width: 100%;
         height: 100%;
-        transform-style: preserve-3d;
-      }
-      :global(.flip-face) {
-        position: absolute;
-        inset: 0;
-        backface-visibility: hidden;
-        overflow: hidden;
-      }
-      :global(.flip-card .flip-front) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .deck-stage {
+        position: relative;
         width: 100%;
         height: 100%;
-      }
-      :global(.flip-back) {
-        background-color: var(--overview-bg);
-        transform: rotateY(180deg);
-      }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 1400px;
+        perspective-origin: center center;
+        cursor: grab;
+        user-select: none;
+        outline: none;
+    }
 
-      .character-wrapper {
-        position: fixed;
-        bottom: 0;
+    .deck-stage.is-dragging {
+        cursor: grabbing;
+    }
+
+    .deck-card-item {
+        position: absolute;
+        /* Matches HoloProjectCard's own standalone width/aspect-ratio
+           (Sandbox.astro, tarot-showcase.astro) exactly — its internal
+           typography is sized with vw units tuned for that formula, so the
+           deck must render the card at the same size, not a smaller one,
+           or the same font sizes get crammed into a narrower box. */
+        width: clamp(280px, 30vw, 390px);
+        aspect-ratio: 600 / 921;
+        transform-style: preserve-3d;
+        cursor: pointer;
+        will-change: transform, z-index;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    /* Trusted By Strip */
+    .trusted-by {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        flex-shrink: 0;
+        gap: 0.5em;
         width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        pointer-events: none;
-        z-index: -1;
-        transform-origin: bottom center;
-        transition: opacity 2s ease;
+        margin: 0;
+        padding-top: 10px;
+        border-top: 2px solid #000000;
+        font-family: var(--pw-sans);
+        font-size: 0.6875rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: var(--pw-muted);
+    }
 
-        video {
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 1400px;
-          max-width: unset;
-          height: auto;
-          pointer-events: none;
+    .trusted-by-label {
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #0F172A;
+        margin-right: 0.4em;
+    }
+
+    .trusted-by-name {
+        color: #64748B;
+        transition: color 0.2s ease;
+    }
+
+    .trusted-by-name:hover {
+        color: #0F172A;
+    }
+
+    .trusted-by-sep {
+        opacity: 0.4;
+    }
+
+    /* Mobile Responsive Adaptation */
+    @media (max-width: 900px) {
+        .home-page {
+            height: auto;
+            min-height: 100dvh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 48px 20px 32px;
+            gap: 20px;
         }
-      }
 
-      #character-idle {
-        opacity: 0;
-      }
-
-      body.fill-background .character-wrapper {
-        opacity: 0;
-      }
-
-      @media (max-width: 480px) {
-        .character-wrapper video {
-          width: 900px;
+        .work-stage {
+            grid-template-columns: minmax(0, 1fr);
+            flex: none;
+            gap: 20px;
         }
-      }
-    </style>
-  </Base>
 
+        .deck-stage-wrapper {
+            height: 480px;
+        }
+
+        .deck-header {
+            position: static;
+            margin-bottom: 12px;
+        }
+    }
+</style>
