@@ -92,25 +92,12 @@ const employers = [
             <CategoryRail counts={counts} total={projects.length} />
 
             <section class="deck-section" aria-label="Selected work card deck">
-                <!-- Stack Labels & Controls -->
+                <!-- Stack Labels -->
                 <div class="deck-header">
                     <div class="deck-stack-indicators" aria-hidden="true">
                         <span class="stack-indicator-label discard-label">Discard Pile</span>
                         <span class="stack-indicator-sep">⇄</span>
                         <span class="stack-indicator-label draw-label">Draw Deck</span>
-                    </div>
-
-                    <div class="deck-controls">
-                        <button type="button" class="nav-arrow-btn" id="carouselPrevBtn" aria-label="Return card to deck">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                                <path d="M15 18l-6-6 6-6" />
-                            </svg>
-                        </button>
-                        <button type="button" class="nav-arrow-btn" id="carouselNextBtn" aria-label="Deal next card">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                                <path d="M9 18l6-6-6-6" />
-                            </svg>
-                        </button>
                     </div>
                 </div>
 
@@ -136,6 +123,7 @@ const employers = [
                                     title={project.data.projTitle}
                                     subtitle={PROJ_TYPE_LABEL[project.data.projType] || "Case Study"}
                                     category={project.data.holoCategory}
+                                    summary={project.data.summary || project.data.holoCategory}
                                     statLabel={project.data.holoStatLabel || "RESULTS"}
                                     statValue={project.data.holoStatValue || stat}
                                     iconSrc={project.data.iconSrc}
@@ -148,8 +136,24 @@ const employers = [
                             </div>
                         ))}
                     </div>
+
+                    <!-- Navigation Controls: Attached directly beneath the center card -->
+                    <div class="deck-bottom-controls">
+                        <button type="button" class="nav-arrow-btn" id="carouselPrevBtn" aria-label="Return card to deck">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                                <path d="M15 18l-6-6 6-6" />
+                            </svg>
+                        </button>
+                        <button type="button" class="nav-arrow-btn" id="carouselNextBtn" aria-label="Deal next card">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </section>
+
+            <div class="stage-spacer" aria-hidden="true"></div>
         </div>
 
         <!-- Trusted By Strip -->
@@ -170,19 +174,18 @@ const employers = [
     <LivingCV />
 
     <script>
-        import { initTarotDeckEngine } from "../lib/deckController.js"
+        import { initCardDeckEngine } from "../lib/deckController.js"
 
-        document.addEventListener("astro:page-load", initTarotDeckEngine)
-        document.addEventListener("DOMContentLoaded", initTarotDeckEngine)
+        document.addEventListener("astro:page-load", initCardDeckEngine)
+        document.addEventListener("DOMContentLoaded", initCardDeckEngine)
     </script>
 </Base>
 
 <style>
     /* Doodle-Pop cream canvas — warm off-white ground so the deck's bold
-       color-blocked cards and thick black linework read clearly, matching
-       the AU case-study page's white dilemma stage. */
+       white (#ffffff) color-blocked cards and thick black linework stand out clearly. */
     body {
-        background: #FAF8F5;
+        background: var(--cream, #f2efe8);
         color: #0F172A;
         min-height: 100dvh;
         overflow-x: hidden;
@@ -198,8 +201,8 @@ const employers = [
         display: flex;
         flex-direction: column;
         height: 100dvh;
-        padding: clamp(56px, 6.5vh, 80px) clamp(24px, 4vw, 56px) clamp(16px, 2vh, 24px);
-        gap: clamp(14px, 1.8vh, 22px);
+        padding: clamp(40px, 4.5vh, 60px) clamp(24px, 4vw, 56px) clamp(20px, 2.5vh, 32px);
+        gap: clamp(12px, 1.5vh, 20px);
         overflow: hidden;
         box-sizing: border-box;
     }
@@ -278,15 +281,22 @@ const employers = [
         color: #0F172A;
     }
 
-    /* Work Stage: Category Rail on Left & Card Deck on Right */
+    /* Work Stage: Category Rail (Left) | Card Deck (Center) | Symmetrical Spacer (Right) */
     .work-stage {
         display: grid;
-        grid-template-columns: 200px minmax(0, 1fr);
-        align-items: center;
-        gap: clamp(24px, 3.5vw, 48px);
+        grid-template-columns: 200px minmax(0, 1fr) 200px;
+        align-items: flex-end;
+        gap: clamp(16px, 2.5vw, 36px);
         width: 100%;
         flex: 1;
         min-height: 0;
+        padding-bottom: 0;
+    }
+
+    .stage-spacer {
+        display: block;
+        width: 200px;
+        pointer-events: none;
     }
 
     /* Deck Section */
@@ -294,6 +304,7 @@ const employers = [
         position: relative;
         display: flex;
         flex-direction: column;
+        justify-content: flex-end;
         min-height: 0;
         min-width: 0;
         width: 100%;
@@ -307,7 +318,7 @@ const employers = [
         right: 0;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         z-index: 20;
         pointer-events: none;
     }
@@ -321,19 +332,30 @@ const employers = [
         font-weight: 700;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #64748B;
-        opacity: 0.85;
+        color: #0F172A;
+        background: #ffffff;
+        border: 2px solid #000000;
+        border-radius: 9999px;
+        padding: 3px 14px;
+        box-shadow: 2px 2px 0px #000000;
     }
 
     .stack-indicator-sep {
         color: var(--pw-accent);
         font-size: 0.85rem;
+        font-weight: 900;
     }
 
-    .deck-controls {
+    .deck-bottom-controls {
+        position: absolute;
+        bottom: clamp(8px, 1.2vh, 16px);
+        left: 50%;
+        transform: translateX(-50%);
         display: flex;
         align-items: center;
-        gap: 8px;
+        justify-content: center;
+        gap: 12px;
+        z-index: 40;
         pointer-events: auto;
     }
 
@@ -369,7 +391,7 @@ const employers = [
         width: 100%;
         height: 100%;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: center;
     }
 
@@ -378,13 +400,14 @@ const employers = [
         width: 100%;
         height: 100%;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: center;
         perspective: 1400px;
-        perspective-origin: center center;
+        perspective-origin: center 75%;
         cursor: grab;
         user-select: none;
         outline: none;
+        padding-bottom: clamp(62px, 7.5vh, 78px);
     }
 
     .deck-stage.is-dragging {
@@ -393,13 +416,12 @@ const employers = [
 
     .deck-card-item {
         position: absolute;
-        /* Matches HoloProjectCard's own standalone width/aspect-ratio
-           (Sandbox.astro, tarot-showcase.astro) exactly — its internal
-           typography is sized with vw units tuned for that formula, so the
-           deck must render the card at the same size, not a smaller one,
-           or the same font sizes get crammed into a narrower box. */
-        width: clamp(280px, 30vw, 390px);
+        left: 50%;
+        margin-left: calc(-0.5 * clamp(210px, 18.5vw, 270px));
+        width: clamp(210px, 18.5vw, 270px);
         aspect-ratio: 600 / 921;
+        border-radius: 12px;
+        transform-origin: center center;
         transform-style: preserve-3d;
         cursor: pointer;
         will-change: transform, z-index;
@@ -417,7 +439,8 @@ const employers = [
         gap: 0.5em;
         width: 100%;
         margin: 0;
-        padding-top: 10px;
+        padding-top: clamp(12px, 1.6vh, 20px);
+        padding-bottom: clamp(2px, 0.5vh, 6px);
         border-top: 2px solid #000000;
         font-family: var(--pw-sans);
         font-size: 0.6875rem;
@@ -461,6 +484,10 @@ const employers = [
             grid-template-columns: minmax(0, 1fr);
             flex: none;
             gap: 20px;
+        }
+
+        .stage-spacer {
+            display: none;
         }
 
         .deck-stage-wrapper {

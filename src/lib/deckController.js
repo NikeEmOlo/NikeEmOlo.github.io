@@ -1,5 +1,5 @@
 /**
- * Tarot Deck Dealing & Discard Physics Engine
+ * Card Deck Dealing & Discard Physics Engine
  * 
  * 1. Precision Viewport Screen Centering:
  *    Active hero card is positioned at the exact 50% horizontal center of the browser viewport (window.innerWidth / 2).
@@ -14,23 +14,26 @@
  *    Selecting a discipline cleanly filters to only the matching cards, eliminating semi-transparent ghost overlaps.
  */
 
+const CARD_VARIATIONS = [
+    { rotZ: 4.2,  offsetX: -4,  offsetY: 2 },
+    { rotZ: -3.1, offsetX: 5,   offsetY: -3 },
+    { rotZ: 4.8,  offsetX: 3,   offsetY: 4 },
+    { rotZ: -1.9, offsetX: -5,  offsetY: -2 },
+    { rotZ: 2.8,  offsetX: 3,   offsetY: 3 },
+    { rotZ: -4.7, offsetX: -3,  offsetY: -4 },
+    { rotZ: -2.1, offsetX: 5,   offsetY: 2 },
+    { rotZ: 3.9,  offsetX: -5,  offsetY: -2 },
+    { rotZ: -4.0, offsetX: 4,   offsetY: 4 },
+    { rotZ: 3.3,  offsetX: -3,  offsetY: -3 },
+    { rotZ: -3.5, offsetX: 3,   offsetY: 2 },
+    { rotZ: 4.5,  offsetX: -4,  offsetY: -2 },
+];
+
 function getCardOrganicVariation(index) {
-    const s1 = Math.sin(index * 12.9898 + 78.233) * 43758.5453;
-    const s2 = Math.cos(index * 26.6514 + 12.871) * 23421.6312;
-    const s3 = Math.sin(index * 39.4123 + 45.192) * 31415.9265;
-
-    const r1 = s1 - Math.floor(s1);
-    const r2 = s2 - Math.floor(s2);
-    const r3 = s3 - Math.floor(s3);
-
-    return {
-        rotZ: r1 * 6.0 - 3.0,     // -3.0 deg to +3.0 deg
-        offsetX: r2 * 8.0 - 4.0,  // -4.0 px to +4.0 px
-        offsetY: r3 * 6.0 - 3.0,  // -3.0 px to +3.0 px
-    };
+    return CARD_VARIATIONS[index % CARD_VARIATIONS.length];
 }
 
-export class TarotDeckController {
+export class CardDeckController {
     constructor(stageElement) {
         this.stage = stageElement;
         this.allCardNodes = Array.from(stageElement.querySelectorAll(".deck-card-item"));
@@ -40,6 +43,7 @@ export class TarotDeckController {
 
         this.prevBtn = document.getElementById("carouselPrevBtn");
         this.nextBtn = document.getElementById("carouselNextBtn");
+        this.bottomControls = this.stage.parentElement?.querySelector(".deck-bottom-controls") || document.querySelector(".deck-bottom-controls");
 
         // Physics & Progress State
         this.progress = 0; // Strictly clamped to [0, totalCards - 1]
@@ -66,17 +70,18 @@ export class TarotDeckController {
 
     _updateGeometry() {
         const stageRect = this.stage.getBoundingClientRect();
-        // Calculate exact horizontal offset so the active card sits at 50% viewport center
-        const stageCenterX = stageRect.left + stageRect.width / 2;
-        const screenCenterX = window.innerWidth / 2;
-        const screenCenterOffset = screenCenterX - stageCenterX;
+        // The active card sits naturally in the center of its container stage (x = 0)
+        this.centerX = 0;
 
-        this.centerX = Math.round(screenCenterOffset);
+        // Separation distance between container center and the side stacks
+        const separation = Math.round(Math.min(Math.max(stageRect.width * 0.32, 260), 380));
+        this.deckX = separation;
+        this.discardX = -separation;
 
-        // Separation distance between Screen Center and the side stacks
-        const separation = Math.round(Math.min(Math.max(window.innerWidth * 0.23, 270), 380));
-        this.deckX = this.centerX + separation;
-        this.discardX = this.centerX - separation;
+        this.stage.style.setProperty("--deck-separation", `${separation}px`);
+        if (this.stage.parentElement) {
+            this.stage.parentElement.style.setProperty("--deck-separation", `${separation}px`);
+        }
     }
 
     setCategory(category) {
@@ -345,11 +350,11 @@ export class TarotDeckController {
             if (i < currentIdx) {
                 // ── 1. FULLY DISCARDED STACK (Left Side, Organic Non-Uniform Face-Down Stack) ──
                 const k = currentIdx - 1 - i;
-                x = this.discardX - Math.min(k * 3.0, 24) + variation.offsetX;
-                y = Math.min(k * 1.8, 14) + variation.offsetY;
-                z = -Math.min(k * 4.0, 30);
+                x = this.discardX + variation.offsetX;
+                y = variation.offsetY;
+                z = -Math.min(k * 3.0, 24);
                 rotateY = -180; // Inverted face-down flip (showing card back)
-                rotateZ = variation.rotZ; // Natural, organic non-uniform angle
+                rotateZ = variation.rotZ; // Natural, organic non-uniform angle [-10°, +10°]
                 rotateX = 0;
                 scale = Math.max(0.82, 0.88 - k * 0.015);
                 zIndex = 10 + i;
@@ -357,11 +362,11 @@ export class TarotDeckController {
             } else if (i > currentIdx + 1) {
                 // ── 2. DEEP IN DRAW DECK STACK (Right Side, Organic Non-Uniform Face-Down Stack) ──
                 const d = i - (currentIdx + 1);
-                x = this.deckX + Math.min(d * 3.5, 26) + variation.offsetX;
-                y = Math.min(d * 2.2, 16) + variation.offsetY;
-                z = -Math.min(d * 5.5, 40);
+                x = this.deckX + variation.offsetX;
+                y = variation.offsetY;
+                z = -Math.min(d * 4.0, 28);
                 rotateY = 180; // Face-down (showing card back)
-                rotateZ = variation.rotZ; // Natural, organic non-uniform angle
+                rotateZ = variation.rotZ; // Natural, organic non-uniform angle [-10°, +10°]
                 rotateX = 0;
                 scale = Math.max(0.82, 0.88 - d * 0.015);
                 zIndex = 200 - i;
@@ -458,10 +463,14 @@ export class TarotDeckController {
     }
 }
 
-export function initTarotDeckEngine() {
+export function initCardDeckEngine() {
     const stage = document.querySelector("[data-deck-stage]");
     if (stage && !stage.dataset.deckMounted) {
         stage.dataset.deckMounted = "true";
-        new TarotDeckController(stage);
+        new CardDeckController(stage);
     }
 }
+
+// Backwards-compatible alias
+export const initTarotDeckEngine = initCardDeckEngine;
+export const TarotDeckController = CardDeckController;
