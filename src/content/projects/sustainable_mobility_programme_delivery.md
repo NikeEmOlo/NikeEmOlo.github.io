@@ -5,6 +5,7 @@ cardTitle: "Service delivery"
 projType: "case study"
 icon: "crab"
 category: "delivery"
+active: false
 summary: "Keeping a multi-partner sustainable mobility programme delivering on time, on scope, and on budget."
 # placeholder art — swap when real artwork exists
 cardBg: "#FF1F70"

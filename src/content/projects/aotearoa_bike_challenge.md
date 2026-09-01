@@ -5,6 +5,7 @@ cardTitle: "Project Coordination"
 projType: "case study"
 icon: "crab"
 category: "operations"
+active: false
 summary: "Coordinating a nationwide cycling challenge from spreadsheet chaos to a repeatable, well-oiled programme."
 # placeholder art — swap when real artwork exists
 cardBg: "#FF1F70"

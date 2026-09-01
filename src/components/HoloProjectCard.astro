@@ -14,6 +14,7 @@ export interface Props {
     borderColor?: string;
     borderWidth?: string;
     holoEffect?: "secret_rare_etched" | "cosmos_galaxy" | "radiant_laser" | "rainbow_secret" | "shiny_rare" | "v_full_art" | string;
+    active?: boolean;
 }
 
 const {
@@ -31,6 +32,7 @@ const {
     borderColor = "#000000",
     borderWidth = "10px",
     holoEffect = "secret_rare_etched",
+    active = true,
 } = Astro.props;
 
 const EFFECT_CONFIGS: Record<string, {
@@ -81,11 +83,12 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
 
 <!-- Reusable Holographic Project Card Component -->
 <div
-    class:list={["card", "interactive", imageUrl && maskUrl && "masked"]}
+    class:list={["card", "interactive", imageUrl && maskUrl && "masked", !active && "is-unactivated"]}
     data-rarity={activeEffect.rarity}
     data-set={activeEffect.set}
     data-number={activeEffect.number}
     data-holo-project-card
+    data-card-active={active ? "true" : "false"}
     style={{
         "--card-bg": cardBg,
         "--card-border-color": cardBg,
@@ -154,14 +157,23 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
                         ></div>
                     </div>
 
-                    <!-- Bottom: Right-Aligned Title & Summary Text -->
+                    <!-- Bottom: Centered Title & Summary Text -->
                     <div class="card-bottom-info">
-                        <h2 class="card-title-right">{title}</h2>
+                        <h2 class="card-title-text">{title.endsWith('.') ? title : `${title}.`}</h2>
                         {(summary || category) && (
-                            <p class="card-summary-right">{summary || category}</p>
+                            <p class="card-summary-text">{summary || category}</p>
                         )}
                     </div>
                 </div>
+
+                <!-- Big "Coming Soon" Stamp for Inactive Cards -->
+                {!active && (
+                    <div class="card-coming-soon-wrap" aria-hidden="true">
+                        <div class="coming-soon-stamp">
+                            <span>Coming soon</span>
+                        </div>
+                    </div>
+                )}
 
                 <!-- Full-Card Interactive Light Point Glare (Contained strictly inside card front) -->
                 <div class="card__glare"></div>
@@ -454,44 +466,111 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         backface-visibility: hidden;
     }
 
-    /* Bottom Info: Right Aligned */
+    /* Bottom Info: Centered Typography */
     .card-bottom-info {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        text-align: right;
+        align-items: center;
+        text-align: center;
         width: 100%;
         margin-top: 0;
         padding-top: 0;
-        gap: 3px;
+        gap: clamp(8px, 1.2vh, 12px);
     }
 
-    .card-title-right {
+    .card-title-text {
         font-family: var(--archivo-font, 'Archivo', sans-serif);
-        font-weight: 800;
+        font-weight: 900;
         font-size: clamp(0.95rem, 1.25vw, 1.22rem);
-        line-height: 1.12;
+        line-height: 1.04;
         letter-spacing: -0.025em;
         color: #000000;
         margin: 0;
-        text-align: right;
+        text-align: center;
         width: 100%;
         max-width: 100%;
         -webkit-font-smoothing: antialiased;
     }
 
-    .card-summary-right {
+    .card-summary-text {
         font-family: var(--archivo-font, 'Archivo', sans-serif);
-        font-weight: 300;
-        font-size: clamp(0.70rem, 0.88vw, 0.82rem);
-        line-height: 1.32;
-        letter-spacing: -0.01em;
-        color: #000000;
-        margin: 0;
-        text-align: right;
+        font-weight: 400;
+        font-size: clamp(0.68rem, 0.85vw, 0.80rem);
+        line-height: 1.18;
+        letter-spacing: -0.015em;
+        color: #1E293B;
+        margin: 0 auto;
+        text-align: center;
         width: 100%;
-        max-width: 100%;
+        max-width: 30ch;
         -webkit-font-smoothing: antialiased;
+    }
+
+    /* Inactive Card State: Completely greyed out monochrome prototype, back face untouched */
+    .card.is-unactivated .card-base-frame {
+        border-color: #CBD5E1 !important;
+        background-color: #FFFFFF !important;
+    }
+
+    .card.is-unactivated .artwork-square {
+        background-color: #E2E8F0 !important;
+        border: 1.5px solid #CBD5E1 !important;
+    }
+
+    .card.is-unactivated .character-artwork {
+        filter: grayscale(100%) contrast(0.9) brightness(0.9) !important;
+        opacity: 0.55 !important;
+    }
+
+    .card.is-unactivated .card-title-text {
+        color: #475569 !important;
+    }
+
+    .card.is-unactivated .card-summary-text {
+        color: #94A3B8 !important;
+    }
+
+    .card.is-unactivated .card__shine,
+    .card.is-unactivated .card__glare {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    .card.is-unactivated .card__rotator {
+        cursor: not-allowed;
+    }
+
+    /* Big "Coming soon" Stamp */
+    .card-coming-soon-wrap {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(12px, 1.5vw, 20px);
+        z-index: 25;
+        pointer-events: none;
+    }
+
+    .coming-soon-stamp {
+        background: #000000;
+        color: #FFFFFF;
+        border: 2.5px solid #000000;
+        border-radius: 8px;
+        padding: clamp(8px, 1.2vh, 12px) clamp(16px, 1.8vw, 24px);
+        transform: rotate(-6deg);
+        box-shadow: 3.5px 3.5px 0px rgba(0, 0, 0, 0.4);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-weight: 900;
+        font-size: clamp(1.05rem, 1.4vw, 1.4rem);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        line-height: 1;
+        white-space: nowrap;
     }
 </style>
 

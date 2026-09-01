@@ -11,8 +11,8 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
     </button>
     <div class="nav-menu" id="nav-menu">
         <ul id="pages-list">
-            <li>
-                <button id="open-living-cv" class="nav-item-btn nav-cv-btn" style="--accent-color: var(--doodle-pink, #FF1F70)" aria-haspopup="dialog" aria-controls="cv-modal">
+            <li class="nav-li">
+                <button id="open-living-cv" class="nav-item-btn nav-cv-btn" style="--tab-accent: var(--doodle-pink, #FF1F70); --tab-text: #FFFFFF;" aria-haspopup="dialog" aria-controls="liveCvModal" type="button">
                     <svg class="nav-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                         <polyline points="14 2 14 8 20 8"></polyline>
@@ -23,13 +23,13 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
                     <span>CV</span>
                 </button>
             </li>
-            <li>
-                <a href="/" class="nav-item-btn nav-link" style="--accent-color: var(--doodle-cyan, #00B3E3)" aria-current={isCurrent("/") ? "page" : undefined}>
+            <li class="nav-li">
+                <a href="/" class="nav-item-btn nav-link" style="--tab-accent: var(--doodle-yellow, #FFDA00); --tab-text: #000000;" aria-current={isCurrent("/") ? "page" : undefined}>
                     <span>Home</span>
                 </a>
             </li>
-            <li>
-                <a href="https://outeroffice.co" target="_blank" rel="noopener noreferrer" class="nav-item-btn nav-link" style="--accent-color: var(--doodle-yellow, #FFDA00)">
+            <li class="nav-li">
+                <a href="https://outeroffice.co" target="_blank" rel="noopener noreferrer" class="nav-item-btn nav-link" style="--tab-accent: var(--doodle-lime, #D1FF00); --tab-text: #000000;">
                     <span>Outer Office</span>
                     <svg class="nav-ext-svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <line x1="7" y1="17" x2="17" y2="7"></line>
@@ -37,8 +37,8 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
                     </svg>
                 </a>
             </li>
-            <li>
-                <a href="mailto:nike.emily@pm.me" class="nav-item-btn nav-link nav-contact" style="--accent-color: var(--doodle-purple, #A855F7)">
+            <li class="nav-li">
+                <a href="mailto:nike.emily@pm.me" class="nav-item-btn nav-link nav-contact" style="--tab-accent: var(--doodle-purple, #7A00FF); --tab-text: #FFFFFF;">
                     <span>Contact</span>
                 </a>
             </li>
@@ -71,7 +71,7 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         align-items: center;
     }
 
-    ul {
+    ul#pages-list {
         display: flex;
         align-items: center;
         gap: 4px;
@@ -80,15 +80,21 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         margin: 0;
     }
 
+    .nav-li {
+        display: flex;
+        align-items: center;
+    }
+
+    /* Individual Nav Button with Bold Outlines */
     .nav-item-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 5px;
         background: transparent;
-        padding: 5px 12px;
         border: 2px solid transparent;
         border-radius: 9999px;
+        padding: 5px 12px;
         color: #0F172A;
         font-family: var(--archivo-font, 'Archivo', sans-serif);
         font-weight: 700;
@@ -101,9 +107,9 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
     }
 
     .nav-item-btn:hover {
-        background: var(--accent-color, #f1f5f9);
+        background: var(--tab-accent, #FFDA00);
         border-color: #000000;
-        color: #000000;
+        color: var(--tab-text, #000000);
         transform: translate(-1px, -1px);
         box-shadow: 2px 2px 0px #000000;
     }
@@ -114,10 +120,11 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
     }
 
     .nav-item-btn[aria-current="page"] {
-        background: var(--doodle-cyan, #00B3E3);
-        color: #000000;
-        border-color: #000000;
+        background: #000000;
+        border: 2px solid #000000;
+        color: #ffffff;
         box-shadow: 2px 2px 0px #000000;
+        font-weight: 900;
     }
 
     .nav-icon-svg {
@@ -146,11 +153,11 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         border-radius: 9999px;
         box-shadow: 2px 2px 0px #000000;
         cursor: pointer;
-        transition: transform 0.12s ease, box-shadow 0.12s ease;
+        transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
     }
 
     .hamburger:hover {
-        background: var(--doodle-cyan, #00B3E3);
+        background: var(--doodle-yellow, #FFDA00);
         transform: translate(-1px, -1px);
         box-shadow: 3px 3px 0px #000000;
     }
@@ -207,14 +214,14 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         border: 2px solid #000000;
         box-shadow: 3px 4px 0px #000000;
         z-index: 100;
-        min-width: 140px;
+        min-width: 150px;
     }
 
     nav.is-mobile:has(.hamburger[aria-expanded="true"]) .nav-menu {
         display: flex;
     }
 
-    nav.is-mobile ul {
+    nav.is-mobile ul#pages-list {
         display: flex;
         flex-direction: column;
         gap: 4px;
@@ -223,7 +230,7 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
     nav.is-mobile .nav-item-btn {
         width: 100%;
         justify-content: flex-start;
-        padding: 8px 12px;
+        padding: 8px 14px;
         font-size: 0.875rem;
     }
 </style>

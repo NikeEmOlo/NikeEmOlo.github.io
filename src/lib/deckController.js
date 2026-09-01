@@ -268,6 +268,17 @@ export class CardDeckController {
                 const currentActiveCard = this.activeCards[activeIndex];
 
                 if (cardEl === currentActiveCard) {
+                    // Check if card is unactivated (coming soon)
+                    if (cardEl.dataset.active === "false") {
+                        cardEl.classList.remove("is-locked-shake");
+                        void cardEl.offsetWidth;
+                        cardEl.classList.add("is-locked-shake");
+                        setTimeout(() => {
+                            cardEl.classList.remove("is-locked-shake");
+                        }, 400);
+                        return;
+                    }
+
                     // Click on active top card opens case study modal
                     const projectId = cardEl.dataset.projectId;
                     if (projectId) {

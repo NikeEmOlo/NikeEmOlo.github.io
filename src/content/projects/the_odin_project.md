@@ -5,6 +5,7 @@ cardTitle: "Full-stack study"
 projType: "overview & timeline"
 icon: "crab"
 category: "development"
+active: false
 summary: "A self-directed, project-based path from HTML basics to full-stack JavaScript — this site included."
 # placeholder art — swap when real artwork exists
 cardBg: "#D1FF00"

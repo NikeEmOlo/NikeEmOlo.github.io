@@ -4,16 +4,13 @@ import Navigation from '../components/Navigation.astro'
 import CategoryRail from '../components/CategoryRail.astro'
 import HoloProjectCard from '../components/HoloProjectCard.astro'
 import ProjectModal from '../components/ProjectModal.astro'
-import LivingCV from '../components/LivingCV.astro'
 import { getCollection, render } from 'astro:content'
 import { CATEGORIES } from '../categories.js'
 
-const rawProjects = (await getCollection('projects', ({ data }) => data.active))
+const rawProjects = (await getCollection('projects'))
     .sort((a, b) => a.data.order - b.data.order)
 
-// Harmonic Mystic Tarot Color Presets — still used by ProjectModal's embedded
-// HoloCard showcase (see ProjectModal.astro); the deck itself now renders
-// HoloProjectCard using each project's own cardBg/borderColor instead.
+// Harmonic Mystic Tarot Color Presets — used by ProjectModal's embedded HoloCard showcase
 const ORB_PALETTE: Array<"purple" | "teal" | "amber" | "rose" | "blue" | "cyan" | "coral" | "emerald"> = [
     "purple",
     "teal",
@@ -70,122 +67,190 @@ const employers = [
         <!-- Top Navigation -->
         <Navigation />
 
-        <!-- Header Section -->
-        <div class="intro">
-            <div class="identity-block">
-                <p class="identity-name">Olanike Olowo-Fela.</p>
-                <p class="identity-tagline">Technology Consultant · Full-Stack Developer</p>
-            </div>
-
-            <header class="work-header">
-                <p class="work-eyebrow">Selected Work</p>
-                <h1 class="work-headline">
-                    <strong>8 years</strong> of hands-on delivery — from AI-assisted automation to national transport programmes — where I've been, and what I built.
-                </h1>
-            </header>
-        </div>
-
         <p id="filter-announcement" class="visually-hidden" role="status" aria-live="polite"></p>
 
-        <!-- Main Work Stage: Category Rail (Left) + Doodle-Pop Card Deck (Right) -->
-        <div class="work-stage">
-            <CategoryRail counts={counts} total={projects.length} />
-
-            <section class="deck-section" aria-label="Selected work card deck">
-                <!-- Stack Labels -->
-                <div class="deck-header">
-                    <div class="deck-stack-indicators" aria-hidden="true">
-                        <span class="stack-indicator-label discard-label">Discard Pile</span>
-                        <span class="stack-indicator-sep">⇄</span>
-                        <span class="stack-indicator-label draw-label">Draw Deck</span>
-                    </div>
+        <!-- Main Interactive Work Center: Dedicated flex column with gap -->
+        <div class="deck-flex-container" aria-label="Selected work card deck">
+            <!-- Top Section: Projects Title & Discipline Filters -->
+            <div class="deck-top-group">
+                <div class="projects-title-wrap">
+                    <h1 class="projects-main-title">projects</h1>
                 </div>
+                <!-- 1. Top Discipline Filters -->
+                <CategoryRail counts={counts} total={projects.length} />
+            </div>
 
-                <!-- 3D Dual-Stack Dealing Stage -->
-                <div class="deck-stage-wrapper">
-                    <div
-                        class="deck-stage"
-                        data-deck-stage
-                        tabindex="0"
-                        role="region"
-                        aria-label="Project card dealing deck. Drag or scroll to deal cards from deck to discard."
-                    >
-                        {projects.map(({ project, stat }) => (
-                            <div
-                                class="deck-card-item"
-                                data-project-id={project.id}
-                                data-category={project.data.category}
-                                role="button"
-                                tabindex="0"
-                                aria-label={`View ${project.data.projTitle} project details`}
-                            >
-                                <HoloProjectCard
-                                    title={project.data.projTitle}
-                                    subtitle={PROJ_TYPE_LABEL[project.data.projType] || "Case Study"}
-                                    category={project.data.holoCategory}
-                                    summary={project.data.summary || project.data.holoCategory}
-                                    statLabel={project.data.holoStatLabel || "RESULTS"}
-                                    statValue={project.data.holoStatValue || stat}
-                                    iconSrc={project.data.iconSrc}
-                                    imageUrl={project.data.imageUrl}
-                                    maskUrl={project.data.maskUrl}
-                                    cardBg={project.data.cardBg}
-                                    borderColor={project.data.borderColor}
-                                    holoEffect={project.data.holoEffect}
-                                />
+            <!-- 2. 3D Dual-Stack Dealing Stage -->
+            <div
+                class="deck-stage"
+                data-deck-stage
+                tabindex="0"
+                role="region"
+                aria-label="Project card dealing deck. Drag or scroll to deal cards from deck to discard."
+            >
+                <!-- Playmat Zone: Discard Pile (Left) -->
+                <div class="playmat-slot discard-slot" aria-hidden="true">
+                    <div class="playmat-card-body">
+                        <div class="playmat-top-bar">
+                            <span class="playmat-badge">Discard pile</span>
+                        </div>
+
+                        <div class="playmat-center-art">
+                            <div class="playmat-sticker-graphic">
+                                <svg width="40" height="40" viewBox="0 0 64 64" fill="none" class="doodle-svg-icon" stroke="currentColor">
+                                    <rect x="12" y="16" width="40" height="34" rx="6" stroke-width="2" stroke-dasharray="3 3" />
+                                    <rect x="16" y="10" width="40" height="34" rx="6" stroke-width="2" fill="rgba(255,255,255,0.7)" />
+                                    <path d="M36 17v15m0 0l-5-5m5 5l5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <div class="playmat-label">
+                                    <span>Archive</span>
+                                </div>
                             </div>
-                        ))}
-                    </div>
-
-                    <!-- Navigation Controls: Attached directly beneath the center card -->
-                    <div class="deck-bottom-controls">
-                        <button type="button" class="nav-arrow-btn" id="carouselPrevBtn" aria-label="Return card to deck">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                                <path d="M15 18l-6-6 6-6" />
-                            </svg>
-                        </button>
-                        <button type="button" class="nav-arrow-btn" id="carouselNextBtn" aria-label="Deal next card">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                                <path d="M9 18l6-6-6-6" />
-                            </svg>
-                        </button>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <div class="stage-spacer" aria-hidden="true"></div>
+                <!-- Playmat Zone: Draw Pile (Right) -->
+                <div class="playmat-slot draw-slot" aria-hidden="true">
+                    <div class="playmat-card-body">
+                        <div class="playmat-top-bar">
+                            <span class="playmat-badge">Draw pile</span>
+                        </div>
+
+                        <div class="playmat-center-art">
+                            <div class="playmat-sticker-graphic">
+                                <svg width="40" height="40" viewBox="0 0 64 64" fill="none" class="doodle-svg-icon" stroke="currentColor">
+                                    <rect x="16" y="8" width="34" height="42" rx="6" stroke-width="2" transform="rotate(-5 16 8)" stroke-dasharray="3 3" />
+                                    <rect x="14" y="14" width="36" height="42" rx="6" stroke-width="2" fill="rgba(255,255,255,0.7)" />
+                                    <path d="M25 32a8 8 0 1 1 2.5 5.8" stroke-width="2.2" stroke-linecap="round" />
+                                    <path d="M28 38h-6v-6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <div class="playmat-label">
+                                    <span>Reshuffle deck</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {projects.map(({ project, stat }) => (
+                    <div
+                        class="deck-card-item"
+                        data-project-id={project.id}
+                        data-category={project.data.category}
+                        data-active={project.data.active !== false ? "true" : "false"}
+                        role="button"
+                        tabindex="0"
+                        aria-label={`View ${project.data.projTitle} ${project.data.active !== false ? "project details" : "(Coming Soon)"}`}
+                    >
+                        <HoloProjectCard
+                            title={project.data.projTitle}
+                            subtitle={PROJ_TYPE_LABEL[project.data.projType] || "Case Study"}
+                            category={project.data.holoCategory}
+                            summary={project.data.summary || project.data.holoCategory}
+                            statLabel={project.data.holoStatLabel || "RESULTS"}
+                            statValue={project.data.holoStatValue || stat}
+                            iconSrc={project.data.iconSrc}
+                            imageUrl={project.data.imageUrl}
+                            maskUrl={project.data.maskUrl}
+                            cardBg={project.data.cardBg}
+                            borderColor={project.data.borderColor}
+                            holoEffect={project.data.holoEffect}
+                            active={project.data.active !== false}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            <!-- 3. Navigation Controls: Normal flex item directly beneath cards -->
+            <div class="deck-bottom-controls">
+                <button type="button" class="nav-arrow-btn" id="carouselPrevBtn" aria-label="Return card to deck" title="Return card to deck">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                </button>
+                
+                <div class="deck-scroll-indicator" title="Scroll mouse wheel, trackpad, or swipe to deal cards">
+                    <span class="scroll-cue-arrow" aria-hidden="true">‹</span>
+                    <span class="scroll-cue-text">scroll</span>
+                    <span class="scroll-cue-arrow" aria-hidden="true">›</span>
+                </div>
+
+                <button type="button" class="nav-arrow-btn" id="carouselNextBtn" aria-label="Deal next card" title="Deal next card">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                        <path d="M9 18l6-6-6-6" />
+                    </svg>
+                </button>
+            </div>
         </div>
 
-        <!-- Trusted By Strip -->
+        <!-- Footer Strip with Rotating Slide-Up Text -->
         <footer class="trusted-by">
-            <span class="trusted-by-label">Trusted by</span>
-            {employers.map((name, i) => (
-                <>
-                    <span class="trusted-by-name">{name}</span>
-                    {i < employers.length - 1 && <span class="trusted-by-sep" aria-hidden="true">·</span>}
-                </>
-            ))}
+            <span class="trusted-by-label">Currently working on:</span>
+            <div class="ticker-container" id="footerTicker" aria-live="polite">
+                <span class="ticker-item is-active" data-index="0">Finishing this portfolio</span>
+                <span class="ticker-item" data-index="1">Finishing The Odin Project course in full-stack development so my AI agent doesn't think I'm an idiot</span>
+            </div>
         </footer>
 
         <!-- Sandbox-Style Two-Column Detail Modal -->
         <ProjectModal projects={projects} />
     </main>
 
-    <LivingCV />
-
     <script>
         import { initCardDeckEngine } from "../lib/deckController.js"
 
-        document.addEventListener("astro:page-load", initCardDeckEngine)
-        document.addEventListener("DOMContentLoaded", initCardDeckEngine)
+        function initFooterTicker() {
+            const container = document.getElementById("footerTicker")
+            if (!container || container.dataset.tickerInit === "true") return
+            container.dataset.tickerInit = "true"
+
+            const items = container.querySelectorAll(".ticker-item")
+            if (items.length <= 1) return
+
+            let currentIndex = 0
+            setInterval(() => {
+                const prevIndex = currentIndex
+                currentIndex = (currentIndex + 1) % items.length
+
+                const prevItem = items[prevIndex]
+                const nextItem = items[currentIndex]
+
+                prevItem.classList.remove("is-active")
+                prevItem.classList.add("is-exiting")
+
+                nextItem.classList.remove("is-exiting")
+                nextItem.classList.add("is-active")
+
+                setTimeout(() => {
+                    prevItem.classList.remove("is-exiting")
+                }, 550)
+            }, 4200)
+        }
+
+        function initPage() {
+            initCardDeckEngine()
+            initFooterTicker()
+        }
+
+        document.addEventListener("astro:page-load", initPage)
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initPage)
+        } else {
+            initPage()
+        }
     </script>
 </Base>
 
 <style>
-    /* Doodle-Pop cream canvas — warm off-white ground so the deck's bold
+    /* Doodle-Pop clean off-white canvas — neutral ground so the deck's bold
        white (#ffffff) color-blocked cards and thick black linework stand out clearly. */
     body {
-        background: var(--cream, #f2efe8);
+        background-color: var(--cream, #F7F8F9);
+        background-image: 
+            radial-gradient(rgba(15, 23, 42, 0.08) 1.2px, transparent 1.2px),
+            url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+        background-size: 22px 22px, auto;
         color: #0F172A;
         min-height: 100dvh;
         overflow-x: hidden;
@@ -195,168 +260,102 @@ const employers = [
         --pw-ink: #0F172A;
         --pw-muted: #64748B;
         --pw-border: rgba(15, 23, 42, 0.12);
-        --pw-accent: var(--doodle-cyan, #00B3E3);
+        --pw-accent: var(--doodle-yellow, #FFDA00);
         --pw-sans: var(--archivo-font, 'Archivo', -apple-system, sans-serif);
 
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         height: 100dvh;
-        padding: clamp(40px, 4.5vh, 60px) clamp(24px, 4vw, 56px) clamp(20px, 2.5vh, 32px);
-        gap: clamp(12px, 1.5vh, 20px);
+        padding: clamp(24px, 3vh, 40px) clamp(24px, 4vw, 56px) clamp(16px, 2vh, 24px);
+        gap: clamp(10px, 1.5vh, 18px);
         overflow: hidden;
         box-sizing: border-box;
     }
 
-    /* Intro Block */
-    .intro {
+    /* Main Interactive Work Center: Anchored to the bottom section of the screen */
+    .deck-flex-container {
         display: flex;
         flex-direction: column;
-        flex-shrink: 0;
-        width: 100%;
-        gap: 8px;
-    }
-
-    .identity-block {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-    }
-
-    .identity-name {
-        font-family: var(--pw-sans);
-        font-weight: 800;
-        font-size: 1.1rem;
-        letter-spacing: -0.01em;
-        color: #0F172A;
-        margin: 0;
-    }
-
-    .identity-tagline {
-        font-family: var(--pw-sans);
-        font-size: 0.6875rem;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--pw-muted);
-        margin: 0;
-    }
-
-    .work-header {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 6px;
-    }
-
-    .work-eyebrow {
-        display: inline-flex;
-        align-self: flex-start;
-        font-family: monospace;
-        font-weight: 800;
-        font-size: 0.6875rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: #000000;
-        background: var(--pw-accent);
-        border: 2px solid #000000;
-        border-radius: 9999px;
-        padding: 2px 12px;
-        box-shadow: 2px 2px 0px #000000;
-        margin: 0;
-    }
-
-    .work-headline {
-        max-width: 54ch;
-        font-family: var(--pw-sans);
-        font-weight: 600;
-        font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-        line-height: 1.45;
-        color: #334155;
-        letter-spacing: -0.01em;
-        margin: 0;
-    }
-
-    .work-headline strong {
-        font-weight: 900;
-        color: #0F172A;
-    }
-
-    /* Work Stage: Category Rail (Left) | Card Deck (Center) | Symmetrical Spacer (Right) */
-    .work-stage {
-        display: grid;
-        grid-template-columns: 200px minmax(0, 1fr) 200px;
-        align-items: flex-end;
-        gap: clamp(16px, 2.5vw, 36px);
+        align-items: center;
+        justify-content: flex-end;
+        gap: clamp(1.75rem, 3vh, 2.5rem);
         width: 100%;
         flex: 1;
         min-height: 0;
-        padding-bottom: 0;
+        margin-top: auto;
+        padding-bottom: clamp(16px, 4vh, 36px);
     }
 
-    .stage-spacer {
-        display: block;
-        width: 200px;
-        pointer-events: none;
-    }
-
-    /* Deck Section */
-    .deck-section {
-        position: relative;
+    /* Top Section: Title & Category Rail */
+    .deck-top-group {
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
-        min-height: 0;
-        min-width: 0;
+        align-items: center;
+        gap: clamp(12px, 1.8vh, 18px);
         width: 100%;
-        height: 100%;
+        flex-shrink: 0;
     }
 
-    .deck-header {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
+    .projects-title-wrap {
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 20;
-        pointer-events: none;
+        width: 100%;
     }
 
-    .deck-stack-indicators {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-family: monospace;
-        font-size: 0.6875rem;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: #0F172A;
-        background: #ffffff;
-        border: 2px solid #000000;
-        border-radius: 9999px;
-        padding: 3px 14px;
-        box-shadow: 2px 2px 0px #000000;
-    }
-
-    .stack-indicator-sep {
-        color: var(--pw-accent);
-        font-size: 0.85rem;
+    .projects-main-title {
+        position: relative;
+        font-family: var(--pw-sans);
         font-weight: 900;
+        font-size: clamp(1.85rem, 2.8vw, 2.5rem);
+        color: #0F172A;
+        letter-spacing: -0.03em;
+        margin: 0;
+        line-height: 1;
+        display: inline-block;
+        padding-bottom: 7px;
     }
 
-    .deck-bottom-controls {
+    .projects-main-title::after {
+        content: "";
         position: absolute;
-        bottom: clamp(8px, 1.2vh, 16px);
-        left: 50%;
-        transform: translateX(-50%);
+        bottom: 0;
+        left: -14px;
+        right: -14px;
+        height: 3.5px;
+        background-color: #0F172A;
+        border-radius: 2px;
+    }
+
+    /* Deck Stage 3D Perspective Area */
+    .deck-stage {
+        position: relative;
+        width: 100%;
+        height: clamp(350px, 47vh, 430px);
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 12px;
+        perspective: 1400px;
+        perspective-origin: center center;
+        cursor: grab;
+        user-select: none;
+        outline: none;
+    }
+
+    .deck-stage.is-dragging {
+        cursor: grabbing;
+    }
+
+    /* Navigation Controls: Normal flow item directly below the card stage */
+    .deck-bottom-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
         z-index: 40;
         pointer-events: auto;
+        flex-shrink: 0;
     }
 
     .nav-arrow-btn {
@@ -371,11 +370,11 @@ const employers = [
         color: #0F172A;
         box-shadow: 2px 2px 0px #000000;
         cursor: pointer;
-        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
     }
 
     .nav-arrow-btn:hover {
-        background: var(--pw-accent);
+        background: var(--doodle-yellow, #FFDA00);
         transform: translate(-1px, -1px);
         box-shadow: 3px 3px 0px #000000;
     }
@@ -385,40 +384,147 @@ const employers = [
         box-shadow: 1px 1px 0px #000000;
     }
 
-    /* Deck Stage 3D Perspective Area */
-    .deck-stage-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-    }
-
-    .deck-stage {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        perspective: 1400px;
-        perspective-origin: center 75%;
-        cursor: grab;
+    /* Tactile Doodle-Pop "scroll" Indicator Badge */
+    .deck-scroll-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #ffffff;
+        border: 2px solid #000000;
+        border-radius: 9999px;
+        padding: 3px 12px;
+        box-shadow: 2px 2px 0px #000000;
+        font-family: monospace;
+        font-size: 0.6875rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #0F172A;
         user-select: none;
-        outline: none;
-        padding-bottom: clamp(62px, 7.5vh, 78px);
+        cursor: default;
+        transition: transform 0.15s ease, background-color 0.15s ease;
     }
 
-    .deck-stage.is-dragging {
-        cursor: grabbing;
+    .deck-scroll-indicator:hover {
+        background: #FAF7F2;
+        transform: translateY(-1px);
+    }
+
+    .scroll-cue-arrow {
+        font-size: 0.85rem;
+        font-weight: 900;
+        color: var(--doodle-pink, #FF1F70);
+    }
+
+    .scroll-cue-text {
+        color: #000000;
+    }
+
+    /* ── Playmat Card Zones (Subtle Tabletop Monochrome Print) ── */
+    .playmat-slot {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: calc(-0.5 * clamp(200px, 17.5vw, 255px));
+        margin-top: calc(-0.5 * (clamp(200px, 17.5vw, 255px) * 921 / 600));
+        width: clamp(200px, 17.5vw, 255px);
+        aspect-ratio: 600 / 921;
+        pointer-events: none;
+        user-select: none;
+        z-index: 0;
+        box-sizing: border-box;
+        opacity: 0.44;
+    }
+
+    .discard-slot {
+        transform: translateX(calc(-1 * var(--deck-separation, 320px))) scale(0.88) rotate(-2deg);
+    }
+
+    .draw-slot {
+        transform: translateX(var(--deck-separation, 320px)) scale(0.88) rotate(2deg);
+    }
+
+    .playmat-card-body {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.5);
+        border: 2px dashed rgba(0, 0, 0, 0.45);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 10px 16px;
+        box-sizing: border-box;
+    }
+
+    .playmat-top-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .playmat-badge {
+        display: inline-flex;
+        align-items: center;
+        border: 1.5px solid #000000;
+        border-radius: 9999px;
+        padding: 2px 10px;
+        font-family: monospace;
+        font-size: 0.625rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: #ffffff;
+        color: #000000;
+    }
+
+    .playmat-center-art {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+    }
+
+    .playmat-sticker-graphic {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: #000000;
+    }
+
+    .doodle-svg-icon {
+        opacity: 0.8;
+    }
+
+    .playmat-label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1.5px solid #000000;
+        border-radius: 9999px;
+        padding: 3px 12px;
+        font-family: monospace;
+        font-size: 0.625rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: #ffffff;
+        color: #000000;
     }
 
     .deck-card-item {
         position: absolute;
         left: 50%;
-        margin-left: calc(-0.5 * clamp(210px, 18.5vw, 270px));
-        width: clamp(210px, 18.5vw, 270px);
+        top: 50%;
+        margin-left: calc(-0.5 * clamp(200px, 17.5vw, 255px));
+        margin-top: calc(-0.5 * (clamp(200px, 17.5vw, 255px) * 921 / 600));
+        width: clamp(200px, 17.5vw, 255px);
         aspect-ratio: 600 / 921;
         border-radius: 12px;
         transform-origin: center center;
@@ -430,43 +536,84 @@ const employers = [
         text-rendering: optimizeLegibility;
     }
 
-    /* Trusted By Strip */
+    .deck-card-item[data-active="false"].is-active-hero {
+        cursor: not-allowed;
+    }
+
+    @keyframes lockedShake {
+        0%, 100% { transform: translate3d(var(--card-tx, 0px), var(--card-ty, 0px), var(--card-tz, 0px)) rotateY(var(--card-ry, 0deg)) rotateZ(var(--card-rz, 0deg)) scale(var(--card-scale, 1)); }
+        20%, 60% { transform: translate3d(calc(var(--card-tx, 0px) - 6px), var(--card-ty, 0px), var(--card-tz, 0px)) rotateY(var(--card-ry, 0deg)) rotateZ(calc(var(--card-rz, 0deg) - 2deg)) scale(var(--card-scale, 1)); }
+        40%, 80% { transform: translate3d(calc(var(--card-tx, 0px) + 6px), var(--card-ty, 0px), var(--card-tz, 0px)) rotateY(var(--card-ry, 0deg)) rotateZ(calc(var(--card-rz, 0deg) + 2deg)) scale(var(--card-scale, 1)); }
+    }
+
+    .deck-card-item.is-locked-shake {
+        animation: lockedShake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    /* Footer Strip with Rotating Slide-Up Text */
     .trusted-by {
         display: flex;
-        flex-wrap: wrap;
         align-items: center;
         flex-shrink: 0;
-        gap: 0.5em;
         width: 100%;
         margin: 0;
-        padding-top: clamp(12px, 1.6vh, 20px);
-        padding-bottom: clamp(2px, 0.5vh, 6px);
+        padding-top: clamp(10px, 1.4vh, 18px);
+        padding-bottom: clamp(2px, 0.4vh, 6px);
         border-top: 2px solid #000000;
         font-family: var(--pw-sans);
-        font-size: 0.6875rem;
+        font-size: clamp(0.8125rem, 1vw, 0.875rem);
         font-weight: 600;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.01em;
+        line-height: 1.4;
         color: var(--pw-muted);
+        overflow: hidden;
     }
 
     .trusted-by-label {
         font-weight: 800;
-        text-transform: uppercase;
         color: #0F172A;
         margin-right: 0.4em;
+        flex-shrink: 0;
+        white-space: nowrap;
     }
 
-    .trusted-by-name {
-        color: #64748B;
-        transition: color 0.2s ease;
+    .ticker-container {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        height: 1.4em;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
     }
 
-    .trusted-by-name:hover {
-        color: #0F172A;
+    .ticker-item {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: inline-block;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 100%;
+        color: #475569;
+        font-weight: 600;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        pointer-events: none;
     }
 
-    .trusted-by-sep {
-        opacity: 0.4;
+    .ticker-item.is-active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .ticker-item.is-exiting {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
     }
 
     /* Mobile Responsive Adaptation */
@@ -480,23 +627,17 @@ const employers = [
             gap: 20px;
         }
 
-        .work-stage {
-            grid-template-columns: minmax(0, 1fr);
+        .deck-flex-container {
             flex: none;
-            gap: 20px;
+            gap: 16px;
         }
 
-        .stage-spacer {
+        .deck-stage {
+            height: 440px;
+        }
+
+        .playmat-slot {
             display: none;
-        }
-
-        .deck-stage-wrapper {
-            height: 480px;
-        }
-
-        .deck-header {
-            position: static;
-            margin-bottom: 12px;
         }
     }
 </style>

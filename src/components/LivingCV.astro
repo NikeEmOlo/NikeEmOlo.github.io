@@ -1,1148 +1,1636 @@
 ---
-const skills = [
-  "AI-Assisted Automation",
-  "Agentic Workflow Design",
-  "API Integration",
-  "Process Design",
-  "Systems Thinking",
-  "HTML / CSS / JavaScript",
-  "Node.js",
-  "Client Delivery & Coordination",
-  "Workshop Facilitation",
-  "Stakeholder Translation",
-];
-
-const experience = [
-  {
-    company: "The Odin Project",
-    location: "Remote",
-    dates: "2024 - Present",
-    role: "Full-Stack Developer (Training)",
-    keywords: "HTML, CSS, JavaScript, Node.js, Data Structures & Algorithms, SOLID Principles",
-  },
-  {
-    company: "Outer Office",
-    location: "Freelance",
-    dates: "2024 - 2025",
-    role: "Freelance Workflow Consultant",
-    keywords: "Workflow Automation, Microsoft Graph, Google Workspace APIs, OpenAI",
-  },
-  {
-    company: "Highgate Transportation",
-    location: "Bristol, UK",
-    dates: "2023 - 2024",
-    role: "Transport Planner",
-    keywords: "Client Reporting, Regulatory Compliance, Transport Planning Research",
-  },
-  {
-    company: "Auckland Transport",
-    location: "Auckland, NZ",
-    dates: "2021 - 2023",
-    role: "Travel Demand Planner",
-    keywords: "20+ Client Organisations, Pilot Programmes, Stakeholder Workshops, KPI Reporting",
-  },
-  {
-    company: "Asahi Beverages, Auckland Council, IFM Electrical & others",
-    location: "Auckland, NZ",
-    dates: "2020 - 2023",
-    role: "Temp Administration, Research & Hospitality",
-    keywords: "Cross-Industry Temp Roles",
-  },
-  {
-    company: "Coster Content Ltd",
-    location: "Manchester, UK",
-    dates: "2018 - 2020",
-    role: "Copywriter",
-    keywords: "Marketing Agency Copywriting",
-  },
-];
-
-const capabilities = [
-  {
-    title: "AI & Automation",
-    icon: "spark",
-    items: ["AI-Assisted Automation", "Agentic Workflow Design (OpenClaw, Claude)", "API Integration (Graph, Workspace, OpenAI)", "MCP"],
-  },
-  {
-    title: "Process & Systems Design",
-    icon: "flow",
-    items: ["Structured Problem-Solving", "Systems Thinking", "Workflow Optimisation", "Prioritisation Across Workstreams"],
-  },
-  {
-    title: "Full-Stack Development",
-    icon: "code",
-    items: ["HTML, CSS, JavaScript, Node.js", "Data Structures & Algorithms", "SOLID Principles", "Security Fundamentals"],
-  },
-  {
-    title: "Client & Stakeholder Delivery",
-    icon: "chat",
-    items: ["Client Delivery & Coordination", "Workshop Delivery & Onboarding", "Translating Technical Concepts", "Documentation & Reporting"],
-  },
-  {
-    title: "Project & Agile Delivery",
-    icon: "check",
-    items: ["Agile Workflows (ICAgile Certified)", "Project Management (PMI Trained)", "Multi-Stakeholder Coordination"],
-  },
-  {
-    title: "Productivity & Collaboration",
-    icon: "grid",
-    items: ["Microsoft 365, Azure, DevOps", "Google Drive, Dropbox"],
-  },
-];
-
-const focusAreas = [
-  "Workflow Automation & AI",
-  "Full-Stack Web Development",
-  "Client Enablement & Training",
-  "Agile & Project Delivery",
-  "Public Sector & Transport",
-  "Research & Reporting",
-];
-
-const nowItems = [
-  "Deepening full-stack fundamentals (data structures, algorithms, SOLID principles) through The Odin Project.",
-  "Designing agentic AI workflows with OpenClaw, Claude, and MCP to remove repetitive work.",
-  "Automating real workflows for a freelance client using Microsoft Graph, Google Workspace, and OpenAI.",
-  "Open to roles where consulting experience and hands-on build skills both add leverage.",
-];
-
-const certificates = [
-  { title: "ICAgile Certified Professional", meta: "Agile workflows and teamwork · 2022" },
-  { title: "Project Management Institute Training", meta: "Practical project management skills · 2022" },
-];
-
-const icons: Record<string, string> = {
-  chat: `<path d="M3 12c0-4.4 4-8 9-8s9 3.6 9 8-4 8-9 8c-1.1 0-2.2-.2-3.2-.5L4 21l1.3-4.3C3.8 15.4 3 13.8 3 12Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
-  flow: `<path d="M4 6h5m0 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0Zm4 0h7M9 18h5m0 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0Zm-9-6h16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
-  spark: `<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`,
-  code: `<path d="m9 8-4 4 4 4M15 8l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>`,
-  check: `<path d="M4 12.5 9 17l11-11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
-  grid: `<path d="M4 4h6v6H4V4Zm10 0h6v6h-6V4ZM4 14h6v6H4v-6Zm10 0h6v6h-6v-6Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>`,
-};
+// LivingCV.astro - Standalone Live Master CV Modal Component
+// Verified ground-truth resume & career history matching the Doodle-Pop design standard.
 ---
 
-<div class="cv-modal" id="cv-modal" aria-hidden="true">
-  <div class="cv-backdrop" data-cv-close></div>
-  <div class="cv-window" role="dialog" aria-modal="true" aria-labelledby="cv-hero-name" tabindex="-1">
-    <div class="cv-rail">
-      <div class="cv-dots">
-        <button class="cv-dot cv-dot-close" data-cv-close aria-label="Close living CV" type="button"></button>
-        <span class="cv-dot cv-dot-mid" aria-hidden="true"></span>
-        <span class="cv-dot cv-dot-end" aria-hidden="true"></span>
+<div
+  class="live-cv-modal-backdrop"
+  id="liveCvModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="liveCvModalTitle"
+  aria-hidden="true"
+>
+  <div class="live-cv-window" id="liveCvWindow" tabindex="-1">
+    <!-- OS Window Titlebar -->
+    <div class="live-cv-titlebar">
+      <div class="live-cv-title-left">
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none" aria-hidden="true">
+          <path d="M 2 1 L 11 1 L 14 4 L 14 15 L 2 15 Z" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+          <path d="M 11 1 L 11 4 L 14 4 Z" fill="#E4E4E7" stroke="#000000" stroke-width="1.2" />
+          <line x1="4" y1="7" x2="12" y2="7" stroke="#000000" stroke-width="1.2" stroke-linecap="round" />
+          <line x1="4" y1="10" x2="10" y2="10" stroke="#000000" stroke-width="1.2" stroke-linecap="round" />
+        </svg>
+        <span class="live-cv-title-text" id="liveCvModalTitle">master_cv.md: Live CV</span>
       </div>
-      <span class="cv-rail-label" aria-hidden="true">LIVE_CV.OLANIKE</span>
+      <div class="live-cv-title-controls">
+        <button class="live-cv-close-btn" id="closeLiveCvBtn" type="button" aria-label="Close Live CV modal" title="Close Live CV">✕</button>
+      </div>
     </div>
 
-    <div class="cv-content" id="cv-content">
-      <div class="cv-progress-track" aria-hidden="true"><div class="cv-progress-bar" id="cv-progress"></div></div>
-
-      <header class="cv-topbar">
-        <a class="cv-contact-placeholder" href="mailto:nike.emily@pm.me">nike.emily@pm.me</a>
-        <nav class="cv-nav" aria-label="Living CV sections">
-          <button data-cv-link="cv-about">About</button>
-          <button data-cv-link="cv-experience">Experience</button>
-          <button data-cv-link="cv-capabilities">Capabilities</button>
-          <button data-cv-link="cv-now">Now</button>
+    <!-- Sticky Topbar Navigation & Actions -->
+    <header class="live-cv-topbar">
+      <div class="live-cv-top-left">
+        <span class="mcv-contact-email">nike.emily@pm.me</span>
+        <nav class="master-cv-nav" aria-label="Live CV sections">
+          <button class="cv-nav-btn" data-target="mcv-about" type="button">About</button>
+          <button class="cv-nav-btn" data-target="mcv-experience" type="button">Experience</button>
+          <button class="cv-nav-btn" data-target="mcv-competencies" type="button">Competencies</button>
+          <button class="cv-nav-btn" data-target="mcv-now" type="button">Currently</button>
+          <button class="cv-nav-btn" data-target="mcv-certs" type="button">Certs</button>
         </nav>
-        <button class="cv-theme-toggle" id="cv-theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
-          <svg class="cv-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-          </svg>
-          <svg class="cv-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+      </div>
+      <div class="master-cv-top-actions">
+        <button class="cv-tool-btn" id="copyLiveCvMarkdownBtn" type="button" title="Copy Markdown to clipboard">
+          📋 Copy MD
         </button>
-        <a class="cv-download" href="/Olanike-Olowo-Fela-CV.pdf" download>
-          Download CV
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M8 2v8m0 0 3-3m-3 3-3-3M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <a class="cv-download-btn-green" href="/Olanike-Olowo-Fela-CV.pdf" download="Olanike-Olowo-Fela-CV.pdf" id="downloadLiveCvBtn" title="Download Verified CV PDF">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M8 2v8m0 0 3-3m-3 3-3-3M3 13h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+          <span>Download CV</span>
         </a>
-      </header>
+      </div>
+    </header>
 
-      <section class="cv-hero">
-        <h1 id="cv-hero-name">Olanike<br />Olowo-Fela<span class="cv-accent-dot">.</span></h1>
-        <div class="cv-tags">
-          <span>Technology Consultant</span>
-          <span class="cv-tag-sep" aria-hidden="true"></span>
-          <span>Full-Stack Developer</span>
-        </div>
-        <div class="cv-scroll-indicator" aria-hidden="true">
-          <span>Scroll</span>
-          <i></i>
+    <!-- Master CV Scrollable Body -->
+    <div class="master-cv-body" id="liveCvScrollBody">
+      <!-- Hero Section -->
+      <section class="mcv-hero-section">
+        <h1 class="mcv-hero-name">Olanike<br />Olowo-Fela<span class="mcv-accent-dot">.</span></h1>
+        <div class="mcv-hero-tags">
+          <span class="mcv-tag highlight">Technology Consultant</span>
+          <span class="mcv-tag-sep">/</span>
+          <span class="mcv-tag highlight">Full-Stack Developer</span>
+          <span class="mcv-tag-sep">·</span>
+          <span class="mcv-tag">London, UK</span>
         </div>
       </section>
 
-      <section class="cv-section cv-reveal" id="cv-about">
-        <div class="cv-grid-2">
-          <div>
-            <h2>about</h2>
-            <p>
-              I design and ship automation that removes repetitive work, including a multi-agent, agentic AI
-              workflow that cut my own job-search time by 83%.
+      <!-- Section 1: About & Education / Skills -->
+      <section class="mcv-section" id="mcv-about">
+        <div class="mcv-grid-2">
+          <div class="mcv-col">
+            <h2 class="mcv-heading">about</h2>
+            <p class="mcv-p">
+              With a background in consulting, service delivery, and project coordination, alongside technical training in full-stack development, I bridge the gap between engineering and client-facing teams.
             </p>
-            <p>
-              That build-first instinct sits on a background in consulting, service delivery, and project
-              coordination, which lets me bridge the gap between technical and client-facing teams. Naturally
-              process-minded and analytical, I bring both to freelance workflow automation work.
+            <p class="mcv-p">
+              Naturally process-driven and analytical, I build solutions with both operational realities and business goals in mind, an adaptable approach I've applied across the public, private, and non-profit sectors.
             </p>
           </div>
-          <div>
-            <h2>edu.</h2>
-            <p class="cv-edu-degree">Integrated Master's in Geography with International Development</p>
-            <p class="cv-edu-school">University of Manchester</p>
-
-            <h2 class="cv-subheading">skills</h2>
-            <div class="cv-pills">
-              {skills.map((skill) => (
-                <span class="cv-pill">{skill}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="cv-section cv-reveal" id="cv-experience">
-        <h2>work experience <span class="cv-heading-suffix">8 Years</span></h2>
-        <ul class="cv-timeline">
-          {experience.map((job) => (
-            <li class="cv-reveal">
-              <div class="cv-timeline-left">
-                <strong>{job.company}</strong>
-                <span>{job.location} · {job.dates}</span>
-              </div>
-              <div class="cv-timeline-right">
-                <strong>{job.role}</strong>
-                <span>{job.keywords}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="cv-section cv-reveal" id="cv-capabilities">
-        <h2>capability stack</h2>
-        <div class="cv-cards-grid">
-          {capabilities.map((cap) => (
-            <div class="cv-card cv-reveal">
-              <svg class="cv-card-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" set:html={icons[cap.icon]} />
-              <h3>{cap.title}</h3>
-              <ul>
-                {cap.items.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section class="cv-section cv-reveal" id="cv-now">
-        <div class="cv-grid-2">
-          <div>
-            <h2>focus areas</h2>
-            <ol class="cv-numbered">
-              {focusAreas.map((area, i) => (
-                <li><span>{String(i + 1).padStart(2, "0")}</span>{area}</li>
-              ))}
-            </ol>
-          </div>
-          <div>
-            <h2>currently</h2>
-            <div class="cv-now-list">
-              {nowItems.map((item) => (
-                <div class="cv-now-item">
-                  <span class="cv-now-dot" aria-hidden="true"></span>
-                  <p>{item}</p>
+          <div class="mcv-col">
+            <h2 class="mcv-heading">edu.</h2>
+            <div class="mcv-edu-plain mcv-expandable-card" id="liveCvEduItem" title="Click to view degree focus & modules" tabindex="0" role="button" aria-expanded="false">
+              <div class="mcv-edu-header">
+                <div class="mcv-edu-titles">
+                  <p class="mcv-edu-degree">Integrated Master's in Geography with International Development</p>
+                  <p class="mcv-edu-school">University of Manchester</p>
                 </div>
-              ))}
+                <span class="mcv-expand-toggle-badge" aria-hidden="true">
+                  <span class="expand-text">+ details</span>
+                  <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+              </div>
+
+              <div class="mcv-item-details">
+                <div class="mcv-item-details-inner">
+                  <div class="mcv-edu-detail-block">
+                    <strong class="mcv-edu-branch-title">MSc International Development:</strong>
+                    <p class="mcv-edu-desc">
+                      Focused on analysing complex, interconnected systems involving institutions, policy, technology, and global economics. Developed strengths in systems analysis, structured research, technical writing, and project-based collaboration.
+                    </p>
+                  </div>
+                  <div class="mcv-edu-detail-block">
+                    <strong class="mcv-edu-branch-title">BA Geography:</strong>
+                    <p class="mcv-edu-desc">
+                      Focused on understanding how social, economic, and environmental systems interact at local and global scales. Gained practical skills in research, data analysis, policy analysis, and problem-solving.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h2 class="mcv-heading" style="margin-top: 16px;">skills</h2>
+            <div class="mcv-pills">
+              <span class="mcv-pill pop-yellow">AI-Assisted Automation</span>
+              <span class="mcv-pill pop-purple">Agentic Workflow Design</span>
+              <span class="mcv-pill pop-cyan">API Integration</span>
+              <span class="mcv-pill pop-lime">Process Design</span>
+              <span class="mcv-pill pop-pink">Systems Thinking</span>
+              <span class="mcv-pill">HTML / CSS / JavaScript</span>
+              <span class="mcv-pill">Node.js</span>
+              <span class="mcv-pill pop-cyan">Client Delivery & Coordination</span>
+              <span class="mcv-pill pop-yellow">Workshop Facilitation</span>
+              <span class="mcv-pill pop-lime">Stakeholder Translation</span>
             </div>
           </div>
         </div>
       </section>
 
-      <div class="cv-divider-band" aria-hidden="true"></div>
-
-      <section class="cv-section cv-reveal" id="cv-certificates">
-        <h2>certificates</h2>
-        <div class="cv-cert-grid">
-          {certificates.map((cert) => (
-            <div class="cv-cert-card cv-reveal">
-              <h3>{cert.title}</h3>
-              <p>{cert.meta}</p>
+      <!-- Section 2: Work Experience (Expandable Timeline Items) -->
+      <section class="mcv-section" id="mcv-experience">
+        <h2 class="mcv-heading">work experience</h2>
+        <div class="mcv-timeline">
+          <!-- 1. The Odin Project -->
+          <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements" tabindex="0" role="button" aria-expanded="false">
+            <div class="mcv-tl-main">
+              <div class="mcv-tl-left">
+                <div class="mcv-tl-header">
+                  <strong class="mcv-tl-comp">The Odin Project</strong>
+                  <span class="mcv-badge-sticker pop-lime">Training</span>
+                </div>
+                <span class="mcv-tl-loc">Remote · 2024 - Present</span>
+              </div>
+              <div class="mcv-tl-right">
+                <div class="mcv-tl-role-row">
+                  <strong class="mcv-tl-role">Full-Stack Developer (Training)</strong>
+                  <span class="mcv-expand-toggle-badge" aria-hidden="true">
+                    <span class="expand-text">+ details</span>
+                    <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </span>
+                </div>
+                <span class="mcv-tl-kw">HTML, CSS, JavaScript, Node.js, Data Structures & Algorithms, SOLID Principles</span>
+              </div>
             </div>
-          ))}
+
+            <div class="mcv-item-details">
+              <div class="mcv-item-details-inner">
+                <p class="mcv-tl-overview">An open-source, project-based full-stack web development curriculum.</p>
+                <ul class="mcv-tl-bullets">
+                  <li>Designed and deployed a multi-agent, agentic AI workflow using OpenClaw and Claude to automate the job-search process, reducing time spent by 83%.</li>
+                  <li>Completing full-stack curriculum covering fundamental computer science, data structures and algorithms, SOLID principles, and debugging in HTML, CSS, and JS.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Outer Office -->
+          <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements" tabindex="0" role="button" aria-expanded="false">
+            <div class="mcv-tl-main">
+              <div class="mcv-tl-left">
+                <div class="mcv-tl-header">
+                  <strong class="mcv-tl-comp">Outer Office</strong>
+                  <span class="mcv-badge-sticker pop-yellow">Freelance</span>
+                </div>
+                <span class="mcv-tl-loc">Freelance · 2024 - 2025</span>
+              </div>
+              <div class="mcv-tl-right">
+                <div class="mcv-tl-role-row">
+                  <strong class="mcv-tl-role">Freelance Workflow Consultant</strong>
+                  <span class="mcv-expand-toggle-badge" aria-hidden="true">
+                    <span class="expand-text">+ details</span>
+                    <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </span>
+                </div>
+                <span class="mcv-tl-kw">Workflow Automation, Microsoft Graph, Google Workspace APIs, OpenAI</span>
+              </div>
+            </div>
+
+            <div class="mcv-item-details">
+              <div class="mcv-item-details-inner">
+                <ul class="mcv-tl-bullets">
+                  <li>Delivered freelance workflow optimisation and automation for a small-business client, identifying manual processes and designing tailored solutions.</li>
+                  <li>Built an AI-powered email management tool using Microsoft Graph, Google Workspace APIs, and OpenAI. Built with AI-assisted development, which exposed the limits of working without deeper technical understanding and led directly to formal full-stack training.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Highgate Transportation -->
+          <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements" tabindex="0" role="button" aria-expanded="false">
+            <div class="mcv-tl-main">
+              <div class="mcv-tl-left">
+                <div class="mcv-tl-header">
+                  <strong class="mcv-tl-comp">Highgate Transportation</strong>
+                  <span class="mcv-badge-sticker pop-cyan">Consultancy</span>
+                </div>
+                <span class="mcv-tl-loc">Bristol, UK · 2023 - 2024</span>
+              </div>
+              <div class="mcv-tl-right">
+                <div class="mcv-tl-role-row">
+                  <strong class="mcv-tl-role">Transport Planner</strong>
+                  <span class="mcv-expand-toggle-badge" aria-hidden="true">
+                    <span class="expand-text">+ details</span>
+                    <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </span>
+                </div>
+                <span class="mcv-tl-kw">Client Reporting, Regulatory Compliance, Transport Planning Research</span>
+              </div>
+            </div>
+
+            <div class="mcv-item-details">
+              <div class="mcv-item-details-inner">
+                <p class="mcv-tl-overview">Highgate Transportation, Bristol, UK - Transport consultancy.</p>
+                <ul class="mcv-tl-bullets">
+                  <li>Produced client-facing reports, and conducted research to support transport planning proposals, recommendations, and regulatory compliance.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Auckland Transport -->
+          <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements" tabindex="0" role="button" aria-expanded="false">
+            <div class="mcv-tl-main">
+              <div class="mcv-tl-left">
+                <div class="mcv-tl-header">
+                  <strong class="mcv-tl-comp">Auckland Transport</strong>
+                  <span class="mcv-badge-sticker pop-purple">Public Organisation</span>
+                </div>
+                <span class="mcv-tl-loc">Auckland, NZ · 2021 - 2023</span>
+              </div>
+              <div class="mcv-tl-right">
+                <div class="mcv-tl-role-row">
+                  <strong class="mcv-tl-role">Travel Demand Planner</strong>
+                  <span class="mcv-expand-toggle-badge" aria-hidden="true">
+                    <span class="expand-text">+ details</span>
+                    <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </span>
+                </div>
+                <span class="mcv-tl-kw">20+ Client Organisations, Pilot Programmes, Stakeholder Workshops, KPI Reporting</span>
+              </div>
+            </div>
+
+            <div class="mcv-item-details">
+              <div class="mcv-item-details-inner">
+                <p class="mcv-tl-overview">Auckland Transport, Auckland, NZ - Public sector transport authority.</p>
+                <ul class="mcv-tl-bullets">
+                  <li>Managed a portfolio of 20+ client organisations through onboarding, engagement, and delivery milestones as primary point of contact, delivering workshops and training to drive user adoption and behavioural change.</li>
+                  <li>Designed and delivered a six-month pilot of a new mobile application, covering planning, user recruitment, training, engagement tracking, and feedback collection.</li>
+                  <li>Led nationwide campaign delivery, coordinating with councils and stakeholders to restore participation levels following COVID-19 disruption.</li>
+                  <li>Monitored engagement and performance using data, KPIs, and qualitative feedback, producing clear reports and guidance for internal and external stakeholders.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Asahi, Auckland Council & others -->
+          <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements" tabindex="0" role="button" aria-expanded="false">
+            <div class="mcv-tl-main">
+              <div class="mcv-tl-left">
+                <div class="mcv-tl-header">
+                  <strong class="mcv-tl-comp">Asahi, Auckland Council & others</strong>
+                  <span class="mcv-badge-sticker pop-pink">Cross-Sector</span>
+                </div>
+                <span class="mcv-tl-loc">Auckland, NZ · 2020 - 2023</span>
+              </div>
+              <div class="mcv-tl-right">
+                <div class="mcv-tl-role-row">
+                  <strong class="mcv-tl-role">Temp Administration, Research & Hospitality</strong>
+                  <span class="mcv-expand-toggle-badge" aria-hidden="true">
+                    <span class="expand-text">+ details</span>
+                    <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </span>
+                </div>
+                <span class="mcv-tl-kw">Cross-Industry Temp Roles, Process Auditing</span>
+              </div>
+            </div>
+
+            <div class="mcv-item-details">
+              <div class="mcv-item-details-inner">
+                <p class="mcv-tl-overview">Asahi Beverages, Auckland Council, IFM Electrical, Coreiss, and others.</p>
+                <ul class="mcv-tl-bullets">
+                  <li>Delivered agile administration, compliance auditing, operational data entry, and research assistance across fast-paced corporate and public sector environments.</li>
+                  <li>Streamlined operational coordination and stakeholder communications across diverse client accounts.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Coster Content Ltd -->
+          <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements" tabindex="0" role="button" aria-expanded="false">
+            <div class="mcv-tl-main">
+              <div class="mcv-tl-left">
+                <div class="mcv-tl-header">
+                  <strong class="mcv-tl-comp">Coster Content Ltd</strong>
+                  <span class="mcv-badge-sticker pop-pink">Agency</span>
+                </div>
+                <span class="mcv-tl-loc">Manchester, UK · 2018 - 2020</span>
+              </div>
+              <div class="mcv-tl-right">
+                <div class="mcv-tl-role-row">
+                  <strong class="mcv-tl-role">Copywriter</strong>
+                  <span class="mcv-expand-toggle-badge" aria-hidden="true">
+                    <span class="expand-text">+ details</span>
+                    <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </span>
+                </div>
+                <span class="mcv-tl-kw">Marketing Agency Copywriting, Value Proposition Synthesis</span>
+              </div>
+            </div>
+
+            <div class="mcv-item-details">
+              <div class="mcv-item-details-inner">
+                <p class="mcv-tl-overview">Coster Content Ltd, Manchester, UK - Marketing copy agency.</p>
+                <ul class="mcv-tl-bullets">
+                  <li>Produced high-converting B2B copywriting, marketing collateral, and strategic value propositions for agency clients across diverse sectors.</li>
+                  <li>Synthesized complex service architectures and business requirements into clear, compelling narratives.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <footer class="cv-footer cv-reveal">
-        <h2>Let's connect<span class="cv-accent-dot">.</span></h2>
-        <p class="cv-footer-email"><a href="mailto:nike.emily@pm.me">nike.emily@pm.me</a></p>
+      <!-- Section 3: Key Competencies (Streetwear Doodle-Pop Cards) -->
+      <section class="mcv-section" id="mcv-competencies">
+        <h2 class="mcv-heading">key competencies</h2>
+        <div class="mcv-cards-grid">
+          <!-- AI & Automation -->
+          <div class="mcv-cap-card card-yellow">
+            <div class="mcv-cap-card-top">
+              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none" aria-hidden="true">
+                <path d="M4 10L7 12" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                <path d="M36 8L33 11" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                <path d="M34 22L37 24" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                <path d="M23 2L9 17H19L14 30L29 13H19L23 2Z" fill="#FFDA00" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+                <path d="M21 5L12 15H18L15 23" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+              <span class="mcv-sticker-tag pop-yellow">AI_CORE</span>
+            </div>
+            <h3>AI & Automation</h3>
+            <ul>
+              <li>AI-Assisted Automation</li>
+              <li>Agentic Workflow Design (OpenClaw, Claude)</li>
+              <li>API Integration (Graph, Workspace, OpenAI)</li>
+              <li>MCP Protocol Implementation</li>
+            </ul>
+          </div>
 
-        <div class="cv-social-links">
-          <a
-            class="cv-social-link"
-            href="https://www.linkedin.com/in/NikeEmilyO/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M6.94 8.5H3.56V20.5H6.94V8.5ZM5.25 3.5C4.1 3.5 3.25 4.36 3.25 5.44C3.25 6.5 4.08 7.38 5.22 7.38H5.25C6.42 7.38 7.25 6.5 7.25 5.44C7.23 4.36 6.42 3.5 5.25 3.5ZM20.5 13.62C20.5 10.31 18.74 8.77 16.4 8.77C14.51 8.77 13.67 9.81 13.19 10.54V8.5H9.81C9.86 9.55 9.81 20.5 9.81 20.5H13.19V13.9C13.19 13.55 13.22 13.19 13.32 12.94C13.6 12.24 14.24 11.51 15.32 11.51C16.73 11.51 17.13 12.6 17.13 14.19V20.5H20.5V13.62Z"/>
-            </svg>
-            <span>LinkedIn</span>
-          </a>
+          <!-- Process & Systems Design -->
+          <div class="mcv-cap-card card-cyan">
+            <div class="mcv-cap-card-top">
+              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none" aria-hidden="true">
+                <path d="M16 6L18 6L18.5 8.5L20.5 9.5L23 8L24.5 9.5L23 12L24 14L26.5 14.5L26.5 16.5L24 17L23 19L24.5 21.5L23 23L20.5 21.5L18.5 22.5L18 25L16 25L15.5 22.5L13.5 21.5L11 23L9.5 21.5L11 19L10 17L7.5 16.5L7.5 14.5L10 14L11 12L9.5 9.5L11 8L13.5 9.5L15.5 8.5L16 6Z" fill="#00B3E3" stroke="#000000" stroke-width="2.2" stroke-linejoin="round" />
+                <circle cx="17" cy="15.5" r="3.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+                <path d="M28 8C33 11 34 18 30 23" stroke="#000000" stroke-width="2.2" stroke-linecap="round" fill="none" />
+                <path d="M33 23L29 23L31 19" fill="#D1FF00" stroke="#000000" stroke-width="2" stroke-linejoin="round" />
+                <path d="M5 6L6 8L8 9L6 10L5 12L4 10L2 9L4 8Z" fill="#FF1F70" stroke="#000000" stroke-width="1" />
+              </svg>
+              <span class="mcv-sticker-tag pop-cyan">SYS_ARCH</span>
+            </div>
+            <h3>Process & Systems Design</h3>
+            <ul>
+              <li>Structured Problem-Solving</li>
+              <li>Systems Thinking & Logic</li>
+              <li>Workflow Optimisation</li>
+              <li>Prioritisation Across Workstreams</li>
+            </ul>
+          </div>
 
-          <button
-            class="cv-social-link cv-substack-btn"
-            type="button"
-            id="cv-substack-btn"
-            aria-label="Substack (coming soon)"
-          >
-            <span class="cv-substack-smoke" aria-hidden="true"></span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M4 4h16v3H4V4Zm0 5h16v3H4V9Zm0 5h16v8l-8-4.5L4 22v-8Z"/>
-            </svg>
-            <span class="cv-substack-text">
-              <span class="cv-substack-text-default">Substack</span>
-              <span class="cv-substack-text-alt" aria-hidden="true">Coming soon</span>
-            </span>
-            <span class="visually-hidden" id="cv-substack-status" role="status"></span>
-          </button>
+          <!-- Full-Stack Development -->
+          <div class="mcv-cap-card card-purple">
+            <div class="mcv-cap-card-top">
+              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none" aria-hidden="true">
+                <rect x="6" y="6" width="28" height="20" rx="5" fill="#7A00FF" stroke="#000000" stroke-width="2.5" />
+                <rect x="9" y="9" width="10" height="3" rx="1.5" fill="#FFFFFF" opacity="0.8" />
+                <path d="M14 13L11 16L14 19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M26 13L29 16L26 19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="19" cy="16" r="1.8" fill="#D1FF00" stroke="#000000" stroke-width="1.2" />
+                <circle cx="22" cy="16" r="1.8" fill="#FF1F70" stroke="#000000" stroke-width="1.2" />
+                <path d="M12 6L9 2" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                <circle cx="8" cy="2" r="1.5" fill="#D1FF00" stroke="#000000" stroke-width="1" />
+              </svg>
+              <span class="mcv-sticker-tag pop-purple">CODE_STACK</span>
+            </div>
+            <h3>Full-Stack Development</h3>
+            <ul>
+              <li>HTML, CSS, JavaScript, Node.js</li>
+              <li>Data Structures & Algorithms</li>
+              <li>SOLID Principles & Clean Architecture</li>
+              <li>Security Fundamentals</li>
+            </ul>
+          </div>
 
-          <a class="cv-download" href="/Olanike-Olowo-Fela-CV.pdf" download>Download CV</a>
+          <!-- Client & Stakeholder Delivery -->
+          <div class="mcv-cap-card card-pink">
+            <div class="mcv-cap-card-top">
+              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none" aria-hidden="true">
+                <path d="M6 6H30C32.2 6 34 7.8 34 10V20C34 22.2 32.2 24 30 24H16L10 29V24H6C3.8 24 2 22.2 2 20V10C2 7.8 3.8 6 6 6Z" fill="#FF1F70" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+                <path d="M6 9H18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+                <circle cx="10" cy="15" r="1.5" fill="#FFFFFF" />
+                <circle cx="16" cy="15" r="1.5" fill="#FFFFFF" />
+                <circle cx="22" cy="15" r="1.5" fill="#FFFFFF" />
+                <path d="M34 5L35 7L37 8L35 9L34 11L33 9L31 8L33 7Z" fill="#FFDA00" stroke="#000000" stroke-width="1.2" />
+              </svg>
+              <span class="mcv-sticker-tag pop-pink">CLIENT_OPS</span>
+            </div>
+            <h3>Client & Stakeholder Delivery</h3>
+            <ul>
+              <li>Client Delivery & Coordination</li>
+              <li>Workshop Delivery & Onboarding</li>
+              <li>Translating Technical Concepts</li>
+              <li>Documentation & Executive Reporting</li>
+            </ul>
+          </div>
+
+          <!-- Project & Agile Delivery -->
+          <div class="mcv-cap-card card-lime">
+            <div class="mcv-cap-card-top">
+              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none" aria-hidden="true">
+                <circle cx="18" cy="16" r="11" fill="#D1FF00" stroke="#000000" stroke-width="2.5" />
+                <circle cx="18" cy="16" r="7" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+                <circle cx="18" cy="16" r="3" fill="#FF1F70" stroke="#000000" stroke-width="1.8" />
+                <path d="M36 4L19 15" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+                <path d="M33 3L37 3L37 7" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M22 11L25 9" stroke="#FFDA00" stroke-width="2" stroke-linecap="round" />
+                <path d="M14 21L12 24" stroke="#FFDA00" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              <span class="mcv-sticker-tag pop-lime">AGILE_PM</span>
+            </div>
+            <h3>Project & Agile Delivery</h3>
+            <ul>
+              <li>Agile Workflows (ICAgile Certified)</li>
+              <li>Project Management (PMI Trained)</li>
+              <li>Multi-Stakeholder Coordination</li>
+            </ul>
+          </div>
+
+          <!-- Productivity & Collaboration -->
+          <div class="mcv-cap-card card-cyan">
+            <div class="mcv-cap-card-top">
+              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none" aria-hidden="true">
+                <path d="M5 8C5 6.9 5.9 6 7 6H15L18 9H31C32.1 9 33 9.9 33 11V23C33 24.1 32.1 25 31 25H7C5.9 25 5 24.1 5 23V8Z" fill="#00B3E3" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+                <path d="M9 12H21" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+                <rect x="12" y="14" width="14" height="7" rx="2" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+                <line x1="15" y1="17" x2="23" y2="17" stroke="#000000" stroke-width="1.2" stroke-linecap="round" />
+                <path d="M33 5L34 7L36 8L34 9L33 11L32 9L30 8L32 7Z" fill="#FFDA00" stroke="#000000" stroke-width="1.2" />
+              </svg>
+              <span class="mcv-sticker-tag pop-cyan">TOOLING</span>
+            </div>
+            <h3>Productivity & Collaboration</h3>
+            <ul>
+              <li>Microsoft 365, Azure, DevOps</li>
+              <li>Google Workspace, Dropbox, Notion</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Currently (Dedicated High-Impact Active Grid) -->
+      <section class="mcv-section" id="mcv-now">
+        <h2 class="mcv-heading">currently</h2>
+        <div class="mcv-now-grid">
+          <div class="mcv-now-card card-lime">
+            <div class="mcv-now-header">
+              <span class="mcv-now-beacon lime-beacon" aria-hidden="true"></span>
+              <span class="mcv-sticker-tag pop-lime">ACTIVE STUDY</span>
+            </div>
+            <h4 class="mcv-now-title">Full-Stack Fundamentals</h4>
+            <p class="mcv-now-desc">Deepening full-stack core principles (data structures, algorithms, and SOLID architecture) via The Odin Project.</p>
+          </div>
+
+          <div class="mcv-now-card card-purple">
+            <div class="mcv-now-header">
+              <span class="mcv-now-beacon purple-beacon" aria-hidden="true"></span>
+              <span class="mcv-sticker-tag pop-purple">AGENT ARCH</span>
+            </div>
+            <h4 class="mcv-now-title">Agentic AI Workflows</h4>
+            <p class="mcv-now-desc">Designing multi-agent orchestration systems with OpenClaw, Claude, and Model Context Protocol (MCP) to eliminate manual toil.</p>
+          </div>
+
+          <div class="mcv-now-card card-yellow">
+            <div class="mcv-now-header">
+              <span class="mcv-now-beacon yellow-beacon" aria-hidden="true"></span>
+              <span class="mcv-sticker-tag pop-yellow">FREELANCE CLIENT</span>
+            </div>
+            <h4 class="mcv-now-title">Enterprise Automation</h4>
+            <p class="mcv-now-desc">Building production workflow integrations for freelance clients using Microsoft Graph, Google Workspace APIs, and OpenAI.</p>
+          </div>
+
+          <div class="mcv-now-card card-pink">
+            <div class="mcv-now-header">
+              <span class="mcv-now-beacon pink-beacon" aria-hidden="true"></span>
+              <span class="mcv-sticker-tag pop-pink">NEXT CHAPTER</span>
+            </div>
+            <h4 class="mcv-now-title">Open to Opportunities</h4>
+            <p class="mcv-now-desc">Available for consulting, technical solution design, and full-stack automation roles where consulting acumen adds leverage.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Certificates -->
+      <section class="mcv-section" id="mcv-certs">
+        <h2 class="mcv-heading">certificates</h2>
+        <div class="mcv-cert-grid">
+          <div class="mcv-card cert-card card-cyan">
+            <h3 class="cert-title">ICAgile Certified Professional</h3>
+            <p class="cert-meta">Agile workflows and teamwork · 2022</p>
+          </div>
+          <div class="mcv-card cert-card card-purple">
+            <h3 class="cert-title">Project Management Institute Training</h3>
+            <p class="cert-meta">Practical project management skills · 2022</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Connect & Prominent Download Footer -->
+      <footer class="mcv-footer">
+        <div class="mcv-footer-left">
+          <h2 class="mcv-footer-title">Let's speed things up<span class="mcv-accent-dot">.</span></h2>
+          <div class="mcv-footer-btns-row">
+            <a href="mailto:nike.emily@pm.me" class="mcv-action-btn email-btn" id="liveCvEmailBtn" title="Send email to Nike">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              <span>Email me</span>
+            </a>
+            <a href="https://www.linkedin.com/in/NikeEmilyO/" target="_blank" rel="noopener noreferrer" class="mcv-action-btn linkedin-btn" title="View LinkedIn Profile">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z"/>
+              </svg>
+              <span>LinkedIn ↗</span>
+            </a>
+          </div>
         </div>
 
-        <p class="cv-copyright">© 2026 Olanike Olowo-Fela. All rights reserved.</p>
+        <div class="mcv-footer-right">
+          <a class="cv-download-btn-green hero-lg" href="/Olanike-Olowo-Fela-CV.pdf" download="Olanike-Olowo-Fela-CV.pdf">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 2v8m0 0 3-3m-3 3-3-3M3 13h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Download Real CV (PDF)</span>
+          </a>
+        </div>
       </footer>
     </div>
   </div>
 </div>
 
 <script>
-  import "./livingCV.js"
+  function initLiveCvModal() {
+    const modal = document.getElementById("liveCvModal");
+    if (!modal) return;
+    if (modal.dataset.initialized === "true") return;
+    modal.dataset.initialized = "true";
+
+    const cvWindow = document.getElementById("liveCvWindow");
+    const closeBtn = document.getElementById("closeLiveCvBtn");
+    const copyBtn = document.getElementById("copyLiveCvMarkdownBtn");
+    const scrollBody = document.getElementById("liveCvScrollBody");
+
+    let previousActiveElement = null;
+
+    function openModal() {
+      previousActiveElement = document.activeElement;
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      cvWindow?.focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      if (previousActiveElement instanceof HTMLElement) {
+        previousActiveElement.focus();
+      }
+    }
+
+    // Attach to triggers across the page
+    document.querySelectorAll("#open-living-cv, [data-open-cv]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    window.addEventListener("open-living-cv", openModal);
+
+    // Close button
+    closeBtn?.addEventListener("click", closeModal);
+
+    // Backdrop click
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Escape key
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) {
+        closeModal();
+      }
+    });
+
+    // Copy Markdown
+    if (copyBtn) {
+      copyBtn.addEventListener("click", () => {
+        const cvMd = `# Olanike Olowo-Fela
+Technology Consultant & Full-Stack Automation Developer
+Location: London, UK / Remote
+
+## Summary
+With a background in consulting, service delivery, and project coordination, alongside technical training in full-stack development, I bridge the gap between engineering and client-facing teams. Naturally process-driven and analytical, I build solutions with both operational realities and business goals in mind, an adaptable approach I've applied across the public, private, and non-profit sectors.
+
+## Core Skills
+AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, JavaScript, Systems Thinking, Client Delivery.
+
+## Experience
+- The Odin Project (2024 - Present): Full-Stack Developer (Training)
+- Outer Office (2024 - 2025): Freelance Workflow Consultant
+- Highgate Transportation (2023 - 2024): Transport Planner
+- Auckland Transport (2021 - 2023): Travel Demand Planner
+- Asahi Beverages, Auckland Council & others (2020 - 2023): Temp Administration & Research
+- Coster Content Ltd (2018 - 2020): Copywriter
+
+## Education & Certifications
+- University of Manchester: Integrated Master's in Geography with International Development
+- ICAgile Certified Professional (2022)
+- Project Management Institute Training (2022)`;
+
+        navigator.clipboard?.writeText(cvMd).catch(() => {});
+        copyBtn.textContent = "✅ Copied!";
+        setTimeout(() => {
+          copyBtn.textContent = "📋 Copy MD";
+        }, 2000);
+      });
+    }
+
+    // Nav button smooth scrolling
+    modal.querySelectorAll(".cv-nav-btn[data-target]").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = btn.getAttribute("data-target");
+        if (targetId && scrollBody) {
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            const topOffset = targetEl.offsetTop - scrollBody.offsetTop - 10;
+            scrollBody.scrollTo({
+              top: Math.max(0, topOffset),
+              behavior: "smooth",
+            });
+          }
+        }
+      });
+    });
+
+    // Expandable cards in Master CV (work experience & education)
+    modal.querySelectorAll(".mcv-expandable-card").forEach((card) => {
+      const toggleCard = (e) => {
+        const target = e.target;
+        if (target && target.closest && target.closest("a")) return;
+        const isOpen = card.classList.toggle("is-expanded");
+        card.setAttribute("aria-expanded", String(isOpen));
+        const badgeText = card.querySelector(".expand-text");
+        if (badgeText) {
+          badgeText.textContent = isOpen ? "− close" : "+ details";
+        }
+      };
+
+      card.addEventListener("click", toggleCard);
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleCard(e);
+        }
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initLiveCvModal);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLiveCvModal);
+  } else {
+    initLiveCvModal();
+  }
 </script>
 
 <style>
-  .cv-modal {
+  /* Standalone Live CV Modal Overlay */
+  .live-cv-modal-backdrop {
     position: fixed;
     inset: 0;
-    z-index: 300;
+    background: rgba(8, 14, 28, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;
-    visibility: hidden;
+    padding: clamp(12px, 3vh, 32px) clamp(12px, 3vw, 24px);
     opacity: 0;
-    transition: opacity 0.35s ease, visibility 0s linear 0.35s;
-  }
-
-  .cv-modal.is-open {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.35s ease;
-  }
-
-  .cv-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(3, 5, 10, 0.72);
-    backdrop-filter: blur(6px);
-  }
-
-  .cv-window {
-    --cv-bg: var(--ink);
-    --cv-surface: rgba(255, 255, 255, 0.03);
-    --cv-border: rgba(255, 255, 255, 0.08);
-    --cv-line: rgba(255, 255, 255, 0.2);
-    --cv-text: var(--text);
-    --cv-muted: var(--muted-text);
-    --cv-accent: var(--teal-light);
-    --cv-topbar-bg: rgba(8, 14, 28, 0.85);
-    --cv-progress-track: rgba(255, 255, 255, 0.06);
-    --cv-pill-bg: rgba(207, 207, 223, 0.08);
-    --cv-divider-bg: rgba(0, 0, 0, 0.3);
-
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    width: min(1080px, 90vw);
-    height: 85vh;
-    max-width: 1400px;
-    background: var(--cv-bg);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-    transform: scale(0.94) translateY(12px);
-    opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, background 0.3s ease;
-  }
-
-  .cv-window[data-theme="light"] {
-    --cv-bg: var(--cream);
-    --cv-surface: rgba(8, 14, 28, 0.04);
-    --cv-border: rgba(8, 14, 28, 0.1);
-    --cv-line: rgba(8, 14, 28, 0.2);
-    --cv-text: var(--ink);
-    --cv-muted: rgba(8, 14, 28, 0.55);
-    /* --teal-light (#7ECECE) is ~1.6:1 against this background — nowhere near
-       the 4.5:1 (text) / 3:1 (icons, borders) WCAG AA minimums. This darker
-       teal holds ~5:1 against --cream so every accent usage stays legible. */
-    --cv-accent: #1b6f6e;
-    --cv-topbar-bg: rgba(242, 239, 232, 0.85);
-    --cv-progress-track: rgba(8, 14, 28, 0.08);
-    --cv-pill-bg: rgba(8, 14, 28, 0.06);
-    --cv-divider-bg: rgba(8, 14, 28, 0.06);
-  }
-
-  .cv-modal.is-open .cv-window {
-    transform: none;
-    opacity: 1;
-  }
-
-  .cv-window::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: var(--tarot-gradient);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
     pointer-events: none;
-    z-index: 5;
+    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* ── Rail ── */
-  .cv-rail {
-    flex-shrink: 0;
-    width: 40px;
+  .live-cv-modal-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .live-cv-window {
+    width: min(900px, 96vw);
+    max-width: 900px;
+    max-height: 90vh;
+    background: #FFFFFF;
+    border: 3px solid #000000;
+    border-radius: 12px;
+    box-shadow: 6px 6px 0px #000000;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 16px 0;
-    background: var(--cv-surface);
-    border-right: 1px solid var(--cv-border);
+    overflow: hidden;
+    transform: scale(0.96) translateY(12px);
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
   }
 
-  .cv-dots {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+  .live-cv-modal-backdrop.is-open .live-cv-window {
+    transform: scale(1) translateY(0);
   }
 
-  .cv-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: none;
-    padding: 0;
-  }
-
-  .cv-dot-close {
-    background: var(--cv-accent);
-    cursor: pointer;
-  }
-
-  .cv-dot-mid {
-    background: var(--purple);
-  }
-
-  .cv-dot-end {
-    background: var(--orchid);
-  }
-
-  .cv-rail-label {
-    writing-mode: vertical-rl;
-    margin-top: 18px;
-    font-size: 10px;
-    color: var(--cv-muted);
-    letter-spacing: 0.15em;
-    font-family: var(--secondary-font);
-  }
-
-  /* ── Scrollable content ── */
-  .cv-content {
-    flex: 1;
-    min-width: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: none;
-  }
-
-  .cv-content::-webkit-scrollbar {
-    display: none;
-  }
-
-  .cv-progress-track {
-    position: sticky;
-    top: 0;
-    height: 2px;
-    background: var(--cv-progress-track);
-    z-index: 21;
-  }
-
-  .cv-progress-bar {
-    height: 100%;
-    width: 0%;
-    background: var(--tarot-gradient);
-  }
-
-  .cv-topbar {
-    position: sticky;
-    top: 2px;
-    z-index: 20;
+  /* Titlebar */
+  .live-cv-titlebar {
+    background: #FFD233;
+    color: #000000;
+    padding: 8px 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding: 14px 28px;
-    background: var(--cv-topbar-bg);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--cv-border);
+    border-bottom: 2px solid #000000;
+    user-select: none;
   }
 
-  .cv-contact-placeholder {
-    color: var(--cv-muted);
-    font-family: var(--secondary-font);
-    font-size: 0.75rem;
-    white-space: nowrap;
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  a.cv-contact-placeholder:hover {
-    color: var(--cv-text);
-    text-decoration: underline;
-  }
-
-  .cv-footer-email {
-    margin: 0;
-    font-family: var(--secondary-font);
-    font-size: clamp(0.95rem, 1.4vw, 1.1rem);
-  }
-
-  .cv-footer-email a {
-    color: var(--cv-text);
-    text-decoration: none;
-    border-bottom: 1px solid var(--cv-border);
-    padding-bottom: 2px;
-    transition: border-color 0.2s ease, opacity 0.2s ease;
-  }
-
-  .cv-footer-email a:hover {
-    border-bottom-color: currentColor;
-    opacity: 0.75;
-  }
-
-  .cv-nav {
-    display: flex;
-    gap: 20px;
-  }
-
-  .cv-nav button {
-    background: none;
-    border: none;
-    padding: 4px 2px;
-    color: var(--cv-muted);
-    font-family: var(--secondary-font);
-    font-size: 0.8rem;
-    cursor: pointer;
-    border-bottom: 1.5px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
-  }
-
-  .cv-nav button:hover,
-  .cv-nav button.is-active {
-    color: var(--cv-text);
-    border-color: var(--cv-accent);
-  }
-
-  .cv-theme-toggle {
+  .live-cv-title-left {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1px solid var(--cv-border);
-    background: var(--cv-surface);
-    color: var(--cv-muted);
-    cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease;
+    gap: 8px;
   }
 
-  .cv-theme-toggle:hover {
-    color: var(--cv-text);
-    border-color: var(--cv-accent);
+  .live-cv-title-text {
+    font-family: monospace;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #000000;
   }
 
-  .cv-icon-sun {
-    display: none;
-  }
-
-  .cv-window[data-theme="light"] .cv-icon-sun {
-    display: block;
-  }
-
-  .cv-window[data-theme="light"] .cv-icon-moon {
-    display: none;
-  }
-
-  .cv-download {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: var(--tarot-gradient);
-    color: var(--white);
-    font-family: var(--secondary-font);
-    font-weight: 700;
-    font-size: 0.78rem;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: transform 0.15s ease;
-  }
-
-  .cv-download:hover {
-    transform: scale(1.04);
-  }
-
-  /* ── Hero ── */
-  .cv-hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: calc(100% - 51px);
-    padding: 40px 60px;
-  }
-
-  .cv-hero h1 {
-    margin: 0;
-    color: var(--cv-text);
-    font-family: var(--boldonse);
-    font-weight: 400;
-    font-size: clamp(2.6rem, 6vw, 4.5rem);
-    line-height: 1.05;
-  }
-
-  .cv-accent-dot {
-    color: var(--cv-accent);
-  }
-
-  .cv-tags {
+  .live-cv-title-controls {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-top: 20px;
-    color: var(--cv-muted);
-    font-family: var(--secondary-font);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    flex-wrap: wrap;
   }
 
-  .cv-tag-sep {
+  .live-cv-close-btn {
     width: 24px;
-    height: 1px;
-    background: var(--cv-line);
+    height: 24px;
+    border-radius: 4px;
+    border: 1.5px solid #000000;
+    background: #FFFFFF;
+    color: #000000;
+    font-size: 0.8rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 1.5px 1.5px 0px #000000;
+    transition: all 0.12s ease;
   }
 
-  .cv-scroll-indicator {
+  .live-cv-close-btn:hover {
+    background: #FF1F70;
+    color: #FFFFFF;
+    transform: translate(-1px, -1px);
+    box-shadow: 2px 2px 0px #000000;
+  }
+
+  .live-cv-close-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 0px 0px 0px #000000;
+  }
+
+  /* Topbar */
+  .live-cv-topbar {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 18px;
+    background: #FAF7F2;
+    border-bottom: 2px solid #000000;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .live-cv-top-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .mcv-contact-email {
+    font-family: monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #64748B;
+  }
+
+  .master-cv-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .cv-nav-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    font-family: monospace;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #334155;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+
+  .cv-nav-btn:hover {
+    background: #E2E8F0;
+    border-color: #CBD5E1;
+    color: #000000;
+  }
+
+  .master-cv-top-actions {
+    display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 56px;
-    color: var(--cv-muted);
-    font-family: var(--secondary-font);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
   }
 
-  .cv-scroll-indicator i {
-    display: block;
-    width: 1px;
-    height: 36px;
-    background: linear-gradient(var(--cv-accent), transparent);
+  .cv-tool-btn {
+    font-family: monospace;
+    font-size: 0.74rem;
+    font-weight: 800;
+    background: #FFFFFF;
+    color: #0F172A;
+    border: 1.5px solid #000000;
+    border-radius: 6px;
+    padding: 5px 11px;
+    cursor: pointer;
+    box-shadow: 1.5px 1.5px 0px #000000;
+    transition: all 0.12s ease;
   }
 
-  /* ── Sections ── */
-  .cv-section {
-    padding: 56px 60px;
-    border-top: 1px solid var(--cv-border);
+  .cv-tool-btn:hover {
+    background: #F1F5F9;
+    transform: translateY(-1px);
+    box-shadow: 2px 2px 0px #000000;
   }
 
-  .cv-section h2 {
-    margin: 0 0 24px;
-    color: var(--cv-text);
-    font-family: var(--boldonse);
-    font-weight: 400;
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    text-transform: lowercase;
-    display: inline-flex;
-    align-items: baseline;
-    gap: 14px;
-    padding-bottom: 12px;
-    border-bottom: 3px solid transparent;
-    border-image: var(--tarot-gradient) 1;
+  /* Prominent Green Download CV Button */
+  .cv-download-btn-green {
+    background: #22C55E !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    border-radius: 6px !important;
+    padding: 6px 14px !important;
+    font-family: monospace !important;
+    font-size: 0.8rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.02em !important;
+    box-shadow: 2.5px 3px 0px #000000 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
-  .cv-heading-suffix {
-    font-family: var(--secondary-font);
-    font-size: 1rem;
-    color: var(--cv-muted);
-    text-transform: none;
+  .cv-download-btn-green:hover {
+    background: #16A34A !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 3.5px 4px 0px #000000 !important;
   }
 
-  .cv-subheading {
-    margin-top: 32px;
+  .cv-download-btn-green.hero-lg {
+    padding: 12px 22px !important;
+    font-size: 0.95rem !important;
+    box-shadow: 3.5px 4px 0px #000000 !important;
   }
 
-  .cv-grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
+  .cv-download-btn-green.hero-lg:hover {
+    box-shadow: 4.5px 5px 0px #000000 !important;
   }
 
-  .cv-grid-2 p {
-    margin: 0 0 14px;
-    color: var(--cv-text);
-    font-family: var(--secondary-font);
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-
-  .cv-edu-degree {
-    font-weight: 600;
-  }
-
-  .cv-edu-school {
-    color: var(--cv-muted) !important;
-    font-size: 0.85rem !important;
-  }
-
-  .cv-pills {
+  /* Body */
+  .master-cv-body {
+    padding: 24px 28px;
+    overflow-y: auto;
+    max-height: calc(90vh - 84px);
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 32px;
+    background: #FFFFFF;
+    scroll-behavior: smooth;
+  }
+
+  .mcv-hero-section {
+    padding-bottom: 20px;
+    border-bottom: 2px solid #000000;
+    display: flex;
+    flex-direction: column;
     gap: 8px;
   }
 
-  .cv-pill {
-    background: var(--cv-pill-bg);
-    border-radius: 999px;
-    padding: 6px 14px;
-    color: var(--cv-muted);
-    font-family: var(--secondary-font);
-    font-size: 0.75rem;
-  }
-
-  /* ── Timeline ── */
-  .cv-timeline {
-    list-style: none;
-    padding: 0;
+  .mcv-hero-name {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 900;
+    color: #0F172A;
     margin: 0;
+    line-height: 0.98;
+    letter-spacing: -0.03em;
   }
 
-  .cv-timeline li {
+  .mcv-accent-dot {
+    color: #EAB308;
+    margin-left: 2px;
+  }
+
+  .mcv-hero-tags {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: monospace;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #475569;
+    margin-top: 4px;
+  }
+
+  .mcv-tag.highlight {
+    background: #FFFBEB;
+    color: #B45309;
+    border: 1.5px solid #FCD34D;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .mcv-tag-sep {
+    color: #CBD5E1;
+  }
+
+  .mcv-section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .mcv-heading {
+    font-family: monospace;
+    font-size: 0.88rem;
+    font-weight: 900;
+    color: #0F172A;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mcv-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--cv-border);
   }
 
-  .cv-timeline li:last-child {
-    border-bottom: none;
+  @media (max-width: 640px) {
+    .mcv-grid-2 {
+      grid-template-columns: 1fr;
+    }
   }
 
-  .cv-timeline-left,
-  .cv-timeline-right {
+  .mcv-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mcv-p {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #334155;
+    margin: 0;
+  }
+
+  /* Education */
+  .mcv-edu-plain {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 4px 0;
+  }
+
+  .mcv-edu-plain.mcv-expandable-card {
+    background: #FAF7F2;
+    border: 1.5px solid #000000;
+    border-radius: 8px;
+    padding: 10px 14px;
+    box-shadow: 2px 2px 0px #000000;
+  }
+
+  .mcv-edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .mcv-edu-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .mcv-edu-degree {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #0F172A !important;
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  .mcv-edu-school {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748B !important;
+    margin: 0;
+  }
+
+  /* Expandable Cards & Indicators */
+  .mcv-expandable-card {
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+    user-select: none;
+  }
+
+  .mcv-expandable-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 3px 3px 0px #000000 !important;
+  }
+
+  .mcv-expandable-card.is-expanded {
+    background: #FAF7F2 !important;
+    box-shadow: 3.5px 3.5px 0px #000000 !important;
+  }
+
+  .mcv-expand-toggle-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: monospace;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #475569;
+    background: #FFFFFF;
+    border: 1.2px solid #000000;
+    border-radius: 4px;
+    padding: 1px 6px;
+    box-shadow: 1px 1px 0px #000000;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+
+  .mcv-expandable-card:hover .mcv-expand-toggle-badge {
+    background: #FFDA00;
+    color: #000000;
+  }
+
+  .expand-chevron {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mcv-expandable-card.is-expanded .expand-chevron {
+    transform: rotate(180deg);
+  }
+
+  .mcv-expandable-card.is-expanded .mcv-expand-toggle-badge {
+    background: #00B3E3;
+    color: #000000;
+  }
+
+  /* Expandable Detail Drawer */
+  .mcv-item-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, margin-top 0.2s ease;
+    opacity: 0;
+    margin-top: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .mcv-expandable-card.is-expanded .mcv-item-details {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 10px;
+  }
+
+  .mcv-item-details-inner {
+    min-height: 0;
+    overflow: hidden;
+    border-top: 1.5px dashed #CBD5E1;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mcv-tl-overview {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.82rem;
+    font-style: italic;
+    color: #475569;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .mcv-tl-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .mcv-tl-bullets li {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.82rem;
+    color: #000000 !important;
+    line-height: 1.45;
+    position: relative;
+    padding-left: 14px;
+  }
+
+  .mcv-tl-bullets li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: #000000;
+    font-size: 0.65rem;
+    top: 1px;
+  }
+
+  .mcv-edu-detail-block {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .mcv-edu-branch-title {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: #000000 !important;
+    margin: 0;
+  }
+
+  .mcv-edu-desc {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.8rem;
+    color: #334155;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Pills */
+  .mcv-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .mcv-pill {
+    font-family: monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: #FAF7F2;
+    color: #000000;
+    border: 1.5px solid #000000;
+    padding: 4px 9px;
+    border-radius: 6px;
+    box-shadow: 1.5px 1.5px 0px #000000;
+    transition: transform 0.1s ease;
+  }
+
+  .mcv-pill:hover {
+    transform: translateY(-1px);
+  }
+
+  .pop-pink {
+    background: #FF1F70 !important;
+    color: #FFFFFF !important;
+    border-color: #000000 !important;
+  }
+
+  .pop-cyan {
+    background: #00B3E3 !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+  }
+
+  .pop-lime {
+    background: #D1FF00 !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+  }
+
+  .pop-yellow {
+    background: #FFDA00 !important;
+    color: #000000 !important;
+    border-color: #000000 !important;
+  }
+
+  .pop-purple {
+    background: #7A00FF !important;
+    color: #FFFFFF !important;
+    border-color: #000000 !important;
+  }
+
+  /* Timeline */
+  .mcv-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .mcv-timeline-item {
+    background: #FAF7F2 !important;
+    border: 1.5px solid #000000 !important;
+    border-radius: 8px !important;
+    padding: 12px 16px !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    color: #0F172A !important;
+  }
+
+  .mcv-tl-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .mcv-tl-role-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mcv-tl-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 200px;
+  }
+
+  .mcv-tl-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .mcv-badge-sticker {
+    font-family: monospace;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 2px 7px;
+    border: 1.5px solid #000000;
+    border-radius: 4px;
+    box-shadow: 1.5px 1.5px 0px #000000;
+    letter-spacing: 0.02em;
+    display: inline-block;
+  }
+
+  .mcv-tl-comp {
+    font-family: var(--archivo-font, 'Archivo', sans-serif) !important;
+    font-size: 0.94rem !important;
+    font-weight: 900 !important;
+    color: #000000 !important;
+  }
+
+  .mcv-tl-loc {
+    font-family: monospace !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    color: #64748B !important;
+  }
+
+  .mcv-tl-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 220px;
+  }
+
+  .mcv-tl-role {
+    font-family: var(--archivo-font, 'Archivo', sans-serif) !important;
+    font-size: 0.9rem !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+  }
+
+  .mcv-tl-kw {
+    font-family: var(--archivo-font, 'Archivo', sans-serif) !important;
+    font-size: 0.78rem !important;
+    color: #334155 !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Competency Cards */
+  .mcv-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+  }
+
+  .mcv-cap-card {
+    border: 1.5px solid #000000;
+    border-radius: 8px;
+    padding: 14px;
+    box-shadow: 2.5px 2.5px 0px #000000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.12s ease;
+  }
+
+  .mcv-cap-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 3.5px 3.5px 0px #000000;
+  }
+
+  .card-pink {
+    background: #FFF0F5;
+    border-top: 4px solid #FF1F70;
+  }
+
+  .card-cyan {
+    background: #F0FAFF;
+    border-top: 4px solid #00B3E3;
+  }
+
+  .card-lime {
+    background: #F8FFE5;
+    border-top: 4px solid #D1FF00;
+  }
+
+  .card-yellow {
+    background: #FFFDF0;
+    border-top: 4px solid #FFDA00;
+  }
+
+  .card-purple {
+    background: #F8F0FF;
+    border-top: 4px solid #7A00FF;
+  }
+
+  .mcv-cap-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+
+  .mcv-doodle-art {
+    width: 44px;
+    height: 34px;
+    display: block;
+    flex-shrink: 0;
+    filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
+  }
+
+  .mcv-sticker-tag {
+    font-family: monospace;
+    font-size: 0.62rem;
+    font-weight: 900;
+    border: 1.5px solid #000000;
+    border-radius: 4px;
+    padding: 1px 5px;
+    box-shadow: 1px 1px 0px #000000;
+    letter-spacing: 0.03em;
+  }
+
+  .mcv-cap-card h3 {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.92rem;
+    font-weight: 900;
+    color: #0F172A;
+    margin: 0;
+  }
+
+  .mcv-cap-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
 
-  .cv-timeline-right {
-    text-align: right;
-    align-items: flex-end;
-  }
-
-  .cv-timeline strong {
-    color: var(--cv-text);
-    font-family: var(--secondary-font);
-    font-size: 0.95rem;
-    font-weight: 700;
-  }
-
-  .cv-timeline-left span {
-    color: var(--cv-muted);
-    font-family: var(--secondary-font);
-    font-size: 0.8rem;
-  }
-
-  .cv-timeline-right span {
-    color: var(--cv-accent);
-    font-family: var(--secondary-font);
-    font-size: 0.75rem;
-    max-width: 42ch;
-  }
-
-  /* ── Capability cards ── */
-  .cv-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .cv-card {
-    background: var(--cv-surface);
-    border: 1px solid var(--cv-border);
-    border-radius: 14px;
-    padding: 22px;
-  }
-
-  .cv-card-icon {
-    color: var(--cv-accent);
-    margin-bottom: 12px;
-  }
-
-  .cv-card h3 {
-    margin: 0 0 10px;
-    color: var(--cv-text);
-    font-family: var(--secondary-font);
-    font-size: 0.95rem;
-    font-weight: 700;
-  }
-
-  .cv-card ul {
-    margin: 0;
-    padding-left: 18px;
-    color: var(--cv-muted);
-    font-family: var(--secondary-font);
+  .mcv-cap-card li {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
     font-size: 0.78rem;
-    line-height: 1.6;
+    color: #475569;
+    line-height: 1.35;
+    position: relative;
+    padding-left: 12px;
   }
 
-  /* ── Now: focus areas + currently ── */
-  .cv-numbered {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .mcv-cap-card li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: #000000;
+    font-size: 0.65rem;
   }
 
-  .cv-numbered li {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--cv-border);
-    color: var(--cv-text);
-    font-family: var(--secondary-font);
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-
-  .cv-numbered li span {
-    color: var(--cv-accent);
-    font-family: var(--secondary-font);
-    font-size: 0.8rem;
-  }
-
-  .cv-now-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .cv-now-item {
-    display: flex;
-    align-items: flex-start;
+  /* Currently Section */
+  .mcv-now-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 12px;
   }
 
-  .cv-now-dot {
-    flex-shrink: 0;
-    width: 8px;
-    height: 8px;
-    margin-top: 6px;
-    border-radius: 50%;
-    background: var(--cv-accent);
-    animation: cv-now-pulse 2.4s ease-in-out infinite;
-  }
-
-  @keyframes cv-now-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(126, 206, 206, 0.35); }
-    50% { box-shadow: 0 0 0 6px rgba(126, 206, 206, 0); }
-  }
-
-  .cv-now-item p {
-    margin: 0;
-    color: var(--cv-text);
-    font-family: var(--secondary-font);
-    font-size: 0.9rem;
-    line-height: 1.55;
-  }
-
-  /* ── Divider band ── */
-  .cv-divider-band {
-    height: 40px;
-    background: var(--cv-divider-bg);
-    border-top: 1px solid var(--cv-border);
-    border-bottom: 1px solid var(--cv-border);
-  }
-
-  /* ── Certificates ── */
-  .cv-cert-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .cv-cert-card {
-    background: var(--cv-surface);
-    border: 1px solid var(--cv-border);
-    border-radius: 14px;
-    padding: 20px 22px;
-  }
-
-  .cv-cert-card h3 {
-    margin: 0 0 6px;
-    color: var(--cv-text);
-    font-family: var(--secondary-font);
-    font-size: 0.92rem;
-    font-weight: 700;
-  }
-
-  .cv-cert-card p {
-    margin: 0;
-    color: var(--cv-muted);
-    font-family: var(--secondary-font);
-    font-size: 0.78rem;
-  }
-
-  /* ── Footer ── */
-  .cv-footer {
-    padding: 56px 60px 40px;
-    border-top: 1px solid var(--cv-border);
-  }
-
-  .cv-footer h2 {
-    margin: 0 0 16px;
-    color: var(--cv-text);
-    font-family: var(--boldonse);
-    font-weight: 400;
-    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-  }
-
-  .cv-social-links {
+  .mcv-now-card {
+    border: 1.5px solid #000000;
+    border-radius: 8px;
+    padding: 14px;
+    box-shadow: 2.5px 2.5px 0px #000000;
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.12s ease;
+  }
+
+  .mcv-now-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 3.5px 3.5px 0px #000000;
+  }
+
+  .mcv-now-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mcv-now-beacon {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid #000000;
+  }
+
+  .lime-beacon {
+    background: #D1FF00;
+    box-shadow: 0 0 8px rgba(209, 255, 0, 0.9);
+  }
+
+  .purple-beacon {
+    background: #7A00FF;
+    box-shadow: 0 0 8px rgba(122, 0, 255, 0.7);
+  }
+
+  .yellow-beacon {
+    background: #FFDA00;
+    box-shadow: 0 0 8px rgba(255, 218, 0, 0.9);
+  }
+
+  .pink-beacon {
+    background: #FF1F70;
+    box-shadow: 0 0 8px rgba(255, 31, 112, 0.8);
+  }
+
+  .mcv-now-title {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.92rem;
+    font-weight: 900;
+    color: #000000 !important;
+    margin: 0;
+  }
+
+  .mcv-now-desc {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.8rem;
+    color: #334155;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Certs */
+  .mcv-cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+  }
+
+  .cert-card {
+    background: #FAF7F2;
+    border: 1.5px solid #000000;
+    border-radius: 8px;
+    padding: 12px 14px;
+    box-shadow: 2px 2px 0px #000000;
+  }
+
+  .cert-title {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 0.88rem;
+    font-weight: 900;
+    color: #0F172A;
+    margin: 0 0 3px 0;
+  }
+
+  .cert-meta {
+    font-family: monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #64748B;
+    margin: 0;
+  }
+
+  /* Footer */
+  .mcv-footer {
+    background: #FAF7F2 !important;
+    border: 2.5px solid #000000 !important;
+    border-radius: 10px !important;
+    padding: 20px 24px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 20px !important;
+    flex-wrap: wrap !important;
+    box-shadow: 4px 4px 0px #000000 !important;
+    margin-top: 10px;
+    color: #0F172A !important;
+  }
+
+  .mcv-footer-title {
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: #0F172A !important;
+    margin: 0 0 10px 0;
+  }
+
+  .mcv-footer-btns-row {
+    display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 18px;
+    flex-wrap: wrap;
   }
 
-  .cv-social-link {
+  .mcv-action-btn {
+    font-family: monospace;
+    font-size: 0.78rem;
+    font-weight: 900;
+    background: #FFFFFF;
+    color: #0F172A;
+    border: 1.5px solid #000000;
+    border-radius: 6px;
+    padding: 6px 14px;
+    text-decoration: none;
+    box-shadow: 2px 2px 0px #000000;
+    transition: all 0.12s ease;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-    padding: 9px 16px;
-    border-radius: 999px;
-    border: 1px solid var(--cv-border);
-    background: var(--cv-surface);
-    color: var(--cv-muted);
-    font-family: var(--secondary-font);
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    white-space: nowrap;
+    gap: 7px;
     cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
   }
 
-  .cv-social-link:hover,
-  .cv-social-link:focus-visible {
-    color: var(--cv-text);
-    border-color: var(--cv-accent);
-    transform: translateY(-1px);
+  .mcv-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0px #000000;
   }
 
-  .cv-social-link svg {
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
+  .mcv-action-btn.email-btn:hover {
+    background: #FEF08A;
   }
 
-  /* ── Substack: smoke-fill + label crossfade (no popup) ── */
-  .cv-substack-btn {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cv-substack-smoke {
-    position: absolute;
-    inset: -50%;
-    z-index: 0;
-    background: var(--tarot-gradient);
-    opacity: 0;
-    filter: blur(12px);
-    transform: scale(0.5);
-    transition: opacity 1.2s ease, transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .cv-substack-btn.is-active {
-    color: var(--white);
-    border-color: transparent;
-  }
-
-  .cv-substack-btn.is-active .cv-substack-smoke {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .cv-substack-text {
-    position: relative;
-    z-index: 1;
-    display: inline-grid;
-  }
-
-  .cv-substack-text > span {
-    grid-area: 1 / 1;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-
-  .cv-substack-text-alt {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-
-  .cv-substack-btn.is-active .cv-substack-text-default {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-
-  .cv-substack-btn.is-active .cv-substack-text-alt {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.5s;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .cv-substack-smoke,
-    .cv-substack-text > span {
-      transition-duration: 0.2s;
-      transition-delay: 0s;
-    }
-  }
-
-  .cv-copyright {
-    margin-top: 36px;
-    padding-top: 16px;
-    border-top: 1px solid var(--cv-border);
-    color: var(--cv-muted);
-    font-family: var(--secondary-font);
-    font-size: 0.72rem;
-  }
-
-  /* ── Scroll reveal ── */
-  .cv-reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .cv-reveal.is-visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .cv-reveal {
-      transition: opacity 0.2s ease;
-      transform: none;
-    }
-    .cv-window {
-      transition: opacity 0.2s ease;
-      transform: none;
-    }
-    .cv-now-dot {
-      animation: none;
-    }
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 760px) {
-    .cv-window {
-      width: 96vw;
-      height: 92vh;
-      flex-direction: column-reverse;
-    }
-
-    .cv-rail {
-      flex-direction: row;
-      width: 100%;
-      height: 34px;
-      padding: 0 14px;
-      border-right: none;
-      border-top: 1px solid var(--cv-border);
-    }
-
-    .cv-dots {
-      flex-direction: row;
-    }
-
-    .cv-rail-label {
-      display: none;
-    }
-
-    .cv-topbar {
-      flex-wrap: wrap;
-      padding: 12px 20px;
-    }
-
-    .cv-contact-placeholder {
-      display: none;
-    }
-
-    .cv-nav {
-      order: 1;
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    .cv-hero,
-    .cv-section,
-    .cv-footer {
-      padding: 36px 24px;
-    }
-
-    .cv-social-links {
-      flex-wrap: wrap;
-    }
-
-    .cv-grid-2,
-    .cv-cards-grid,
-    .cv-cert-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .cv-timeline li {
-      grid-template-columns: 1fr;
-    }
-
-    .cv-timeline-right {
-      text-align: left;
-      align-items: flex-start;
-    }
+  .mcv-action-btn.linkedin-btn:hover {
+    background: #E0F2FE;
+    color: #0A66C2;
   }
 </style>

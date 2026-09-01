@@ -5,6 +5,7 @@ cardTitle: "Improving processes"
 projType: "case study"
 icon: "crab"
 category: "operations"
+active: false
 summary: "Untangling the operational snags slowing a sustainable mobility programme down, one process fix at a time."
 # placeholder art — swap when real artwork exists
 cardBg: "#FFDA00"

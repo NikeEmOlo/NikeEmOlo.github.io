@@ -5,6 +5,7 @@ cardTitle: "Delivery Management"
 projType: "case study"
 icon: "crab"
 category: "delivery"
+active: false
 summary: "Piloting the BetterPoints behaviour-change app with the operational rigour a live customer trial demands."
 # placeholder art — swap when real artwork exists
 cardBg: "#D1FF00"
