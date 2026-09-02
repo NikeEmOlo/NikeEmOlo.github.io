@@ -13,12 +13,12 @@ education:
   school: "University of Manchester"
   details:
     - title: "MSc International Development:"
-      description: "Focused on analysing complex, interconnected systems involving institutions, policy, technology, and global economics. Developed strengths in systems analysis, structured research, technical writing, and project-based collaboration."
+      description: "Analysed the complex, interconnected systems shaping policy, economy, technology, institutions, and the environment. Highly focused on sustainable development and global inequality. Developed strengths in systems analysis, structured research, technical writing, and project-based collaboration."
     - title: "BA Geography:"
-      description: "Focused on understanding how social, economic, and environmental systems interact at local and global scales. Gained practical skills in research, data analysis, policy analysis, and problem-solving."
+      description: "Understanding how environmental, social, and economic systems interact at local and global scales, and how we can protect and manage these systems. Gained practical skills in research, data analysis, policy analysis, and problem-solving."
 
 skills:
-  - name: "AI-Assisted Automation"
+  - name: "AI Automation"
     color: "yellow"
   - name: "Agentic Workflow Design"
     color: "purple"
@@ -30,7 +30,11 @@ skills:
     color: "pink"
   - name: "HTML / CSS / JavaScript"
   - name: "Node.js"
-  - name: "Client Delivery & Coordination"
+  - name: "SQL"
+    color: "purple"
+  - name: "Data structures & Algorithms"
+    color: "yellow"
+  - name: "Service Delivery & Coordination"
     color: "cyan"
   - name: "Workshop Facilitation"
     color: "yellow"
@@ -43,11 +47,11 @@ experience:
     badgeColor: "lime"
     location: "Remote · 2024 - Present"
     role: "Full-Stack Developer (Training)"
-    keywords: "HTML, CSS, JavaScript, Node.js, Data Structures & Algorithms, SOLID Principles"
-    overview: "An open-source, project-based full-stack web development curriculum."
+    keywords: "HTML, CSS, JavaScript, Node.js, Data Structures & Algorithms, SOLID Principles, SQL, React"
+    overview: "An open-source, project-based, full-stack web development curriculum."
     bullets:
       - "Designed and deployed a multi-agent, agentic AI workflow using OpenClaw and Claude to automate the job-search process, reducing time spent by 83%."
-      - "Completing full-stack curriculum covering fundamental computer science, data structures and algorithms, SOLID principles, and debugging in HTML, CSS, and JS."
+      - "Developed the knowledge needed to create a full-stack web-application without the use of AI, providing the fundamental knowledge to harness the power of AI."
 
   - company: "Outer Office"
     badge: "Freelance"
@@ -110,37 +114,44 @@ competencies:
     color: "yellow"
     items:
       - "AI-Assisted Automation"
-      - "Agentic Workflow Design (OpenClaw, Claude)"
-      - "API Integration (Graph, Workspace, OpenAI)"
+      - "Agentic Workflow Design"
+      - "API Integration"
       - "MCP Protocol Implementation"
-
+      - "Outcome-Driven Automation (83% Time Reduction)"
+  - title: "Self-Directed Learning"
+    code: "SELF_TEACH"
+    color: "cyan"
+    items:
+      - "Comfort With Technical Uncertainty"
+      - "Rapid Skill Acquisition"
+      - "Self-Directed Technical Training"
+      - "Learning Through Building"
   - title: "Process & Systems Design"
     code: "SYS_ARCH"
     color: "cyan"
     items:
       - "Structured Problem-Solving"
-      - "Systems Thinking & Logic"
-      - "Workflow Optimisation"
+      - "Structured Research"
+      - "Systems Thinking"
+      - "Bridging Technical & Non-Technical Perspectives"
       - "Prioritisation Across Workstreams"
-
   - title: "Full-Stack Development"
     code: "CODE_STACK"
     color: "purple"
     items:
       - "HTML, CSS, JavaScript, Node.js"
       - "Data Structures & Algorithms"
-      - "SOLID Principles & Clean Architecture"
+      - "SOLID Principles"
       - "Security Fundamentals"
-
   - title: "Client & Stakeholder Delivery"
     code: "CLIENT_OPS"
     color: "pink"
     items:
       - "Client Delivery & Coordination"
       - "Workshop Delivery & Onboarding"
+      - "Driving Adoption & Behavioural Change"
       - "Translating Technical Concepts"
-      - "Documentation & Executive Reporting"
-
+      - "Documentation & Stakeholder Reporting"
   - title: "Project & Agile Delivery"
     code: "AGILE_PM"
     color: "lime"
@@ -148,34 +159,21 @@ competencies:
       - "Agile Workflows (ICAgile Certified)"
       - "Project Management (PMI Trained)"
       - "Multi-Stakeholder Coordination"
-
-  - title: "Productivity & Collaboration"
-    code: "TOOLING"
-    color: "cyan"
-    items:
-      - "Microsoft 365, Azure, DevOps"
-      - "Google Workspace, Dropbox, Notion"
+      - "Resilience Under Disruption"
 
 currently:
   - title: "Full-Stack Fundamentals"
     tag: "ACTIVE STUDY"
     color: "lime"
-    description: "Deepening full-stack core principles (data structures, algorithms, and SOLID architecture) via The Odin Project."
-
+    description: "Deepening core full-stack principles (data structures, algorithms, and SOLID architecture) through The Odin Project."
   - title: "Agentic AI Workflows"
     tag: "AGENT ARCH"
     color: "purple"
-    description: "Designing multi-agent orchestration systems with OpenClaw, Claude, and Model Context Protocol (MCP) to eliminate manual toil."
-
-  - title: "Enterprise Automation"
-    tag: "FREELANCE CLIENT"
-    color: "yellow"
-    description: "Building production workflow integrations for freelance clients using Microsoft Graph, Google Workspace APIs, and OpenAI."
-
+    description: "Testing the limits of agentic workflow design to prototype new automation systems."
   - title: "Open to Opportunities"
     tag: "NEXT CHAPTER"
     color: "pink"
-    description: "Available for consulting, technical solution design, and full-stack automation roles where consulting acumen adds leverage."
+    description: "Available for consulting, technical solution design, and full-stack automation roles that draw on both technical and client-facing experience."
 
 certificates:
   - title: "ICAgile Certified Professional"
