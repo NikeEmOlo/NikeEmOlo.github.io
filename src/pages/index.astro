@@ -64,6 +64,12 @@ const employers = [
 
 <Base>
     <main class="home-page">
+        <!-- Top Hero Header: Semi-bold Title with Pink Dot & Regular Subtitle -->
+        <header class="hero-header">
+            <h1 class="hero-title">Olanike Olowo-Fela<span class="hero-dot">.</span></h1>
+            <p class="hero-subtitle">I build systems and software that<br />make life easier.</p>
+        </header>
+
         <!-- Top Navigation -->
         <Navigation />
 
@@ -273,6 +279,45 @@ const employers = [
         box-sizing: border-box;
     }
 
+    /* Top Hero Header: Semi-bold Title with Pink Dot & Regular Subtitle */
+    .hero-header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        width: 100%;
+        max-width: 640px;
+        flex-shrink: 0;
+        z-index: 10;
+    }
+
+    .hero-title {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-weight: 600;
+        font-size: clamp(1.75rem, 3.2vw, 3rem); /* 48px at 3rem */
+        line-height: 1.0;
+        letter-spacing: -0.06em;
+        color: #0F172A;
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .hero-dot {
+        color: var(--doodle-pink, #FF1F70);
+    }
+
+    .hero-subtitle {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-weight: 400;
+        font-size: clamp(1rem, 1.6vw, 1.5rem); /* 24px at 1.5rem */
+        line-height: 1.12;
+        letter-spacing: -0.06em;
+        color: #0F172A;
+        margin-top: clamp(4px, 0.6vh, 8px);
+        margin-bottom: 0;
+        -webkit-font-smoothing: antialiased;
+    }
+
     /* Main Interactive Work Center: Anchored to the bottom section of the screen */
     .deck-flex-container {
         display: flex;
@@ -310,7 +355,7 @@ const employers = [
         font-weight: 900;
         font-size: clamp(1.85rem, 2.8vw, 2.5rem);
         color: #0F172A;
-        letter-spacing: -0.03em;
+        letter-spacing: -0.06em;
         margin: 0;
         line-height: 1;
         display: inline-block;
@@ -563,8 +608,8 @@ const employers = [
         font-family: var(--pw-sans);
         font-size: clamp(0.8125rem, 1vw, 0.875rem);
         font-weight: 600;
-        letter-spacing: 0.01em;
-        line-height: 1.4;
+        letter-spacing: -0.04em;
+        line-height: 1.25;
         color: var(--pw-muted);
         overflow: hidden;
     }
@@ -623,8 +668,20 @@ const employers = [
             min-height: 100dvh;
             overflow-y: auto;
             overflow-x: hidden;
-            padding: 48px 20px 32px;
+            padding: 24px 20px 32px;
             gap: 20px;
+        }
+
+        .hero-header {
+            padding-right: 60px;
+        }
+
+        .hero-title {
+            font-size: clamp(1.5rem, 5.5vw, 2.25rem);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.95rem, 3.2vw, 1.25rem);
         }
 
         .deck-flex-container {
