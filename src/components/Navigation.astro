@@ -28,19 +28,132 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
                     <span>Home</span>
                 </a>
             </li>
-            <li class="nav-li">
-                <a href="https://outeroffice.co" target="_blank" rel="noopener noreferrer" class="nav-item-btn nav-link" style="--tab-accent: var(--doodle-lime, #D1FF00); --tab-text: #000000;">
+            <li class="nav-li nav-outer-office-li">
+                <button
+                    type="button"
+                    class="nav-item-btn nav-link nav-outer-office-btn"
+                    id="navOuterOfficeBtn"
+                    aria-expanded="false"
+                    aria-controls="outerOfficeSign"
+                    aria-label="Outer Office (Under construction)"
+                >
                     <span>Outer Office</span>
                     <svg class="nav-ext-svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <line x1="7" y1="17" x2="17" y2="7"></line>
                         <polyline points="7 7 17 7 17 17"></polyline>
                     </svg>
-                </a>
+                </button>
+
+                <!-- Hanging Under Construction Sign Container -->
+                <div class="hanging-sign-anchor" id="outerOfficeSign" aria-hidden="true">
+                    <div class="hanging-sign-wrapper">
+                        <!-- Twin Clean Black Cables -->
+                        <div class="sign-poles" aria-hidden="true">
+                            <div class="sign-pole pole-left">
+                                <span class="pole-rod"></span>
+                            </div>
+                            <div class="sign-pole pole-right">
+                                <span class="pole-rod"></span>
+                            </div>
+                        </div>
+
+                        <!-- Sign Board Artwork -->
+                        <div class="sign-board">
+                            <img
+                                src="/img/under-construction-sign.webp"
+                                alt="Under Construction"
+                                class="sign-board-img"
+                                width="170"
+                                height="120"
+                                loading="eager"
+                            />
+                        </div>
+                    </div>
+                </div>
             </li>
-            <li class="nav-li">
-                <a href="mailto:nike.emily@pm.me" class="nav-item-btn nav-link nav-contact" style="--tab-accent: var(--doodle-purple, #7A00FF); --tab-text: #FFFFFF;">
-                    <span>Contact</span>
-                </a>
+            <li class="nav-li nav-contact-li">
+                <button
+                    type="button"
+                    id="navContactBtn"
+                    class="nav-item-btn nav-link nav-contact-btn"
+                    aria-expanded="false"
+                    aria-controls="contactHangingChain"
+                    aria-label="Toggle contact links"
+                    style="--tab-accent: var(--doodle-purple, #7A00FF); --tab-text: #FFFFFF;"
+                >
+                    <span class="contact-label-text">Contact</span>
+                    <span class="contact-close-icon" aria-hidden="true">&times;</span>
+                </button>
+
+                <!-- Hanging Chain of Contact Icons -->
+                <div class="contact-hanging-anchor" id="contactHangingChain" aria-hidden="true">
+                    <div class="contact-hanging-wrapper">
+                        <!-- Top String from Navbar to LinkedIn -->
+                        <div class="contact-string string-top" aria-hidden="true">
+                            <span class="string-line"></span>
+                        </div>
+
+                        <!-- LinkedIn Icon Node -->
+                        <div class="contact-node-item node-linkedin">
+                            <a
+                                href="https://www.linkedin.com/in/NikeEmilyO/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="contact-icon-link linkedin-link"
+                                title="Visit LinkedIn Profile"
+                                aria-label="LinkedIn Profile"
+                            >
+                                <img
+                                    src="/img/contact-linkedin.webp"
+                                    alt="LinkedIn"
+                                    class="contact-icon-img"
+                                    width="52"
+                                    height="38"
+                                    loading="eager"
+                                />
+                            </a>
+                        </div>
+
+                        <!-- Middle String from LinkedIn to Email -->
+                        <div class="contact-string string-middle" aria-hidden="true">
+                            <span class="string-line"></span>
+                        </div>
+
+                        <!-- Email Icon Node with Copy Quick Action -->
+                        <div class="contact-node-item node-email">
+                            <!-- Copy Email Quick Action Button (Pops out to the left) -->
+                            <button
+                                type="button"
+                                class="copy-email-btn"
+                                id="copyEmailQuickBtn"
+                                title="Copy email address to clipboard"
+                                aria-label="Copy email address"
+                            >
+                                <svg class="copy-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                <span class="copy-btn-text">or copy email address</span>
+                            </button>
+
+                            <a
+                                href="mailto:nike.emily@pm.me"
+                                class="contact-icon-link email-link"
+                                title="Send email to nike.emily@pm.me"
+                                aria-label="Send Email"
+                            >
+                                <img
+                                    src="/img/contact-email.png"
+                                    alt="Email"
+                                    class="contact-icon-img"
+                                    width="52"
+                                    height="37"
+                                    loading="eager"
+                                />
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
@@ -100,6 +213,7 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         font-weight: 700;
         text-decoration: none;
         font-size: 0.8125rem;
+        letter-spacing: -0.04em;
         line-height: 1;
         white-space: nowrap;
         cursor: pointer;
@@ -127,6 +241,602 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         font-weight: 900;
     }
 
+    /* ── Outer Office Under-Construction Sign ── */
+    .nav-outer-office-li {
+        position: relative;
+    }
+
+    .nav-outer-office-btn {
+        position: relative;
+    }
+
+    /* Greyed-out hover/focus/active state for Outer Office button */
+    .nav-outer-office-li:hover .nav-outer-office-btn,
+    .nav-outer-office-li:focus-within .nav-outer-office-btn,
+    .nav-outer-office-li.is-sign-open .nav-outer-office-btn {
+        background: #E2E8F0 !important;
+        border-color: #000000 !important;
+        color: #64748B !important;
+        cursor: not-allowed !important;
+        transform: translate(0px, 0px) !important;
+        box-shadow: 1.5px 1.5px 0px #000000 !important;
+    }
+
+    .hanging-sign-anchor {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 50%;
+        transform: translateX(-50%) scale(var(--sign-scale, 1));
+        pointer-events: none;
+        z-index: 500;
+        visibility: hidden;
+        clip-path: inset(0 -120px -400px -120px);
+        transform-origin: top center;
+        transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* When Contact chain is open, scale down the under-construction sign so they never overlap */
+    nav:has(.nav-contact-li.is-contact-open) .hanging-sign-anchor,
+    .nav-outer-office-li.is-compact-sign .hanging-sign-anchor {
+        --sign-scale: 0.70;
+    }
+
+    .hanging-sign-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: max-content;
+        transform-origin: top center;
+        transform: translateY(-130%);
+        will-change: transform;
+    }
+
+    /* Twin Clean Black Cables */
+    .sign-poles {
+        display: flex;
+        justify-content: space-between;
+        width: 68px;
+        height: 44px;
+        position: relative;
+        margin-top: -6px; /* tucks securely behind the navbar bottom border */
+        margin-bottom: -18px;
+        z-index: 1;
+    }
+
+    .sign-pole {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        width: 4px;
+        height: 100%;
+    }
+
+    .pole-rod {
+        width: 4px;
+        height: 100%;
+        background-color: #000000;
+        border-radius: 1px;
+    }
+
+    /* Sign Board Artwork with tactile drop-shadow */
+    .sign-board {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+    }
+
+    .sign-board-img {
+        width: 175px;
+        height: auto;
+        display: block;
+        filter: drop-shadow(2px 3.5px 0px #000000);
+        user-select: none;
+        pointer-events: none;
+    }
+
+    /* Authentic Gravity Physics Drop, Cable Rebound & Decaying Pendulum Swing:
+       1. Free Fall (0% - 40%): Accelerates straight down under gravity with 0deg rotation.
+       2. Cable Catch & Elastic Bounce (40% - 58%): Reaches maximum velocity, stretches to +8px, rebounds up to -5px.
+       3. Pendulum Swing (46% - 100%): Sudden tension initiates decaying left-right oscillation to rest. */
+    @keyframes signDropGravityPhysics {
+        0% {
+            transform: translateY(-130%) rotate(0deg);
+            opacity: 0;
+        }
+        4% {
+            opacity: 1;
+        }
+        /* Quadratic gravity acceleration downwards */
+        14% {
+            transform: translateY(-105%) rotate(0deg);
+        }
+        26% {
+            transform: translateY(-60%) rotate(0deg);
+        }
+        36% {
+            transform: translateY(-12%) rotate(0deg);
+        }
+        40% {
+            transform: translateY(0px) rotate(0deg);
+        }
+
+        /* Cable stretch overshoot + elastic rebound */
+        46% {
+            transform: translateY(8px) rotate(1deg);
+        }
+        54% {
+            transform: translateY(-5px) rotate(3.2deg);
+        }
+        64% {
+            transform: translateY(3px) rotate(-2.4deg);
+        }
+
+        /* Decaying pendulum swing to rest */
+        74% {
+            transform: translateY(-1.5px) rotate(1.6deg);
+        }
+        84% {
+            transform: translateY(0.5px) rotate(-0.9deg);
+        }
+        92% {
+            transform: translateY(0px) rotate(0.4deg);
+        }
+        100% {
+            transform: translateY(0px) rotate(0deg);
+            opacity: 1;
+        }
+    }
+
+    /* Reverse Slide-Up Keyframe: Slides straight vertically back up into navbar */
+    @keyframes signSlideUp {
+        0% {
+            transform: translateY(0px) rotate(0deg);
+            opacity: 1;
+        }
+        15% {
+            transform: translateY(2px) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-130%) rotate(0deg);
+            opacity: 0;
+        }
+    }
+
+    /* Shake Keyframe on Click/Tap */
+    @keyframes signShake {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        20%, 60% { transform: translateY(0px) rotate(-3.5deg); }
+        40%, 80% { transform: translateY(0px) rotate(3.5deg); }
+    }
+
+    /* Active Open State */
+    .nav-outer-office-li.is-sign-open .hanging-sign-anchor {
+        visibility: visible;
+    }
+
+    .nav-outer-office-li.is-sign-open .hanging-sign-wrapper {
+        animation: signDropGravityPhysics 0.85s linear forwards;
+    }
+
+    /* Closing State */
+    .nav-outer-office-li.is-sign-closing .hanging-sign-anchor {
+        visibility: visible;
+    }
+
+    .nav-outer-office-li.is-sign-closing .hanging-sign-wrapper {
+        animation: signSlideUp 0.32s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    /* Click Shake State */
+    .nav-outer-office-li.is-sign-shake .hanging-sign-wrapper {
+        animation: signShake 0.35s ease forwards;
+    }
+
+    /* ── Contact Button & Hanging Chain ── */
+    .nav-contact-li {
+        position: relative;
+    }
+
+    .nav-contact-btn {
+        position: relative;
+        overflow: hidden;
+        min-width: 68px;
+    }
+
+    .contact-label-text {
+        display: inline-block;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .contact-close-icon {
+        display: none;
+        font-size: 1.15rem;
+        line-height: 1;
+        font-weight: 800;
+        transform-origin: center;
+    }
+
+    /* When Contact Chain is Open */
+    .nav-contact-li.is-contact-open .nav-contact-btn,
+    .nav-contact-li:has(.nav-contact-btn[aria-expanded="true"]) .nav-contact-btn,
+    .nav-contact-btn[aria-expanded="true"] {
+        background: #000000 !important;
+        color: #ffffff !important;
+        border-color: #000000 !important;
+        box-shadow: 2px 2px 0px #000000 !important;
+    }
+
+    .nav-contact-li.is-contact-open .contact-label-text,
+    .nav-contact-li:has(.nav-contact-btn[aria-expanded="true"]) .contact-label-text,
+    .nav-contact-btn[aria-expanded="true"] .contact-label-text {
+        display: none;
+    }
+
+    .nav-contact-li.is-contact-open .contact-close-icon,
+    .nav-contact-li:has(.nav-contact-btn[aria-expanded="true"]) .contact-close-icon,
+    .nav-contact-btn[aria-expanded="true"] .contact-close-icon {
+        display: inline-block;
+        animation: rotateCloseIcon 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes rotateCloseIcon {
+        0% { transform: rotate(-90deg) scale(0.6); opacity: 0; }
+        100% { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
+
+    /* Contact Hanging Anchor & Clipping Plane */
+    .contact-hanging-anchor {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 50%;
+        transform: translateX(-50%);
+        pointer-events: none;
+        z-index: 500;
+        visibility: hidden;
+        clip-path: inset(0 -180px -450px -240px);
+        transform-origin: top center;
+    }
+
+    .nav-contact-li.is-contact-open .contact-hanging-anchor,
+    .nav-contact-li:has(.nav-contact-btn[aria-expanded="true"]) .contact-hanging-anchor {
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .nav-contact-li.is-contact-closing .contact-hanging-anchor {
+        visibility: visible;
+    }
+
+    .contact-hanging-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: max-content;
+        transform-origin: top center;
+        transform: translateY(-140%);
+        will-change: transform;
+    }
+
+    /* Flexible Organic Strings (Longer for cute charm effect) */
+    .contact-string {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+    }
+
+    .contact-string.string-top {
+        height: 34px;
+        margin-top: -2px;
+        margin-bottom: -5px;
+    }
+
+    .contact-string.string-middle {
+        height: 28px;
+        margin-top: -5px;
+        margin-bottom: -5px;
+    }
+
+    .string-line {
+        width: 2.5px;
+        height: 100%;
+        background-color: #000000;
+        border-radius: 9999px;
+    }
+
+    /* Contact Icon Nodes */
+    .contact-node-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+    }
+
+    .node-email {
+        transform-origin: top center;
+    }
+
+    .contact-icon-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        cursor: pointer;
+        padding: 2px;
+        border-radius: 12px;
+        transition: transform 0.15s ease;
+    }
+
+    .contact-icon-img {
+        display: block;
+        height: auto;
+        transition: transform 0.15s ease;
+        user-select: none;
+    }
+
+    /* Hover Vibration / Jiggle Animation on Icons */
+    @keyframes iconVibrate {
+        0% { transform: translate(0, 0) rotate(0deg); }
+        20% { transform: translate(-1.5px, 1px) rotate(-2.5deg); }
+        40% { transform: translate(1.5px, -1px) rotate(2.5deg); }
+        60% { transform: translate(-1px, -1px) rotate(-1.5deg); }
+        80% { transform: translate(1px, 1px) rotate(1.5deg); }
+        100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    .contact-icon-link:hover .contact-icon-img {
+        animation: iconVibrate 0.25s linear infinite;
+        transform: scale(1.08);
+    }
+
+    /* Copy Email Quick Action Button (Pops out to the left) */
+    .copy-email-btn {
+        position: absolute;
+        right: calc(100% + 8px);
+        top: 50%;
+        transform: translateY(-50%) translateX(10px) scale(0.85);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 12px;
+        border: 2px solid #000000;
+        border-radius: 9999px;
+        background: #ffffff;
+        color: #0F172A;
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-weight: 700;
+        font-size: 0.72rem;
+        letter-spacing: -0.04em;
+        white-space: nowrap;
+        box-shadow: 2px 2px 0px #000000;
+        cursor: pointer;
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease, visibility 0.2s ease, background-color 0.15s ease, color 0.15s ease;
+        z-index: 10;
+    }
+
+    /* Invisible hover bridge covering the gap between icon and button */
+    .copy-email-btn::after {
+        content: "";
+        position: absolute;
+        top: -12px;
+        bottom: -12px;
+        left: -8px;
+        right: -16px;
+        background: transparent;
+        z-index: -1;
+    }
+
+    .node-email:hover .copy-email-btn,
+    .node-email:focus-within .copy-email-btn,
+    .copy-email-btn:hover,
+    .copy-email-btn:focus,
+    .copy-email-btn.is-active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(-50%) translateX(0) scale(1);
+    }
+
+    .copy-email-btn:hover {
+        background: var(--doodle-yellow, #FFDA00);
+        transform: translateY(-50%) translateX(-1px) scale(1.03);
+        box-shadow: 2.5px 2.5px 0px #000000;
+    }
+
+    .copy-email-btn.is-copied {
+        background: var(--doodle-lime, #D1FF00) !important;
+        color: #000000 !important;
+    }
+
+    /* Physics Chain Tumble Drop with Flexible Bending Strings & Whiplash Physics:
+       1. Free Fall (0% - 40%): Accelerates down, strings bend and sag with slack, nodes tilt sideways.
+       2. Cable Snap & Elastic Bounce (40% - 55%): Top string snaps taut, LinkedIn rebounds, middle string snaps, Email whiplashes.
+       3. Decaying Oscillation (55% - 100%): Chain oscillates and settles naturally into ambient breeze sway. */
+
+    /* 1. Overall Chain Descent */
+    @keyframes chainGravityDrop {
+        0% {
+            transform: translateY(-140%);
+            opacity: 0;
+        }
+        4% {
+            opacity: 1;
+        }
+        16% {
+            transform: translateY(-110%);
+        }
+        30% {
+            transform: translateY(-55%);
+        }
+        42% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(12px); /* elastic cable stretch */
+        }
+        60% {
+            transform: translateY(-7px); /* rebound */
+        }
+        70% {
+            transform: translateY(4px);
+        }
+        80% {
+            transform: translateY(-2px);
+        }
+        90% {
+            transform: translateY(1px);
+        }
+        100% {
+            transform: translateY(0px);
+            opacity: 1;
+        }
+    }
+
+    /* 2. Top String Bending & Elastic Snap */
+    @keyframes topStringBend {
+        0% { transform: rotate(0deg) skewX(0deg) scaleY(0.7); }
+        22% { transform: rotate(16deg) skewX(12deg) scaleY(0.85); }
+        42% { transform: rotate(-10deg) skewX(-7deg) scaleY(1.2); }
+        54% { transform: rotate(6deg) skewX(4deg) scaleY(0.95); }
+        66% { transform: rotate(-4deg) skewX(-2deg) scaleY(1.05); }
+        78% { transform: rotate(2deg) skewX(1deg) scaleY(0.98); }
+        90% { transform: rotate(-1deg) skewX(0deg) scaleY(1.01); }
+        100% { transform: rotate(0deg) skewX(0deg) scaleY(1); }
+    }
+
+    /* 3. LinkedIn Icon Tumble */
+    @keyframes linkedinTumble {
+        0% { transform: rotate(0deg) translateX(0); }
+        22% { transform: rotate(-18deg) translateX(-7px); }
+        42% { transform: rotate(16deg) translateX(6px); }
+        54% { transform: rotate(-9deg) translateX(-3px); }
+        66% { transform: rotate(6deg) translateX(2px); }
+        78% { transform: rotate(-3deg) translateX(-1px); }
+        90% { transform: rotate(1.5deg) translateX(0); }
+        100% { transform: rotate(0deg) translateX(0); }
+    }
+
+    /* 4. Middle String Bending & Elastic Whiplash */
+    @keyframes middleStringBend {
+        0% { transform: rotate(0deg) skewX(0deg) scaleY(0.6); }
+        20% { transform: rotate(-24deg) skewX(-16deg) scaleY(0.75); }
+        38% { transform: rotate(20deg) skewX(14deg) scaleY(0.9); }
+        50% { transform: rotate(-16deg) skewX(-10deg) scaleY(1.24); } /* whiplash stretch */
+        62% { transform: rotate(10deg) skewX(6deg) scaleY(0.93); }
+        74% { transform: rotate(-6deg) skewX(-4deg) scaleY(1.06); }
+        86% { transform: rotate(3deg) skewX(2deg) scaleY(0.98); }
+        100% { transform: rotate(0deg) skewX(0deg) scaleY(1); }
+    }
+
+    /* 5. Email Icon Heavy Pendulum Tumble */
+    @keyframes emailTumble {
+        0% { transform: rotate(0deg) translateX(0); }
+        20% { transform: rotate(26deg) translateX(12px); }
+        40% { transform: rotate(-22deg) translateX(-9px); }
+        50% { transform: rotate(18deg) translateX(7px); }
+        62% { transform: rotate(-12deg) translateX(-5px); }
+        74% { transform: rotate(7deg) translateX(3px); }
+        86% { transform: rotate(-4deg) translateX(-1px); }
+        100% { transform: rotate(0deg) translateX(0); }
+    }
+
+    /* Continuous Gentle Breeze Sway (Heavy objects in a light breeze) */
+    @keyframes contactBreezeSway {
+        0%, 100% {
+            transform: translateY(0px) rotate(-1.5deg);
+        }
+        50% {
+            transform: translateY(0px) rotate(1.5deg);
+        }
+    }
+
+    @keyframes linkedinBreezeSway {
+        0%, 100% {
+            transform: rotate(-2deg);
+        }
+        50% {
+            transform: rotate(2deg);
+        }
+    }
+
+    @keyframes middleStringBreezeSway {
+        0%, 100% {
+            transform: rotate(-2.5deg) skewX(-2deg);
+        }
+        50% {
+            transform: rotate(2.5deg) skewX(2deg);
+        }
+    }
+
+    @keyframes emailSecondarySway {
+        0%, 100% {
+            transform: rotate(3deg);
+        }
+        50% {
+            transform: rotate(-3deg);
+        }
+    }
+
+    /* Smooth Pull-Up Retract Keyframe */
+    @keyframes contactPullUp {
+        0% {
+            transform: translateY(0px) rotate(0deg);
+            opacity: 1;
+        }
+        15% {
+            transform: translateY(3px) rotate(-1deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-140%) rotate(2deg);
+            opacity: 0;
+        }
+    }
+
+    /* Active Open State: Physical string bending & tumbling entrance, then gentle continuous breeze sway */
+    .nav-contact-li.is-contact-open .contact-hanging-wrapper,
+    .nav-contact-li:has(.nav-contact-btn[aria-expanded="true"]) .contact-hanging-wrapper {
+        animation: chainGravityDrop 0.95s linear forwards, contactBreezeSway 4.8s ease-in-out infinite 0.95s;
+    }
+
+    .nav-contact-li.is-contact-open .string-top .string-line,
+    .nav-contact-li:has(.nav-contact-btn[aria-expanded="true"]) .string-top .string-line {
+        transform-origin: top center;
+        animation: topStringBend 0.95s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    .nav-contact-li.is-contact-open .node-linkedin,
+    .nav-contact-li:has(.nav-contact-btn[aria-expanded="true"]) .node-linkedin {
+        transform-origin: top center;
+        animation: linkedinTumble 0.95s cubic-bezier(0.25, 1, 0.5, 1) forwards, linkedinBreezeSway 4.8s ease-in-out infinite 0.95s;
+    }
+
+    .nav-contact-li.is-contact-open .string-middle .string-line,
+    .nav-contact-li:has(.nav-contact-btn[aria-expanded="true"]) .string-middle .string-line {
+        transform-origin: top center;
+        animation: middleStringBend 0.95s cubic-bezier(0.25, 1, 0.5, 1) forwards, middleStringBreezeSway 4.4s ease-in-out infinite 0.95s;
+    }
+
+    .nav-contact-li.is-contact-open .node-email,
+    .nav-contact-li:has(.nav-contact-btn[aria-expanded="true"]) .node-email {
+        animation: emailTumble 0.95s cubic-bezier(0.25, 1, 0.5, 1) forwards, emailSecondarySway 4.2s ease-in-out infinite 0.95s;
+    }
+
+    /* Closing State */
+    .nav-contact-li.is-contact-closing .contact-hanging-wrapper {
+        animation: contactPullUp 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
     .nav-icon-svg {
         display: inline-block;
         flex-shrink: 0;
@@ -138,9 +848,9 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         opacity: 0.75;
     }
 
-    /* ── Hamburger button ── */
+    /* ── Hamburger button (Strictly hidden on desktop) ── */
     .hamburger {
-        display: none;
+        display: none !important;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -154,6 +864,10 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         box-shadow: 2px 2px 0px #000000;
         cursor: pointer;
         transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+    }
+
+    nav:not(.is-mobile) .hamburger {
+        display: none !important;
     }
 
     .hamburger:hover {
@@ -198,7 +912,7 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
     }
 
     nav.is-mobile .hamburger {
-        display: flex;
+        display: flex !important;
     }
 
     nav.is-mobile .nav-menu {
@@ -232,5 +946,25 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
         justify-content: flex-start;
         padding: 8px 14px;
         font-size: 0.875rem;
+    }
+
+    nav.is-mobile .contact-hanging-anchor {
+        position: static;
+        transform: none;
+        width: 100%;
+        margin-top: 6px;
+        margin-bottom: 6px;
+        display: none;
+        clip-path: none;
+    }
+
+    nav.is-mobile .nav-contact-li.is-contact-open .contact-hanging-anchor {
+        display: flex;
+        justify-content: center;
+    }
+
+    nav.is-mobile .contact-hanging-wrapper {
+        transform: none;
+        animation: none;
     }
 </style>
