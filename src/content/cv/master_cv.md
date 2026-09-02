@@ -1,0 +1,188 @@
+---
+name: "Olanike Olowo-Fela"
+email: "nike.emily@pm.me"
+linkedin: "https://www.linkedin.com/in/NikeEmilyO/"
+pdfPath: "/Olanike-Olowo-Fela-CV.pdf"
+
+about:
+  - "With a background in consulting, service delivery, and project coordination, alongside technical training in full-stack development, I bridge the gap between engineering and client-facing teams."
+  - "Naturally process-driven and analytical, I build solutions with both operational realities and business goals in mind, an adaptable approach I've applied across the public, private, and non-profit sectors."
+
+education:
+  degree: "Integrated Master's in Geography with International Development"
+  school: "University of Manchester"
+  details:
+    - title: "MSc International Development:"
+      description: "Focused on analysing complex, interconnected systems involving institutions, policy, technology, and global economics. Developed strengths in systems analysis, structured research, technical writing, and project-based collaboration."
+    - title: "BA Geography:"
+      description: "Focused on understanding how social, economic, and environmental systems interact at local and global scales. Gained practical skills in research, data analysis, policy analysis, and problem-solving."
+
+skills:
+  - name: "AI-Assisted Automation"
+    color: "yellow"
+  - name: "Agentic Workflow Design"
+    color: "purple"
+  - name: "API Integration"
+    color: "cyan"
+  - name: "Process Design"
+    color: "lime"
+  - name: "Systems Thinking"
+    color: "pink"
+  - name: "HTML / CSS / JavaScript"
+  - name: "Node.js"
+  - name: "Client Delivery & Coordination"
+    color: "cyan"
+  - name: "Workshop Facilitation"
+    color: "yellow"
+  - name: "Stakeholder Translation"
+    color: "lime"
+
+experience:
+  - company: "The Odin Project"
+    badge: "Training"
+    badgeColor: "lime"
+    location: "Remote · 2024 - Present"
+    role: "Full-Stack Developer (Training)"
+    keywords: "HTML, CSS, JavaScript, Node.js, Data Structures & Algorithms, SOLID Principles"
+    overview: "An open-source, project-based full-stack web development curriculum."
+    bullets:
+      - "Designed and deployed a multi-agent, agentic AI workflow using OpenClaw and Claude to automate the job-search process, reducing time spent by 83%."
+      - "Completing full-stack curriculum covering fundamental computer science, data structures and algorithms, SOLID principles, and debugging in HTML, CSS, and JS."
+
+  - company: "Outer Office"
+    badge: "Freelance"
+    badgeColor: "yellow"
+    location: "Freelance · 2024 - 2025"
+    role: "Freelance Workflow Consultant"
+    keywords: "Workflow Automation, Microsoft Graph, Google Workspace APIs, OpenAI"
+    bullets:
+      - "Delivered freelance workflow optimisation and automation for a small-business client, identifying manual processes and designing tailored solutions."
+      - "Built an AI-powered email management tool using Microsoft Graph, Google Workspace APIs, and OpenAI. Built with AI-assisted development, which exposed the limits of working without deeper technical understanding and led directly to formal full-stack training."
+
+  - company: "Highgate Transportation"
+    badge: "Consultancy"
+    badgeColor: "cyan"
+    location: "Bristol, UK · 2023 - 2024"
+    role: "Transport Planner"
+    keywords: "Client Reporting, Regulatory Compliance, Transport Planning Research"
+    overview: "Highgate Transportation, Bristol, UK - Transport consultancy."
+    bullets:
+      - "Produced client-facing reports, and conducted research to support transport planning proposals, recommendations, and regulatory compliance."
+
+  - company: "Auckland Transport"
+    badge: "Public Organisation"
+    badgeColor: "purple"
+    location: "Auckland, NZ · 2021 - 2023"
+    role: "Travel Demand Planner"
+    keywords: "20+ Client Organisations, Pilot Programmes, Stakeholder Workshops, KPI Reporting"
+    overview: "Auckland Transport, Auckland, NZ - Public sector transport authority."
+    bullets:
+      - "Managed a portfolio of 20+ client organisations through onboarding, engagement, and delivery milestones as primary point of contact, delivering workshops and training to drive user adoption and behavioural change."
+      - "Designed and delivered a six-month pilot of a new mobile application, covering planning, user recruitment, training, engagement tracking, and feedback collection."
+      - "Led nationwide campaign delivery, coordinating with councils and stakeholders to restore participation levels following COVID-19 disruption."
+      - "Monitored engagement and performance using data, KPIs, and qualitative feedback, producing clear reports and guidance for internal and external stakeholders."
+
+  - company: "Asahi, Auckland Council & others"
+    badge: "Cross-Sector"
+    badgeColor: "pink"
+    location: "Auckland, NZ · 2020 - 2023"
+    role: "Temp Administration, Research & Hospitality"
+    keywords: "Cross-Industry Temp Roles, Process Auditing"
+    overview: "Asahi Beverages, Auckland Council, IFM Electrical, Coreiss, and others."
+    bullets:
+      - "Delivered agile administration, compliance auditing, operational data entry, and research assistance across fast-paced corporate and public sector environments."
+      - "Streamlined operational coordination and stakeholder communications across diverse client accounts."
+
+  - company: "Coster Content Ltd"
+    badge: "Agency"
+    badgeColor: "yellow"
+    location: "Manchester, UK · 2018 - 2020"
+    role: "Copywriter"
+    keywords: "Marketing Agency Copywriting, Value Proposition Synthesis"
+    overview: "Coster Content Ltd, Manchester, UK - Marketing copy agency."
+    bullets:
+      - "Produced high-converting B2B copywriting, marketing collateral, and strategic value propositions for agency clients across diverse sectors."
+      - "Synthesized complex service architectures and business requirements into clear, compelling narratives."
+
+competencies:
+  - title: "AI & Automation"
+    code: "AI_CORE"
+    color: "yellow"
+    items:
+      - "AI-Assisted Automation"
+      - "Agentic Workflow Design (OpenClaw, Claude)"
+      - "API Integration (Graph, Workspace, OpenAI)"
+      - "MCP Protocol Implementation"
+
+  - title: "Process & Systems Design"
+    code: "SYS_ARCH"
+    color: "cyan"
+    items:
+      - "Structured Problem-Solving"
+      - "Systems Thinking & Logic"
+      - "Workflow Optimisation"
+      - "Prioritisation Across Workstreams"
+
+  - title: "Full-Stack Development"
+    code: "CODE_STACK"
+    color: "purple"
+    items:
+      - "HTML, CSS, JavaScript, Node.js"
+      - "Data Structures & Algorithms"
+      - "SOLID Principles & Clean Architecture"
+      - "Security Fundamentals"
+
+  - title: "Client & Stakeholder Delivery"
+    code: "CLIENT_OPS"
+    color: "pink"
+    items:
+      - "Client Delivery & Coordination"
+      - "Workshop Delivery & Onboarding"
+      - "Translating Technical Concepts"
+      - "Documentation & Executive Reporting"
+
+  - title: "Project & Agile Delivery"
+    code: "AGILE_PM"
+    color: "lime"
+    items:
+      - "Agile Workflows (ICAgile Certified)"
+      - "Project Management (PMI Trained)"
+      - "Multi-Stakeholder Coordination"
+
+  - title: "Productivity & Collaboration"
+    code: "TOOLING"
+    color: "cyan"
+    items:
+      - "Microsoft 365, Azure, DevOps"
+      - "Google Workspace, Dropbox, Notion"
+
+currently:
+  - title: "Full-Stack Fundamentals"
+    tag: "ACTIVE STUDY"
+    color: "lime"
+    description: "Deepening full-stack core principles (data structures, algorithms, and SOLID architecture) via The Odin Project."
+
+  - title: "Agentic AI Workflows"
+    tag: "AGENT ARCH"
+    color: "purple"
+    description: "Designing multi-agent orchestration systems with OpenClaw, Claude, and Model Context Protocol (MCP) to eliminate manual toil."
+
+  - title: "Enterprise Automation"
+    tag: "FREELANCE CLIENT"
+    color: "yellow"
+    description: "Building production workflow integrations for freelance clients using Microsoft Graph, Google Workspace APIs, and OpenAI."
+
+  - title: "Open to Opportunities"
+    tag: "NEXT CHAPTER"
+    color: "pink"
+    description: "Available for consulting, technical solution design, and full-stack automation roles where consulting acumen adds leverage."
+
+certificates:
+  - title: "ICAgile Certified Professional"
+    meta: "Agile workflows and teamwork · 2022"
+    color: "cyan"
+
+  - title: "Project Management Institute Training"
+    meta: "Practical project management skills · 2022"
+    color: "purple"
+---

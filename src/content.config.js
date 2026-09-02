@@ -62,4 +62,54 @@ const overviews = defineCollection({
     }),
 })
 
-export const collections = { projects, overviews };
+const cv = defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/cv" }),
+    schema: z.object({
+        name: z.string(),
+        email: z.string().default("nike.emily@pm.me"),
+        linkedin: z.string().default("https://www.linkedin.com/in/NikeEmilyO/"),
+        pdfPath: z.string().default("/Olanike-Olowo-Fela-CV.pdf"),
+        about: z.array(z.string()),
+        education: z.object({
+            degree: z.string(),
+            school: z.string(),
+            details: z.array(z.object({
+                title: z.string(),
+                description: z.string(),
+            })),
+        }),
+        skills: z.array(z.object({
+            name: z.string(),
+            color: z.string().optional(),
+        })),
+        experience: z.array(z.object({
+            company: z.string(),
+            badge: z.string(),
+            badgeColor: z.string().default("yellow"),
+            location: z.string(),
+            role: z.string(),
+            keywords: z.string(),
+            overview: z.string().optional(),
+            bullets: z.array(z.string()),
+        })),
+        competencies: z.array(z.object({
+            title: z.string(),
+            code: z.string(),
+            color: z.string().default("cyan"),
+            items: z.array(z.string()),
+        })),
+        currently: z.array(z.object({
+            title: z.string(),
+            tag: z.string(),
+            color: z.string().default("lime"),
+            description: z.string(),
+        })),
+        certificates: z.array(z.object({
+            title: z.string(),
+            meta: z.string(),
+            color: z.string().default("cyan"),
+        })),
+    }),
+});
+
+export const collections = { projects, overviews, cv };

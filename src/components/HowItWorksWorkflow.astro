@@ -1,10 +1,15 @@
 ---
 // HowItWorksWorkflow.astro - Interactive Windows Desktop Mockup & Scrollytelling Workflow
+import { getEntry } from "astro:content";
+
 interface Props {
   showTestToolbar?: boolean;
 }
 
 const { showTestToolbar = false } = Astro.props;
+
+const cvEntry = await getEntry("cv", "master_cv");
+const cv = cvEntry?.data;
 ---
 
 <section class="how-it-works-section" id="how-it-works">
@@ -362,57 +367,43 @@ const { showTestToolbar = false } = Astro.props;
                     <div class="mcv-grid-2">
                       <div class="mcv-col">
                         <h2 class="mcv-heading">about</h2>
-                        <p class="mcv-p">
-                          With a background in consulting, service delivery, and project coordination, alongside technical training in full-stack development, I bridge the gap between engineering and client-facing teams.
-                        </p>
-                        <p class="mcv-p">
-                          Naturally process-driven and analytical, I build solutions with both operational realities and business goals in mind, an adaptable approach I've applied across the public, private, and non-profit sectors.
-                        </p>
+                        {cv && cv.about.map((p) => (
+                          <p class="mcv-p">{p}</p>
+                        ))}
                       </div>
                       <div class="mcv-col">
                         <h2 class="mcv-heading">edu.</h2>
-                        <div class="mcv-edu-plain mcv-expandable-card" id="mcvEduItem" title="Click to view degree focus & modules">
-                          <div class="mcv-edu-header">
-                            <div class="mcv-edu-titles">
-                              <p class="mcv-edu-degree">Integrated Master's in Geography with International Development</p>
-                              <p class="mcv-edu-school">University of Manchester</p>
+                        {cv && (
+                          <div class="mcv-edu-plain mcv-expandable-card" id="mcvEduItem" title="Click to view degree focus & modules">
+                            <div class="mcv-edu-header">
+                              <div class="mcv-edu-titles">
+                                <p class="mcv-edu-degree">{cv.education.degree}</p>
+                                <p class="mcv-edu-school">{cv.education.school}</p>
+                              </div>
+                              <span class="mcv-expand-toggle-badge" aria-hidden="true">
+                                <span class="expand-text">+ details</span>
+                                <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                              </span>
                             </div>
-                            <span class="mcv-expand-toggle-badge" aria-hidden="true">
-                              <span class="expand-text">+ details</span>
-                              <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </span>
-                          </div>
 
-                          <div class="mcv-item-details">
-                            <div class="mcv-item-details-inner">
-                              <div class="mcv-edu-detail-block">
-                                <strong class="mcv-edu-branch-title">MSc International Development:</strong>
-                                <p class="mcv-edu-desc">
-                                  Focused on analysing complex, interconnected systems involving institutions, policy, technology, and global economics. Developed strengths in systems analysis, structured research, technical writing, and project-based collaboration.
-                                </p>
-                              </div>
-                              <div class="mcv-edu-detail-block">
-                                <strong class="mcv-edu-branch-title">BA Geography:</strong>
-                                <p class="mcv-edu-desc">
-                                  Focused on understanding how social, economic, and environmental systems interact at local and global scales. Gained practical skills in research, data analysis, policy analysis, and problem-solving.
-                                </p>
+                            <div class="mcv-item-details">
+                              <div class="mcv-item-details-inner">
+                                {cv.education.details.map((detail) => (
+                                  <div class="mcv-edu-detail-block">
+                                    <strong class="mcv-edu-branch-title">{detail.title}</strong>
+                                    <p class="mcv-edu-desc">{detail.description}</p>
+                                  </div>
+                                ))}
                               </div>
                             </div>
                           </div>
-                        </div>
+                        )}
 
                         <h2 class="mcv-heading" style="margin-top: 16px;">skills</h2>
                         <div class="mcv-pills">
-                          <span class="mcv-pill pop-yellow">AI-Assisted Automation</span>
-                          <span class="mcv-pill pop-purple">Agentic Workflow Design</span>
-                          <span class="mcv-pill pop-cyan">API Integration</span>
-                          <span class="mcv-pill pop-lime">Process Design</span>
-                          <span class="mcv-pill pop-pink">Systems Thinking</span>
-                          <span class="mcv-pill">HTML / CSS / JavaScript</span>
-                          <span class="mcv-pill">Node.js</span>
-                          <span class="mcv-pill pop-cyan">Client Delivery & Coordination</span>
-                          <span class="mcv-pill pop-yellow">Workshop Facilitation</span>
-                          <span class="mcv-pill pop-lime">Stakeholder Translation</span>
+                          {cv && cv.skills.map((skill) => (
+                            <span class={`mcv-pill ${skill.color ? `pop-${skill.color}` : ""}`}>{skill.name}</span>
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -422,205 +413,40 @@ const { showTestToolbar = false } = Astro.props;
                   <section class="mcv-section" id="mcv-experience">
                     <h2 class="mcv-heading">work experience</h2>
                     <div class="mcv-timeline">
-                      
-                      <!-- 1. The Odin Project -->
-                      <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements">
-                        <div class="mcv-tl-main">
-                          <div class="mcv-tl-left">
-                            <div class="mcv-tl-header">
-                              <strong class="mcv-tl-comp" style="color: #000000 !important;">The Odin Project</strong>
-                              <span class="mcv-badge-sticker pop-lime">Training</span>
+                      {cv && cv.experience.map((item) => (
+                        <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements">
+                          <div class="mcv-tl-main">
+                            <div class="mcv-tl-left">
+                              <div class="mcv-tl-header">
+                                <strong class="mcv-tl-comp" style="color: #000000 !important;">{item.company}</strong>
+                                <span class={`mcv-badge-sticker pop-${item.badgeColor}`}>{item.badge}</span>
+                              </div>
+                              <span class="mcv-tl-loc" style="color: #64748B !important;">{item.location}</span>
                             </div>
-                            <span class="mcv-tl-loc" style="color: #64748B !important;">Remote · 2024 - Present</span>
+                            <div class="mcv-tl-right">
+                              <div class="mcv-tl-role-row">
+                                <strong class="mcv-tl-role" style="color: #000000 !important;">{item.role}</strong>
+                                <span class="mcv-expand-toggle-badge" aria-hidden="true">
+                                  <span class="expand-text">+ details</span>
+                                  <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </span>
+                              </div>
+                              <span class="mcv-tl-kw" style="color: #334155 !important;">{item.keywords}</span>
+                            </div>
                           </div>
-                          <div class="mcv-tl-right">
-                            <div class="mcv-tl-role-row">
-                              <strong class="mcv-tl-role" style="color: #000000 !important;">Full-Stack Developer (Training)</strong>
-                              <span class="mcv-expand-toggle-badge" aria-hidden="true">
-                                <span class="expand-text">+ details</span>
-                                <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                              </span>
+
+                          <div class="mcv-item-details">
+                            <div class="mcv-item-details-inner">
+                              {item.overview && <p class="mcv-tl-overview">{item.overview}</p>}
+                              <ul class="mcv-tl-bullets">
+                                {item.bullets.map((bullet) => (
+                                  <li>{bullet}</li>
+                                ))}
+                              </ul>
                             </div>
-                            <span class="mcv-tl-kw" style="color: #334155 !important;">HTML, CSS, JavaScript, Node.js, Data Structures & Algorithms, SOLID Principles</span>
                           </div>
                         </div>
-
-                        <div class="mcv-item-details">
-                          <div class="mcv-item-details-inner">
-                            <p class="mcv-tl-overview">An open-source, project-based full-stack web development curriculum.</p>
-                            <ul class="mcv-tl-bullets">
-                              <li>Designed and deployed a multi-agent, agentic AI workflow using OpenClaw and Claude to automate the job-search process, reducing time spent by 83%.</li>
-                              <li>Completing full-stack curriculum covering fundamental computer science, data structures and algorithms, SOLID principles, and debugging in HTML, CSS, and JS.</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- 2. Outer Office -->
-                      <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements">
-                        <div class="mcv-tl-main">
-                          <div class="mcv-tl-left">
-                            <div class="mcv-tl-header">
-                              <strong class="mcv-tl-comp" style="color: #000000 !important;">Outer Office</strong>
-                              <span class="mcv-badge-sticker pop-yellow">Freelance</span>
-                            </div>
-                            <span class="mcv-tl-loc" style="color: #64748B !important;">Freelance · 2024 - 2025</span>
-                          </div>
-                          <div class="mcv-tl-right">
-                            <div class="mcv-tl-role-row">
-                              <strong class="mcv-tl-role" style="color: #000000 !important;">Freelance Workflow Consultant</strong>
-                              <span class="mcv-expand-toggle-badge" aria-hidden="true">
-                                <span class="expand-text">+ details</span>
-                                <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                              </span>
-                            </div>
-                            <span class="mcv-tl-kw" style="color: #334155 !important;">Workflow Automation, Microsoft Graph, Google Workspace APIs, OpenAI</span>
-                          </div>
-                        </div>
-
-                        <div class="mcv-item-details">
-                          <div class="mcv-item-details-inner">
-                            <ul class="mcv-tl-bullets">
-                              <li>Delivered freelance workflow optimisation and automation for a small-business client, identifying manual processes and designing tailored solutions.</li>
-                              <li>Built an AI-powered email management tool using Microsoft Graph, Google Workspace APIs, and OpenAI. Built with AI-assisted development, which exposed the limits of working without deeper technical understanding and led directly to formal full-stack training.</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- 3. Highgate Transportation -->
-                      <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements">
-                        <div class="mcv-tl-main">
-                          <div class="mcv-tl-left">
-                            <div class="mcv-tl-header">
-                              <strong class="mcv-tl-comp" style="color: #000000 !important;">Highgate Transportation</strong>
-                              <span class="mcv-badge-sticker pop-cyan">Consultancy</span>
-                            </div>
-                            <span class="mcv-tl-loc" style="color: #64748B !important;">Bristol, UK · 2023 - 2024</span>
-                          </div>
-                          <div class="mcv-tl-right">
-                            <div class="mcv-tl-role-row">
-                              <strong class="mcv-tl-role" style="color: #000000 !important;">Transport Planner</strong>
-                              <span class="mcv-expand-toggle-badge" aria-hidden="true">
-                                <span class="expand-text">+ details</span>
-                                <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                              </span>
-                            </div>
-                            <span class="mcv-tl-kw" style="color: #334155 !important;">Client Reporting, Regulatory Compliance, Transport Planning Research</span>
-                          </div>
-                        </div>
-
-                        <div class="mcv-item-details">
-                          <div class="mcv-item-details-inner">
-                            <p class="mcv-tl-overview">Highgate Transportation, Bristol, UK - Transport consultancy.</p>
-                            <ul class="mcv-tl-bullets">
-                              <li>Produced client-facing reports, and conducted research to support transport planning proposals, recommendations, and regulatory compliance.</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- 4. Auckland Transport -->
-                      <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements">
-                        <div class="mcv-tl-main">
-                          <div class="mcv-tl-left">
-                            <div class="mcv-tl-header">
-                              <strong class="mcv-tl-comp" style="color: #000000 !important;">Auckland Transport</strong>
-                              <span class="mcv-badge-sticker pop-purple">Public Organisation</span>
-                            </div>
-                            <span class="mcv-tl-loc" style="color: #64748B !important;">Auckland, NZ · 2021 - 2023</span>
-                          </div>
-                          <div class="mcv-tl-right">
-                            <div class="mcv-tl-role-row">
-                              <strong class="mcv-tl-role" style="color: #000000 !important;">Travel Demand Planner</strong>
-                              <span class="mcv-expand-toggle-badge" aria-hidden="true">
-                                <span class="expand-text">+ details</span>
-                                <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                              </span>
-                            </div>
-                            <span class="mcv-tl-kw" style="color: #334155 !important;">20+ Client Organisations, Pilot Programmes, Stakeholder Workshops, KPI Reporting</span>
-                          </div>
-                        </div>
-
-                        <div class="mcv-item-details">
-                          <div class="mcv-item-details-inner">
-                            <p class="mcv-tl-overview">Auckland Transport, Auckland, NZ - Public sector transport authority.</p>
-                            <ul class="mcv-tl-bullets">
-                              <li>Managed a portfolio of 20+ client organisations through onboarding, engagement, and delivery milestones as primary point of contact, delivering workshops and training to drive user adoption and behavioural change.</li>
-                              <li>Designed and delivered a six-month pilot of a new mobile application, covering planning, user recruitment, training, engagement tracking, and feedback collection.</li>
-                              <li>Led nationwide campaign delivery, coordinating with councils and stakeholders to restore participation levels following COVID-19 disruption.</li>
-                              <li>Monitored engagement and performance using data, KPIs, and qualitative feedback, producing clear reports and guidance for internal and external stakeholders.</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- 5. Asahi, Auckland Council & others -->
-                      <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements">
-                        <div class="mcv-tl-main">
-                          <div class="mcv-tl-left">
-                            <div class="mcv-tl-header">
-                              <strong class="mcv-tl-comp" style="color: #000000 !important;">Asahi, Auckland Council & others</strong>
-                              <span class="mcv-badge-sticker pop-pink">Cross-Sector</span>
-                            </div>
-                            <span class="mcv-tl-loc" style="color: #64748B !important;">Auckland, NZ · 2020 - 2023</span>
-                          </div>
-                          <div class="mcv-tl-right">
-                            <div class="mcv-tl-role-row">
-                              <strong class="mcv-tl-role" style="color: #000000 !important;">Temp Administration, Research & Hospitality</strong>
-                              <span class="mcv-expand-toggle-badge" aria-hidden="true">
-                                <span class="expand-text">+ details</span>
-                                <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                              </span>
-                            </div>
-                            <span class="mcv-tl-kw" style="color: #334155 !important;">Cross-Industry Temp Roles, Process Auditing</span>
-                          </div>
-                        </div>
-
-                        <div class="mcv-item-details">
-                          <div class="mcv-item-details-inner">
-                            <p class="mcv-tl-overview">Asahi Beverages, Auckland Council, IFM Electrical, Coreiss, and others.</p>
-                            <ul class="mcv-tl-bullets">
-                              <li>Delivered agile administration, compliance auditing, operational data entry, and research assistance across fast-paced corporate and public sector environments.</li>
-                              <li>Streamlined operational coordination and stakeholder communications across diverse client accounts.</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- 6. Coster Content Ltd -->
-                      <div class="mcv-timeline-item mcv-expandable-card" title="Click to view role responsibilities & achievements">
-                        <div class="mcv-tl-main">
-                          <div class="mcv-tl-left">
-                            <div class="mcv-tl-header">
-                              <strong class="mcv-tl-comp" style="color: #000000 !important;">Coster Content Ltd</strong>
-                              <span class="mcv-badge-sticker pop-pink">Agency</span>
-                            </div>
-                            <span class="mcv-tl-loc" style="color: #64748B !important;">Manchester, UK · 2018 - 2020</span>
-                          </div>
-                          <div class="mcv-tl-right">
-                            <div class="mcv-tl-role-row">
-                              <strong class="mcv-tl-role" style="color: #000000 !important;">Copywriter</strong>
-                              <span class="mcv-expand-toggle-badge" aria-hidden="true">
-                                <span class="expand-text">+ details</span>
-                                <svg class="expand-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                              </span>
-                            </div>
-                            <span class="mcv-tl-kw" style="color: #334155 !important;">Marketing Agency Copywriting, Value Proposition Synthesis</span>
-                          </div>
-                        </div>
-
-                        <div class="mcv-item-details">
-                          <div class="mcv-item-details-inner">
-                            <p class="mcv-tl-overview">Coster Content Ltd, Manchester, UK - Marketing copy agency.</p>
-                            <ul class="mcv-tl-bullets">
-                              <li>Produced high-converting B2B copywriting, marketing collateral, and strategic value propositions for agency clients across diverse sectors.</li>
-                              <li>Synthesized complex service architectures and business requirements into clear, compelling narratives.</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-
+                      ))}
                     </div>
                   </section>
 
@@ -628,141 +454,79 @@ const { showTestToolbar = false } = Astro.props;
                   <section class="mcv-section" id="mcv-competencies">
                     <h2 class="mcv-heading">key competencies</h2>
                     <div class="mcv-cards-grid">
-                      
-                      <!-- AI & Automation: Pure Bold Stylized Lightning Bolt -->
-                      <div class="mcv-cap-card card-yellow">
-                        <div class="mcv-cap-card-top">
-                          <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
-                            <path d="M4 10L7 12" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-                            <path d="M36 8L33 11" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-                            <path d="M34 22L37 24" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-                            <!-- Bold Vector Lightning Bolt -->
-                            <path d="M23 2L9 17H19L14 30L29 13H19L23 2Z" fill="#FFDA00" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
-                            <!-- Gloss Specular Highlight -->
-                            <path d="M21 5L12 15H18L15 23" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" />
-                          </svg>
-                          <span class="mcv-sticker-tag pop-yellow">AI_CORE</span>
+                      {cv && cv.competencies.map((comp) => (
+                        <div class={`mcv-cap-card card-${comp.color}`}>
+                          <div class="mcv-cap-card-top">
+                            {comp.code === "AI_CORE" && (
+                              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
+                                <path d="M4 10L7 12" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                                <path d="M36 8L33 11" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                                <path d="M34 22L37 24" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                                <path d="M23 2L9 17H19L14 30L29 13H19L23 2Z" fill="#FFDA00" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+                                <path d="M21 5L12 15H18L15 23" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" />
+                              </svg>
+                            )}
+                            {comp.code === "SYS_ARCH" && (
+                              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
+                                <path d="M16 6L18 6L18.5 8.5L20.5 9.5L23 8L24.5 9.5L23 12L24 14L26.5 14.5L26.5 16.5L24 17L23 19L24.5 21.5L23 23L20.5 21.5L18.5 22.5L18 25L16 25L15.5 22.5L13.5 21.5L11 23L9.5 21.5L11 19L10 17L7.5 16.5L7.5 14.5L10 14L11 12L9.5 9.5L11 8L13.5 9.5L15.5 8.5L16 6Z" fill="#00B3E3" stroke="#000000" stroke-width="2.2" stroke-linejoin="round" />
+                                <circle cx="17" cy="15.5" r="3.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+                                <path d="M28 8C33 11 34 18 30 23" stroke="#000000" stroke-width="2.2" stroke-linecap="round" fill="none" />
+                                <path d="M33 23L29 23L31 19" fill="#D1FF00" stroke="#000000" stroke-width="2" stroke-linejoin="round" />
+                                <path d="M5 6L6 8L8 9L6 10L5 12L4 10L2 9L4 8Z" fill="#FF1F70" stroke="#000000" stroke-width="1" />
+                              </svg>
+                            )}
+                            {comp.code === "CODE_STACK" && (
+                              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
+                                <rect x="6" y="6" width="28" height="20" rx="5" fill="#7A00FF" stroke="#000000" stroke-width="2.5" />
+                                <rect x="9" y="9" width="10" height="3" rx="1.5" fill="#FFFFFF" opacity="0.8" />
+                                <path d="M14 13L11 16L14 19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M26 13L29 16L26 19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <circle cx="19" cy="16" r="1.8" fill="#D1FF00" stroke="#000000" stroke-width="1.2" />
+                                <circle cx="22" cy="16" r="1.8" fill="#FF1F70" stroke="#000000" stroke-width="1.2" />
+                                <path d="M12 6L9 2" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+                                <circle cx="8" cy="2" r="1.5" fill="#D1FF00" stroke="#000000" stroke-width="1" />
+                              </svg>
+                            )}
+                            {comp.code === "CLIENT_OPS" && (
+                              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
+                                <path d="M6 6H30C32.2 6 34 7.8 34 10V20C34 22.2 32.2 24 30 24H16L10 29V24H6C3.8 24 2 22.2 2 20V10C2 7.8 3.8 6 6 6Z" fill="#FF1F70" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+                                <path d="M6 9H18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+                                <circle cx="10" cy="15" r="1.5" fill="#FFFFFF" />
+                                <circle cx="16" cy="15" r="1.5" fill="#FFFFFF" />
+                                <circle cx="22" cy="15" r="1.5" fill="#FFFFFF" />
+                                <path d="M34 5L35 7L37 8L35 9L34 11L33 9L31 8L33 7Z" fill="#FFDA00" stroke="#000000" stroke-width="1.2" />
+                              </svg>
+                            )}
+                            {comp.code === "AGILE_PM" && (
+                              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
+                                <circle cx="18" cy="16" r="11" fill="#D1FF00" stroke="#000000" stroke-width="2.5" />
+                                <circle cx="18" cy="16" r="7" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+                                <circle cx="18" cy="16" r="3" fill="#FF1F70" stroke="#000000" stroke-width="1.8" />
+                                <path d="M36 4L19 15" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+                                <path d="M33 3L37 3L37 7" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M22 11L25 9" stroke="#FFDA00" stroke-width="2" stroke-linecap="round" />
+                                <path d="M14 21L12 24" stroke="#FFDA00" stroke-width="2" stroke-linecap="round" />
+                              </svg>
+                            )}
+                            {comp.code === "TOOLING" && (
+                              <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
+                                <path d="M5 8C5 6.9 5.9 6 7 6H15L18 9H31C32.1 9 33 9.9 33 11V23C33 24.1 32.1 25 31 25H7C5.9 25 5 24.1 5 23V8Z" fill="#00B3E3" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+                                <path d="M9 12H21" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+                                <rect x="12" y="14" width="14" height="7" rx="2" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+                                <line x1="15" y1="17" x2="23" y2="17" stroke="#000000" stroke-width="1.2" stroke-linecap="round" />
+                                <path d="M33 5L34 7L36 8L34 9L33 11L32 9L30 8L32 7Z" fill="#FFDA00" stroke="#000000" stroke-width="1.2" />
+                              </svg>
+                            )}
+                            <span class={`mcv-sticker-tag pop-${comp.color}`}>{comp.code}</span>
+                          </div>
+                          <h3>{comp.title}</h3>
+                          <ul>
+                            {comp.items.map((item) => (
+                              <li>{item}</li>
+                            ))}
+                          </ul>
                         </div>
-                        <h3>AI & Automation</h3>
-                        <ul>
-                          <li>AI-Assisted Automation</li>
-                          <li>Agentic Workflow Design (OpenClaw, Claude)</li>
-                          <li>API Integration (Graph, Workspace, OpenAI)</li>
-                          <li>MCP Protocol Implementation</li>
-                        </ul>
-                      </div>
-
-                      <!-- Process & Systems Design: Clear Systems Gear & Loop Arrow -->
-                      <div class="mcv-cap-card card-cyan">
-                        <div class="mcv-cap-card-top">
-                          <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
-                            <!-- Main Gear Wheel -->
-                            <path d="M16 6L18 6L18.5 8.5L20.5 9.5L23 8L24.5 9.5L23 12L24 14L26.5 14.5L26.5 16.5L24 17L23 19L24.5 21.5L23 23L20.5 21.5L18.5 22.5L18 25L16 25L15.5 22.5L13.5 21.5L11 23L9.5 21.5L11 19L10 17L7.5 16.5L7.5 14.5L10 14L11 12L9.5 9.5L11 8L13.5 9.5L15.5 8.5L16 6Z" fill="#00B3E3" stroke="#000000" stroke-width="2.2" stroke-linejoin="round" />
-                            <circle cx="17" cy="15.5" r="3.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
-                            <!-- Process Loop Arrow -->
-                            <path d="M28 8C33 11 34 18 30 23" stroke="#000000" stroke-width="2.2" stroke-linecap="round" fill="none" />
-                            <path d="M33 23L29 23L31 19" fill="#D1FF00" stroke="#000000" stroke-width="2" stroke-linejoin="round" />
-                            <!-- Kinetic Spark -->
-                            <path d="M5 6L6 8L8 9L6 10L5 12L4 10L2 9L4 8Z" fill="#FF1F70" stroke="#000000" stroke-width="1" />
-                          </svg>
-                          <span class="mcv-sticker-tag pop-cyan">SYS_ARCH</span>
-                        </div>
-                        <h3>Process & Systems Design</h3>
-                        <ul>
-                          <li>Structured Problem-Solving</li>
-                          <li>Systems Thinking & Logic</li>
-                          <li>Workflow Optimisation</li>
-                          <li>Prioritisation Across Workstreams</li>
-                        </ul>
-                      </div>
-
-                      <!-- Full-Stack Development: Cyber Console Terminal -->
-                      <div class="mcv-cap-card card-purple">
-                        <div class="mcv-cap-card-top">
-                          <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
-                            <rect x="6" y="6" width="28" height="20" rx="5" fill="#7A00FF" stroke="#000000" stroke-width="2.5" />
-                            <rect x="9" y="9" width="10" height="3" rx="1.5" fill="#FFFFFF" opacity="0.8" />
-                            <path d="M14 13L11 16L14 19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M26 13L29 16L26 19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <circle cx="19" cy="16" r="1.8" fill="#D1FF00" stroke="#000000" stroke-width="1.2" />
-                            <circle cx="22" cy="16" r="1.8" fill="#FF1F70" stroke="#000000" stroke-width="1.2" />
-                            <path d="M12 6L9 2" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-                            <circle cx="8" cy="2" r="1.5" fill="#D1FF00" stroke="#000000" stroke-width="1" />
-                          </svg>
-                          <span class="mcv-sticker-tag pop-purple">CODE_STACK</span>
-                        </div>
-                        <h3>Full-Stack Development</h3>
-                        <ul>
-                          <li>HTML, CSS, JavaScript, Node.js</li>
-                          <li>Data Structures & Algorithms</li>
-                          <li>SOLID Principles & Clean Architecture</li>
-                          <li>Security Fundamentals</li>
-                        </ul>
-                      </div>
-
-                      <!-- Client & Stakeholder Delivery: Comic Speech Bubble -->
-                      <div class="mcv-cap-card card-pink">
-                        <div class="mcv-cap-card-top">
-                          <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
-                            <path d="M6 6H30C32.2 6 34 7.8 34 10V20C34 22.2 32.2 24 30 24H16L10 29V24H6C3.8 24 2 22.2 2 20V10C2 7.8 3.8 6 6 6Z" fill="#FF1F70" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
-                            <path d="M6 9H18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
-                            <circle cx="10" cy="15" r="1.5" fill="#FFFFFF" />
-                            <circle cx="16" cy="15" r="1.5" fill="#FFFFFF" />
-                            <circle cx="22" cy="15" r="1.5" fill="#FFFFFF" />
-                            <path d="M34 5L35 7L37 8L35 9L34 11L33 9L31 8L33 7Z" fill="#FFDA00" stroke="#000000" stroke-width="1.2" />
-                          </svg>
-                          <span class="mcv-sticker-tag pop-pink">CLIENT_OPS</span>
-                        </div>
-                        <h3>Client & Stakeholder Delivery</h3>
-                        <ul>
-                          <li>Client Delivery & Coordination</li>
-                          <li>Workshop Delivery & Onboarding</li>
-                          <li>Translating Technical Concepts</li>
-                          <li>Documentation & Executive Reporting</li>
-                        </ul>
-                      </div>
-
-                      <!-- Project & Agile Delivery: Bullseye Target -->
-                      <div class="mcv-cap-card card-lime">
-                        <div class="mcv-cap-card-top">
-                          <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
-                            <circle cx="18" cy="16" r="11" fill="#D1FF00" stroke="#000000" stroke-width="2.5" />
-                            <circle cx="18" cy="16" r="7" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
-                            <circle cx="18" cy="16" r="3" fill="#FF1F70" stroke="#000000" stroke-width="1.8" />
-                            <path d="M36 4L19 15" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
-                            <path d="M33 3L37 3L37 7" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M22 11L25 9" stroke="#FFDA00" stroke-width="2" stroke-linecap="round" />
-                            <path d="M14 21L12 24" stroke="#FFDA00" stroke-width="2" stroke-linecap="round" />
-                          </svg>
-                          <span class="mcv-sticker-tag pop-lime">AGILE_PM</span>
-                        </div>
-                        <h3>Project & Agile Delivery</h3>
-                        <ul>
-                          <li>Agile Workflows (ICAgile Certified)</li>
-                          <li>Project Management (PMI Trained)</li>
-                          <li>Multi-Stakeholder Coordination</li>
-                        </ul>
-                      </div>
-
-                      <!-- Productivity & Collaboration: Cyber Blueprint Folder -->
-                      <div class="mcv-cap-card card-cyan">
-                        <div class="mcv-cap-card-top">
-                          <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none">
-                            <path d="M5 8C5 6.9 5.9 6 7 6H15L18 9H31C32.1 9 33 9.9 33 11V23C33 24.1 32.1 25 31 25H7C5.9 25 5 24.1 5 23V8Z" fill="#00B3E3" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
-                            <path d="M9 12H21" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
-                            <rect x="12" y="14" width="14" height="7" rx="2" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
-                            <line x1="15" y1="17" x2="23" y2="17" stroke="#000000" stroke-width="1.2" stroke-linecap="round" />
-                            <path d="M33 5L34 7L36 8L34 9L33 11L32 9L30 8L32 7Z" fill="#FFDA00" stroke="#000000" stroke-width="1.2" />
-                          </svg>
-                          <span class="mcv-sticker-tag pop-cyan">TOOLING</span>
-                        </div>
-                        <h3>Productivity & Collaboration</h3>
-                        <ul>
-                          <li>Microsoft 365, Azure, DevOps</li>
-                          <li>Google Workspace, Dropbox, Notion</li>
-                        </ul>
-                      </div>
-
+                      ))}
                     </div>
                   </section>
 
@@ -770,43 +534,16 @@ const { showTestToolbar = false } = Astro.props;
                   <section class="mcv-section" id="mcv-now">
                     <h2 class="mcv-heading">currently</h2>
                     <div class="mcv-now-grid">
-                      
-                      <div class="mcv-now-card card-lime">
-                        <div class="mcv-now-header">
-                          <span class="mcv-now-beacon lime-beacon"></span>
-                          <span class="mcv-sticker-tag pop-lime">ACTIVE STUDY</span>
+                      {cv && cv.currently.map((item) => (
+                        <div class={`mcv-now-card card-${item.color}`}>
+                          <div class="mcv-now-header">
+                            <span class={`mcv-now-beacon ${item.color}-beacon`}></span>
+                            <span class={`mcv-sticker-tag pop-${item.color}`}>{item.tag}</span>
+                          </div>
+                          <h4 class="mcv-now-title">{item.title}</h4>
+                          <p class="mcv-now-desc">{item.description}</p>
                         </div>
-                        <h4 class="mcv-now-title">Full-Stack Fundamentals</h4>
-                        <p class="mcv-now-desc">Deepening full-stack core principles (data structures, algorithms, and SOLID architecture) via The Odin Project.</p>
-                      </div>
-
-                      <div class="mcv-now-card card-purple">
-                        <div class="mcv-now-header">
-                          <span class="mcv-now-beacon purple-beacon"></span>
-                          <span class="mcv-sticker-tag pop-purple">AGENT ARCH</span>
-                        </div>
-                        <h4 class="mcv-now-title">Agentic AI Workflows</h4>
-                        <p class="mcv-now-desc">Designing multi-agent orchestration systems with OpenClaw, Claude, and Model Context Protocol (MCP) to eliminate manual toil.</p>
-                      </div>
-
-                      <div class="mcv-now-card card-yellow">
-                        <div class="mcv-now-header">
-                          <span class="mcv-now-beacon yellow-beacon"></span>
-                          <span class="mcv-sticker-tag pop-yellow">FREELANCE CLIENT</span>
-                        </div>
-                        <h4 class="mcv-now-title">Enterprise Automation</h4>
-                        <p class="mcv-now-desc">Building production workflow integrations for freelance clients using Microsoft Graph, Google Workspace APIs, and OpenAI.</p>
-                      </div>
-
-                      <div class="mcv-now-card card-pink">
-                        <div class="mcv-now-header">
-                          <span class="mcv-now-beacon pink-beacon"></span>
-                          <span class="mcv-sticker-tag pop-pink">NEXT CHAPTER</span>
-                        </div>
-                        <h4 class="mcv-now-title">Open to Opportunities</h4>
-                        <p class="mcv-now-desc">Available for consulting, technical solution design, and full-stack automation roles where consulting acumen adds leverage.</p>
-                      </div>
-
+                      ))}
                     </div>
                   </section>
 
@@ -814,14 +551,12 @@ const { showTestToolbar = false } = Astro.props;
                   <section class="mcv-section" id="mcv-certs">
                     <h2 class="mcv-heading">certificates</h2>
                     <div class="mcv-cert-grid">
-                      <div class="mcv-card cert-card card-cyan">
-                        <h3 class="cert-title">ICAgile Certified Professional</h3>
-                        <p class="cert-meta">Agile workflows and teamwork · 2022</p>
-                      </div>
-                      <div class="mcv-card cert-card card-purple">
-                        <h3 class="cert-title">Project Management Institute Training</h3>
-                        <p class="cert-meta">Practical project management skills · 2022</p>
-                      </div>
+                      {cv && cv.certificates.map((cert) => (
+                        <div class={`mcv-card cert-card card-${cert.color}`}>
+                          <h3 class="cert-title">{cert.title}</h3>
+                          <p class="cert-meta">{cert.meta}</p>
+                        </div>
+                      ))}
                     </div>
                   </section>
 
@@ -837,7 +572,7 @@ const { showTestToolbar = false } = Astro.props;
                           </svg>
                           <span>Email me</span>
                         </button>
-                        <a href="https://www.linkedin.com/in/NikeEmilyO/" target="_blank" rel="noopener noreferrer" class="mcv-action-btn linkedin-btn" title="View LinkedIn Profile">
+                        <a href={cv?.linkedin || "https://www.linkedin.com/in/NikeEmilyO/"} target="_blank" rel="noopener noreferrer" class="mcv-action-btn linkedin-btn" title="View LinkedIn Profile">
                           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z"/>
                           </svg>
@@ -847,7 +582,7 @@ const { showTestToolbar = false } = Astro.props;
                     </div>
 
                     <div class="mcv-footer-right">
-                      <a class="cv-download-btn-green hero-lg" href="/Olanike-Olowo-Fela-CV.pdf" download="Olanike-Olowo-Fela-CV.pdf">
+                      <a class="cv-download-btn-green hero-lg" href={cv?.pdfPath || "/Olanike-Olowo-Fela-CV.pdf"} download="Olanike-Olowo-Fela-CV.pdf">
                         <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                           <path d="M8 2v8m0 0 3-3m-3 3-3-3M3 13h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
