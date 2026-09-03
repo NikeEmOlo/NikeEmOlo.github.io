@@ -8,19 +8,14 @@ import HowItWorksWorkflow from "../components/HowItWorksWorkflow.astro";
 
 const project = await getEntry("projects", "automating_unemployment");
 const story = project?.data?.story || {};
-const {
-  vignette3 = {},
-  footer = {},
-} = story;
-
-const agents = vignette3?.agents || [];
+const agents = story?.agents || story?.vignette3?.agents || [];
 ---
 
 <Base>
   <div class="height-story-wrap">
     <!-- Minimalist Top Navigation -->
     <header class="story-header" id="storyHeader">
-      <a href="/" class="header-back" id="headerBackBtn" aria-label="Return to portfolio deck">
+      <a href="/" class="header-back" id="headerBackBtn" aria-label="Return to portfolio home">
         <svg
           width="16"
           height="16"
@@ -33,7 +28,7 @@ const agents = vignette3?.agents || [];
         >
           <path d="m15 18-6-6 6-6"></path>
         </svg>
-        <span id="headerBackText">Deck</span>
+        <span id="headerBackText">Home</span>
       </a>
       <div class="header-case-no">01 // Case Study</div>
     </header>
@@ -58,7 +53,7 @@ const agents = vignette3?.agents || [];
                 <span class="dilemma-punchline">I do.</span>
               </h2>
               <p class="dilemma-sub-lead">
-                You're a career changer who has just moved to London. You want to move into tech, and you're currently mid-way through your training. Do you:
+                You're a career changer who has just moved to London. You want to transition into tech, but you're currently mid-way through your training. Do you:
               </p>
             </div>
 
@@ -197,7 +192,7 @@ const agents = vignette3?.agents || [];
       <HowItWorksWorkflow>
 
         <!-- YELLOW CURTAIN (LIFTS ON SCROLL TO REVEAL "HOW IT WORKS" BENEATH) -->
-        <div slot="stage-curtain" class="benefits-curtain-layer" id="benefitsCurtainLayer">
+        <div slot="stage-curtain" class="benefits-curtain-layer" id="benefitsCurtainLayer" style="transform: translateY(100vh);">
           <div class="benefits-content-wrapper">
 
             <!-- Centered Title Group -->
@@ -291,9 +286,9 @@ const agents = vignette3?.agents || [];
                 </div>
 
                 <div class="node-telemetry-tray">
-                  <span class="telemetry-item"><strong>SCHEDULE:</strong> 3X DAILY CRON</span>
-                  <span class="telemetry-dot">·</span>
-                  <span class="telemetry-item"><strong>FILTER:</strong> 95% SPAM DROPPED</span>
+                  <span class="telemetry-item"><strong>SESSION:</strong> MAIN ORCHESTRATOR</span>
+                  <span class="telemetry-dot">&middot;</span>
+                  <span class="telemetry-item"><strong>TRIAGE:</strong> REAL-TIME ALERTS</span>
                 </div>
               </div>
             )}
@@ -349,7 +344,7 @@ const agents = vignette3?.agents || [];
                   <div class="node-info-col">
                     <div class="node-title-row">
                       <h3 class="node-agent-name">{agents[1].name}</h3>
-                      <span class="node-chip-badge">TAILOR & TWEAK</span>
+                      <span class="node-chip-badge">TAILOR &amp; VIBE</span>
                     </div>
                     <span class="node-agent-role" style="color: #E11D48;">{agents[1].role}</span>
                     <p class="node-brief-text">{agents[1].brief}</p>
@@ -358,7 +353,7 @@ const agents = vignette3?.agents || [];
 
                 <div class="node-telemetry-tray">
                   <span class="telemetry-item"><strong>EVAL:</strong> 100% FACT GROUNDED</span>
-                  <span class="telemetry-dot">·</span>
+                  <span class="telemetry-dot">&middot;</span>
                   <span class="telemetry-item"><strong>PRECISION:</strong> ZERO HALLUCINATION</span>
                 </div>
               </div>
@@ -385,7 +380,7 @@ const agents = vignette3?.agents || [];
                   <div class="node-info-col">
                     <div class="node-title-row">
                       <h3 class="node-agent-name">{agents[2].name}</h3>
-                      <span class="node-chip-badge">DEV & DEBUG</span>
+                      <span class="node-chip-badge">CODE BUILDER</span>
                     </div>
                     <span class="node-agent-role" style="color: #0D9488;">{agents[2].role}</span>
                     <p class="node-brief-text">{agents[2].brief}</p>
@@ -393,9 +388,9 @@ const agents = vignette3?.agents || [];
                 </div>
 
                 <div class="node-telemetry-tray">
-                  <span class="telemetry-item"><strong>CHANNEL:</strong> #JOB-APPROVALS</span>
-                  <span class="telemetry-dot">·</span>
-                  <span class="telemetry-item"><strong>ACTION:</strong> 1-CLICK DISPATCH</span>
+                  <span class="telemetry-item"><strong>MODEL:</strong> CLAUDE OPUS</span>
+                  <span class="telemetry-dot">&middot;</span>
+                  <span class="telemetry-item"><strong>SCOPE:</strong> CODEBASE &amp; APIS</span>
                 </div>
               </div>
             )}
@@ -416,9 +411,10 @@ const agents = vignette3?.agents || [];
             How this can help other candidates
           </h2>
           <p class="doom-standalone-lead">
-            Job seekers are stuck in the <strong>"AI doom loop"</strong>. This workflow
+            Job seekers are stuck in what we are calling the <strong>"AI doom loop"</strong>. This workflow
             provides a way for candidates to maintain the quality of their
-            applications, and their sanity, in a difficult job market.
+            applications, and their sanity, in a difficult job market. 
+            The cost of setting this up is just a few pounds, yet the time saved is invaluable.
           </p>
         </div>
 
@@ -455,46 +451,85 @@ const agents = vignette3?.agents || [];
         </div>
 
         <p class="doom-closing">
-          The point isn't "don't use AI" to escape this cycle. Candidates are left
-          with no other choice. The point is to use AI smarter, focusing on what it
-          is actually good at.
+          The point isn't "don't use AI" to escape this cycle. Candidates currently have no other choice. 
+          But, choosing to design an intelligent system that harnesses the skills of AI while controlling the downsides could be a better strategy for approaching the market.
         </p>
       </div>
     </section>
 
     <!-- EPILOGUE / RETURN -->
     <footer class="story-epilogue">
-      <div class="epilogue-line"></div>
-      <p class="epilogue-closing">
-        {
-          footer.closing ||
-            "Built with OpenClaw, Claude 3.5 Sonnet, Python, and Slack."
-        }
-      </p>
       <div class="epilogue-links">
-        <a href="/" class="link-deck">
+        <!-- 1. Return to home button -->
+        <a href="/" class="footer-home-btn" aria-label="Return to home">
           <svg
             width="16"
             height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.5"
+            stroke-width="2.5"
             stroke-linecap="round"
             stroke-linejoin="round"
+            aria-hidden="true"
           >
             <path d="m15 18-6-6 6-6"></path>
           </svg>
-          <span>{footer.deckLabel || "Return to Tarot Deck"}</span>
+          <span>Return to home</span>
         </a>
-        <a
-          href="https://github.com/NikeEmOlo"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-subtle"
-        >
-          {footer.githubLabel || "View GitHub"}
-        </a>
+
+        <!-- 2. Email button (same pink one as home page) -->
+        <div class="footer-contact-node node-email">
+          <button
+            type="button"
+            class="copy-email-btn footer-copy-email-btn"
+            id="footerCopyEmailBtn"
+            title="Copy email address to clipboard"
+            aria-label="Copy email address"
+          >
+            <svg class="copy-icon-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span class="copy-btn-text">or copy email address</span>
+          </button>
+          <a
+            href="mailto:nike.emily@pm.me"
+            class="footer-icon-link email-link"
+            title="Send email to nike.emily@pm.me"
+            aria-label="Send Email"
+          >
+            <img
+              src="/img/contact-email.png"
+              alt="Email"
+              class="footer-contact-icon-img"
+              width="52"
+              height="37"
+              loading="eager"
+            />
+          </a>
+        </div>
+
+        <!-- 3. LinkedIn button (same blue one as home page) -->
+        <div class="footer-contact-node node-linkedin">
+          <a
+            href="https://www.linkedin.com/in/NikeEmilyO/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-icon-link linkedin-link"
+            title="Visit LinkedIn Profile"
+            aria-label="LinkedIn Profile"
+          >
+            <img
+              src="/img/contact-linkedin.webp"
+              alt="LinkedIn"
+              class="footer-contact-icon-img"
+              width="52"
+              height="38"
+              loading="eager"
+            />
+          </a>
+        </div>
       </div>
     </footer>
   </div>
@@ -512,11 +547,10 @@ const agents = vignette3?.agents || [];
     --text-subtle: #64748b;
     --wire-line: rgba(255, 255, 255, 0.12);
 
-    --teal: #5AB2B3;
     --purple: #704898;
     --orchid: #be83d3;
     --orange: #e8722c;
-    --cyan: #00f2fe;
+    --cyan: #00B3E3;
   }
 
   body {
@@ -1159,6 +1193,7 @@ const agents = vignette3?.agents || [];
     width: 100%;
     height: 100vh;
     z-index: 25;
+    transform: translateY(100vh);
     background-color: var(--doodle-yellow, #FFDA00);
     border-bottom: 3px solid #000000;
     display: flex;
@@ -1701,8 +1736,8 @@ const agents = vignette3?.agents || [];
   /* ============================================================ */
   .doom-loop-standalone-section {
     width: 100%;
-    background-color: #5AB2B3;
-    padding: clamp(80px, 12vh, 140px) 24px;
+    background-color: var(--doodle-cyan, #00B3E3);
+    padding: clamp(60px, 8vh, 100px) 24px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -1715,12 +1750,12 @@ const agents = vignette3?.agents || [];
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(36px, 6vh, 64px);
+    gap: clamp(28px, 4vh, 48px);
   }
 
   .doom-standalone-header {
     text-align: center;
-    max-width: 800px;
+    max-width: 960px;
   }
 
   .doom-section-eyebrow {
@@ -1761,12 +1796,12 @@ const agents = vignette3?.agents || [];
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    font-size: clamp(0.95rem, 1.2vw, 1.15rem);
     font-weight: 500;
     line-height: 1.55;
-    color: rgba(255, 255, 255, 0.92);
+    color: rgba(255, 255, 255, 0.95);
     margin: 14px auto 0;
-    max-width: 52ch;
+    max-width: 82ch;
     text-wrap: balance;
   }
 
@@ -1929,67 +1964,139 @@ const agents = vignette3?.agents || [];
   .story-epilogue {
     width: 100%;
     max-width: 900px;
-    padding: 80px 24px 100px;
+    padding: 70px 24px 90px;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    gap: 28px;
     background-color: #000000;
-  }
-
-  .epilogue-line {
-    width: 60px;
-    height: 3px;
-    background: #3F3F46;
-    border-radius: 9999px;
-  }
-
-  .epilogue-closing {
-    font-size: 0.95rem;
-    color: #71717A;
-    margin: 0;
   }
 
   .epilogue-links {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
-  .link-deck,
-  .link-subtle {
+  /* 1. Return to Home Button */
+  .footer-home-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
+    gap: 8px;
+    font-size: 0.9rem;
     font-weight: 700;
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
     text-decoration: none;
     border-radius: 9999px;
-    padding: 8px 18px;
-    border: 2px solid #000000;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .link-deck {
+    padding: 10px 22px;
     background: #FFFFFF;
     color: #000000;
-    box-shadow: 2px 3px 0px #000000;
+    border: 2px solid #000000;
+    box-shadow: 2.5px 3.5px 0px #000000;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   }
-  .link-deck:hover {
+  .footer-home-btn:hover {
+    background: var(--doodle-yellow, #FFDA00);
     transform: translateY(-2px);
-    box-shadow: 2px 5px 0px #000000;
+    box-shadow: 2.5px 5px 0px #000000;
+  }
+  .footer-home-btn:active {
+    transform: translateY(1px);
+    box-shadow: 1px 1px 0px #000000;
   }
 
-  .link-subtle {
-    background: #18181B;
-    color: #FFFFFF;
-    border-color: #3F3F46;
+  /* 2 & 3. Contact Sticker Nodes */
+  .footer-contact-node {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
-  .link-subtle:hover {
-    background: #27272A;
-    transform: translateY(-2px);
+
+  .footer-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 12px;
+    transition: transform 0.15s ease;
+  }
+
+  .footer-contact-icon-img {
+    display: block;
+    height: auto;
+    transition: transform 0.15s ease;
+    user-select: none;
+    filter: drop-shadow(2px 3px 0px rgba(0, 0, 0, 0.4));
+  }
+
+  .footer-icon-link:hover .footer-contact-icon-img {
+    animation: iconVibrate 0.25s linear infinite;
+    transform: scale(1.1);
+  }
+
+  /* Pop-out copy email tooltip button */
+  .footer-copy-email-btn {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px) scale(0.85);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 14px;
+    border: 2px solid #000000;
+    border-radius: 9999px;
+    background: #ffffff;
+    color: #0F172A;
+    font-family: var(--archivo-font, 'Archivo', sans-serif);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    box-shadow: 2px 3px 0px #000000;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease, visibility 0.2s ease, background-color 0.15s ease;
+    z-index: 20;
+  }
+
+  .footer-copy-email-btn::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    bottom: -16px;
+    left: -12px;
+    right: -12px;
+    background: transparent;
+    z-index: -1;
+  }
+
+  .footer-contact-node.node-email:hover .footer-copy-email-btn,
+  .footer-contact-node.node-email:focus-within .footer-copy-email-btn,
+  .footer-copy-email-btn:hover,
+  .footer-copy-email-btn:focus,
+  .footer-copy-email-btn.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  .footer-copy-email-btn:hover {
+    background: var(--doodle-yellow, #FFDA00);
+    box-shadow: 2.5px 4px 0px #000000;
+  }
+
+  .footer-copy-email-btn.is-copied {
+    background: var(--doodle-lime, #D1FF00) !important;
+    color: #000000 !important;
   }
 </style>
 
@@ -2232,14 +2339,41 @@ const agents = vignette3?.agents || [];
       }
     }
 
+    // Footer Copy Email Quick Action
+    const footerCopyBtn = document.getElementById("footerCopyEmailBtn");
+    if (footerCopyBtn) {
+      footerCopyBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const email = "nike.emily@pm.me";
+        navigator.clipboard?.writeText(email).then(() => {
+          const copyText = footerCopyBtn.querySelector(".copy-btn-text");
+          if (copyText) {
+            const prevText = copyText.textContent;
+            copyText.textContent = "Copied! ✓";
+            footerCopyBtn.classList.add("is-copied");
+            setTimeout(() => {
+              copyText.textContent = prevText;
+              footerCopyBtn.classList.remove("is-copied");
+            }, 2000);
+          }
+        }).catch(() => {
+          const copyText = footerCopyBtn.querySelector(".copy-btn-text");
+          if (copyText) {
+            copyText.textContent = "nike.emily@pm.me";
+          }
+        });
+      });
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAUScrollytelling);
+  } else {
     initAUScrollytelling();
-  });
-  document.addEventListener("astro:page-load", () => {
-    initAUScrollytelling();
-  });
+  }
+  document.addEventListener("astro:page-load", initAUScrollytelling);
 </script>

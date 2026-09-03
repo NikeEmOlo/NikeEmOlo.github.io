@@ -1,22 +1,27 @@
 ---
-const { title, tabs } = Astro.props
+const { title, tabs = {} } = Astro.props;
+const tabEntries = Object.entries(tabs || {});
 ---
 
 <div class="case-study">
     <section class="hero">
         <div class="tab-title-wrap">
             <h1 class="title">{title}</h1>
-            <div class="tab-wrap">
-                {Object.entries(tabs).map(([key, value]) => (
-                    <button class="tab">{key}</button>
+            {tabEntries.length > 0 && (
+                <div class="tab-wrap">
+                    {tabEntries.map(([key]) => (
+                        <button class="tab">{key}</button>
+                    ))}
+                </div>
+            )}
+        </div>
+        {tabEntries.length > 0 && (
+            <div class="hero-info">
+                {tabEntries.map(([, value]) => (
+                    <p class="info-snippet hidden">{value}</p>
                 ))}
             </div>
-        </div>
-        <div class="hero-info">
-            {Object.entries(tabs).map(([key, value]) => (
-                <p class="info-snippet hidden">{value}</p>
-            ))}
-        </div>
+        )}
     </section>
     <slot />
 </div>
@@ -96,7 +101,7 @@ const { title, tabs } = Astro.props
                 }
 
                 &:hover {
-                    background-color: var(--teal);
+                    background-color: var(--doodle-cyan, #00B3E3);
                 }
             }
         }

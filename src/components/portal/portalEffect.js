@@ -3,9 +3,8 @@
 const TRAIL_FADE_SECONDS = 5.0;  // seconds for a fully-lit area to fade back to black
 const DAB_RADIUS       = 0.06;
 const TURBULENCE       = 0.27;
-// Trail palette — the glow cycles through these (from --tarot-gradient + a blue).
-// teal → blue → purple → pink. Tweak/reorder freely; keep it to 4 colours.
-const TRAIL_COLORS     = ['#359E9D', '#0558ff', '#ff34ae', '#e190ff'];
+// cyan → blue → purple → pink. Tweak/reorder freely; keep it to 4 colours.
+const TRAIL_COLORS     = ['#00B3E3', '#0558ff', '#ff34ae', '#e190ff'];
 const IRID_FREQUENCY   = 1.5;   // how many times the palette repeats across the text
 const IRID_ANGLE       = 81.0 * (Math.PI / 180);
 const IRID_SPEED       = 0.1;

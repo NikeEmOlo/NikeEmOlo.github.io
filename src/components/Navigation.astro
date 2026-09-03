@@ -71,12 +71,12 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
                     </div>
                 </div>
             </li>
-            <li class="nav-li nav-contact-li">
+            <li class="nav-li nav-contact-li is-contact-open">
                 <button
                     type="button"
                     id="navContactBtn"
                     class="nav-item-btn nav-link nav-contact-btn"
-                    aria-expanded="false"
+                    aria-expanded="true"
                     aria-controls="contactHangingChain"
                     aria-label="Toggle contact links"
                     style="--tab-accent: var(--doodle-purple, #7A00FF); --tab-text: #FFFFFF;"
@@ -86,7 +86,7 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
                 </button>
 
                 <!-- Hanging Chain of Contact Icons -->
-                <div class="contact-hanging-anchor" id="contactHangingChain" aria-hidden="true">
+                <div class="contact-hanging-anchor" id="contactHangingChain" aria-hidden="false">
                     <div class="contact-hanging-wrapper">
                         <!-- Top String from Navbar to LinkedIn -->
                         <div class="contact-string string-top" aria-hidden="true">
@@ -464,10 +464,16 @@ const isCurrent = (href: string) => (href === "/" ? path === "/" : path.startsWi
     .nav-contact-li.is-contact-open .nav-contact-btn,
     .nav-contact-li:has(.nav-contact-btn[aria-expanded="true"]) .nav-contact-btn,
     .nav-contact-btn[aria-expanded="true"] {
-        background: #000000 !important;
-        color: #ffffff !important;
-        border-color: #000000 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 2px solid #000000 !important;
         box-shadow: 2px 2px 0px #000000 !important;
+    }
+
+    .nav-contact-li.is-contact-open .nav-contact-btn:hover,
+    .nav-contact-btn[aria-expanded="true"]:hover {
+        background: var(--doodle-purple, #7A00FF) !important;
+        color: #ffffff !important;
     }
 
     .nav-contact-li.is-contact-open .contact-label-text,

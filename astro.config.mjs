@@ -30,6 +30,11 @@ export default defineConfig({
 
   integrations: [mdx()],
 
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
+
   redirects: {
     '/projects': '/',
   }

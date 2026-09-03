@@ -25,14 +25,7 @@ const cv = cvEntry?.data;
       </div>
 
 
-      <!-- The runway is long, so say plainly that there is more below -->
-      <div class="how-scroll-cue" id="howScrollCue" aria-hidden="true">
-        <span class="how-scroll-cue-text">Keep scrolling</span>
-        <svg class="how-scroll-cue-arrow" viewBox="0 0 24 24" fill="none">
-          <path d="M12 4 L12 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
-          <path d="M6 13 L12 19 L18 13" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </div>
+
 
       <!-- OPTIONAL STAGE CURTAIN LAYER: sits above the header but below the -->
       <!-- desktop mockup, so a caller can wipe the stage while leaving the  -->
@@ -193,7 +186,7 @@ const cv = cvEntry?.data;
                   
                   <div class="terminal-body" id="terminalOutput">
                     <div class="terminal-line dim">OpenClaw Autonomous Runtime v2.6.4 (node-esm64)</div>
-                    <div class="terminal-line dim">Workspace mounted: C:\openClaw\workspace\job_hunter</div>
+                    <div class="terminal-line dim">Workspace mounted: workspace\job_hunter</div>
                     <div class="terminal-line dim">Loading multi-agent configuration... [OK]</div>
                     <div class="terminal-line system-ready">System ready. Awaiting scheduled triggers or manual execution.</div>
                   </div>
@@ -211,7 +204,7 @@ const cv = cvEntry?.data;
                     <svg viewBox="0 0 16 16" width="14" height="14" fill="none">
                       <path d="M 1 4 L 6 4 L 8 6 L 15 6 L 15 13 L 1 13 Z" fill="#F59E0B" stroke="#000000" stroke-width="1.5" />
                     </svg>
-                    <span class="modal-title-text">File Explorer - C:\openClaw\workspace</span>
+                    <span class="modal-title-text">File Explorer - Workspace</span>
                   </div>
                   <div class="modal-title-controls">
                     <button class="win-ctrl-btn close" id="closeExplorerBtn">✕</button>
@@ -220,7 +213,7 @@ const cv = cvEntry?.data;
 
                 <div class="os-explorer-address-bar">
                   <span class="address-tag">Location:</span>
-                  <span class="address-path" id="explorerCurrentPath">openClaw\workspace\agents</span>
+                  <span class="address-path" id="explorerCurrentPath">workspace\agents</span>
                 </div>
 
                 <div class="os-explorer-body">
@@ -290,8 +283,8 @@ const cv = cvEntry?.data;
 
                   <div class="info-meta-box">
                     <div class="meta-row">
-                      <span class="meta-label">Path:</span>
-                      <span class="meta-val" id="infoFilePath">C:\openClaw\workspace\master_cv.md</span>
+                      <span class="meta-label">Location:</span>
+                      <span class="meta-val" id="infoFilePath">workspace\master_cv.md</span>
                     </div>
                     <div class="meta-row">
                       <span class="meta-label">Execution Role:</span>
@@ -802,7 +795,7 @@ const cv = cvEntry?.data;
                     <div class="mc-header-title-col">
                       <div class="mc-title-row">
                         <span class="mc-header-icon">🚀</span>
-                        <h2 class="mc-title-text">Mission Control <span class="mc-db-tag">http://localhost:8080/mission-control</span></h2>
+                        <h2 class="mc-title-text">Mission Control <span class="mc-db-tag">Interactive Triage Dashboard</span></h2>
                       </div>
                     </div>
 
@@ -1089,14 +1082,14 @@ const cv = cvEntry?.data;
               <span class="wf-step-num">01</span>
               <span class="wf-node-tag">CRON &middot; 3&times; DAILY</span>
             </div>
-            <h3 class="wf-node-title">Giles starts the run</h3>
-            <p class="wf-node-lead">Giles is the orchestrator. He runs on a schedule three times a day, hands each job to the right agent, watches for errors, and pushes triage alerts into Slack and Mission Control.</p>
+            <h3 class="wf-node-title">Gateway daemon fires the schedule</h3>
+            <p class="wf-node-lead">The OpenClaw Gateway daemon runs in the background 24/7. Three times a day (09:00, 13:00, 18:00 BST), its built-in scheduler spins up a fresh, isolated agent session.</p>
             <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-01">
               <span class="wf-expand-label">Read more</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
             <div class="wf-detail" id="wf-detail-01" hidden>
-              <p class="wf-detail-p">His agent file, GILES.md, sets out how he delegates, monitors the cron schedule, supervises error states, and dispatches alerts. Nothing else in the workflow decides when to run. That is his job alone.</p>
+              <p class="wf-detail-p">The Gateway controls and fires the crons independently of whether any agent is in an active session. When a cron fires, it launches an ephemeral, single-task isolated session. It executes the scraper command, finishes, and is destroyed with zero lingering state or memory between runs.</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -1107,14 +1100,14 @@ const cv = cvEntry?.data;
               <span class="wf-step-num">02</span>
               <span class="wf-node-tag">Ingestion</span>
             </div>
-            <h3 class="wf-node-title">job_scraper.py pulls new listings</h3>
-            <p class="wf-node-lead">Scrapes newly listed public jobs and parses them into structured JSON. It only pulls listings that match specific keywords and that appeared since the last run.</p>
+            <h3 class="wf-node-title">runner.py scrapes new listings</h3>
+            <p class="wf-node-lead">Jobs are scraped from publicly listed data, pulling newly posted roles that match target criteria.</p>
             <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-02">
               <span class="wf-expand-label">Read more</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
             <div class="wf-detail" id="wf-detail-02" hidden>
-              <p class="wf-detail-p">Willow built this script from a single prompt, running on Opus, which is worth paying for on complex software engineering. Each run updates the <code>last_run</code> timestamp, which is what stops the same listing being processed twice.</p>
+              <p class="wf-detail-p">The script checks the last scrape timestamp to target only the exact time window since the previous run. It extracts structured job details (title, company, description, location, seniority) into clean data, ensuring no duplicate requests.</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -1123,16 +1116,16 @@ const cv = cvEntry?.data;
           <div class="wf-node-card">
             <div class="wf-node-top">
               <span class="wf-step-num">03</span>
-              <span class="wf-node-tag">No LLM spend yet</span>
+              <span class="wf-node-tag">Deterministic &middot; 0 LLM spend</span>
             </div>
-            <h3 class="wf-node-title">scoring_metric.py filters and scores</h3>
-            <p class="wf-node-lead">Anything outside my industry or role requirements is dropped, along with listings that look like scams or data-mining exercises. Whatever survives gets a weighted score.</p>
+            <h3 class="wf-node-title">scorer.py filters &amp; ranks</h3>
+            <p class="wf-node-lead">A fast Python algorithm scores each job against keyword matches, location, seniority, and salary floors with zero LLM cost.</p>
             <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-03">
               <span class="wf-expand-label">Read more</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
             <div class="wf-detail" id="wf-detail-03" hidden>
-              <p class="wf-detail-p">The metric weighs salary, office / hybrid / remote, industry, keyword matching, and location or distance. I set the criteria out in a markdown file and handed it to Cordelia on Sonnet, since a task shaped like this does not need Opus. It was tested against real listings before going into production. All of it runs in plain Python before any model is called, which is where most of the cost saving comes from.</p>
+              <p class="wf-detail-p"><code>scorer.py</code> deduplicates new listings against the local SQLite database. Roles that survive are saved with <code>new</code> status, and high-scoring matches (&ge;65) are posted straight to the <code>#career</code> Slack channel. Pure code does all the heavy filtering before any AI model is invoked.</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -1141,16 +1134,16 @@ const cv = cvEntry?.data;
           <div class="wf-node-card">
             <div class="wf-node-top">
               <span class="wf-step-num">04</span>
-              <span class="wf-node-tag">LLM due diligence</span>
+              <span class="wf-node-tag">Qualitative Vibe Check</span>
             </div>
-            <h3 class="wf-node-title">Cordelia runs the vibe check</h3>
-            <p class="wf-node-lead">Only the short list reaches an LLM. Cordelia judges whether a role actually suits me and gives it a final score.</p>
+            <h3 class="wf-node-title">Cordy runs the vibe check</h3>
+            <p class="wf-node-lead">Only high-scoring roles reach an LLM. An automated trigger fires a one-shot cron spinning up an isolated Cordy session to conduct deep-dive company research and evaluate qualitative culture and role fit.</p>
             <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-04">
               <span class="wf-expand-label">Read more</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
             <div class="wf-detail" id="wf-detail-04" hidden>
-              <p class="wf-detail-p">Her agent file describes my ideal role, what I value in a company, my ethics, the kinds of projects and industries I want, and the things that get a listing thrown out immediately. It is pre-application due diligence, outsourced. LLMs are not fully predictable, so this is never treated as the final word.</p>
+              <p class="wf-detail-p">Cordy does not rely solely on the job post. Online research is conducted across the company's website, recent news articles, leadership, and public projects. Findings are benchmarked against <code>job_ideals.md</code> (my values, ethics, preferred project types, and red flags) to assign a 1&ndash;10 vibe score. Any role scoring 3 or below is automatically archived.</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -1162,13 +1155,13 @@ const cv = cvEntry?.data;
               <span class="wf-node-tag">Human in the loop</span>
             </div>
             <h3 class="wf-node-title">Mission Control: I decide</h3>
-            <p class="wf-node-lead">Priority jobs land on the Mission Control jobs board. I read the reasoning behind each score and choose which roles are worth going after.</p>
+            <p class="wf-node-lead">High-priority jobs land on the Mission Control dashboard. I review the match reasoning and select which roles are worth pursuing.</p>
             <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-05">
               <span class="wf-expand-label">Read more</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
             <div class="wf-detail" id="wf-detail-05" hidden>
-              <p class="wf-detail-p">Selecting a role is what triggers the tailoring step. The dashboard was built by Willow on Opus from my prompts, and it covers more than just this workflow. Keeping a person at this point is deliberate: it is the last cheap moment to catch a bad call.</p>
+              <p class="wf-detail-p">Clicking <strong>Yes</strong> on a role updates the database and queues a new CV task. That action triggers a one-shot cron scheduled for +15 seconds, waking Cordy's session immediately to begin tailoring (with an 8pm daily sweep fallback).</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -1179,14 +1172,14 @@ const cv = cvEntry?.data;
               <span class="wf-step-num">06</span>
               <span class="wf-node-tag">Grounded output</span>
             </div>
-            <h3 class="wf-node-title">Cordelia tailors the CV</h3>
-            <p class="wf-node-lead">Cordelia writes a CV aimed at the specific job description, using master_cv.md as the template.</p>
+            <h3 class="wf-node-title">Cordy tailors the CV &amp; handles feedback</h3>
+            <p class="wf-node-lead">Cordy drafts a tailored CV anchored to master_cv.md to eliminate hallucinations, and updates revisions based on inline feedback.</p>
             <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-06">
               <span class="wf-expand-label">Read more</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
             <div class="wf-detail" id="wf-detail-06" hidden>
-              <p class="wf-detail-p"><code>master_cv.md</code> is the verified single source of truth for career history, skills and metrics. It exists so that nothing can be invented. Employers filter with applicant tracking systems that demand very high keyword matches, so a generic CV rarely reaches a human. This saves hours on every application.</p>
+              <p class="wf-detail-p"><code>master_cv.md</code> is the verified single source of truth for career achievements and skills. Cordy outputs the tailored CV and marks the role as ready for review in the database. If I submit feedback in Mission Control, a +15s cron wakes Cordy to revise it.</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -2243,55 +2236,7 @@ const cv = cvEntry?.data;
     margin-right: 4px;
   }
 
-  /* ---------------------------------------------------- */
-  /* KEEP-SCROLLING CUE                                    */
-  /* ---------------------------------------------------- */
-  .how-scroll-cue {
-    position: absolute;
-    bottom: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 30;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #000000;
-    color: var(--doodle-yellow, #ffda00);
-    border: 2.5px solid #000000;
-    border-radius: 9999px;
-    padding: 7px 16px;
-    font-family: monospace;
-    font-size: 0.68rem;
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.35);
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.35s ease, transform 0.35s ease;
-    animation: cueBob 1.9s ease-in-out infinite;
-  }
 
-  .how-scroll-cue-arrow {
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
-  }
-
-  @keyframes cueBob {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(5px); }
-  }
-
-  /* Gone once the runway is nearly done, and while the desktop is fullscreen */
-  .how-scroll-cue.is-done,
-  .how-sticky-viewport.has-fullscreen-desktop .how-scroll-cue {
-    opacity: 0;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .how-scroll-cue { animation: none; transform: translateX(-50%); }
-  }
 
   /* ---------------------------------------------------- */
   /* "THIS IS CLICKABLE" AFFORDANCES                       */
@@ -3072,19 +3017,20 @@ const cv = cvEntry?.data;
 
   .info-big-icon,
   :global(.info-big-icon) {
-    font-size: 2rem;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
     flex-shrink: 0;
   }
 
   .info-big-icon svg,
   :global(.info-big-icon svg) {
-    width: 36px;
-    height: 36px;
+    width: 100%;
+    height: 100%;
+    max-width: 44px;
+    max-height: 44px;
     display: block;
   }
 
@@ -6228,9 +6174,8 @@ const cv = cvEntry?.data;
       key: "readme",
       name: "README.md",
       type: "Design Decisions & Rationale",
-      icon: "📄",
       tag: "DOCS",
-      path: "openClaw\\workspace\\README.md",
+      path: "workspace\\README.md",
       role: "Workflow Design Rationale",
       sections: [
         {
@@ -6260,7 +6205,7 @@ const cv = cvEntry?.data;
         },
         {
           title: "How do I communicate with the agents?",
-          content: `<p class="info-section-p">Through Slack or Telegram, so I can monitor the workflow and ask for fixes or new features from anywhere. Cloudflare gives me remote access to the Mission Control dashboard, which is hosted locally.</p>`
+          content: `<p class="info-section-p">Through Slack or Telegram, so I can monitor the workflow and ask for fixes or new features from anywhere. Secure tunneling gives me remote access to the Mission Control dashboard from any device.</p>`
         },
         {
           title: "How is it kept secure?",
@@ -6354,7 +6299,6 @@ const cv = cvEntry?.data;
         key: string;
         name: string;
         type: string;
-        icon: string;
         tag: string;
         path: string;
         role: string;
@@ -6369,43 +6313,41 @@ const cv = cvEntry?.data;
     }> = {
       agents: {
         name: "Agents",
-        path: "openClaw\\workspace\\agents",
+        path: "workspace\\agents",
         files: [
           {
             key: "willow",
             name: "WILLOW.md",
-            type: "Lead Developer Agent Specification",
-            icon: "🧙‍♀️",
-            tag: "DEV AGENT",
-            path: "openClaw\\workspace\\agents\\WILLOW.md",
-            role: "Codebase & Architecture Lead",
+            type: "Developer Agent Specification",
+            tag: "BUILDER AGENT",
+            path: "workspace\\agents\\WILLOW.md",
+            role: "Code Builder & Script Developer",
             sections: [
               {
                 title: "What are Agent files?",
-                content: `<p class="info-section-p">Agent files are an essential building block when developing self-annealing AI agents. The information in these files is prepended to any LLM prompt providing more controlled outputs and consistency. Most LLMs operate in a way that given the same prompt, they will produce a different answer each time. This can be helpful in certain scenarios but is largely unwanted behaviour in professional workflows.</p><p class="info-section-p">These files can contain rules, guidance, or personality information for your agent. For example, "Never use dark mode when developing sites" or "before doing X check the directives folder for clear instructions". Over time, agents can edit their own AGENT file, to add new rules and fine-tune their processes, meaning they become more efficient over time.</p>`
+                content: `<p class="info-section-p">Agent files are an essential building block when developing self-annealing AI agents. The instructions in these files establish coding standards, frameworks, styling, and rules. Agents can also update their own files over time as workflows evolve.</p>`
               },
               {
-                title: "Willow",
-                content: `<p class="info-section-p">Willow's agent file determines rules for development, for example, what frameworks and languages to use, code styling, design requirements, and architecture constraints. Running on Anthropic's flagship Opus model, Willow specializes in complex software engineering, building robust scripts like <a class="file-jump-link" data-open-file="job_scraper">job_scraper.py</a> and the Mission Control dashboard from concise user prompts.</p>`
+                title: "Willow's Role in the System",
+                content: `<p class="info-section-p">Running on Anthropic's flagship Opus model, Willow functions as the builder agent. Following architectural designs, directives, and prompts, the codebase was generated by this agent, including the automated scrapers, deterministic scoring algorithms, SQLite schema, local APIs, and the Next.js Mission Control dashboard. While not part of the scheduled scrape run, the builder agent is dispatched for code builds, refactoring, and bug fixes.</p>`
               }
             ]
           },
           {
             key: "cordelia",
             name: "CORDELIA.md",
-            type: "Copywriter & Analysis Agent Specification",
-            icon: "🔮",
+            type: "Vibe Check & CV Tailoring Specification",
             tag: "RESEARCH AGENT",
-            path: "openClaw\\workspace\\agents\\CORDELIA.md",
-            role: "Tone, Vibe Checks & CV Tailoring",
+            path: "workspace\\agents\\CORDELIA.md",
+            role: "Tone, Vibe Checks & Grounded CVs",
             sections: [
               {
                 title: "What are Agent files?",
-                content: `<p class="info-section-p">Agent files are an essential building block when developing self-annealing AI agents. The information in these files is prepended to any LLM prompt providing more controlled outputs and consistency. Most LLMs operate in a way that given the same prompt, they will produce a different answer each time. This can be helpful in certain scenarios but is largely unwanted behaviour in professional workflows.</p><p class="info-section-p">These files can contain rules, guidance, or personality information for your agent. For example, "Never use dark mode when developing sites" or "before doing X check the directives folder for clear instructions". Over time, agents can edit their own AGENT file, to add new rules and fine-tune their processes, meaning they become more efficient over time.</p>`
+                content: `<p class="info-section-p">Agent files prepend structured guidelines to LLM prompts, ensuring reliable and repeatable outputs across sessions without drifting into generic hallucinations.</p>`
               },
               {
-                title: "Cordelia",
-                content: `<p class="info-section-p">Cordelia's file contains information about how to provide good, humanised copy and context analysis. It provides her with the instructions needed to complete deep <a class="file-jump-link" data-open-file="vibe_check">vibe checks</a> and tailor CVs strictly to job descriptions without hallucinating.</p>`
+                title: "Cordy's Role in the System",
+                content: `<p class="info-section-p">Cordy (Cordelia) handles qualitative evaluations, online company due diligence, and candidate copy. Spun up via trigger crons, online research is carried out across company websites, news articles, and public projects to evaluate cultural and ethical fit against <code>job_ideals.md</code> (assigning a 1–10 vibe score). Fact-grounded tailored CVs are drafted from <code>master_cv.md</code>, and documents are revised immediately when feedback is submitted in Mission Control.</p>`
               }
             ]
           },
@@ -6413,18 +6355,17 @@ const cv = cvEntry?.data;
             key: "giles",
             name: "GILES.md",
             type: "System Orchestrator Specification",
-            icon: "🎩",
             tag: "ORCHESTRATOR",
-            path: "openClaw\\workspace\\agents\\GILES.md",
-            role: "Workflow Scheduler & Supervisor",
+            path: "workspace\\agents\\GILES.md",
+            role: "Main Session Supervisor & Triage",
             sections: [
               {
                 title: "What are Agent files?",
-                content: `<p class="info-section-p">Agent files are an essential building block when developing self-annealing AI agents. The information in these files is prepended to any LLM prompt providing more controlled outputs and consistency. Most LLMs operate in a way that given the same prompt, they will produce a different answer each time. This can be helpful in certain scenarios but is largely unwanted behaviour in professional workflows.</p><p class="info-section-p">These files can contain rules, guidance, or personality information for your agent. For example, "Never use dark mode when developing sites" or "before doing X check the directives folder for clear instructions". Over time, agents can edit their own AGENT file, to add new rules and fine-tune their processes, meaning they become more efficient over time.</p>`
+                content: `<p class="info-section-p">Agent files define the orchestrator's operating principles: delegation protocols, error triage guidelines, and tool usage permissions.</p>`
               },
               {
-                title: "Giles",
-                content: `<p class="info-section-p">Giles's file sets out his tasks as the primary orchestrator. It instructs on how he delegates tasks, monitors cron schedules, supervises error states, and dispatches real-time triage alerts directly to Slack and Mission Control.</p>`
+                title: "Giles's Role in the System",
+                content: `<p class="info-section-p">Operating in the persistent main session, Giles oversees system health, creates and manages cron configurations via the OpenClaw CLI, handles runtime error triage, and pushes priority notifications to Slack and Mission Control.</p>`
               }
             ]
           }
@@ -6432,20 +6373,19 @@ const cv = cvEntry?.data;
       },
       tailored_cvs: {
         name: "CVs",
-        path: "openClaw\\workspace\\tailored_cvs",
+        path: "workspace\\tailored_cvs",
         files: [
           {
             key: "master_cv",
             name: "master_cv.md",
             type: "Ground-Truth Knowledge Base",
-            icon: "📄",
             tag: "SOURCE OF TRUTH",
-            path: "openClaw\\workspace\\tailored_cvs\\master_cv.md",
+            path: "workspace\\tailored_cvs\\master_cv.md",
             role: "Anti-Hallucination Grounding",
             sections: [
               {
                 title: "What this file does in the workflow",
-                content: `<p class="info-section-p">The 100% verified single source of truth containing ground-truth career history, skills, and metrics used to anchor all AI applications and prevent hallucinations.</p>`
+                content: `<p class="info-section-p">The 100% verified single source of truth containing ground-truth career history, metrics, and technical competencies. Every CV drafted by Cordy must draw strictly from this file to prevent AI hallucinations.</p>`
               }
             ]
           },
@@ -6453,18 +6393,17 @@ const cv = cvEntry?.data;
             key: "tailored_cv",
             name: "tailored_CV.pdf",
             type: "Targeted Application Artifact",
-            icon: "📑",
             tag: "GENERATED",
-            path: "openClaw\\workspace\\tailored_cvs\\tailored_CV.pdf",
+            path: "workspace\\tailored_cvs\\tailored_CV.pdf",
             role: "Targeted Candidate Representation",
             sections: [
               {
                 title: "What this does in the workflow",
-                content: `<p class="info-section-p">Tailored CVs are created by Cordelia, running on Sonnet. Cordelia uses the <a class="file-jump-link" data-open-file="master_cv">master_cv</a> as a template to create a new CV tailored to the job description of jobs I have selected via mission control, triggered automatically. This saves hours of work I would have otherwise needed to spend tailoring my CV manually to each job description. This time can be better spent on personal development.</p>`
+                content: `<p class="info-section-p">Tailored CVs are drafted by Cordy when a job is marked 'Yes' in Mission Control. Woken by a +15s trigger cron, Cordy uses <code>master_cv.md</code> as the truth template to highlight relevant achievements matching the job description, saving the tailored CV and updating the job status to ready for application.</p>`
               },
               {
                 title: "Why is this necessary?",
-                content: `<p class="info-section-p">This entire workflow was developed in the shadow of a fast-changing, highly competitive job market. Employers rely on Applicant Tracking Systems, often AI-powered, to assess candidates for roles. Hiring managers and recruiters still spend time reading applicant CVs, however, the CVs that reach them are those that have managed to get past the automated filtering.</p><p class="info-section-p">Due to the sheer number of applicants per role, the filtering systems now require as high as a 95% match of your CV to their requirements. These scores are often given based on keywords and other non-humancentric measures. The best tool candidates have at their disposal to overcome this process is to use the same tools often being used on them: AI. This is the AI doom loop in action.</p>`
+                content: `<p class="info-section-p">Modern applicant tracking systems (ATS) often filter for high keyword alignment before human recruiters review a profile. Grounded AI tailoring ensures genuine skills are prominently surfaced without manual rewriting overhead.</p>`
               }
             ]
           }
@@ -6472,87 +6411,70 @@ const cv = cvEntry?.data;
       },
       scripts: {
         name: "Scripts",
-        path: "openClaw\\workspace\\scripts",
+        path: "workspace\\scripts",
         files: [
           {
             key: "job_scraper",
-            name: "job_scraper.py",
-            type: "Python Ingestion Script",
-            icon: "🐍",
+            name: "runner.py",
+            type: "Job Ingestion Script",
             tag: "SCRAPER",
-            path: "openClaw\\workspace\\scripts\\job_scraper.py",
+            path: "workspace\\scripts\\runner.py",
             role: "Automated Job Ingestion",
             sections: [
               {
                 title: "What this file does in the workflow",
-                content: `<p class="info-section-p">Scrapes newly listed, publicly available jobs from the internet on each cron run, parsing them into structured JSON data. The scraper only pulls jobs that match specific keywords, and that have been listed since the last run. On each run, the <code>last_run</code> time is updated.</p>`
+                content: `<p class="info-section-p">Executed inside an ephemeral isolated session 3x daily by the OpenClaw Gateway daemon. Jobs are scraped from publicly listed data. It checks the last run timestamp to target only the exact hours since the previous execution.</p>`
               },
               {
                 title: "What happens to the data?",
-                content: `<p class="info-section-p">The newly listed jobs are given to the <a class="file-jump-link" data-open-file="scoring_metric">scoring_metric</a> for analysis and filtering.</p>`
+                content: `<p class="info-section-p">Extracted listings are passed directly to <a class="file-jump-link" data-open-file="scoring_metric">scorer.py</a> for deterministic deduplication and filtering.</p>`
               },
               {
                 title: "How was this developed?",
-                content: `<p class="info-section-p">Willow developed this script with a single prompt. Willow runs on Anthropic's flagship Opus model which provides superior coding capabilities.</p>`
+                content: `<p class="info-section-p">Built by Willow on Anthropic's flagship Opus model from concise engineering specifications.</p>`
               }
             ]
           },
           {
             key: "scoring_metric",
-            name: "scoring_metric.py",
-            type: "Python Scoring & Filter Algorithm",
-            icon: "🐍",
+            name: "scorer.py",
+            type: "Deterministic Scoring Engine",
             tag: "FILTER",
-            path: "openClaw\\workspace\\scripts\\scoring_metric.py",
-            role: "Weighted Match Engine",
+            path: "workspace\\scripts\\scorer.py",
+            role: "Weighted Match Engine (0 LLM Cost)",
             sections: [
               {
                 title: "What this file does in the workflow",
-                content: `<p class="info-section-p">Processes scraped jobs by filtering out jobs that don't match my industry or role requirements. It also filters out listings that are likely to be scams or listed for data mining purposes. The remaining jobs are then given a score, using a weighted scoring metric that assesses how well each role matches my requirements across:</p>
+                content: `<p class="info-section-p">Evaluates newly scraped listings against deterministic criteria with zero LLM API cost:</p>
                 <ul class="info-section-list">
-                  <li>Salary</li>
-                  <li>Office / hybrid / remote</li>
-                  <li>Industry</li>
-                  <li>Keyword matching</li>
-                  <li>Location / distance</li>
+                  <li>Role title & seniority matching</li>
+                  <li>Location weighting & remote/hybrid filters</li>
+                  <li>Keyword matching & stack relevance</li>
+                  <li>Scam & data-mining exclusion</li>
                 </ul>
-                <p class="info-section-p">The higher the score the better the match. Only very highly scoring jobs remain, all others are filtered out. This keeps the number of jobs provided to me for review manageable, and ensures I am focusing on roles that will provide the best use of my time.</p>`
+                <p class="info-section-p">Deduplicates against the local SQLite database, writes new listings as <code>new</code> status, and dispatches high matches (&ge;65) to the <code>#career</code> Slack channel.</p>`
               },
               {
                 title: "Where does this data go?",
-                content: `<p class="info-section-p">The remaining jobs are given to Cordelia who will complete a <a class="file-jump-link" data-open-file="vibe_check">vibe_check</a> and provide them with a final score.</p>`
-              },
-              {
-                title: "How was this developed?",
-                content: `<p class="info-section-p">I set out my selection criteria in a markdown file. These requirements were handed to Cordelia, running on Anthropic's general purpose model Sonnet to create the weighted scoring metric. A simpler task like this doesn't require the full power of Opus, and a less expensive model can be chosen. The scoring metric was then tested against real listings before being put into production.</p>`
+                content: `<p class="info-section-p">High-scoring listings trigger an automated one-shot cron that spins up an isolated Cordy session for qualitative <a class="file-jump-link" data-open-file="vibe_check">vibe checking</a>.</p>`
               }
             ]
           },
           {
             key: "vibe_check",
-            name: "vibe_check.py",
-            type: "Python LLM Due Diligence Pipeline",
-            icon: "🐍",
-            tag: "LLM PIPELINE",
-            path: "openClaw\\workspace\\scripts\\vibe_check.py",
-            role: "Automated Pre-Application Due Diligence",
+            name: "vibe_check",
+            type: "Cordy Qualitative Due Diligence",
+            tag: "LLM DUE DILIGENCE",
+            path: "workspace\\scripts\\vibe_check",
+            role: "Pre-Application Culture & Value Fit",
             sections: [
               {
                 title: "What is the vibe check?",
-                content: `<p class="info-section-p">The process of using an AI agent (Cordelia) to analyse whether a job is suited to me based on their 'vibe'. Essentially, I am outsourcing the majority of pre-application due diligence to an LLM. As LLMs are not always predictable, this process is not to be trusted 100%.</p>`
+                content: `<p class="info-section-p">A deep-dive qualitative AI evaluation conducted by Cordy. Rather than just skimming the job post, online research is carried out across the company's website, news articles, public projects, and leadership to assess company values, engineering culture, ethics, and immediate red flags.</p>`
               },
               {
                 title: "How it works",
-                content: `<p class="info-section-p">In Cordelia's agent files, I have provided detailed information about:</p>
-                <ul class="info-section-list">
-                  <li>My ideal role / dream job</li>
-                  <li>What I value in a company</li>
-                  <li>My ethical values</li>
-                  <li>The types of projects I hope to work on</li>
-                  <li>The types of industries I would like to work in</li>
-                </ul>
-                <p class="info-section-p">I also provide information on things that I do not like, and factors that would result in a job being filtered out immediately. From the filtered job listings passed on by the <a class="file-jump-link" data-open-file="scoring_metric">scoring_metric</a>, Cordelia takes the company and job description and researches the company on the internet, looking for things like the type of projects they do, their reputation, feedback from past employees, their company values, work culture, and so on. Any big NO's are filtered out, otherwise, those remaining are handed a 'vibe_score' showing how well they match my vibe.</p>
-                <p class="info-section-p">The vibe_score and original score are combined to create a priority_score which is what gets shown in <a class="file-jump-link" data-open-file="what_is_mission_control">what_is_mission_control</a>.</p>`
+                content: `<p class="info-section-p">Research findings are evaluated against <code>job_ideals.md</code>. A 1–10 vibe score is assigned and qualitative notes are written directly back to the SQLite database. Any role scoring 3 or below is automatically archived, ensuring only genuinely aligned opportunities reach Mission Control for human review.</p>`
               }
             ]
           }
@@ -6560,26 +6482,25 @@ const cv = cvEntry?.data;
       },
       mission_control: {
         name: "Mission Control",
-        path: "openClaw\\workspace\\mission_control",
+        path: "workspace\\mission_control",
         files: [
           {
             key: "what_is_mission_control",
             name: "what_is_mission_control.md",
             type: "Documentation & Operations Guide",
-            icon: "🎯",
             tag: "DOCUMENTATION",
-            path: "openClaw\\workspace\\mission_control\\what_is_mission_control.md",
+            path: "workspace\\mission_control\\what_is_mission_control.md",
             role: "Human-In-The-Loop Operations Guide",
             hasOpenMcAction: true,
             sections: [
               {
                 title: "What this page does in the workflow",
-                content: `<p class="info-section-p">A custom dashboard that provides oversight of tasks, agents, workflows, and projects I am currently working on. Its use spans beyond this workflow; however, it features a "jobs" page where priority jobs are displayed for my review. It is an essential part of the human-in-the-loop approach I have taken to this project.</p>
-                <p class="info-section-p">On the jobs board, I am able to select which roles I want to apply for, triggering the creation of a <a class="file-jump-link" data-open-file="tailored_cv">tailored_CV</a> that can be used to apply for that role in seconds.</p>`
+                content: `<p class="info-section-p">A custom dashboard application that provides real-time oversight of job opportunities, scores, and status pipelines. On the jobs board, I review priority roles and click 'Yes' or 'No'.</p>
+                <p class="info-section-p">Clicking 'Yes' updates the database and queues a CV generation task, scheduling a +15s one-shot cron that wakes Cordy to generate a tailored CV. It also provides an inline feedback box to request CV revisions at any time.</p>`
               },
               {
-                title: "How it was made",
-                content: `<p class="info-section-p">Developed by Willow using Anthropic's Opus based on user prompts. My training in full-stack development was pivotal in enabling me to clearly convey the features required in the dashboard.</p>`
+                title: "How it was built",
+                content: `<p class="info-section-p">Developed by Willow on Opus from prompts, providing a dedicated interface for human decision-making and pipeline management.</p>`
               }
             ]
           },
@@ -6587,15 +6508,64 @@ const cv = cvEntry?.data;
             key: "mission_control_html",
             name: "mission_control.html",
             type: "Interactive Triage Dashboard",
-            icon: "🎯",
             tag: "DASHBOARD",
-            path: "openClaw\\workspace\\mission_control\\mission_control.html",
+            path: "workspace\\mission_control\\mission_control.html",
             role: "Live Jobs & Pipeline Control Center",
             isDirectLaunch: true
           }
         ]
       }
     };
+
+    const bossAgentSvg = `<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 20 28 C 14 36, 14 48, 20 56" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" opacity="0.6" stroke-dasharray="3 3" />
+      <path d="M 80 28 C 86 36, 86 48, 80 56" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" opacity="0.6" stroke-dasharray="3 3" />
+      <path d="M 24 58 L 28 26 L 42 42 L 50 20 L 58 42 L 72 26 L 76 58 Z" fill="#B45309" />
+      <path d="M 24 54 L 28 22 L 42 38 L 50 16 L 58 38 L 72 22 L 76 54 Z" fill="#FBBF24" stroke="#000000" stroke-width="3" stroke-linejoin="round" />
+      <rect x="22" y="54" width="56" height="12" rx="4" fill="#F59E0B" stroke="#000000" stroke-width="3" />
+      <circle cx="50" cy="16" r="3.5" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+      <circle cx="28" cy="22" r="2.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+      <circle cx="72" cy="22" r="2.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+      <rect x="36" y="66" width="28" height="6" rx="2" fill="#18181B" stroke="#000000" stroke-width="2" />
+      <rect x="28" y="57" width="16" height="3" rx="1.5" fill="#FFFFFF" />
+      <rect x="46" y="32" width="8" height="3" rx="1.5" fill="#FFFFFF" transform="rotate(45 46 32)" />
+    </svg>`;
+
+    const tailorAgentSvg = `<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="18" y="14" width="44" height="54" rx="6" fill="#FFFFFF" stroke="#000000" stroke-width="3" />
+      <rect x="26" y="24" width="16" height="3" rx="1.5" fill="#E11D48" />
+      <rect x="26" y="32" width="26" height="2.5" rx="1.25" fill="#A1A1AA" />
+      <rect x="26" y="39" width="22" height="2.5" rx="1.25" fill="#A1A1AA" />
+      <rect x="26" y="46" width="18" height="2.5" rx="1.25" fill="#A1A1AA" />
+      <path d="M 26 56 C 36 50, 44 62, 54 54" stroke="#E11D48" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 3" />
+      <circle cx="26" cy="56" r="2.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.5" />
+      <circle cx="54" cy="54" r="2.5" fill="#E11D48" stroke="#000000" stroke-width="1.5" />
+      <path d="M 52 56 L 78 16 L 86 22 L 56 60 Z" fill="#9F1239" />
+      <path d="M 50 54 L 76 14 L 84 20 L 54 58 Z" fill="#E11D48" stroke="#000000" stroke-width="3" stroke-linejoin="round" />
+      <path d="M 50 54 L 46 64 L 54 58 Z" fill="#F4F4F5" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+      <circle cx="45" cy="65" r="2" fill="#E11D48" />
+      <rect x="62" y="24" width="14" height="2.5" rx="1.25" fill="#FFFFFF" transform="rotate(-56 62 24)" />
+    </svg>`;
+
+    const developerAgentSvg = `<svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <text x="12" y="48" font-family="monospace" font-size="26" font-weight="900" fill="#0D9488" opacity="0.3">&lt;</text>
+      <text x="74" y="48" font-family="monospace" font-size="26" font-weight="900" fill="#0D9488" opacity="0.3">&gt;</text>
+      <path d="M 34 32 L 22 26" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 32 44 L 20 44" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 34 56 L 22 62" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 66 32 L 78 26" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 68 44 L 80 44" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 66 56 L 78 62" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
+      <ellipse cx="50" cy="46" rx="18" ry="20" fill="#115E59" />
+      <ellipse cx="50" cy="44" rx="18" ry="20" fill="#14B8A6" stroke="#000000" stroke-width="3" />
+      <circle cx="50" cy="22" r="10" fill="#0D9488" stroke="#000000" stroke-width="2.5" />
+      <path d="M 46 14 C 44 8, 38 8, 36 10" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+      <path d="M 54 14 C 56 8, 62 8, 64 10" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+      <line x1="50" y1="24" x2="50" y2="64" stroke="#000000" stroke-width="2.5" />
+      <line x1="44" y1="36" x2="56" y2="52" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+      <circle cx="50" cy="44" r="8" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="2 2" />
+      <rect x="38" y="32" width="6" height="12" rx="3" fill="#FFFFFF" opacity="0.8" />
+    </svg>`;
 
     const mdFileIconSvg = `<svg viewBox="0 0 36 44" fill="none">
       <path d="M 4 2 L 24 2 L 32 10 L 32 40 C 32 41.1 31.1 42 30 42 L 6 42 C 4.9 42 4 41.1 4 40 Z" fill="#FFFFFF" stroke="#64748B" stroke-width="1.8"/>
@@ -6634,16 +6604,17 @@ const cv = cvEntry?.data;
     </svg>`;
 
     const fileIconsSVG: Record<string, string> = {
-      giles: mdFileIconSvg,
-      cordelia: mdFileIconSvg,
-      willow: mdFileIconSvg,
+      giles: bossAgentSvg,
+      cordelia: tailorAgentSvg,
+      willow: developerAgentSvg,
       master_cv: mdFileIconSvg,
       tailored_cv: pdfFileIconSvg,
       job_scraper: pyFileIconSvg,
       scoring_metric: pyFileIconSvg,
       vibe_check: pyFileIconSvg,
       what_is_mission_control: mdFileIconSvg,
-      mission_control_html: htmlFileIconSvg
+      mission_control_html: htmlFileIconSvg,
+      readme: mdFileIconSvg
     };
 
     function formatFileNameHtml(name: string) {
@@ -6781,10 +6752,16 @@ const cv = cvEntry?.data;
       if (infoBigIcon) {
         if (file.iconSvg) {
           infoBigIcon.innerHTML = file.iconSvg;
+        } else if (file.key && fileIconsSVG[file.key]) {
+          infoBigIcon.innerHTML = fileIconsSVG[file.key];
         } else if (file.name && file.name.endsWith(".py")) {
           infoBigIcon.innerHTML = pythonLogoSvg;
+        } else if (file.name && file.name.endsWith(".pdf")) {
+          infoBigIcon.innerHTML = pdfFileIconSvg;
+        } else if (file.name && file.name.endsWith(".html")) {
+          infoBigIcon.innerHTML = htmlFileIconSvg;
         } else {
-          infoBigIcon.textContent = file.icon || "📄";
+          infoBigIcon.innerHTML = mdFileIconSvg;
         }
       }
       if (infoFilename) infoFilename.textContent = file.name;
@@ -7741,27 +7718,34 @@ const cv = cvEntry?.data;
       }
     }
 
-    // Helper to check if any user modal (other than the terminal) is currently open
+    // Helper to check if any user modal or full-screen app (like Mission Control) is currently active
     function isAnyModalOpen(): boolean {
+      if (mcDashboard && (mcDashboard.classList.contains("is-open") || mcDashboard.classList.contains("is-visible"))) {
+        return true;
+      }
       const openModal = document.querySelector(
-        "#osExplorerModal.is-open, #osFileInfoModal.is-open, #osEmailModal.is-open, #osMasterCvModal.is-open, #missionJobModal.is-open, #osMissionControlDashboard.is-visible, .os-window-modal.is-open:not(#terminalConsole)"
+        "#osExplorerModal.is-open, #osFileInfoModal.is-open, #osEmailModal.is-open, #osMasterCvModal.is-open, #missionJobModal.is-open, #osMissionControlDashboard.is-open, .os-window-modal.is-open:not(#terminalConsole), .mission-control-fullscreen.is-open, .mission-job-modal-backdrop.is-open, .living-cv-modal-backdrop.is-open"
       );
       return !!openModal;
     }
 
     // Scroll-to-Scale shrinking gesture listener:
     // Only DOWNWARD scroll causes shrink and exit. UPWARD scroll only recovers scale to 1.0 and never exits.
-    // Exit ONLY occurs when NO user modals are open (other than the terminal).
+    // Exit ONLY occurs when NO user modals are open (other than the terminal) AND user is outside Mission Control.
     window.addEventListener(
       "wheel",
       (e) => {
         if (!zoomContainer || !zoomContainer.classList.contains("is-fullscreen")) return;
 
-        // If any modal (other than terminal) is open, NEVER trigger exit-on-scroll.
+        // If Mission Control or any modal is open, NEVER trigger exit-on-scroll.
         if (isAnyModalOpen()) return;
 
         const target = e.target as HTMLElement;
-        const inTerminal = target.closest("#terminalOutput") as HTMLElement | null;
+        if (target && target.closest("#osMissionControlDashboard, .mission-control-fullscreen, .mc-table-container, #missionJobModal, .os-window-modal:not(#terminalConsole)")) {
+          return;
+        }
+
+        const inTerminal = target ? target.closest("#terminalOutput") as HTMLElement | null : null;
         if (inTerminal) {
           const isScrollDown = e.deltaY > 0;
           const isScrollUp = e.deltaY < 0;
@@ -7818,11 +7802,14 @@ const cv = cvEntry?.data;
         if (!zoomContainer || !zoomContainer.classList.contains("is-fullscreen")) return;
         if (!e.touches || !e.touches[0]) return;
 
-        // If any modal (other than terminal) is open, NEVER trigger exit-on-scroll
+        // If Mission Control or any modal is open, NEVER trigger exit-on-scroll
         if (isAnyModalOpen()) return;
 
         const target = e.target as HTMLElement;
-        const inTerminal = target.closest("#terminalOutput") as HTMLElement | null;
+        if (target && target.closest("#osMissionControlDashboard, .mission-control-fullscreen, .mc-table-container, #missionJobModal, .os-window-modal:not(#terminalConsole)")) {
+          return;
+        }
+        const inTerminal = target ? target.closest("#terminalOutput") as HTMLElement | null : null;
         if (inTerminal) return;
 
         // In touch: finger swiping UP (moving down in content) -> deltaY > 0
@@ -7937,17 +7924,6 @@ const cv = cvEntry?.data;
         startAutoSequence();
       });
     }
-
-    // Exit Fullscreen Button Trigger
-
-    // Escape Key Listener to exit fullscreen
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        if (currentMorph > 0.05 || (mcDashboard && mcDashboard.classList.contains("is-open"))) {
-          exitFullscreen();
-        }
-      }
-    });
 
     // Slack Notification actions
     if (closeSlackBtn) {

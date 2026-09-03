@@ -14,6 +14,8 @@
  *    Selecting a discipline cleanly filters to only the matching cards, eliminating semi-transparent ghost overlaps.
  */
 
+import { navigate } from "astro:transitions/client";
+
 const CARD_VARIATIONS = [
     { rotZ: 4.2,  offsetX: -4,  offsetY: 2 },
     { rotZ: -3.1, offsetX: 5,   offsetY: -3 },
@@ -44,6 +46,14 @@ export class CardDeckController {
         this.prevBtn = document.getElementById("carouselPrevBtn");
         this.nextBtn = document.getElementById("carouselNextBtn");
         this.bottomControls = this.stage.parentElement?.querySelector(".deck-bottom-controls") || document.querySelector(".deck-bottom-controls");
+
+        // Speculatively prefetch all active card pages in the background
+        this.allCardNodes.forEach((card) => {
+            const href = card.dataset.projectHref;
+            if (href && card.dataset.active !== "false" && typeof fetch === "function") {
+                fetch(href, { priority: "low" }).catch(() => {});
+            }
+        });
 
         // Physics & Progress State
         this.progress = 0; // Strictly clamped to [0, totalCards - 1]
@@ -104,9 +114,10 @@ export class CardDeckController {
         if (this.selectedCategory === "all") {
             this.activeCards = [...this.allCardNodes];
         } else {
-            this.activeCards = this.allCardNodes.filter(
-                (c) => c.dataset.category === this.selectedCategory
-            );
+            this.activeCards = this.allCardNodes.filter((c) => {
+                const cats = (c.dataset.category || "").split(/\s+/);
+                return cats.includes(this.selectedCategory);
+            });
         }
 
         this.totalCards = this.activeCards.length;
@@ -259,9 +270,9 @@ export class CardDeckController {
             });
         });
 
-        // 6. Individual Card Clicks
+        // 6. Individual Card Clicks & Keyboard Action
         this.allCardNodes.forEach((cardEl) => {
-            cardEl.addEventListener("click", (e) => {
+            const handleCardAction = () => {
                 if (this.dragDistance > 6 || this.isDragging) return;
 
                 const activeIndex = Math.round(this.progress);
@@ -279,14 +290,14 @@ export class CardDeckController {
                         return;
                     }
 
-                    // Click on active top card opens case study modal
-                    const projectId = cardEl.dataset.projectId;
-                    if (projectId) {
-                        window.dispatchEvent(
-                            new CustomEvent("open-project-modal", {
-                                detail: { projectId },
-                            })
-                        );
+                    // Click on active top card navigates directly to the project case study page
+                    const href = cardEl.dataset.projectHref || (cardEl.dataset.projectId ? `/${cardEl.dataset.projectId}` : null);
+                    if (href) {
+                        try {
+                            navigate(href);
+                        } catch {
+                            window.location.href = href;
+                        }
                     }
                 } else {
                     // Click on another card in the active deck deals or returns directly to that card
@@ -295,6 +306,14 @@ export class CardDeckController {
                         this.targetProgress = cardIndexInActive;
                         this._startLoop();
                     }
+                }
+            };
+
+            cardEl.addEventListener("click", handleCardAction);
+            cardEl.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleCardAction();
                 }
             });
         });

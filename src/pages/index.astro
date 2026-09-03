@@ -3,52 +3,33 @@ import Base from '../layouts/Base.astro'
 import Navigation from '../components/Navigation.astro'
 import CategoryRail from '../components/CategoryRail.astro'
 import HoloProjectCard from '../components/HoloProjectCard.astro'
-import ProjectModal from '../components/ProjectModal.astro'
-import { getCollection, render } from 'astro:content'
+import { getCollection, getEntry } from 'astro:content'
 import { CATEGORIES } from '../categories.js'
 
-const rawProjects = (await getCollection('projects'))
-    .sort((a, b) => a.data.order - b.data.order)
-
-// Harmonic Mystic Tarot Color Presets — used by ProjectModal's embedded HoloCard showcase
-const ORB_PALETTE: Array<"purple" | "teal" | "amber" | "rose" | "blue" | "cyan" | "coral" | "emerald"> = [
-    "purple",
-    "teal",
-    "amber",
-    "rose",
-    "blue",
-    "cyan",
-    "coral",
-    "emerald",
-]
-
-const PROJ_TYPE_LABEL: Record<string, string> = {
-    "case study": "Case Study",
-    "overview & timeline": "Overview & Timeline",
+const homeEntries = await getCollection('home')
+const home = homeEntries[0]?.data || (await getEntry('home', 'index'))?.data || {
+    title: "Olanike Olowo-Fela",
+    subtitle: "I build systems and software that\nmake life easier.",
+    projectsTitle: "projects",
+    tickerLabel: "Currently working on:",
+    currentlyWorkingOn: [
+        "Finishing this portfolio",
+        "Finishing The Odin Project course in full-stack development so my AI agent doesn't think I'm an idiot",
+    ],
 }
 
-const projects = await Promise.all(
-    rawProjects.map(async (project, index) => {
-        const { Content } = await render(project)
-        const orbColor = ORB_PALETTE[index % ORB_PALETTE.length]
-
-        let stat = "+100 Tranquility"
-        if (project.data.category === "operations") stat = "+100 Efficiency"
-        else if (project.data.category === "delivery") stat = "+100 Delivery"
-        else if (project.data.category === "development") stat = "+100 Full-Stack"
-
-        return {
-            project,
-            Content,
-            orbColor,
-            stat,
-        }
-    })
-)
+const projects = (await getCollection('projects'))
+    .sort((a, b) => a.data.order - b.data.order)
 
 const counts = Object.fromEntries(
-    CATEGORIES.map((category) => [category, projects.filter((p) => p.project.data.category === category).length])
-)
+    CATEGORIES.map((category) => [
+        category,
+        projects.filter((p) => {
+            const cats = Array.isArray(p.data.category) ? p.data.category : [p.data.category];
+            return cats.includes(category);
+        }).length,
+    ])
+);
 
 const employers = [
     "The Odin Project",
@@ -60,14 +41,36 @@ const employers = [
     "IFM Electrical",
     "Coster Content Ltd",
 ]
+
+const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
+    if (typeof item === "object" && item.url) {
+        return {
+            html: `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="ticker-link">${item.text} <span class="ticker-link-arrow">↗</span></a>`,
+        };
+    }
+
+    const rawText = typeof item === "string" ? item : item.text;
+
+    let htmlContent = rawText.replace(
+        /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+        '<a href="$2" target="_blank" rel="noopener noreferrer" class="ticker-link">$1 <span class="ticker-link-arrow">↗</span></a>'
+    );
+
+    htmlContent = htmlContent.replace(
+        /\$\{(https?:\/\/[^\s}]+)\}/g,
+        '<a href="$1" target="_blank" rel="noopener noreferrer" class="ticker-link">$1 <span class="ticker-link-arrow">↗</span></a>'
+    );
+
+    return { html: htmlContent };
+});
 ---
 
 <Base>
     <main class="home-page">
         <!-- Top Hero Header: Semi-bold Title with Pink Dot & Regular Subtitle -->
         <header class="hero-header">
-            <h1 class="hero-title">Olanike Olowo-Fela<span class="hero-dot">.</span></h1>
-            <p class="hero-subtitle">I build systems and software that<br />make life easier.</p>
+            <h1 class="hero-title">{home.title}<span class="hero-dot">.</span></h1>
+            <p class="hero-subtitle">{home.subtitle}</p>
         </header>
 
         <!-- Top Navigation -->
@@ -80,7 +83,7 @@ const employers = [
             <!-- Top Section: Projects Title & Discipline Filters -->
             <div class="deck-top-group">
                 <div class="projects-title-wrap">
-                    <h1 class="projects-main-title">projects</h1>
+                    <h1 class="projects-main-title">{home.projectsTitle || "projects"}</h1>
                 </div>
                 <!-- 1. Top Discipline Filters -->
                 <CategoryRail counts={counts} total={projects.length} />
@@ -139,31 +142,18 @@ const employers = [
                     </div>
                 </div>
 
-                {projects.map(({ project, stat }) => (
+                {projects.map((project) => (
                     <div
                         class="deck-card-item"
                         data-project-id={project.id}
-                        data-category={project.data.category}
+                        data-project-href={`/${project.id}`}
+                        data-category={Array.isArray(project.data.category) ? project.data.category.join(" ") : project.data.category}
                         data-active={project.data.active !== false ? "true" : "false"}
                         role="button"
                         tabindex="0"
                         aria-label={`View ${project.data.projTitle} ${project.data.active !== false ? "project details" : "(Coming Soon)"}`}
                     >
-                        <HoloProjectCard
-                            title={project.data.projTitle}
-                            subtitle={PROJ_TYPE_LABEL[project.data.projType] || "Case Study"}
-                            category={project.data.holoCategory}
-                            summary={project.data.summary || project.data.holoCategory}
-                            statLabel={project.data.holoStatLabel || "RESULTS"}
-                            statValue={project.data.holoStatValue || stat}
-                            iconSrc={project.data.iconSrc}
-                            imageUrl={project.data.imageUrl}
-                            maskUrl={project.data.maskUrl}
-                            cardBg={project.data.cardBg}
-                            borderColor={project.data.borderColor}
-                            holoEffect={project.data.holoEffect}
-                            active={project.data.active !== false}
-                        />
+                        <HoloProjectCard project={project} />
                     </div>
                 ))}
             </div>
@@ -192,15 +182,17 @@ const employers = [
 
         <!-- Footer Strip with Rotating Slide-Up Text -->
         <footer class="trusted-by">
-            <span class="trusted-by-label">Currently working on:</span>
+            <span class="trusted-by-label">{home.tickerLabel || "Currently working on:"}</span>
             <div class="ticker-container" id="footerTicker" aria-live="polite">
-                <span class="ticker-item is-active" data-index="0">Finishing this portfolio</span>
-                <span class="ticker-item" data-index="1">Finishing The Odin Project course in full-stack development so my AI agent doesn't think I'm an idiot</span>
+                {tickerItems.map((item, index) => (
+                    <span
+                        class={`ticker-item ${index === 0 ? "is-active" : ""}`}
+                        data-index={index}
+                        set:html={item.html}
+                    />
+                ))}
             </div>
         </footer>
-
-        <!-- Sandbox-Style Two-Column Detail Modal -->
-        <ProjectModal projects={projects} />
     </main>
 
     <script>
@@ -311,24 +303,26 @@ const employers = [
         font-weight: 400;
         font-size: clamp(1rem, 1.6vw, 1.5rem); /* 24px at 1.5rem */
         line-height: 1.12;
-        letter-spacing: -0.06em;
+        letter-spacing: -0.03em;
         color: #0F172A;
+        max-width: 32ch;
+        text-wrap: pretty;
         margin-top: clamp(4px, 0.6vh, 8px);
         margin-bottom: 0;
         -webkit-font-smoothing: antialiased;
     }
 
-    /* Main Interactive Work Center: Anchored to the bottom section of the screen */
+    /* Main Interactive Work Center: Centered in available screen height */
     .deck-flex-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: center;
         gap: clamp(1.75rem, 3vh, 2.5rem);
         width: 100%;
         flex: 1;
         min-height: 0;
-        margin-top: auto;
+        padding-top: clamp(16px, 4vh, 36px);
         padding-bottom: clamp(16px, 4vh, 36px);
     }
 
@@ -659,6 +653,34 @@ const employers = [
         transform: translateY(-100%);
         opacity: 0;
         pointer-events: none;
+    }
+
+    .ticker-item :global(a),
+    .ticker-item :global(.ticker-link) {
+        color: #000000;
+        text-decoration: underline;
+        text-decoration-thickness: 1.5px;
+        text-underline-offset: 3px;
+        transition: color 0.15s ease, text-decoration-color 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .ticker-item :global(a:hover),
+    .ticker-item :global(.ticker-link:hover) {
+        color: var(--doodle-cyan, #00B3E3);
+        text-decoration-color: var(--doodle-cyan, #00B3E3);
+    }
+
+    .ticker-item :global(.ticker-link-arrow) {
+        font-size: 0.85em;
+        line-height: 1;
+        transition: transform 0.15s ease;
+    }
+
+    .ticker-item :global(.ticker-link:hover .ticker-link-arrow) {
+        transform: translate(1px, -1px);
     }
 
     /* Mobile Responsive Adaptation */

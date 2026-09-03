@@ -63,8 +63,6 @@ h1, h2, h3, h4, h5, h6 {
   --archivo-font: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* ---------- Brand ---------- */
-  --teal: #359E9D;
-  --teal-light: #7ECECE;
   --purple: #704898;
   --orchid: #BE83D3;
   --cream: #F7F8F9;
@@ -83,8 +81,9 @@ h1, h2, h3, h4, h5, h6 {
   --doodle-yellow: #FFDA00;
   --doodle-purple: #7A00FF;
 
-  /* Signature gradient — kept as-is */
-  --tarot-gradient: linear-gradient(0.3turn, #359E9D 0%, #704898 42%, #BE83D3 82%, #359E9D 99%);
+  /* Signature gradient */
+  --brand-gradient: linear-gradient(0.3turn, #00B3E3 0%, #704898 42%, #BE83D3 82%, #00B3E3 99%);
+  --tarot-gradient: var(--brand-gradient);
 
   /* ---------- Surfaces (near-black → navy) ---------- */
   /* The animated page-background scale (--bg-1..4) is index-specific and lives in index.astro. */
@@ -105,17 +104,18 @@ h1, h2, h3, h4, h5, h6 {
   --light-muted: rgba(8, 14, 28, 0.4);
   --light-desc: rgba(8, 14, 28, 0.6);
   --light-border: rgba(8, 14, 28, 0.1);
-  /* --teal-light (#7ECECE) is ~1.6:1 against --cream — nowhere near the
-     WCAG AA minimums (4.5:1 text / 3:1 icons+borders). This darker teal
-     holds ~5:1, first proven out in LivingCV's light theme. */
   --light-accent: #1b6f6e;
   --light-accent-rgb: 27, 111, 110;
 
   /* ---------- Sizing ---------- */
-  --tarot-card-w: clamp(140px, 7.5vw, 260px);
-  --tarot-card-h: clamp(235px, 12.5vw, 435px);
-  --tarot-card-radius: 8px;
-  --tarot-card-scale: 2;
+  --deck-card-w: clamp(140px, 7.5vw, 260px);
+  --deck-card-h: clamp(235px, 12.5vw, 435px);
+  --deck-card-radius: 8px;
+  --deck-card-scale: 2;
+  --tarot-card-w: var(--deck-card-w);
+  --tarot-card-h: var(--deck-card-h);
+  --tarot-card-radius: var(--deck-card-radius);
+  --tarot-card-scale: var(--deck-card-scale);
 }
 
 .visually-hidden {
@@ -136,7 +136,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .base-gradient {
-    background: var(--tarot-gradient);
+    background: var(--brand-gradient);
     background-clip: text;
     color: transparent;
 }

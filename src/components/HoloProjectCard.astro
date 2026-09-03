@@ -1,5 +1,6 @@
 ---
 export interface Props {
+    project?: any;
     title?: string;
     subtitle?: string;
     category?: string;
@@ -17,23 +18,23 @@ export interface Props {
     active?: boolean;
 }
 
-const {
-    title = "PROJECT TITLE",
-    subtitle = "Case Study",
-    category = "Category",
-    summary,
-    statLabel = "STAT",
-    statValue = "—",
-    iconSrc,
-    imageUrl,
-    maskUrl,
-    backUrl = "/img/card-back-generic.svg",
-    cardBg = "#27272A",
-    borderColor = "#000000",
-    borderWidth = "10px",
-    holoEffect = "secret_rare_etched",
-    active = true,
-} = Astro.props;
+const props = Astro.props;
+const pData = props.project?.data || props.project || {};
+
+const title = props.title || pData.projTitle || pData.title || "PROJECT TITLE";
+const subtitle = props.subtitle || "Case Study";
+const summary = props.summary !== undefined ? props.summary : (pData.summary || "");
+const statLabel = props.statLabel || pData.holoStatLabel || "RESULTS";
+const statValue = props.statValue || pData.holoStatValue || (pData.category === "operations" ? "+100 Efficiency" : (pData.category === "delivery" ? "+100 Delivery" : (pData.category === "development" ? "+100 Full-Stack" : "-")));
+const iconSrc = props.iconSrc !== undefined ? props.iconSrc : pData.iconSrc;
+const imageUrl = props.imageUrl !== undefined ? props.imageUrl : pData.imageUrl;
+const maskUrl = props.maskUrl !== undefined ? props.maskUrl : pData.maskUrl;
+const backUrl = props.backUrl || pData.backUrl || "/img/card-back-generic.svg";
+const cardBg = props.cardBg || pData.cardBg || "#00B3E3";
+const borderColor = props.borderColor || pData.borderColor || cardBg;
+const borderWidth = props.borderWidth || pData.borderWidth || "10px";
+const holoEffect = props.holoEffect || pData.holoEffect || "secret_rare_etched";
+const active = props.active !== undefined ? props.active : (pData.active !== undefined ? pData.active : true);
 
 const EFFECT_CONFIGS: Record<string, {
     rarity: string;
@@ -160,8 +161,8 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
                     <!-- Bottom: Centered Title & Summary Text -->
                     <div class="card-bottom-info">
                         <h2 class="card-title-text">{title.endsWith('.') ? title : `${title}.`}</h2>
-                        {(summary || category) && (
-                            <p class="card-summary-text">{summary || category}</p>
+                        {summary && (
+                            <p class="card-summary-text">{summary}</p>
                         )}
                     </div>
                 </div>
@@ -497,7 +498,7 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         font-weight: 400;
         font-size: clamp(0.68rem, 0.85vw, 0.80rem);
         line-height: 1.12;
-        letter-spacing: -0.06em;
+        letter-spacing: -0.03em;
         color: #1E293B;
         margin: 0 auto;
         text-align: center;
@@ -584,11 +585,9 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
             const rotator = card.querySelector(".card__rotator");
             if (!rotator) return;
 
-            // Deck-managed cards: deckController.js already owns click (open
-            // modal / deal to card) and rotation for every card in the deck,
-            // and only the currently centered card should show the
-            // tilt/shine reaction — mirrors HoloCard.astro's own
-            // `is-active-hero` gating.
+            // Deck-managed cards: deckController.js owns click (navigate
+            // to project / deal to card) and 3D matrix transform for cards in the deck,
+            // and only the currently centered card should show the tilt/shine reaction.
             const deckItem = card.closest(".deck-card-item");
             const isDeckManaged = !!deckItem;
             const isDeckActive = () => !deckItem || deckItem.classList.contains("is-active-hero");

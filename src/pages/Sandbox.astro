@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import HoloProjectCard from '../components/HoloProjectCard.astro';
-import HoloCard from '../components/HoloCard.astro';
 import LinkedInJobCard from '../components/LinkedInJobCard.astro';
 import DoodleLinkedInJobCard from '../components/DoodleLinkedInJobCard.astro';
 import DoodleVinylRecord from '../components/DoodleVinylRecord.astro';
@@ -13,11 +12,10 @@ import DoodleVinylRecord from '../components/DoodleVinylRecord.astro';
       <div class="intro-box">
         <span class="sandbox-badge">Component Lab // Interactive Assets</span>
         <h1 class="sandbox-title">Interactive Project Cards & Assets</h1>
-        <p class="sandbox-hint">Test holographic trading cards, mystic tarot decks, doodle pop assets, and UI components.</p>
+        <p class="sandbox-hint">Test holographic trading cards, doodle pop assets, and UI components.</p>
         
         <div class="sandbox-nav-chips">
           <a href="#holo-trading-cards" class="nav-chip">✨ Holo Trading Cards</a>
-          <a href="#tarot-project-cards" class="nav-chip">🔮 Tarot Project Cards</a>
           <a href="#vinyl-record" class="nav-chip">🎵 Vinyl Record</a>
           <a href="#job-cards" class="nav-chip">💼 Job Cards</a>
         </div>
@@ -81,49 +79,8 @@ import DoodleVinylRecord from '../components/DoodleVinylRecord.astro';
     <!-- Divider -->
     <div class="variant-divider"></div>
 
-    <!-- SECTION 2: MYSTIC TAROT PROJECT CARDS -->
-    <section id="tarot-project-cards" class="sandbox-card-stage">
-      <div class="variant-label">
-        <span class="variant-tag">Interactive Asset // Harmonic Mystic Tarot Cards</span>
-        <span class="variant-desc">
-          Dual-faced project tarot cards with dynamic orb gradients, badge glows, and holographic glare shaders (as featured in the Projects Deck).
-        </span>
-      </div>
-
-      <div class="cards-grid tarot-grid">
-        <div class="tarot-display-anchor">
-          <HoloCard
-            id="sandbox-tarot-1"
-            title="Automating Unemployment"
-            subtitle="Multi-agent job application system built on openClaw.\nScrapes, scores against master CV, and drafts tailored applications."
-            badge="Agentic AI"
-            stat="+100 Efficiency"
-            orbColor="teal"
-            interactive={true}
-            startFront={true}
-          />
-        </div>
-
-        <div class="tarot-display-anchor">
-          <HoloCard
-            id="sandbox-tarot-2"
-            title="How I Made This Website"
-            subtitle="An exploratory portfolio engineered with Astro, custom CSS shaders,\nand scrollytelling workflow stages."
-            badge="Creative Dev"
-            stat="+100 Full-Stack"
-            orbColor="purple"
-            interactive={true}
-            startFront={true}
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- Divider -->
-    <div class="variant-divider"></div>
-
     <!-- SECTION 3: VINYL RECORD COMPONENT SHOWCASE -->
-    <section id="vinyl-record" class="sandbox-card-stage" style="background-color: #5AB2B3; border-radius: 20px; padding: 48px 24px; margin-bottom: 40px;">
+    <section id="vinyl-record" class="sandbox-card-stage" style="background-color: var(--doodle-cyan, #00B3E3); border-radius: 20px; padding: 48px 24px; margin-bottom: 40px;">
       <div class="variant-label" style="margin-bottom: 32px;">
         <span class="variant-tag" style="background: #000000; color: #FFFFFF;">Interactive Asset // AI Doom Loop Vinyl Record</span>
         <span class="variant-desc" style="color: rgba(255, 255, 255, 0.9);">
