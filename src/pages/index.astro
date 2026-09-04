@@ -168,7 +168,8 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
                 
                 <div class="deck-scroll-indicator" title="Scroll mouse wheel, trackpad, or swipe to deal cards">
                     <span class="scroll-cue-arrow" aria-hidden="true">‹</span>
-                    <span class="scroll-cue-text">scroll</span>
+                    <span class="scroll-cue-text scroll-cue-desktop">scroll</span>
+                    <span class="scroll-cue-text scroll-cue-mobile">swipe</span>
                     <span class="scroll-cue-arrow" aria-hidden="true">›</span>
                 </div>
 
@@ -459,6 +460,11 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
         color: #000000;
     }
 
+    /* There is no wheel on a phone — the deck is dealt by dragging. */
+    .scroll-cue-mobile {
+        display: none;
+    }
+
     /* ── Playmat Card Zones (Subtle Tabletop Monochrome Print) ── */
     .playmat-slot {
         position: absolute;
@@ -709,6 +715,14 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
         .deck-flex-container {
             flex: none;
             gap: 16px;
+        }
+
+        .scroll-cue-desktop {
+            display: none;
+        }
+
+        .scroll-cue-mobile {
+            display: inline;
         }
 
         .deck-stage {
