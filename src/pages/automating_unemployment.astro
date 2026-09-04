@@ -5,6 +5,7 @@ import DoodleLinkedInJobCard from "../components/DoodleLinkedInJobCard.astro";
 import AgentTreeIcons from "../components/mascots/AgentTreeIcons.astro";
 import GraffitiMarks from "../components/mascots/GraffitiMarks.astro";
 import HowItWorksWorkflow from "../components/HowItWorksWorkflow.astro";
+import Navigation from "../components/Navigation.astro";
 
 const project = await getEntry("projects", "automating_unemployment");
 const story = project?.data?.story || {};
@@ -13,7 +14,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
 
 <Base>
   <div class="height-story-wrap">
-    <!-- Minimalist Top Navigation -->
+    <!-- Desktop Minimalist Top Navigation -->
     <header class="story-header" id="storyHeader">
       <a href="/" class="header-back" id="headerBackBtn" aria-label="Return to portfolio home">
         <svg
@@ -32,6 +33,11 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       </a>
       <div class="header-case-no">01 // Case Study</div>
     </header>
+
+    <!-- Mobile Fixed Hamburger Navigation -->
+    <div class="case-study-mobile-nav">
+      <Navigation />
+    </div>
 
     <!-- ============================================================ -->
     <!-- 01 // HERO SCROLLYTELLING RUNWAY (STAGE CURTAIN + DILEMMA FRAME) -->
@@ -52,13 +58,16 @@ const agents = story?.agents || story?.vignette3?.agents || [];
                 Do you know how time consuming it is to be unemployed?
                 <span class="dilemma-punchline">I do.</span>
               </h2>
-              <p class="dilemma-sub-lead">
+              <p class="dilemma-sub-lead desktop-sub-lead">
                 You're a career changer who has just moved to London. You want to transition into tech, but you're currently mid-way through your training. Do you:
               </p>
             </div>
 
-            <!-- Centered Choice Stage: Left Option, Center Character, Right Option -->
+            <!-- Centered Choice Stage: Prompt, Left Option, Center Character, Right Option -->
             <div class="dilemma-decision-stage" data-dilemma-body>
+              <p class="dilemma-sub-lead mobile-sub-lead">
+                You're a career changer who has just moved to London. You want to transition into tech, but you're currently mid-way through your training. Do you:
+              </p>
               
               <!-- Option 1 (Selectable Button Card) -->
               <button
@@ -133,7 +142,6 @@ const agents = story?.agents || story?.vignette3?.agents || [];
             <div class="dilemma-popup-card">
               <div class="popup-header-row">
                 <h3 class="popup-answer-title" id="popupTitle">WRONG</h3>
-                <button class="popup-close-btn" id="closePopupBtn" aria-label="Close answer">✕</button>
               </div>
               <div class="popup-body-content">
                 <p class="popup-answer-p" id="popupText">
@@ -192,7 +200,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       <HowItWorksWorkflow>
 
         <!-- YELLOW CURTAIN (LIFTS ON SCROLL TO REVEAL "HOW IT WORKS" BENEATH) -->
-        <div slot="stage-curtain" class="benefits-curtain-layer" id="benefitsCurtainLayer" style="transform: translateY(100vh);">
+        <div slot="stage-curtain" class="benefits-curtain-layer" id="benefitsCurtainLayer">
           <div class="benefits-content-wrapper">
 
             <!-- Centered Title Group -->
@@ -228,11 +236,21 @@ const agents = story?.agents || story?.vignette3?.agents || [];
 
             </ul>
 
-            <!-- CTA Row -->
-            <div class="benefits-action-row">
+            <!-- Desktop CTA Row (Desktop Only) -->
+            <div class="benefits-action-row desktop-cta-row">
               <button class="benefits-scroll-cta" id="exploreWorkflowBtn" type="button">
                 <span>Explore how it works</span>
                 <span class="cta-arrow-down">↓</span>
+              </button>
+            </div>
+
+            <!-- Mobile Desktop Preview Notice & Direct Scroll CTA (Mobile Only) -->
+            <div class="mobile-desktop-notice-card">
+              <span class="mobile-notice-badge">Desktop simulation</span>
+              <p class="mobile-notice-desc">Unavailable on mobile</p>
+              <button class="mobile-scroll-wf-cta" id="scrollToWorkflowStepsBtn" type="button">
+                <span>See the workflow written down</span>
+                <span class="btn-arrow-down">↓</span>
               </button>
             </div>
 
@@ -281,7 +299,16 @@ const agents = story?.agents || story?.vignette3?.agents || [];
                       <span class="node-chip-badge">ORCHESTRATOR</span>
                     </div>
                     <span class="node-agent-role" style="color: #D97706;">{agents[0].role}</span>
-                    <p class="node-brief-text">{agents[0].brief}</p>
+                    <p class="node-brief-text" id="agent-brief-0">{agents[0].brief}</p>
+                    <button
+                      class="node-expand-btn"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="agent-brief-0"
+                    >
+                      <span class="node-expand-label">Read more</span>
+                      <span class="node-expand-chevron" aria-hidden="true">&#9662;</span>
+                    </button>
                   </div>
                 </div>
 
@@ -347,7 +374,16 @@ const agents = story?.agents || story?.vignette3?.agents || [];
                       <span class="node-chip-badge">TAILOR &amp; VIBE</span>
                     </div>
                     <span class="node-agent-role" style="color: #E11D48;">{agents[1].role}</span>
-                    <p class="node-brief-text">{agents[1].brief}</p>
+                    <p class="node-brief-text" id="agent-brief-1">{agents[1].brief}</p>
+                    <button
+                      class="node-expand-btn"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="agent-brief-1"
+                    >
+                      <span class="node-expand-label">Read more</span>
+                      <span class="node-expand-chevron" aria-hidden="true">&#9662;</span>
+                    </button>
                   </div>
                 </div>
 
@@ -383,7 +419,16 @@ const agents = story?.agents || story?.vignette3?.agents || [];
                       <span class="node-chip-badge">CODE BUILDER</span>
                     </div>
                     <span class="node-agent-role" style="color: #0D9488;">{agents[2].role}</span>
-                    <p class="node-brief-text">{agents[2].brief}</p>
+                    <p class="node-brief-text" id="agent-brief-2">{agents[2].brief}</p>
+                    <button
+                      class="node-expand-btn"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="agent-brief-2"
+                    >
+                      <span class="node-expand-label">Read more</span>
+                      <span class="node-expand-chevron" aria-hidden="true">&#9662;</span>
+                    </button>
                   </div>
                 </div>
 
@@ -410,12 +455,11 @@ const agents = story?.agents || story?.vignette3?.agents || [];
           <h2 class="doom-standalone-title">
             How this can help other candidates
           </h2>
-          <p class="doom-standalone-lead">
-            Job seekers are stuck in what we are calling the <strong>"AI doom loop"</strong>. This workflow
-            provides a way for candidates to maintain the quality of their
-            applications, and their sanity, in a difficult job market. 
-            The cost of setting this up is just a few pounds, yet the time saved is invaluable.
-          </p>
+          <div class="doom-lead-block">
+            <p class="doom-standalone-lead">
+              Job seekers are stuck in what we are calling the <strong>"AI doom loop"</strong>. This workflow provides a way for candidates to maintain the quality of their applications, and their sanity, in a difficult job market&hellip; The cost of setting this up is just a few pounds, yet the time saved is invaluable.
+            </p>
+          </div>
         </div>
 
         <!-- The listing lands in the middle, the loop assembles around it -->
@@ -444,7 +488,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
               company="Nota Scam"
               title="Junior role"
               location="London, England, United Kingdom"
-              autoPlay={false}
+              autoPlay={true}
               showReplay={false}
             />
           </div>
@@ -452,7 +496,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
 
         <p class="doom-closing">
           The point isn't "don't use AI" to escape this cycle. Candidates currently have no other choice. 
-          But, choosing to design an intelligent system that harnesses the skills of AI while controlling the downsides could be a better strategy for approaching the market.
+          But choosing to design an intelligent system that harnesses the skills of AI while controlling the downsides could be a better strategy for approaching the market.
         </p>
       </div>
     </section>
@@ -810,6 +854,10 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     margin: 4px 0 0;
   }
 
+  .mobile-sub-lead {
+    display: none;
+  }
+
   /* ---------------------------------------------------- */
   /* CENTERED DECISION STAGE                              */
   /* ---------------------------------------------------- */
@@ -1048,7 +1096,9 @@ const agents = story?.agents || story?.vignette3?.agents || [];
   .popup-header-row {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* Was space-between to push the ✕ to the right; with the close button
+       gone the title is the only child and starts the row. */
+    justify-content: flex-start;
     border-bottom: 2.5px solid #000000;
     padding-bottom: 12px;
   }
@@ -1066,28 +1116,6 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     margin: 0;
     text-transform: uppercase;
     letter-spacing: -0.015em;
-  }
-
-  .popup-close-btn {
-    background: #FFFFFF;
-    border: 2px solid #000000;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 900;
-    color: #000000;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 2px 2px 0px #000000;
-    transition: background 0.15s ease, transform 0.15s ease;
-  }
-
-  .popup-close-btn:hover {
-    background: var(--doodle-yellow, #FFDA00);
-    transform: scale(1.06);
   }
 
   .popup-body-content {
@@ -1731,6 +1759,12 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     color: #52525B;
   }
 
+  /* Mobile-only affordance: the full agent cards fit fine on desktop, so the
+     collapse control does not exist there. */
+  .node-expand-btn {
+    display: none;
+  }
+
   /* ============================================================ */
   /* 05 // THE AI DOOM LOOP & MARKET REALITY                      */
   /* ============================================================ */
@@ -2098,6 +2132,934 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     background: var(--doodle-lime, #D1FF00) !important;
     color: #000000 !important;
   }
+
+  /* ---------------------------------------------------- */
+  /* MOBILE RESPONSIVE OVERHAUL (max-width: 860px)        */
+  /* ---------------------------------------------------- */
+  .case-study-mobile-nav {
+    display: none;
+  }
+
+  @media (max-width: 860px) {
+    /* 1. Header */
+    .story-header {
+      display: none !important;
+    }
+    .case-study-mobile-nav {
+      display: block;
+      position: fixed;
+      top: 14px;
+      right: 16px;
+      z-index: 1005;
+    }
+    .case-study-mobile-nav nav.doodle-nav {
+      display: flex !important;
+    }
+
+    /* 2. Hero Section */
+    .hero-float-center {
+      left: 50% !important;
+      top: 40% !important;
+      transform: translate(-50%, -50%) !important;
+      width: 90% !important;
+      max-width: 360px !important;
+      text-align: center !important;
+    }
+
+    .hero-title-text {
+      text-align: center !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: clamp(1.2rem, 5.5vw, 1.55rem) !important;
+      line-height: 1.28 !important;
+      font-weight: 800 !important;
+    }
+
+    .hero-lounger-corner {
+      bottom: 24px !important;
+      left: 50% !important;
+      right: auto !important;
+      transform: translateX(-50%) !important;
+    }
+
+    .hero-lounger-img {
+      width: clamp(140px, 38vw, 180px) !important;
+    }
+
+    /* 3. Dilemma White Stage (Screenshot 1 Redesign & Spacing Fix) */
+    .hero-scrolly-runway {
+      height: 180dvh !important;
+      min-height: 180dvh !important;
+    }
+
+    .figma-hero-stage {
+      height: 100dvh !important;
+      min-height: 100dvh !important;
+      background-color: #ffffff !important;
+    }
+
+    .dilemma-white-stage {
+      padding: 56px 16px 20px !important;
+      height: 100dvh !important;
+      max-height: 100dvh !important;
+      box-sizing: border-box !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      display: flex !important;
+      flex-direction: column !important;
+      /* flex-start + auto block margins on the child centres the content when
+         it fits and lets it scroll from the top when it doesn't. Centring via
+         justify-content strands the overflow beyond the scroll origin. */
+      justify-content: flex-start !important;
+      align-items: center !important;
+      background: #ffffff !important;
+    }
+
+    /* Container: vertically centered with 1rem gap */
+    .dilemma-content-wrapper {
+      height: auto !important;
+      min-height: 0 !important;
+      flex: 0 0 auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
+      max-width: 420px !important;
+      margin: auto !important;
+      gap: 1rem !important;
+    }
+
+    /* Group 1: Title Header (Eyebrow + Title with 1rem gap) */
+    .dilemma-header-group {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      gap: 1rem !important;
+      width: 100% !important;
+      margin: 0 !important;
+      flex-shrink: 0 !important;
+    }
+
+    .desktop-sub-lead {
+      display: none !important;
+    }
+
+    /* An eyebrow should sit under the body text, not over it. At 0.88rem/800
+       the uppercase, letter-spaced monospace was out-weighing the 1rem lead
+       it was meant to introduce — more so now the title is hidden. */
+    .dilemma-eyebrow {
+      font-size: 0.7rem !important;
+      font-family: monospace !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1em !important;
+      color: #8a8a93 !important;
+    }
+
+    /* The question ("Do you know how time consuming it is to be unemployed?
+       I do.") is dropped on mobile — the eyebrow and the sub-lead already set
+       up the scenario, and the height it frees is what lets the choice cards
+       and the character breathe inside the one-screen stage. */
+    .dilemma-title {
+      display: none !important;
+    }
+
+    .dilemma-punchline {
+      display: inline-block !important;
+      vertical-align: middle !important;
+      font-size: 0.88em !important;
+      padding: 1px 11px !important;
+      margin-left: 6px !important;
+      background: var(--doodle-yellow, #FFDA00) !important;
+      border: 2.5px solid #000000 !important;
+      border-radius: 9999px !important;
+      box-shadow: 2px 2.5px 0px #000000 !important;
+      color: #000000 !important;
+    }
+
+    /* Group 2: Prompt + Decision Stage (gap set to 2rem) */
+    .dilemma-decision-stage {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 2rem !important;
+      width: 100% !important;
+      margin: 0 !important;
+    }
+
+    /* With the title hidden this is the section's lead, so it steps up above
+       the card copy (1rem/700) instead of matching it. Width is pinned to the
+       cards' 340px rather than a ch measure, which would drift wider as the
+       size grows and break the shared left/right edge. */
+    .mobile-sub-lead {
+      display: block !important;
+      order: 0 !important;
+      font-size: 1.12rem !important;
+      line-height: 1.42 !important;
+      font-weight: 600 !important;
+      text-align: center !important;
+      margin: 0 auto -1rem auto !important; /* Preserves proximity to Choice 1 */
+      color: #27272a !important;
+      width: 100% !important;
+      max-width: 340px !important;
+      text-wrap: balance !important;
+    }
+
+    /* Question cards size to their content. The old `min-height: 18vh` forced
+       a box shorter than the copy needed, and `.choice-bottom-bar`'s
+       `margin-top: auto` then pushed the "Pick this one" pill straight out
+       through the bottom border. Content-height + no auto margin keeps the
+       pill inside the card, and lets the short card B be genuinely short. */
+    .dilemma-choice-btn {
+      width: 100% !important;
+      max-width: 340px !important;
+      min-height: 0 !important;
+      /* Without this the stage's flex column shrinks the cards below their
+         content height and the pill escapes through the bottom border. */
+      flex: 0 0 auto !important;
+      padding: 16px 18px !important;
+      box-sizing: border-box !important;
+      border-radius: 16px !important;
+      border: 2.5px solid #000000 !important;
+      box-shadow: 3.5px 5px 0px #000000 !important;
+      background: #ffffff !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: flex-start !important;
+      gap: 12px !important;
+      text-align: left !important;
+      cursor: pointer !important;
+      transition: transform 0.12s ease, box-shadow 0.12s ease !important;
+    }
+
+    .choice-bottom-bar {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+    }
+
+    .dilemma-choice-btn:active {
+      transform: translate(1px, 2px) !important;
+      box-shadow: 1px 1px 0px #000000 !important;
+    }
+
+    .choice-tag-row {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      width: 100% !important;
+      margin-bottom: 2px !important;
+    }
+
+    .choice-num-badge {
+      width: 26px !important;
+      height: 26px !important;
+      font-size: 0.95rem !important;
+      font-weight: 900 !important;
+      border-radius: 7px !important;
+      background: #000000 !important;
+      color: #ffffff !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .choice-hint {
+      font-family: monospace !important;
+      font-size: 0.82rem !important;
+      font-weight: 800 !important;
+      color: #71717a !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.04em !important;
+    }
+
+    .choice-main-text {
+      font-size: 1rem !important;
+      line-height: 1.36 !important;
+      font-weight: 700 !important;
+      color: #000000 !important;
+      margin: 0 !important;
+    }
+
+    .choice-pick-pill {
+      display: inline-block !important;
+      font-family: monospace !important;
+      font-size: 0.82rem !important;
+      font-weight: 800 !important;
+      padding: 5px 14px !important;
+      border-radius: 9999px !important;
+      border: 2px solid #000000 !important;
+      background: var(--doodle-yellow, #FFDA00) !important;
+      color: #000000 !important;
+      box-shadow: 2px 2.5px 0px #000000 !important;
+    }
+
+    .dilemma-center-character {
+      margin: 0 !important;
+      order: 2 !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      width: 100% !important;
+      flex: 0 0 auto !important;
+    }
+
+    .choice-left {
+      order: 1 !important;
+    }
+
+    .choice-right {
+      order: 3 !important;
+    }
+
+    /* The character carries the tone of the whole section; at 66px it read as
+       a stray icon between two cards. It is the only illustration here, so it
+       gets to be seen. */
+    .dilemma-standing-img {
+      height: clamp(110px, 18vh, 160px) !important;
+      width: auto !important;
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.18)) !important;
+    }
+
+    .dilemma-popup-card {
+      padding: 22px 20px !important;
+      border-width: 2.5px !important;
+      border-radius: 18px !important;
+      max-width: 90vw !important;
+      gap: 14px !important;
+      box-shadow: 4px 6px 0px #000000 !important;
+    }
+
+    .popup-answer-title {
+      font-size: 1.4rem !important;
+      font-weight: 900 !important;
+    }
+
+    .popup-answer-p {
+      font-size: 1rem !important;
+      line-height: 1.48 !important;
+    }
+
+    .popup-action-btn {
+      font-size: 0.92rem !important;
+      padding: 8px 18px !important;
+      min-height: 44px !important;
+    }
+
+    /* 4. Benefits Section (Visible 100vw x 100dvh Yellow Screen) */
+    .benefits-scrolly-runway {
+      display: none !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+
+    .how-it-works-lift {
+      position: static !important;
+      margin-top: 0 !important;
+      width: 100% !important;
+      background-color: var(--doodle-yellow, #FFDA00) !important;
+      border: none !important;
+    }
+
+    .benefits-curtain-layer {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      /* The curtain animation is off below 860px, so this is just a section —
+         but it was still pinned to 100dvh, which parks a large void wherever
+         the content is shorter than the screen (and the void lands somewhere
+         different depending on where you have scrolled to). Size it to its
+         content and let the padding set the rhythm instead. */
+      min-height: 0 !important;
+      transform: none !important;
+      /* Outer padding is tuned to read as the same interval as the gaps
+         between the three groups inside, so the spacing is even throughout. */
+      padding: clamp(52px, 8.5vh, 84px) 18px !important;
+      z-index: 25 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: center !important;
+      background-color: var(--doodle-yellow, #FFDA00) !important;
+      box-shadow: none !important;
+      border: none !important;
+      box-sizing: border-box !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    /* The three groups were stacked tight in the middle of a full-height
+       screen with dead yellow above and below. Spread them across the
+       available height instead of clumping them. */
+    .benefits-content-wrapper {
+      gap: clamp(34px, 5.5vh, 56px) !important;
+      width: 100% !important;
+      max-width: 420px !important;
+      margin: 0 auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .benefits-header-group {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      text-align: center !important;
+      gap: 10px !important;
+      width: 100% !important;
+      margin: 0 !important;
+    }
+
+    /* An eyebrow, not a button — same correction as the workflow section. */
+    .benefits-eyebrow {
+      display: block !important;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      font-family: monospace !important;
+      font-size: 0.7rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      color: rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .benefits-main-title {
+      font-size: clamp(1.25rem, 5vw, 1.55rem) !important;
+      line-height: 1.24 !important;
+      text-align: center !important;
+      font-weight: 800 !important;
+      color: #000000 !important;
+      text-wrap: balance !important;
+    }
+
+    .benefits-highlight-pill {
+      font-size: 1em !important;
+      padding: 1px 8px !important;
+    }
+
+    /* Four benefits as a 2x2 grid of centred icon-over-text cells. Stacked
+       rows ran the section past the fold; two columns keep each item in the
+       column format while halving the height it costs. */
+    .benefits-free-list {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      column-gap: 12px !important;
+      row-gap: clamp(16px, 3vh, 26px) !important;
+      width: 100% !important;
+      max-width: 360px !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+    }
+
+    .benefit-doodle-item {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      text-align: center !important;
+      gap: 8px !important;
+      padding: 0 !important;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .benefit-doodle-item + .benefit-doodle-item::before {
+      display: none !important;
+    }
+
+    /* Mark is supporting punctuation for the line, so it sits back: smaller
+       than before and slightly held off full black. The text leads. */
+    .benefit-mark {
+      width: 30px !important;
+      height: 30px !important;
+      flex-shrink: 0 !important;
+      opacity: 0.72 !important;
+    }
+
+    .benefit-item-text {
+      font-size: 1rem !important;
+      line-height: 1.3 !important;
+      font-weight: 700 !important;
+      max-width: none !important;
+      margin: 0 !important;
+      color: #000000 !important;
+      text-wrap: balance !important;
+    }
+
+    .desktop-cta-row {
+      display: none !important;
+    }
+
+    /* Stripped to the three things it actually has to say: what it is, that
+       you cannot have it here, and where to go instead. */
+    .mobile-desktop-notice-card {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 6px !important;
+      background: #ffffff !important;
+      border: 2.5px solid #000000 !important;
+      border-radius: 16px !important;
+      box-shadow: 3.5px 5px 0px #000000 !important;
+      padding: 14px 16px !important;
+      width: 100% !important;
+      max-width: 340px !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      text-align: center !important;
+    }
+
+    .mobile-notice-badge {
+      font-family: monospace !important;
+      font-size: 0.68rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      color: rgba(0, 0, 0, 0.5) !important;
+      background: none !important;
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+    }
+
+    .mobile-notice-desc {
+      font-size: 1.02rem !important;
+      font-weight: 800 !important;
+      line-height: 1.25 !important;
+      color: #000000 !important;
+      margin: 0 !important;
+    }
+
+    .mobile-scroll-wf-cta {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      background: #000000 !important;
+      color: #ffffff !important;
+      border: 2px solid #000000 !important;
+      border-radius: 9999px !important;
+      padding: 11px 16px !important;
+      /* Keep the label on one line so the trailing arrow stays beside it
+         instead of stranding on the right of a wrapped second line. */
+      font-size: 0.82rem !important;
+      white-space: nowrap !important;
+      font-weight: 800 !important;
+      box-shadow: 3px 4px 0px #000000 !important;
+      cursor: pointer !important;
+      margin-top: 8px !important;
+      min-height: 44px !important;
+      width: 100% !important;
+      transition: transform 0.12s ease, box-shadow 0.12s ease !important;
+    }
+
+    .mobile-scroll-wf-cta:active {
+      transform: translate(1px, 2px) !important;
+      box-shadow: 0px 0px 0px #000000 !important;
+    }
+
+    /* 5. Team Hierarchy Section — cards collapse to banner, name and role,
+       with the brief and telemetry behind a Read more. Three full cards ran
+       to roughly three screens; collapsed they are one. */
+    .team-hierarchy-section {
+      padding: clamp(56px, 9vh, 84px) 18px !important;
+    }
+
+    .team-eyebrow {
+      display: block !important;
+      font-family: monospace !important;
+      font-size: 0.7rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      color: #71717a !important;
+    }
+
+    .team-main-title {
+      font-size: clamp(1.8rem, 7vw, 2.3rem) !important;
+    }
+
+    .agent-tree-wrapper {
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+    }
+
+    .tree-fork-connector {
+      display: none !important;
+    }
+
+    .tree-root-row,
+    .tree-branches-row {
+      display: flex !important;
+      flex-direction: column !important;
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+      margin: 0 !important;
+    }
+
+    .agent-node-card {
+      width: 100% !important;
+    }
+
+    /* Collapsed by default */
+    .node-brief-text,
+    .node-telemetry-tray {
+      display: none !important;
+    }
+
+    .agent-node-card.is-expanded .node-brief-text {
+      display: block !important;
+      font-size: 0.95rem !important;
+      line-height: 1.45 !important;
+      margin-top: 10px !important;
+    }
+
+    .agent-node-card.is-expanded .node-telemetry-tray {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 4px 10px !important;
+      justify-content: flex-start !important;
+    }
+
+    /* The telemetry separator only makes sense on one line. */
+    .agent-node-card.is-expanded .telemetry-dot {
+      display: none !important;
+    }
+
+    .node-expand-btn {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 7px !important;
+      /* The 44px tap target already contributes ~16px of optical space above
+         the label, so the margin stays small or the gap reads as a void. */
+      margin-top: 0 !important;
+      align-self: flex-start !important;
+      padding: 0 !important;
+      min-height: 44px !important;
+      background: none !important;
+      border: none !important;
+      font-family: monospace !important;
+      font-size: 0.72rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      color: var(--node-accent, #A1A1AA) !important;
+      cursor: pointer !important;
+    }
+
+    .node-expand-chevron {
+      transition: transform 0.2s ease !important;
+    }
+
+    .agent-node-card.is-expanded .node-expand-chevron {
+      transform: rotate(180deg) !important;
+    }
+
+    /* 6. Market Context (AI Doom Loop) */
+    .doom-loop-standalone-section {
+      padding: 68px 18px 80px !important;
+      background-color: var(--doodle-cyan, #00B3E3) !important;
+    }
+
+    /* Left-aligned on mobile: a centred ragged block of body copy is harder
+       to scan on a narrow column than a flush left edge. The block itself
+       stays centred in the section and matches .doom-orbit's 440px, so the
+       text shares its left and right edges with the numbered cards below. */
+    .doom-standalone-header {
+      width: 100% !important;
+      max-width: 440px !important;
+      margin: 0 auto !important;
+      text-align: left !important;
+    }
+
+    .doom-section-eyebrow {
+      display: block !important;
+      text-align: center !important;
+      width: 100% !important;
+      font-family: monospace !important;
+      font-size: 0.7rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      color: rgba(255, 255, 255, 0.72) !important;
+    }
+
+    .doom-standalone-title {
+      font-size: clamp(1.75rem, 7vw, 2.3rem) !important;
+      line-height: 1.18 !important;
+      font-weight: 900 !important;
+      color: #ffffff !important;
+      text-align: center !important;
+      margin: 8px 0 0 !important;
+    }
+
+    .doom-lead-block {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      margin: 14px 0 24px !important;
+      max-width: none !important;
+    }
+
+    /* Justified so both edges line up with the cards below. */
+    .doom-standalone-lead {
+      font-size: 1rem !important;
+      line-height: 1.48 !important;
+      color: #ffffff !important;
+      text-align: justify !important;
+      text-wrap: auto !important;
+      hyphens: auto !important;
+      margin: 0 !important;
+    }
+
+    .doom-orbit {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 16px !important;
+      width: 100% !important;
+      max-width: 440px !important;
+      margin: 0 auto !important;
+    }
+
+    .doom-orbit-notes {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+      width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      list-style: none !important;
+    }
+
+    .doom-orbit-note {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+      background: #ffffff !important;
+      border: 2.5px solid #000000 !important;
+      border-radius: 16px !important;
+      box-shadow: 3.5px 4.5px 0px #000000 !important;
+      padding: 16px 18px !important;
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      gap: 14px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .doom-note-num {
+      flex-shrink: 0 !important;
+      background: var(--note-accent, #000000) !important;
+      color: #000000 !important;
+      border: 2px solid #000000 !important;
+      border-radius: 8px !important;
+      padding: 3px 8px !important;
+      font-family: monospace !important;
+      font-size: 0.88rem !important;
+      font-weight: 900 !important;
+      box-shadow: 1.5px 2px 0px #000000 !important;
+    }
+
+    .doom-note-text {
+      font-size: 1rem !important;
+      line-height: 1.42 !important;
+      font-weight: 600 !important;
+      color: #18181b !important;
+      margin: 0 !important;
+    }
+
+    .doom-orbit-centre {
+      display: none !important;
+    }
+
+    .doom-closing {
+      font-size: 1rem !important;
+      line-height: 1.5 !important;
+      color: #ffffff !important;
+      text-align: center !important;
+      max-width: 38ch !important;
+      margin: 32px auto 0 !important;
+    }
+
+    /* 7. Footer Epilogue */
+    .footer-home-btn {
+      padding: 10px 22px !important;
+      font-size: 0.95rem !important;
+      font-weight: 800 !important;
+      min-height: 44px !important;
+    }
+
+    .footer-icon-link {
+      min-width: 44px !important;
+      min-height: 44px !important;
+    }
+
+    /* The copy-email pill is a hover tooltip with an invisible ::after bridge
+       so the cursor can travel to it. On touch the first tap latches :hover,
+       the bridge then covers the icon row and the mailto:/LinkedIn taps get
+       swallowed. It has to become a real, always-visible control here.
+
+       `display: contents` dissolves the two .footer-contact-node wrappers so
+       the button, both icons and the copy control become direct children of
+       .epilogue-links. That lets one flex row order and align all four —
+       without it the copy pill was stacked inside the email wrapper, which
+       is what threw the row out of alignment. */
+    .footer-contact-node {
+      display: contents !important;
+    }
+
+    .epilogue-links {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: center !important;
+      column-gap: 12px !important;
+      row-gap: 4px !important;
+      width: 100% !important;
+    }
+
+    .footer-home-btn { order: 1 !important; }
+    .email-link { order: 2 !important; }
+    .linkedin-link { order: 3 !important; }
+
+    /* Own full-width row beneath the three controls, as plain centred text
+       rather than a second competing pill. */
+    .footer-copy-email-btn {
+      order: 4 !important;
+      flex: 0 0 100% !important;
+      position: static !important;
+      transform: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-height: 44px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      font-size: 0.78rem !important;
+      font-weight: 600 !important;
+      color: rgba(255, 255, 255, 0.66) !important;
+      text-decoration: underline !important;
+      text-underline-offset: 4px !important;
+      white-space: nowrap !important;
+    }
+
+    .footer-copy-email-btn::after {
+      display: none !important;
+    }
+
+    /* Just tall enough for the controls plus a little breathing room. */
+    .story-epilogue {
+      padding: 26px 18px calc(26px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+  }
+
+  /* At 360px the home button plus both social icons overrun the row by a few
+     pixels and the LinkedIn icon wraps onto a line of its own. */
+  @media (max-width: 390px) {
+    .story-epilogue {
+      padding-left: 14px !important;
+      padding-right: 14px !important;
+    }
+
+    .epilogue-links {
+      gap: 12px !important;
+    }
+
+    .footer-home-btn {
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+    }
+  }
+
+  /* Short phones (SE, older Androids): the dilemma has to fit one 100dvh
+     stage, and at ~640px tall the second choice card and its button fall
+     below the fold. Tighten the vertical rhythm rather than let it clip.
+     Width-gated too, so no desktop breakpoint can ever match. */
+  @media (max-width: 860px) and (max-height: 830px) {
+    .dilemma-white-stage {
+      padding: 44px 16px 16px !important;
+    }
+
+    .dilemma-content-wrapper {
+      gap: 0.6rem !important;
+    }
+
+    .dilemma-header-group {
+      gap: 0.5rem !important;
+    }
+
+    .dilemma-title {
+      font-size: clamp(1.35rem, 5.6vw, 1.7rem) !important;
+    }
+
+    .dilemma-eyebrow {
+      font-size: 0.66rem !important;
+    }
+
+    .mobile-sub-lead {
+      font-size: 1.02rem !important;
+      line-height: 1.36 !important;
+      margin-bottom: -0.6rem !important;
+    }
+
+    .dilemma-decision-stage {
+      gap: 0.85rem !important;
+    }
+
+    .dilemma-choice-btn {
+      min-height: 0 !important;
+      padding: 11px 14px !important;
+      gap: 6px !important;
+    }
+
+    .choice-bottom-bar {
+      padding-top: 0 !important;
+    }
+
+    .choice-pick-pill {
+      padding: 4px 12px !important;
+    }
+
+    .choice-main-text {
+      font-size: 0.92rem !important;
+      line-height: 1.3 !important;
+    }
+
+    .dilemma-standing-img {
+      height: clamp(84px, 15vh, 110px) !important;
+    }
+  }
+
+  /* Desktop defaults for notice card & plain toggle */
+  .mobile-desktop-notice-card {
+    display: none;
+  }
+
 </style>
 
 <script>
@@ -2114,7 +3076,6 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     const choice1Btn = document.getElementById("choiceOption1");
     const choice2Btn = document.getElementById("choiceOption2");
     const answerPopup = document.getElementById("dilemmaAnswerPopup");
-    const closePopupBtn = document.getElementById("closePopupBtn");
     const popupTitle = document.getElementById("popupTitle");
     const popupText = document.getElementById("popupText");
     const popupActionBtn = document.getElementById("popupActionBtn");
@@ -2123,10 +3084,28 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     const benefitsRunway = benefitsFrameWrap;
     const benefitsCurtainLayer = document.getElementById("benefitsCurtainLayer");
     const exploreWorkflowBtn = document.getElementById("exploreWorkflowBtn");
+    const scrollToWorkflowStepsBtn = document.getElementById("scrollToWorkflowStepsBtn");
+
+    // The layout uses ClientRouter, so `astro:page-load` fires on the FIRST
+    // load as well as after every view transition — and this init also runs
+    // from the readyState branch below. Every handler was therefore bound
+    // twice, which silently cancelled anything that toggles: click once, the
+    // first listener turns it on and the second turns it straight back off.
+    // Marking the element means a re-run rebinds only genuinely new DOM.
+    function bindOnce(
+      el: Element | null,
+      type: string,
+      handler: EventListenerOrEventListenerObject,
+      key: string,
+    ) {
+      if (!el) return;
+      const flag = `bound${key}`;
+      if ((el as HTMLElement).dataset[flag] === "1") return;
+      (el as HTMLElement).dataset[flag] = "1";
+      el.addEventListener(type, handler);
+    }
 
     function openAnswerPopup(choiceNumber: string) {
-      // Only advance to "ALSO WRONG" when the user switches their choice.
-      // Re-picking the same option keeps showing "WRONG" / "try again".
       const isRepeatChoice = lastChoice !== null && choiceNumber === lastChoice;
       if (!isRepeatChoice) {
         selectionAttempts += 1;
@@ -2137,7 +3116,6 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       if (choice2Btn) choice2Btn.classList.toggle("is-selected", choiceNumber === "2");
 
       if (selectionAttempts === 1) {
-        // First selection: title = "WRONG", button = "try again"
         if (popupTitle) popupTitle.textContent = "WRONG";
         if (popupActionBtnText) popupActionBtnText.textContent = "try again";
 
@@ -2150,7 +3128,6 @@ const agents = story?.agents || story?.vignette3?.agents || [];
           }
         }
       } else {
-        // Second selection: title = "ALSO WRONG", button = "wth?"
         if (popupTitle) popupTitle.textContent = "ALSO WRONG";
         if (popupActionBtnText) popupActionBtnText.textContent = "wth?";
 
@@ -2179,8 +3156,6 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       if (choice2Btn) choice2Btn.classList.remove("is-selected");
     }
 
-    // Scroll to the end of the benefits runway: the curtain finishes lifting
-    // exactly as the How It Works stage settles into place.
     function raiseBenefitsCurtain() {
       if (!benefitsRunway) return;
       const rect = benefitsRunway.getBoundingClientRect();
@@ -2197,60 +3172,157 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       if (currentBtnText === "try again") {
         closeAnswerPopup();
       } else if (currentBtnText === "wth?" || currentBtnText === "wtf" || currentBtnText === "wth") {
-        // Scroll down to the Benefits section (its own page, reachable by scrolling)
         closeAnswerPopup();
-        if (benefitsFrameWrap) benefitsFrameWrap.scrollIntoView({ behavior: "smooth" });
+        // On desktop the benefits curtain is absolutely positioned inside the
+        // sticky viewport and moved by a scroll-driven transform, so
+        // scrollIntoView resolves to "already in place" and nothing happens.
+        // Drive its runway instead — the same path the "Explore how it works"
+        // button takes. Below 860px that runway is display:none, so fall back
+        // to scrolling the (then static) curtain into view.
+        // Scroll to the START of the runway, where the yellow curtain is
+        // fully down. raiseBenefitsCurtain() goes to the END of the lift,
+        // which is the "Explore how it works" behaviour and overshoots the
+        // benefits entirely.
+        const runway = benefitsRunway;
+        if (runway && runway.getBoundingClientRect().height > window.innerHeight) {
+          window.scrollTo({
+            top: window.scrollY + runway.getBoundingClientRect().top,
+            behavior: "smooth",
+          });
+        } else {
+          document
+            .getElementById("benefitsCurtainLayer")
+            ?.scrollIntoView({ behavior: "smooth" });
+        }
       } else {
         closeAnswerPopup();
       }
     }
 
-    if (choice1Btn) choice1Btn.addEventListener("click", () => openAnswerPopup("1"));
-    if (choice2Btn) choice2Btn.addEventListener("click", () => openAnswerPopup("2"));
-    if (closePopupBtn) closePopupBtn.addEventListener("click", closeAnswerPopup);
-    if (popupActionBtn) popupActionBtn.addEventListener("click", handlePopupAction);
-    if (answerPopup) {
-      answerPopup.addEventListener("click", (e) => {
-        if (e.target === answerPopup) closeAnswerPopup();
-      });
+    bindOnce(choice1Btn, "click", () => openAnswerPopup("1"), "Choice1");
+    bindOnce(choice2Btn, "click", () => openAnswerPopup("2"), "Choice2");
+    // The popup action button is deliberately the only way out: no ✕, no
+    // backdrop dismissal. The copy is part of the argument the section makes,
+    // so the reader has to acknowledge it rather than swipe past it.
+    bindOnce(popupActionBtn, "click", handlePopupAction, "PopupAction");
+
+    bindOnce(exploreWorkflowBtn, "click", raiseBenefitsCurtain, "ExploreWf");
+    bindOnce(scrollToWorkflowStepsBtn, "click", () => {
+      const wf = document.getElementById("workflow-steps");
+      if (wf) wf.scrollIntoView({ behavior: "smooth" });
+    }, "ScrollWf");
+
+    // ----------------------------------------------------
+    // MOBILE TOUCH GESTURE CONTROLLER (QUICK SWIPE VS SLOW SCROLL)
+    // ----------------------------------------------------
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+
+    function getSnapSections(): HTMLElement[] {
+      const selectors = [
+        "#hero-runway",
+        "#hero",
+        "#benefitsCurtainLayer",
+        ".team-hierarchy-section",
+        "#workflow-steps",
+        "#doom-section",
+        ".story-epilogue",
+      ];
+      return selectors
+        .map((s) => document.querySelector(s) as HTMLElement)
+        .filter((el): el is HTMLElement => !!el && el.offsetHeight > 0);
     }
 
-    if (exploreWorkflowBtn) exploreWorkflowBtn.addEventListener("click", raiseBenefitsCurtain);
+    function scrollToSection(direction: "next" | "prev") {
+      const sections = getSnapSections();
+      if (!sections.length) return;
 
-    // Doom loop: land the listing first, then let the notes assemble around it.
-    // autoPlay is off on the card so the two stay in step.
+      const buffer = 50;
+
+      if (direction === "next") {
+        const next = sections.find((sec) => {
+          const rect = sec.getBoundingClientRect();
+          return rect.top > buffer;
+        });
+        if (next) {
+          next.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        const prevList = sections.filter((sec) => {
+          const rect = sec.getBoundingClientRect();
+          return rect.top < -buffer;
+        });
+        if (prevList.length > 0) {
+          const prev = prevList[prevList.length - 1];
+          prev.scrollIntoView({ behavior: "smooth" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+    }
+
+    window.addEventListener(
+      "touchstart",
+      (e) => {
+        if (window.innerWidth > 860) return;
+        if (e.touches.length !== 1) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      },
+      { passive: true },
+    );
+
+    window.addEventListener(
+      "touchend",
+      (e) => {
+        if (window.innerWidth > 860) return;
+        if (e.changedTouches.length !== 1) return;
+        const deltaX = touchStartX - e.changedTouches[0].clientX;
+        const deltaY = touchStartY - e.changedTouches[0].clientY;
+        const elapsed = Date.now() - touchStartTime;
+
+        // Quick flick detection: fast duration (< 320ms), clear vertical motion (> 40px), predominantly vertical
+        const isQuickFlick = elapsed < 320 && Math.abs(deltaY) > 40 && Math.abs(deltaY) > Math.abs(deltaX) * 1.25;
+
+        if (isQuickFlick) {
+          if (deltaY > 0) {
+            // Quick swipe UP -> snap smoothly to next section
+            scrollToSection("next");
+          } else {
+            // Quick swipe DOWN -> snap smoothly to previous section
+            scrollToSection("prev");
+          }
+        }
+        // Slow swipe / drag (elapsed >= 320ms) allows free natural scrolling!
+      },
+      { passive: true },
+    );
+
+    // Doom loop IntersectionObserver
     const doomOrbit = document.querySelector("[data-doom-orbit]");
     if (doomOrbit && !doomOrbit.hasAttribute("data-doom-bound")) {
       doomOrbit.setAttribute("data-doom-bound", "1");
-      // Only hide the notes once we know JS is running to reveal them again
       doomOrbit.classList.add("is-armed");
-      const doomCard = doomOrbit.querySelector(".doodle-card-container");
       const orbitObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
             doomOrbit.classList.add("is-live");
-            if (doomCard) doomCard.dispatchEvent(new CustomEvent("doodle:slam"));
             orbitObserver.disconnect();
           });
         },
-        // Watch the card, not the whole orbit: stacked on a phone the orbit is
-        // several screens tall, where a ratio threshold may never be met.
-        { threshold: 0.4, rootMargin: "0px 0px -40px 0px" },
+        { threshold: 0.15, rootMargin: "0px 0px -20px 0px" },
       );
-      orbitObserver.observe(doomCard || doomOrbit);
+      orbitObserver.observe(doomOrbit);
     }
 
-    // The desktop sits some way down inside the How It Works stage. Measure that
-    // offset so the curtain hem lands just above the mockup's top bezel, leaving
-    // the device peeking out at the bottom of the benefits screen at any size.
     function syncBenefitsLift() {
-      if (!benefitsRunway) return;
+      if (window.innerWidth <= 860 || !benefitsRunway) return;
       const howViewport = document.querySelector(".how-sticky-viewport");
       const mockup = document.querySelector(".device-screen-mockup");
       const zoom = document.querySelector("[data-desktop-zoom]");
-      // Skip while the desktop is scaled up ("dive in" mode) — the measurement
-      // would be taken from a transformed box.
       if (!howViewport || !mockup) return;
       if (zoom && zoom.classList.contains("is-fullscreen")) return;
 
@@ -2265,15 +3337,18 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       );
     }
 
-    // Benefits curtain lift, driven by scroll through its own runway.
     function onBenefitsScroll() {
-      if (!benefitsRunway || !benefitsCurtainLayer) return;
+      if (window.innerWidth <= 860 || !benefitsRunway || !benefitsCurtainLayer) {
+        if (benefitsCurtainLayer && window.innerWidth <= 860) {
+          benefitsCurtainLayer.style.transform = "none";
+          benefitsCurtainLayer.style.pointerEvents = "auto";
+        }
+        return;
+      }
       const rect = benefitsRunway.getBoundingClientRect();
       const liftDistance = rect.height - window.innerHeight;
       if (liftDistance <= 0) return;
 
-      // The curtain is viewport-fixed, so before its runway reaches the top it
-      // has to ride up with the runway the way an ordinary section would.
       if (rect.top > 0) {
         benefitsCurtainLayer.style.transform = `translateY(${rect.top.toFixed(2)}px)`;
         benefitsCurtainLayer.style.pointerEvents = "auto";
@@ -2297,52 +3372,36 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     if (!runway || !curtain) return;
 
     function onScroll() {
+      if (!runway || !curtain) return;
       const rect = runway.getBoundingClientRect();
       const runwayHeight = rect.height - window.innerHeight;
       if (runwayHeight <= 0) return;
 
       const scrolled = -rect.top;
-      // Scroll progress from 0.0 -> 1.0
       const p = Math.min(Math.max(scrolled / runwayHeight, 0), 1);
 
-      // 1. STAGE CURTAIN LIFT (p: 0.00 -> 0.40)
-      if (p <= 0.40) {
-        const curtainP = p / 0.38;
-        const translateY = Math.min(curtainP * 105, 105);
-        curtain.style.transform = `translateY(-${translateY.toFixed(2)}%)`;
-        curtain.style.pointerEvents = curtainP >= 0.95 ? "none" : "auto";
+      // Smooth translation of hero curtain on both mobile and desktop
+      const translateY = Math.min(p * 105, 105);
+      curtain.style.transform = `translateY(-${translateY.toFixed(2)}%)`;
+      curtain.style.pointerEvents = p >= 0.92 ? "none" : "auto";
 
-        // Fade title slightly as curtain pulls up
-        if (titleEl) {
-          const titleOp = Math.max(0, 1 - curtainP * 1.2);
-          (titleEl as HTMLElement).style.opacity = titleOp.toFixed(3);
-        }
-      } else {
-        curtain.style.transform = `translateY(-105%)`;
-        curtain.style.pointerEvents = "none";
-        if (titleEl) (titleEl as HTMLElement).style.opacity = "0";
+      if (titleEl) {
+        const titleOp = Math.max(0, 1 - p * 2.2);
+        (titleEl as HTMLElement).style.opacity = titleOp.toFixed(3);
       }
 
-      // 2. DILEMMA REVEAL UNDERNEATH (p: 0.15 -> 0.60)
-      if (p >= 0.15) {
-        if (dilemmaHeader) {
-          const headOp = Math.min((p - 0.15) / 0.15, 1);
-          (dilemmaHeader as HTMLElement).style.opacity = headOp.toFixed(3);
-        }
-        if (dilemmaBody) {
-          const bodyOp = Math.min((p - 0.25) / 0.18, 1);
-          (dilemmaBody as HTMLElement).style.opacity = bodyOp.toFixed(3);
-        }
-      } else {
-        if (dilemmaHeader) (dilemmaHeader as HTMLElement).style.opacity = "0.4";
-        if (dilemmaBody) (dilemmaBody as HTMLElement).style.opacity = "0.2";
+      if (dilemmaHeader) {
+        (dilemmaHeader as HTMLElement).style.opacity = "1";
+      }
+      if (dilemmaBody) {
+        (dilemmaBody as HTMLElement).style.opacity = "1";
       }
     }
 
     // Footer Copy Email Quick Action
     const footerCopyBtn = document.getElementById("footerCopyEmailBtn");
     if (footerCopyBtn) {
-      footerCopyBtn.addEventListener("click", (e) => {
+      bindOnce(footerCopyBtn, "click", (e) => {
         e.preventDefault();
         e.stopPropagation();
         const email = "nike.emily@pm.me";
@@ -2363,8 +3422,24 @@ const agents = story?.agents || story?.vignette3?.agents || [];
             copyText.textContent = "nike.emily@pm.me";
           }
         });
-      });
+      }, "FooterCopy");
     }
+
+    // Agent cards collapse to banner + name + role below 860px; this toggles
+    // the brief and telemetry tray back in. The button itself is display:none
+    // on desktop, so nothing here has any effect there.
+    document.querySelectorAll(".node-expand-btn").forEach((btn) => {
+      if (btn.hasAttribute("data-expand-bound")) return;
+      btn.setAttribute("data-expand-bound", "1");
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".agent-node-card");
+        if (!card) return;
+        const open = card.classList.toggle("is-expanded");
+        btn.setAttribute("aria-expanded", String(open));
+        const label = btn.querySelector(".node-expand-label");
+        if (label) label.textContent = open ? "Read less" : "Read more";
+      });
+    });
 
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
