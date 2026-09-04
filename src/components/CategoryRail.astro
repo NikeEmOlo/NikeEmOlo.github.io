@@ -14,7 +14,7 @@ const { counts, total } = Astro.props;
         aria-controls="railPillGroup"
     >
         <span class="trigger-label" aria-hidden="true">FILTER:</span>
-        <span class="trigger-value" data-trigger-value>All Work</span>
+        <span class="trigger-value" data-trigger-value>All</span>
         <span class="trigger-count" data-trigger-count>{String(total).padStart(2, "0")}</span>
         <span class="trigger-chevron" aria-hidden="true">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -42,7 +42,7 @@ const { counts, total } = Astro.props;
                 </svg>
             </span>
             <span class="node-dot" aria-hidden="true"></span>
-            <span class="node-label">All Work</span>
+            <span class="node-label">All</span>
             <span class="node-count">{String(total).padStart(2, "0")}</span>
         </button>
 
