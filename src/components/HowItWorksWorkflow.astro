@@ -3136,9 +3136,10 @@ const cv = cvEntry?.data;
   /* Note Page Styling */
   .info-desc-card,
   :global(.info-desc-card) {
+    /* Plain white, no dot grid: this card carries body copy, and the
+       14px dot lattice sat directly behind the text and cost legibility
+       for a texture nobody reads a modal for. */
     background-color: #FFFFFF !important;
-    background-image: radial-gradient(#CBD5E1 0.85px, transparent 0.85px) !important;
-    background-size: 14px 14px !important;
     border: 2.5px solid #000000 !important;
     border-radius: 10px !important;
     padding: 18px 20px !important;
