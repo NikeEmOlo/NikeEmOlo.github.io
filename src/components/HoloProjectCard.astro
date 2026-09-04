@@ -142,6 +142,8 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
                     </div>
                 )}
 
+                <!-- Full-Card Interactive Light Point Glare (Contained strictly inside card front) -->
+                <div class="card__glare"></div>
             </div>
         </button>
     </div>
@@ -198,7 +200,8 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         transform: rotateY(180deg) !important;
     }
 
-    .card[data-holo-project-card].flipped .card__shine {
+    .card[data-holo-project-card].flipped .card__shine,
+    .card[data-holo-project-card].flipped .card__glare {
         opacity: 0 !important;
         visibility: hidden !important;
         pointer-events: none !important;
@@ -216,7 +219,8 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         margin: 0;
     }
 
-    .deck-card-item.is-deck-stack .card__shine {
+    .deck-card-item.is-deck-stack .card__shine,
+    .deck-card-item.is-deck-stack .card__glare {
         opacity: 0 !important;
         visibility: hidden !important;
     }
@@ -399,6 +403,31 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         box-sizing: border-box;
     }
 
+    /* Full-Card Subtle Spotlight Glare (Refined, gentle luminous sheen, zero grey tint) */
+    .card-base-frame .card__glare {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        z-index: 20;
+        pointer-events: none;
+        background-image: radial-gradient(
+            farthest-corner circle at var(--pointer-x) var(--pointer-y),
+            hsla(0, 0%, 100%, 0.60) 0%,
+            hsla(0, 0%, 100%, 0.28) 22%,
+            hsla(0, 0%, 100%, 0.05) 50%,
+            hsla(0, 0%, 100%, 0) 95%
+        ) !important;
+        filter: none !important;
+        mix-blend-mode: normal !important;
+        opacity: calc(var(--card-opacity, 0.8) * 0.52);
+        transform: none !important;
+        overflow: hidden;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
     /* Bottom Info: Centered Typography */
     .card-bottom-info {
         display: flex;
@@ -467,7 +496,8 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         color: #94A3B8 !important;
     }
 
-    .card.is-unactivated .card__shine {
+    .card.is-unactivated .card__shine,
+    .card.is-unactivated .card__glare {
         display: none !important;
         opacity: 0 !important;
         visibility: hidden !important;
