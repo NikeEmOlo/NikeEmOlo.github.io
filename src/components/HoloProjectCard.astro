@@ -518,9 +518,13 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         border: 1.5px solid #CBD5E1 !important;
     }
 
+    /* Heavy blur keeps the hero art a shape rather than a picture — the card
+       reads as unrevealed, not as a duplicate of art used elsewhere. The
+       slight scale-up hides the soft edge the blur pulls in from the bounds. */
     .card.is-unactivated .character-artwork {
-        filter: grayscale(100%) contrast(0.9) brightness(0.9) !important;
-        opacity: 0.55 !important;
+        filter: grayscale(100%) contrast(0.9) brightness(0.95) blur(9px) !important;
+        opacity: 0.7 !important;
+        transform: scale(1.06);
     }
 
     .card.is-unactivated .card-title-text {
