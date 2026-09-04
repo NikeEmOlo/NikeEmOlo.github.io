@@ -250,6 +250,17 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
         --pw-accent: var(--doodle-yellow, #FFDA00);
         --pw-sans: var(--archivo-font, 'Archivo', -apple-system, sans-serif);
 
+        /* One source of truth for the card footprint: the playmat slots, the
+           deck items and the stage that holds them all derive from it.
+           Deliberately not the global --deck-card-w, which is a different
+           (tarot) size on :root. */
+        --hero-card-w: clamp(200px, 17.5vw, 255px);
+        /* Card is 600x921. The focused card is not scaled — deckController
+           pushes it 180px towards the viewer, and the stage's 1400px
+           perspective magnifies it by 1400 / (1400 - 180) = 1.148. That is
+           the height the stage actually has to give it. */
+        --hero-card-h: calc(var(--hero-card-w) * 921 / 600 * 1.148);
+
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -458,9 +469,9 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
         position: absolute;
         left: 50%;
         top: 50%;
-        margin-left: calc(-0.5 * clamp(200px, 17.5vw, 255px));
-        margin-top: calc(-0.5 * (clamp(200px, 17.5vw, 255px) * 921 / 600));
-        width: clamp(200px, 17.5vw, 255px);
+        margin-left: calc(-0.5 * var(--hero-card-w));
+        margin-top: calc(-0.5 * (var(--hero-card-w) * 921 / 600));
+        width: var(--hero-card-w);
         aspect-ratio: 600 / 921;
         pointer-events: none;
         user-select: none;
@@ -529,9 +540,9 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
         position: absolute;
         left: 50%;
         top: 50%;
-        margin-left: calc(-0.5 * clamp(200px, 17.5vw, 255px));
-        margin-top: calc(-0.5 * (clamp(200px, 17.5vw, 255px) * 921 / 600));
-        width: clamp(200px, 17.5vw, 255px);
+        margin-left: calc(-0.5 * var(--hero-card-w));
+        margin-top: calc(-0.5 * (var(--hero-card-w) * 921 / 600));
+        width: var(--hero-card-w);
         aspect-ratio: 600 / 921;
         border-radius: 12px;
         transform-origin: center center;
@@ -658,8 +669,8 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
             min-height: 100dvh;
             overflow-y: auto;
             overflow-x: hidden;
-            padding: 24px 20px 32px;
-            gap: 12px;
+            padding: 12px 20px 14px;
+            gap: 10px;
         }
 
         /* Centred on mobile. The right padding that used to keep the
@@ -670,8 +681,9 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
             text-align: center;
             padding-right: 0;
             /* Sits low in its own band: clears the hamburger above and closes
-               the run of empty canvas down to the "projects" heading. */
-            padding-top: 72px;
+               the run of empty canvas down to the "projects" heading. On a
+               short viewport it gives that band back to the card. */
+            padding-top: clamp(32px, 6.5dvh, 72px);
         }
 
         /* The deck-top-group below gives up height (smaller "projects"
@@ -689,8 +701,10 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
             flex: none;
             gap: 10px;
             /* The filter rail no longer occupies three wrapped rows here, so
-               the deck can sit closer to the title. */
+               the deck can sit closer to the title, and the ticker below
+               already has the page gap to separate it. */
             padding-top: 0;
+            padding-bottom: 0;
         }
 
         .deck-top-group {
@@ -716,13 +730,31 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
             display: inline;
         }
 
-        /* The card is ~352px tall and sits centred in the stage, so every
-           pixel of extra stage height became dead space above and below it. */
+        /* The stage hugs the focused card instead of standing at a fixed
+           380px: any extra height here is dead space above and below the
+           card, and on a short phone it was height the page did not have. */
         .deck-stage {
-            height: 380px;
+            height: var(--hero-card-h);
         }
 
         .playmat-slot {
+            display: none;
+        }
+
+        /* Swiping the deck is the native gesture here, so the arrows are
+           redundant — and the 32px row they forced was the difference
+           between the card fitting on screen and not. The "swipe" cue
+           stays: it is the affordance, not a control. */
+        .nav-arrow-btn {
+            display: none;
+        }
+    }
+
+    /* Short phones — a tall handset with the URL bar and toolbar showing, or
+       any handset in landscape. The deck is what the page is for, so the
+       ticker is the piece that yields rather than the card. */
+    @media (max-width: 900px) and (max-height: 680px) {
+        .trusted-by {
             display: none;
         }
     }

@@ -118,8 +118,12 @@
 
 .card.active .card__translater,
 .card.active .card__rotator {
-  /* prevent pinch/double-tap zooms on card */
-  touch-action: none;
+  /* Still blocks pinch and double-tap zoom, but leaves vertical panning to
+     the browser. `none` meant a finger that landed on the card — which is
+     most of a phone screen — could not scroll the page at all, so the deck
+     arrows and the footer below it were unreachable. The deck's own swipe
+     only reads clientX, so it is unaffected. */
+  touch-action: pan-y;
 }
 
 .card__translater,

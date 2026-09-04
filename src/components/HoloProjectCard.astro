@@ -541,6 +541,10 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
 </style>
 
 <script>
+    // Hybrid laptops report both, so this is a live query rather than a
+    // one-time user-agent guess.
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+
     function mountHoloProjectCards() {
         document.querySelectorAll("[data-holo-project-card]").forEach((cardEl) => {
             const card = cardEl;
@@ -570,8 +574,16 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
             card.style.setProperty("--rotate-x", "0deg");
             card.style.setProperty("--rotate-y", "0deg");
 
+            // The tilt/shine reaction tracks a hovering cursor. On a touch
+            // screen there is nothing to hover: the same handler fires off
+            // the swipe itself, so dragging the deck sideways also throws the
+            // card into a tilt and fights the gesture. Mouse only.
+            const canTilt = (e) =>
+                finePointer.matches && (!e || e.pointerType === "mouse");
+
             const updatePointer = (e) => {
                 if (!isDeckActive()) return;
+                if (!canTilt(e)) return;
                 const rect = card.getBoundingClientRect();
                 const absolute = {
                     x: e.clientX - rect.left,
