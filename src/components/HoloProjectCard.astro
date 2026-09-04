@@ -43,29 +43,6 @@ const EFFECT_CONFIGS: Record<string, {
         seedy: "0.5188117694209767",
         cosmosbg: "107px 664px",
     },
-    cosmos_galaxy: {
-        rarity: "rare holo cosmos",
-        foil: "/img/cosmos-bottom.png",
-        seedx: "0.5",
-        seedy: "0.5",
-        cosmosbg: "center",
-    },
-    radiant_laser: {
-        rarity: "radiant holo",
-        foil: "/img/glitter.png",
-    },
-    rainbow_secret: {
-        rarity: "rare rainbow",
-        foil: "/img/glitter.png",
-    },
-    shiny_rare: {
-        rarity: "rare shiny",
-        foil: "/img/glitter.png",
-    },
-    v_full_art: {
-        rarity: "rare ultra",
-        foil: "/img/glitter.png",
-    }
 };
 
 const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_etched"];
@@ -173,14 +150,9 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
 </div>
 
 <style is:global>
-    @import "/css/poke-holo/base.css";
-    @import "/css/poke-holo/cards.css";
-    @import "/css/poke-holo/swsh-pikachu.css";
-    @import "/css/poke-holo/cosmos-holo.css";
-    @import "/css/poke-holo/radiant-holo.css";
-    @import "/css/poke-holo/rainbow-holo.css";
-    @import "/css/poke-holo/shiny-rare.css";
-    @import "/css/poke-holo/v-full-art.css";
+    @import "../styles/holo/base.css";
+    @import "../styles/holo/cards.css";
+    @import "../styles/holo/swsh-pikachu.css";
 
     /* Root Card Dimensions & 3D Perspective Anchor — strictly preserves 600 / 921 ratio */
     .card[data-holo-project-card] {
