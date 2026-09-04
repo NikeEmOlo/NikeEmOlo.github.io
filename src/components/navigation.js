@@ -81,6 +81,7 @@ function closeMenu() {
     const hamburger = document.querySelector('.hamburger')
     hamburger?.setAttribute('aria-expanded', 'false')
     hamburger?.setAttribute('aria-label', 'Open menu')
+    document.body.style.overflow = ''
 }
 
 //----------------------- CONTACT HANGING CHAIN CONTROLLERS -----------------------//
@@ -168,6 +169,9 @@ let outerClosingTimer = null
 
 export function openOuterOfficeSign(outerOfficeLi, outerOfficeBtn) {
     if (!outerOfficeLi || !outerOfficeBtn) return
+    // The menu has no sign to drop — the item is a disabled placeholder there.
+    // Guarded here as well as at each trigger so no other caller can open it.
+    if (isMobileNav()) return
     const signAnchor = document.getElementById('outerOfficeSign')
     if (outerRetractTimer) clearTimeout(outerRetractTimer)
     if (outerClosingTimer) clearTimeout(outerClosingTimer)
@@ -212,17 +216,27 @@ function setupOuterOfficeHover() {
     const outerOfficeBtn = document.getElementById('navOuterOfficeBtn')
     if (!outerOfficeLi || !outerOfficeBtn) return
 
-    outerOfficeLi.onmouseenter = () => openOuterOfficeSign(outerOfficeLi, outerOfficeBtn)
+    // In the mobile menu the item is a disabled placeholder, so none of the
+    // sign's triggers should fire. Checked per-event rather than at setup so
+    // it stays correct across a resize past the breakpoint.
+    outerOfficeLi.onmouseenter = () => {
+        if (isMobileNav()) return
+        openOuterOfficeSign(outerOfficeLi, outerOfficeBtn)
+    }
     outerOfficeLi.onmouseleave = () => {
         if (outerOfficeLi.classList.contains('is-sign-open')) {
             scheduleOuterRetract(outerOfficeLi, outerOfficeBtn, 2000)
         }
     }
-    outerOfficeBtn.onfocus = () => openOuterOfficeSign(outerOfficeLi, outerOfficeBtn)
+    outerOfficeBtn.onfocus = () => {
+        if (isMobileNav()) return
+        openOuterOfficeSign(outerOfficeLi, outerOfficeBtn)
+    }
     outerOfficeBtn.onblur = () => scheduleOuterRetract(outerOfficeLi, outerOfficeBtn, 1000)
     outerOfficeBtn.onclick = (e) => {
         e.preventDefault()
         e.stopPropagation()
+        if (isMobileNav()) return
         if (!outerOfficeLi.classList.contains('is-sign-open')) {
             openOuterOfficeSign(outerOfficeLi, outerOfficeBtn)
             scheduleOuterRetract(outerOfficeLi, outerOfficeBtn, 2000)
@@ -246,11 +260,34 @@ function updateNavMode() {
     nav.style.width = ''
 
     const rightOffset = parseFloat(getComputedStyle(nav).right) || 0
-    if (naturalWidth + rightOffset >= window.innerWidth) {
+    if (window.innerWidth <= 860 || naturalWidth + rightOffset >= window.innerWidth) {
         nav.classList.add('is-mobile')
     } else if (wasMobile) {
         closeMenu()
     }
+
+    syncOuterOfficeAvailability()
+}
+
+/* The About me item has no destination yet. Desktop says so with the hanging
+   under-construction sign; the menu has no room for that gag, so the item is
+   marked plainly unavailable instead. Shrinking the window mid-swing also has
+   to leave the sign's open state behind. */
+function syncOuterOfficeAvailability() {
+    const outerOfficeLi = document.querySelector('.nav-outer-office-li')
+    const outerOfficeBtn = document.getElementById('navOuterOfficeBtn')
+    if (!outerOfficeLi || !outerOfficeBtn) return
+
+    if (isMobileNav()) {
+        closeOuterOfficeSign(outerOfficeLi, outerOfficeBtn, true)
+        outerOfficeBtn.setAttribute('aria-disabled', 'true')
+    } else {
+        outerOfficeBtn.removeAttribute('aria-disabled')
+    }
+}
+
+function isMobileNav() {
+    return !!document.querySelector('nav.doodle-nav.is-mobile')
 }
 
 //----------------------- GLOBAL EVENT DELEGATION -----------------------//
@@ -262,8 +299,14 @@ document.addEventListener('click', (e) => {
     const hamburgerBtn = target.closest('.hamburger')
     if (hamburgerBtn) {
         const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true'
-        hamburgerBtn.setAttribute('aria-expanded', String(!isExpanded))
-        hamburgerBtn.setAttribute('aria-label', isExpanded ? 'Open menu' : 'Close menu')
+        const nextState = !isExpanded
+        hamburgerBtn.setAttribute('aria-expanded', String(nextState))
+        hamburgerBtn.setAttribute('aria-label', nextState ? 'Close menu' : 'Open menu')
+        if (nextState) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = ''
+        }
         return
     }
 
@@ -272,6 +315,9 @@ document.addEventListener('click', (e) => {
     if (contactBtn) {
         e.preventDefault()
         e.stopPropagation()
+        // In the mobile menu the chain is a permanent part of the list, not a
+        // dropdown — only the menu's own close button dismisses it.
+        if (isMobileNav()) return
         const contactLi = contactBtn.closest('.nav-contact-li')
         if (contactLi) {
             if (contactLi.classList.contains('is-contact-open')) {
@@ -292,8 +338,8 @@ document.addEventListener('click', (e) => {
         return
     }
 
-    // 4. Click outside Contact chain -> close it
-    if (!target.closest('.nav-contact-li')) {
+    // 4. Click outside Contact chain -> close it (desktop only, see above)
+    if (!isMobileNav() && !target.closest('.nav-contact-li')) {
         const openContactLi = document.querySelector('.nav-contact-li.is-contact-open')
         const openContactBtn = document.getElementById('navContactBtn')
         if (openContactLi && openContactBtn) {
