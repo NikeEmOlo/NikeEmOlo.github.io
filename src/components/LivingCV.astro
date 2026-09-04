@@ -84,6 +84,29 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
           <button class="cv-nav-btn nav-btn-now" data-target="mcv-now" type="button">Currently</button>
           <button class="cv-nav-btn nav-btn-certs" data-target="mcv-certs" type="button">Certs</button>
         </nav>
+        <!-- Mobile equivalent of the tab row. Deliberately not a native
+             <select>: its popup is OS-level UI drawn outside the page, so it
+             cannot be styled and lands in the wrong place inside an emulated
+             viewport. This one renders in-page. -->
+        <div class="cv-jump" data-cv-jump>
+          <button
+            type="button"
+            class="cv-jump-trigger"
+            id="liveCvJumpTrigger"
+            aria-expanded="false"
+            aria-controls="liveCvJumpList"
+          >
+            <span>Jump to section&hellip;</span>
+            <svg class="cv-jump-chevron" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <ul class="cv-jump-list" id="liveCvJumpList" hidden>
+            <li><button type="button" class="cv-jump-item" data-target="mcv-about">About</button></li>
+            <li><button type="button" class="cv-jump-item" data-target="mcv-experience">Experience</button></li>
+            <li><button type="button" class="cv-jump-item" data-target="mcv-competencies">Competencies</button></li>
+            <li><button type="button" class="cv-jump-item" data-target="mcv-now">Currently</button></li>
+            <li><button type="button" class="cv-jump-item" data-target="mcv-certs">Certs</button></li>
+          </ul>
+        </div>
       </div>
       <div class="master-cv-top-actions">
         <button class="cv-tool-btn" id="copyLiveCvMarkdownBtn" type="button" title="Copy Markdown to clipboard" data-cv-md={cvMdString}>
@@ -330,16 +353,18 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
           <h2 class="mcv-footer-title">Let's speed things up<span class="mcv-accent-dot">.</span></h2>
           <div class="mcv-footer-btns-row">
             <a href={`mailto:${cv.email}`} class="mcv-action-btn email-btn" id="liveCvEmailBtn" title="Send email to Nike">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="mcv-action-glyph" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
               </svg>
+              <img src="/img/contact-email.png" alt="" class="mcv-action-art" width="52" height="37" loading="lazy" aria-hidden="true" />
               <span>Email me</span>
             </a>
             <a href={cv.linkedin} target="_blank" rel="noopener noreferrer" class="mcv-action-btn linkedin-btn" title="View LinkedIn Profile">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <svg class="mcv-action-glyph" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z"/>
               </svg>
+              <img src="/img/contact-linkedin.webp" alt="" class="mcv-action-art" width="52" height="38" loading="lazy" aria-hidden="true" />
               <span>LinkedIn ↗</span>
             </a>
           </div>
@@ -440,7 +465,10 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
         e.preventDefault();
         const targetId = btn.getAttribute("data-target");
         if (targetId && scrollBody) {
-          const targetEl = document.getElementById(targetId);
+          // Scoped to the modal: these section ids also exist in the OS-sim
+          // Master CV window, and getElementById returns whichever comes
+          // first in the document — so this was measuring the wrong element.
+          const targetEl = modal.querySelector("#" + targetId);
           if (targetEl) {
             const topOffset = targetEl.offsetTop - scrollBody.offsetTop - 12;
             scrollBody.scrollTo({
@@ -452,8 +480,158 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
       });
     });
 
-    // Expandable cards in Master CV (work experience & education)
+    // Mobile "Jump to section" menu — same scroll behaviour as the tab row it
+    // replaces below 860px, but rendered in-page so it is styleable and
+    // always appears under its own trigger.
+    const jumpWrap = modal.querySelector("[data-cv-jump]");
+    if (jumpWrap && jumpWrap.dataset.jumpBound !== "1") {
+      jumpWrap.dataset.jumpBound = "1";
+      const trigger = jumpWrap.querySelector(".cv-jump-trigger");
+      const list = jumpWrap.querySelector(".cv-jump-list");
+
+      const closeJump = () => {
+        list.hidden = true;
+        trigger.setAttribute("aria-expanded", "false");
+      };
+
+      trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const open = list.hidden;
+        list.hidden = !open;
+        trigger.setAttribute("aria-expanded", String(open));
+      });
+
+      jumpWrap.querySelectorAll(".cv-jump-item").forEach((item) => {
+        item.addEventListener("click", () => {
+          const targetId = item.getAttribute("data-target");
+          closeJump();
+          if (!targetId || !scrollBody) return;
+          const targetEl = modal.querySelector("#" + targetId);
+          if (!targetEl) return;
+          const topOffset =
+            targetEl.getBoundingClientRect().top -
+            scrollBody.getBoundingClientRect().top +
+            scrollBody.scrollTop -
+            12;
+          scrollBody.scrollTo({ top: Math.max(0, topOffset), behavior: "smooth" });
+        });
+      });
+
+      modal.addEventListener("click", (e) => {
+        if (!list.hidden && !jumpWrap.contains(e.target)) closeJump();
+      });
+      modal.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !list.hidden) {
+          e.stopPropagation();
+          closeJump();
+        }
+      });
+    }
+
+    // Skills pills: flex-wrap fills strictly in source order, so a long pill
+    // strands a half-empty line behind it. Repack with first-fit-decreasing
+    // (greedy: fill each line with the widest pill that still fits) and apply
+    // the result via `order`. Mobile only; order is cleared above 860px.
+    const pillWrap = modal.querySelector(".mcv-pills");
+    if (pillWrap) {
+      const packPills = () => {
+        const pills = Array.from(pillWrap.querySelectorAll(".mcv-pill"));
+        if (!pills.length) return;
+
+        if (!window.matchMedia("(max-width: 860px)").matches) {
+          pills.forEach((el) => { el.style.order = ""; });
+          return;
+        }
+
+        const gap = parseFloat(getComputedStyle(pillWrap).columnGap) || 0;
+        pills.forEach((el) => { el.style.order = ""; });
+        // offsetWidth, not getBoundingClientRect(): the modal scales in when
+        // it opens and rect widths are post-transform, so packing scaled
+        // widths against the unscaled container gave a wrong layout.
+        // offsetWidth rounds down though, and the accumulated shortfall let
+        // the packer believe one more pill fitted than actually did — which
+        // then wrapped and cost a whole row. Pad each width to stay honest.
+        const SAFETY = 0.75;
+        const items = pills.map((el, i) => ({
+          el,
+          i,
+          w: el.offsetWidth + SAFETY,
+        }));
+        const max = pillWrap.clientWidth;
+        // widest first, stable on original index for equal widths
+        const pool = [...items].sort((a, b) => b.w - a.w || a.i - b.i);
+        const placed = [];
+
+        // These two lead the list by request; the packer fills around them.
+        const PINNED = ["Service Delivery & Coordination", "AI Automation"];
+        let remaining = max;
+        let first = true;
+        PINNED.forEach((label) => {
+          const k = pool.findIndex(
+            (it) => it.el.textContent.trim() === label,
+          );
+          if (k === -1) return;
+          remaining -= pool[k].w + (first ? 0 : gap);
+          first = false;
+          placed.push(pool.splice(k, 1)[0]);
+        });
+
+        while (pool.length) {
+          let progressed = placed.length > 0 && !first;
+          for (let k = 0; k < pool.length; ) {
+            const need = pool[k].w + (first ? 0 : gap);
+            if (need <= remaining) {
+              remaining -= need;
+              first = false;
+              progressed = true;
+              placed.push(pool.splice(k, 1)[0]);
+            } else {
+              k++;
+            }
+          }
+          // a single pill wider than the row would loop forever otherwise
+          if (!progressed) placed.push(pool.shift());
+          if (pool.length) {
+            remaining = max;
+            first = true;
+          }
+        }
+        placed.forEach((item, n) => { item.el.style.order = String(n); });
+      };
+
+      // The modal is display:none until opened, so on first init every pill
+      // measures 0 wide. Watch for the container gaining a real width and
+      // pack then; width-keyed so reflowing rows cannot loop.
+      if (!pillWrap.dataset.packBound) {
+        pillWrap.dataset.packBound = "1";
+        let settleTimer = null;
+        // Debounced: the modal animates open, so the container passes through
+        // intermediate widths. Packing against one of those was silently
+        // costing a row — a pill would be judged to fit by a pixel or two and
+        // then wrap once the width settled. Wait for it to stop moving.
+        const schedulePack = () => {
+          clearTimeout(settleTimer);
+          settleTimer = setTimeout(packPills, 140);
+        };
+        if (typeof ResizeObserver !== "undefined") {
+          new ResizeObserver(() => {
+            if (pillWrap.clientWidth) schedulePack();
+          }).observe(pillWrap);
+        }
+        window.addEventListener("resize", schedulePack);
+      }
+      setTimeout(packPills, 160);
+    }
+
+    // Expandable cards in Master CV (work experience & education).
+    // initLiveCvModal runs from both the readyState branch and
+    // `astro:page-load` (which ClientRouter also fires on first load), so
+    // without this guard each card bound twice and a click toggled it open
+    // then immediately shut again.
     modal.querySelectorAll(".mcv-expandable-card").forEach((card) => {
+      if (card.dataset.expandBound === "1") return;
+      card.dataset.expandBound = "1";
+
       const toggleCard = (e) => {
         const target = e.target;
         if (target && target.closest && target.closest("a")) return;
@@ -882,6 +1060,18 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
     gap: 24px;
   }
 
+  /* Desktop keeps the tab row; this is the mobile substitute. */
+  .cv-jump {
+    display: none;
+  }
+
+  /* Desktop keeps the outline glyphs inside the labelled buttons. */
+  .mcv-action-art {
+    display: none;
+  }
+
+
+
   @media (max-width: 720px) {
     .mcv-grid-2 {
       grid-template-columns: 1fr;
@@ -897,12 +1087,14 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
     gap: 10px;
   }
 
+  /* Body copy, not a control. The bordered card read as another button on a
+     page that already has plenty. */
   .mcv-about-card {
-    background: var(--cream, #FAF7F2);
-    border: 2px solid #000000;
-    border-radius: 12px;
-    padding: 14px 18px;
-    box-shadow: 3px 3px 0px #000000;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -917,20 +1109,22 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
   }
 
   /* Education Card */
+  /* Still expandable, but the "+ details" badge carries that affordance —
+     the card itself does not need to look like a button too. */
   .mcv-edu-plain.mcv-expandable-card {
-    background: #FFFFFF;
-    border: 2px solid #000000;
-    border-radius: 12px;
-    padding: 12px 16px;
-    box-shadow: 3px 3px 0px #000000;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 2px 0 0;
+    box-shadow: none;
     cursor: pointer;
-    transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+    transition: opacity 0.15s ease;
     user-select: none;
   }
 
   .mcv-edu-plain.mcv-expandable-card:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 4px 4px 0px #000000;
+    transform: none;
+    box-shadow: none;
   }
 
   .mcv-edu-header {
@@ -1476,5 +1670,398 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
   .mcv-action-btn.linkedin-btn:hover {
     background: var(--doodle-cyan, #00B3E3);
     color: #000000;
+  }
+
+  /* ---- Live CV, mobile ------------------------------------------------ */
+  @media (max-width: 860px) {
+    /* Tab row out, one plain select in. No chrome around it — the Download
+       CV button is the thing that should carry weight in this bar. */
+    .live-cv-topbar .master-cv-nav {
+      display: none !important;
+    }
+
+    .live-cv-topbar {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 10px !important;
+      padding: 12px 14px !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .live-cv-top-left {
+      width: 100% !important;
+    }
+
+    .cv-jump {
+      display: block !important;
+      position: relative !important;
+      width: 100% !important;
+    }
+
+    .cv-jump-trigger {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+      width: 100% !important;
+      min-height: 44px !important;
+      padding: 10px 12px !important;
+      font-family: inherit !important;
+      font-size: 0.95rem !important;
+      font-weight: 700 !important;
+      color: #18181b !important;
+      background: #ffffff !important;
+      border: none !important;
+      border-bottom: 2px solid #d4d4d8 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      cursor: pointer !important;
+    }
+
+    .cv-jump-chevron {
+      transition: transform 0.2s ease !important;
+      flex: 0 0 auto !important;
+    }
+
+    .cv-jump-trigger[aria-expanded="true"] .cv-jump-chevron {
+      transform: rotate(180deg) !important;
+    }
+
+    .cv-jump-list {
+      position: absolute !important;
+      top: calc(100% + 6px) !important;
+      left: 0 !important;
+      right: 0 !important;
+      z-index: 40 !important;
+      margin: 0 !important;
+      padding: 6px !important;
+      list-style: none !important;
+      background: #ffffff !important;
+      border: 2.5px solid #000000 !important;
+      border-radius: 14px !important;
+      box-shadow: 3px 4px 0px #000000 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 2px !important;
+    }
+
+    .cv-jump-list[hidden] {
+      display: none !important;
+    }
+
+    .cv-jump-item {
+      display: block !important;
+      width: 100% !important;
+      min-height: 44px !important;
+      padding: 10px 12px !important;
+      text-align: left !important;
+      font-family: inherit !important;
+      font-size: 0.95rem !important;
+      font-weight: 700 !important;
+      color: #18181b !important;
+      background: none !important;
+      border: none !important;
+      border-radius: 9px !important;
+      cursor: pointer !important;
+    }
+
+    .cv-jump-item:active {
+      background: var(--doodle-yellow, #FFDA00) !important;
+    }
+
+    .master-cv-top-actions {
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      width: 100% !important;
+    }
+
+    /* Download is the primary action here; Copy MD steps back to a quiet
+       secondary so it stops competing. */
+    .live-cv-topbar .cv-download-btn-pill {
+      flex: 1 1 auto !important;
+      justify-content: center !important;
+      min-height: 46px !important;
+      font-size: 1rem !important;
+      font-weight: 800 !important;
+    }
+
+    .live-cv-topbar .cv-tool-btn {
+      flex: 0 0 auto !important;
+      min-height: 46px !important;
+      background: none !important;
+      box-shadow: none !important;
+      font-weight: 600 !important;
+    }
+
+    /* Work experience: the badge sat inline after the company name, so its
+       position shifted with every name length. Pin it to the right edge so
+       the cards share a column. Same for the "+ details" badge. */
+    /* .mcv-tl-left/-right are shrink-to-fit columns with min-widths, so the
+       header row only spans its own content and the badge lands wherever the
+       company name ends. Force both columns full width first. */
+    .mcv-tl-main {
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+
+    .mcv-tl-left,
+    .mcv-tl-right {
+      width: 100% !important;
+      min-width: 0 !important;
+      flex: 0 0 auto !important;
+    }
+
+    .mcv-tl-header {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+      width: 100% !important;
+    }
+
+    .mcv-tl-comp {
+      min-width: 0 !important;
+    }
+
+    .mcv-badge-sticker {
+      flex: 0 0 auto !important;
+      margin-left: auto !important;
+    }
+
+    /* "+ details" sat beside the role, which broke the reading order and
+       added yet another pill to a page full of them. Dissolve the role row
+       so role, keywords and the toggle become siblings, then order the
+       toggle last — bottom of the card, as plain text. */
+    .mcv-tl-right {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .mcv-tl-role-row {
+      display: contents !important;
+    }
+
+    .mcv-tl-role { order: 1 !important; }
+    .mcv-tl-kw { order: 2 !important; }
+
+    .mcv-tl-right .mcv-expand-toggle-badge {
+      order: 3 !important;
+      align-self: flex-start !important;
+      margin: 8px 0 0 !important;
+    }
+
+    /* Plain text, not a pill — work experience only. Education and the other
+       expandables keep their badge. */
+    .mcv-timeline-item .mcv-expand-toggle-badge {
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      /* No min-height: the whole card is the tap target (role="button"), so
+         a 44px box here only hung ~15px of empty space under the underline. */
+      min-height: 0 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 5px !important;
+      font-size: 0.82rem !important;
+      font-weight: 700 !important;
+      color: #52525b !important;
+      text-decoration: underline !important;
+      text-underline-offset: 3px !important;
+    }
+
+    /* Key competencies: the code sticker jumped left whenever a card had no
+       doodle, because space-between has nothing to push against. Anchoring
+       the sticker right keeps every card's header on the same line. */
+    .mcv-cap-card-top {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 10px !important;
+      min-height: 34px !important;
+    }
+
+    .mcv-sticker-tag {
+      margin-left: auto !important;
+      flex: 0 0 auto !important;
+    }
+
+    /* Copy MD is a desktop convenience; nobody is pasting markdown on a
+       phone, and it competes with Download CV. */
+    .live-cv-topbar .cv-tool-btn {
+      display: none !important;
+    }
+
+    .master-cv-top-actions .cv-download-btn-pill {
+      flex: 1 1 100% !important;
+    }
+
+    /* Hero hierarchy: the name owns the full width instead of sharing a row
+       with the status pill (which was squeezing it onto three lines). Then
+       roles, then the quieter meta. */
+    /* Name / job titles / [status + location]. The status pill and the
+       location pill live in different wrappers, so both wrappers are
+       dissolved with display:contents and the five items are then placed
+       explicitly on a 3-row grid. */
+    .mcv-hero-section {
+      display: grid !important;
+      grid-template-columns: max-content auto !important;
+      align-items: center !important;
+      justify-items: start !important;
+      gap: 12px 10px !important;
+    }
+
+    .mcv-hero-top-row,
+    .mcv-hero-tags {
+      display: contents !important;
+    }
+
+    .mcv-hero-name {
+      grid-column: 1 / -1 !important;
+      grid-row: 1 !important;
+    }
+
+    .mcv-hero-tags .mcv-tag.tag-cyan {
+      grid-column: 1 !important;
+      grid-row: 2 !important;
+    }
+
+    .mcv-hero-tags .mcv-tag.tag-pink {
+      grid-column: 2 / -1 !important;
+      grid-row: 2 !important;
+    }
+
+    .mcv-hero-status-pill {
+      grid-column: 1 !important;
+      grid-row: 3 !important;
+    }
+
+    .mcv-hero-tags .mcv-tag.tag-white {
+      grid-column: 2 / -1 !important;
+      grid-row: 3 !important;
+    }
+
+    .mcv-hero-name {
+      font-size: clamp(2.3rem, 11vw, 3rem) !important;
+      line-height: 0.92 !important;
+      letter-spacing: -0.055em !important;
+    }
+
+    /* Meta, so it steps back from the name it used to sit beside. */
+    .mcv-hero-status-pill {
+      padding: 4px 10px !important;
+      font-size: 0.7rem !important;
+      box-shadow: 1.5px 1.5px 0px #000000 !important;
+      border-width: 1.8px !important;
+    }
+
+    /* Role tags become coloured text; only the location stays a pill. */
+    .mcv-hero-tags .mcv-tag.tag-cyan,
+    .mcv-hero-tags .mcv-tag.tag-pink {
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      /* Sized so both titles sit on one line at 360px rather than the
+         second one wrapping inside its grid column. */
+      font-size: 0.86rem !important;
+      white-space: nowrap !important;
+    }
+
+    .mcv-hero-tags .mcv-tag.tag-cyan {
+      color: var(--doodle-cyan, #00B3E3) !important;
+    }
+
+    .mcv-hero-tags .mcv-tag.tag-pink {
+      color: var(--doodle-pink, #FF1F70) !important;
+    }
+
+    .mcv-hero-tags .mcv-tag.tag-white {
+      font-size: 0.72rem !important;
+      padding: 3px 10px !important;
+      border-width: 1.6px !important;
+      box-shadow: 1.5px 1.5px 0px #000000 !important;
+    }
+
+    /* Skills: flex-wrap fills strictly in source order, so a long pill can
+       strand a half-empty line. Tightening the metrics is the part CSS can
+       actually do — it fits more per line without reordering the list. */
+    .mcv-pills {
+      gap: 5px !important;
+    }
+
+    .mcv-pill {
+      font-size: 0.7rem !important;
+      padding: 3px 8px !important;
+      box-shadow: 1.5px 1.5px 0px #000000 !important;
+      border-width: 1.6px !important;
+    }
+
+    /* Footer, matched to the case-study footer: one primary button plus the
+       two contact links as icons. */
+    .mcv-footer {
+      flex-wrap: wrap !important;
+      align-items: center !important;
+      justify-content: center !important;
+      /* The download button plus two 48px icons need 288px; the original
+         28px side padding left only 284, so they wrapped onto two rows. */
+      gap: 10px !important;
+      padding: 20px 12px !important;
+    }
+
+    .mcv-footer-left,
+    .mcv-footer-right {
+      display: contents !important;
+    }
+
+    .mcv-footer-title {
+      order: 1 !important;
+      flex: 0 0 100% !important;
+    }
+
+    .mcv-footer-right .cv-download-btn-pill.hero-lg {
+      order: 2 !important;
+      min-height: 48px !important;
+    }
+
+    .mcv-footer-btns-row {
+      order: 3 !important;
+      display: flex !important;
+      gap: 10px !important;
+    }
+
+    .mcv-action-btn {
+      min-width: 48px !important;
+      min-height: 48px !important;
+      justify-content: center !important;
+      padding: 0 !important;
+    }
+
+    .mcv-action-btn span {
+      display: none !important;
+    }
+
+    /* Same artwork as the menu chain and the case-study footer, instead of
+       the outline glyphs the labelled desktop buttons use. */
+    .mcv-action-glyph {
+      display: none !important;
+    }
+
+    .mcv-action-art {
+      display: block !important;
+      width: 34px !important;
+      height: auto !important;
+    }
+
+    .mcv-action-btn {
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
   }
 </style>

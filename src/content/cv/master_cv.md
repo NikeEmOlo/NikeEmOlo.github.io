@@ -51,7 +51,7 @@ experience:
     overview: "An open-source, project-based, full-stack web development curriculum."
     bullets:
       - "Designed and deployed a multi-agent, agentic AI workflow using OpenClaw and Claude to automate the job-search process, reducing time spent by 83%."
-      - "Developed the knowledge needed to create a full-stack web-application without the use of AI, providing the fundamental knowledge to harness the power of AI."
+      - "Developed the knowledge needed to create a full-stack web application without the use of AI, providing the fundamental knowledge to harness the power of AI."
 
   - company: "Outer Office"
     badge: "Freelance"
@@ -71,7 +71,7 @@ experience:
     keywords: "Client Reporting, Regulatory Compliance, Transport Planning Research"
     overview: "Highgate Transportation, Bristol, UK - Transport consultancy."
     bullets:
-      - "Produced client-facing reports, and conducted research to support transport planning proposals, recommendations, and regulatory compliance."
+      - "Produced client-facing reports and conducted research to support transport planning proposals, recommendations, and regulatory compliance."
 
   - company: "Auckland Transport"
     badge: "Public Organisation"
@@ -106,7 +106,7 @@ experience:
     overview: "Coster Content Ltd, Manchester, UK - Marketing copy agency."
     bullets:
       - "Produced high-converting B2B copywriting, marketing collateral, and strategic value propositions for agency clients across diverse sectors."
-      - "Synthesized complex service architectures and business requirements into clear, compelling narratives."
+      - "Synthesised complex service architectures and business requirements into clear, compelling narratives."
 
 competencies:
   - title: "AI & Automation"
