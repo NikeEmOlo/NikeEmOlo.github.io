@@ -253,13 +253,12 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
         /* One source of truth for the card footprint: the playmat slots, the
            deck items and the stage that holds them all derive from it.
            Deliberately not the global --deck-card-w, which is a different
-           (tarot) size on :root. */
+           (tarot) size on :root. This is the card's ON-SCREEN size. */
         --hero-card-w: clamp(200px, 17.5vw, 255px);
-        /* Card is 600x921. The focused card is not scaled — deckController
-           pushes it 180px towards the viewer, and the stage's 1400px
-           perspective magnifies it by 1400 / (1400 - 180) = 1.148. That is
-           the height the stage actually has to give it. */
-        --hero-card-h: calc(var(--hero-card-w) * 921 / 600 * 1.148);
+        /* Card is 600x921 and the focused card now renders 1:1 (see
+           deckController: no depth lift at the plateau), so the stage needs
+           exactly the card's own height. */
+        --hero-card-h: calc(var(--hero-card-w) * 921 / 600);
 
         display: flex;
         flex-direction: column;

@@ -360,6 +360,7 @@ export class CardDeckController {
     _applyTransforms() {
         if (this.totalCards === 0) return;
 
+
         // Strictly clamp progress
         const p = Math.max(0, Math.min(this.totalCards - 1, this.progress));
         const currentIdx = Math.min(Math.floor(p), this.totalCards - 1);
@@ -410,7 +411,12 @@ export class CardDeckController {
                     // 100% STATIONARY IN TRUE VIEWPORT CENTER (Scale 1.0 = Crisp 1:1 Face-Up Rendering)
                     x = this.centerX;
                     y = 0;
-                    z = 180;
+                    // No forward lift: at z > 0 the stage's perspective
+                    // magnifies the card, and the compositor rasterises a
+                    // magnified layer at its layout size and scales it up,
+                    // which visibly softens the card's type. At z = 0 the
+                    // focused card composites 1:1 and its text is sharp.
+                    z = 0;
                     scale = 1.0;
                     rotateY = 0; // 100% Face-up
                     rotateX = 0;
@@ -425,7 +431,7 @@ export class CardDeckController {
 
                     x = this.centerX + (targetDiscardX - this.centerX) * s;
                     y = targetDiscardY * s - Math.sin(u * Math.PI) * 45; // Parabolic flight lift
-                    z = 180 * (1 - s);
+                    z = 0;
                     scale = 1.0 + (0.88 - 1.0) * s;
 
                     // Inverted flip: rotates 0° (face-up) -> -180° (face-down)
@@ -461,7 +467,7 @@ export class CardDeckController {
 
                     x = startDeckX + (this.centerX - startDeckX) * s;
                     y = startDeckY * (1 - s) - Math.sin(u * Math.PI) * 35;
-                    z = s * 180;
+                    z = 0;
                     scale = 0.88 + (1.0 - 0.88) * s;
 
                     // Flips from 180° (face-down on deck) -> 0° (face-up reveal in center)
