@@ -45,10 +45,10 @@ const cv = cvEntry?.data;
         </div>
       )}
 
-      <!-- THE DESKTOP STAGE (SCALES UP SMOOTHLY TO FILL SCREEN) -->
+      <!-- THE DESKTOP STAGE (SCALES UP SMOOTHLY TO FILL SCREEN ON DESKTOP) -->
       <div class="desktop-zoom-container" data-desktop-zoom id="desktopZoomContainer">
         
-        <!-- DEVICE / SCREEN MOCKUP BEZEL (THICK BLACK LINES) -->
+        <!-- DEVICE / SCREEN MOCKUP BEZEL (DESKTOP) -->
         <div class="device-screen-mockup" data-screen-mockup>
           
           <!-- Top Bezel Web Camera -->
@@ -825,7 +825,7 @@ const cv = cvEntry?.data;
                     </div>
                   </div>
 
-                  <!-- Interactive Jobs Table (Streamlined 5-Column High-Hierarchy Layout) -->
+                  <!-- Interactive Jobs Table & Mobile Cards List -->
                   <div class="mc-table-container">
                     <table class="mc-jobs-table">
                       <thead>
@@ -841,6 +841,11 @@ const cv = cvEntry?.data;
                         <!-- Injected dynamically by JavaScript with interactive yes/no decision buttons and click-to-open modal -->
                       </tbody>
                     </table>
+
+                    <!-- Mobile Responsive Job Cards -->
+                    <div class="mc-mobile-cards-list" id="mcMobileCardsList">
+                      <!-- Injected dynamically by JavaScript for mobile screens -->
+                    </div>
                   </div>
 
                 </main>
@@ -1069,10 +1074,20 @@ const cv = cvEntry?.data;
       <div class="wf-steps-header">
         <span class="wf-steps-eyebrow">The workflow, written down</span>
         <h2 class="wf-steps-title">
-          If you don't want to play with the cool interactive desktop, I guess you
-          can read this instead <span class="wf-cough">*cough*</span> boring
-          <span class="wf-cough">*cough*</span>
+          <!-- The desktop line jokes about not playing with the interactive
+               desktop, which mobile cannot reach at all. Each gets its own. -->
+          <span class="wf-title-desktop">
+            If you don't want to play with the cool interactive desktop, I guess you
+            can read this instead <span class="wf-cough">*cough*</span> boring
+            <span class="wf-cough">*cough*</span>
+          </span>
+          <span class="wf-title-mobile">
+            Each step returns hours of time to my hands
+          </span>
         </h2>
+        <div class="wf-mobile-swipe-badge" aria-hidden="true">
+          <span class="wf-swipe-text-desktop">Swipe to explore steps &rarr;</span>
+        </div>
       </div>
 
       <ol class="wf-chain">
@@ -1166,7 +1181,7 @@ const cv = cvEntry?.data;
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
         </li>
-        <li class="wf-node is-last" style="--wf-accent: var(--doodle-cyan, #00B3E3); --wf-ink: #000000;">
+        <li class="wf-node" style="--wf-accent: var(--doodle-cyan, #00B3E3); --wf-ink: #000000;">
           <div class="wf-node-card">
             <div class="wf-node-top">
               <span class="wf-step-num">06</span>
@@ -1184,15 +1199,34 @@ const cv = cvEntry?.data;
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
         </li>
+
+        <!-- Outro: was a footnote under the chain, now the closing card of the
+             chain itself, on desktop as well as mobile. -->
+        <li class="wf-node wf-node-outro is-last" style="--wf-accent: #A1A1AA; --wf-ink: #000000;">
+          <div class="wf-node-card">
+            <div class="wf-node-top">
+              <span class="wf-step-num">07</span>
+              <span class="wf-node-tag">HUMAN STARTS HERE</span>
+            </div>
+            <h3 class="wf-node-title">Nothing is submitted for me</h3>
+            <p class="wf-node-lead">
+              This human-in-the-loop system means I check tailored CVs, and apply
+              myself to selected jobs. Why? Quality control.<span class="wf-readme-sentence">
+              For more information, view
+              <button class="wf-readme-link" type="button" id="wfReadmeLink">README</button>
+              in the interactive desktop.</span>
+            </p>
+          </div>
+        </li>
       </ol>
 
-      <p class="wf-chain-footnote">
-        The workflow stops here. Nothing is submitted on my behalf: I read the
-        tailored CV, check the reasoning behind the score, and apply myself to
-        selected jobs. For more information, view
-        <button class="wf-readme-link" type="button" id="wfReadmeLink">README</button>
-        in the interactive desktop.
-      </p>
+      <!-- Carousel position indicator. Mobile only; built and driven by
+           initWorkflowCarousel() so it always matches the number of steps. -->
+      <div class="wf-swipe-nav" hidden>
+        <button class="wf-swipe-arrow" type="button" data-wf-prev aria-label="Previous step">&#8249;</button>
+        <div class="wf-swipe-dots" data-wf-dots></div>
+        <button class="wf-swipe-arrow" type="button" data-wf-next aria-label="Next step">&#8250;</button>
+      </div>
     </div>
   </section>
 
@@ -5798,8 +5832,17 @@ const cv = cvEntry?.data;
     .wf-node:nth-child(5) .wf-connector::after {
       top: 50%; margin-top: -5.5px; left: auto; margin-left: 0;
     }
+    /* Outro card sits directly below step 06, so 06's connector turns down. */
+    .wf-node:nth-child(7) { grid-area: 4 / 2; }
+    .wf-node:nth-child(6) .wf-connector {
+      --wf-dir: 180deg; --wf-flow: wfFlowV; --wf-bead: wfBeadV; --wf-bead-dir: normal;
+      top: 100%; left: 50%; right: auto;
+      width: 9px; height: var(--wf-gap);
+      transform: translateX(-50%);
+    }
     .wf-node:nth-child(2) .wf-connector::after,
-    .wf-node:nth-child(4) .wf-connector::after {
+    .wf-node:nth-child(4) .wf-connector::after,
+    .wf-node:nth-child(6) .wf-connector::after {
       left: 50%; margin-left: -5.5px; top: auto; margin-top: 0;
     }
   }
@@ -5840,7 +5883,16 @@ const cv = cvEntry?.data;
     .wf-node:nth-child(5) .wf-connector::after {
       top: 50%; margin-top: -5.5px; left: auto; margin-left: 0;
     }
-    .wf-node:nth-child(3) .wf-connector::after {
+    /* Outro card sits directly below step 06, so 06's connector turns down. */
+    .wf-node:nth-child(7) { grid-area: 3 / 1; }
+    .wf-node:nth-child(6) .wf-connector {
+      --wf-dir: 180deg; --wf-flow: wfFlowV; --wf-bead: wfBeadV; --wf-bead-dir: normal;
+      top: 100%; left: 50%; right: auto;
+      width: 9px; height: var(--wf-gap);
+      transform: translateX(-50%);
+    }
+    .wf-node:nth-child(3) .wf-connector::after,
+    .wf-node:nth-child(6) .wf-connector::after {
       left: 50%; margin-left: -5.5px; top: auto; margin-top: 0;
     }
   }
@@ -5862,6 +5914,11 @@ const cv = cvEntry?.data;
   .wf-readme-link:hover,
   .wf-readme-link:focus-visible {
     box-shadow: inset 0 -1.05em 0 var(--doodle-yellow, #ffda00);
+  }
+
+  /* Desktop keeps the original copy; the mobile variants are opt-in. */
+  .wf-title-mobile {
+    display: none;
   }
 
   .wf-chain-footnote {
@@ -5931,6 +5988,296 @@ const cv = cvEntry?.data;
     }
     .test-slider-row {
       display: none;
+    }
+  }
+
+  /* ---------------------------------------------------- */
+  /* MOBILE PHONE SCREEN MOCKUP STYLES (max-width: 860px) */
+  /* ---------------------------------------------------- */
+  .mobile-phone-screen {
+    display: none;
+  }
+
+  .mc-mobile-cards-list {
+    display: none;
+  }
+
+  .mobile-swipe-prompt {
+    display: none;
+  }
+
+  @media (max-width: 860px) {
+    /* Allow runway & sticky viewport to display naturally so slotted stage-curtain renders */
+    .how-runway {
+      display: block !important;
+      position: static !important;
+      height: auto !important;
+      min-height: 0 !important;
+      background: transparent !important;
+    }
+
+    .how-sticky-viewport {
+      display: block !important;
+      position: static !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      min-height: 0 !important;
+      overflow: visible !important;
+      background: transparent !important;
+    }
+
+    /* Hide desktop-only UI components on mobile */
+    .how-header-overlay,
+    .desktop-zoom-container,
+    .device-screen-mockup,
+    .anim-test-toolbar {
+      display: none !important;
+    }
+
+    .how-it-works-section {
+      padding: 0 !important;
+      background: transparent !important;
+    }
+
+    /* Section 06 // The Workflow Written Down */
+    .workflow-steps-section {
+      padding: 60px 16px 80px !important;
+      background: var(--cream, #f2efe8) !important;
+    }
+
+    .wf-steps-header {
+      text-align: center !important;
+      margin-bottom: 32px !important;
+    }
+
+    .wf-steps-eyebrow {
+      font-size: 0.72rem !important;
+      font-family: monospace !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.06em !important;
+      color: #71717a !important;
+    }
+
+    .wf-steps-title {
+      font-size: clamp(1.22rem, 4.8vw, 1.55rem) !important;
+      line-height: 1.25 !important;
+      text-align: center !important;
+    }
+
+    .wf-chain {
+      gap: 16px !important;
+    }
+
+    .wf-node-card {
+      padding: 16px !important;
+      border: 2.5px solid #000000 !important;
+      border-radius: 16px !important;
+      box-shadow: 3px 4px 0px #000000 !important;
+      background: #ffffff !important;
+    }
+
+    .wf-node-title {
+      font-size: 1rem !important;
+      line-height: 1.3 !important;
+    }
+
+    .wf-node-lead {
+      font-size: 0.85rem !important;
+      line-height: 1.4 !important;
+    }
+
+    /* ---- Horizontal swipe carousel (mobile only) ------------------------
+       Five full-width stacked cards made this section an endless scroll.
+       Here the chain becomes a snap carousel: one card at a time, the next
+       one peeking at the right edge so the affordance is visible without
+       reading the hint. */
+    /* The arrows and dots already say "there is more sideways". */
+    .wf-mobile-swipe-badge {
+      display: none !important;
+    }
+
+    .wf-title-desktop {
+      display: none !important;
+    }
+
+    .wf-title-mobile {
+      display: inline !important;
+    }
+
+    /* An eyebrow, not a button: it labels the section, it does not invite a
+       tap. The pill styling made it read as an action on mobile. */
+    .wf-steps-eyebrow {
+      display: block !important;
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      font-family: monospace !important;
+      font-size: 0.7rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1em !important;
+      text-transform: uppercase !important;
+      color: #8a8a93 !important;
+    }
+
+    /* The interactive desktop this points at does not exist below 860px. */
+    .wf-readme-sentence {
+      display: none !important;
+    }
+
+    .wf-chain {
+      display: flex !important;
+      grid-template-columns: none !important;
+      /* stretch, so every card matches the tallest in the track and the
+         carousel does not jump height as you swipe */
+      align-items: stretch !important;
+      gap: 14px !important;
+      overflow-x: auto !important;
+      overflow-y: visible !important;
+      scroll-snap-type: x mandatory !important;
+      overscroll-behavior-x: contain !important;
+      -webkit-overflow-scrolling: touch !important;
+      /* Bleed past the section gutter so a card can peek at each edge, and
+         pad the track so the cards' hard drop-shadows are not clipped. */
+      margin: 0 -16px !important;
+      /* Side padding of (track - card)/2 so the first and last cards can
+         actually reach the centre; without it snap-align:center strands them
+         against the edges. */
+      padding: 6px calc((100vw - min(82vw, 330px)) / 2) 20px !important;
+      scroll-padding-inline: 0 !important;
+      scrollbar-width: none !important;
+    }
+
+    .wf-chain::-webkit-scrollbar {
+      display: none !important;
+    }
+
+    .wf-node {
+      /* Sized in vw, not %, so it matches the track's vw-based side padding.
+         A percentage would resolve against the already-padded content box,
+         leaving the first and last cards ~29px off centre. */
+      flex: 0 0 min(82vw, 330px) !important;
+      max-width: none !important;
+      scroll-snap-align: center !important;
+      scroll-snap-stop: always !important;
+    }
+
+    /* Card fills the stretched track row, and its own column layout pushes
+       the Read more button to the bottom so the buttons line up card to card. */
+    .wf-node-card {
+      height: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+    }
+
+    .wf-expand-btn {
+      margin-top: auto !important;
+    }
+
+    .wf-node-outro .wf-node-lead {
+      margin-bottom: 0 !important;
+    }
+
+    /* Vertical spine between stacked steps — meaningless side by side. */
+    .wf-connector {
+      display: none !important;
+    }
+
+    .wf-swipe-nav {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 14px !important;
+      margin-top: 6px !important;
+    }
+
+    .wf-swipe-nav[hidden] {
+      display: none !important;
+    }
+
+    .wf-swipe-arrow {
+      width: 44px !important;
+      height: 44px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      font-size: 1.35rem !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      color: #000000 !important;
+      background: #ffffff !important;
+      border: 2.5px solid #000000 !important;
+      border-radius: 9999px !important;
+      box-shadow: 2px 3px 0px #000000 !important;
+      cursor: pointer !important;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.15s ease !important;
+    }
+
+    .wf-swipe-arrow:active {
+      transform: translate(1px, 2px) !important;
+      box-shadow: 0px 0px 0px #000000 !important;
+    }
+
+    .wf-swipe-arrow:disabled {
+      opacity: 0.32 !important;
+      cursor: default !important;
+      box-shadow: 1px 1.5px 0px #000000 !important;
+    }
+
+    .wf-swipe-dots {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+    /* Dots are created by initWorkflowCarousel(), so they never receive this
+       component's data-astro-cid attribute — they must be matched globally. */
+    .wf-swipe-dots :global(.wf-dot) {
+      width: 10px !important;
+      height: 10px !important;
+      min-width: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border-radius: 9999px !important;
+      border: 2px solid #000000 !important;
+      background: #ffffff !important;
+      box-sizing: border-box !important;
+      cursor: pointer !important;
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      transition: width 0.2s ease, background-color 0.2s ease !important;
+    }
+
+    .wf-swipe-dots :global(.wf-dot.is-current) {
+      width: 26px !important;
+      background: var(--doodle-yellow, #FFDA00) !important;
+    }
+
+    .wf-expand-btn {
+      min-height: 44px !important;
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
+    }
+
+    /* This sits mid-sentence and its yellow highlight is an inset box-shadow
+       measured in em from the box's bottom edge — stretching the box to a
+       44px tap target dragged the highlight far below the text. Grow the hit
+       area with an overlay instead, leaving the visual box alone. */
+    .wf-readme-link {
+      position: relative !important;
+    }
+
+    .wf-readme-link::after {
+      content: "" !important;
+      position: absolute !important;
+      left: 0 !important;
+      right: 0 !important;
+      top: 50% !important;
+      height: 44px !important;
+      transform: translateY(-50%) !important;
     }
   }
 </style>
@@ -7264,6 +7611,111 @@ const cv = cvEntry?.data;
 
         mcJobsTableBody.appendChild(tr);
       });
+
+      // Populate Mobile Job Cards List for Mobile Viewports
+      const mcMobileCardsList = document.getElementById("mcMobileCardsList");
+      if (mcMobileCardsList) {
+        mcMobileCardsList.innerHTML = "";
+        if (filtered.length === 0) {
+          mcMobileCardsList.innerHTML = `
+            <div style="text-align: center; padding: 24px; color: #a1a1aa; font-family: monospace; font-size: 0.8rem;">
+              👾 No matching roles found for current filter.
+            </div>
+          `;
+        } else {
+          filtered.forEach((job) => {
+            const card = document.createElement("div");
+            card.className = `mc-job-card ${job.decision === 'approved' ? 'is-approved' : ''} ${job.decision === 'rejected' ? 'is-rejected' : ''} ${job.decision === 'pending' ? 'is-pending' : ''}`;
+            
+            let statusBtnHtml = "";
+            if (job.decision === "pending") {
+              statusBtnHtml = `<span class="mc-card-act-btn approve-btn" style="background: #F59E0B; cursor: default;">⏳ Tailoring (~2s)...</span>`;
+            } else if (job.decision === "approved") {
+              statusBtnHtml = `<button class="mc-card-act-btn view-cv-btn" data-job-id="${job.id}" type="button">📄 VIEW CV</button>`;
+            } else if (job.decision === "rejected") {
+              statusBtnHtml = `<button class="mc-card-act-btn feedback-btn" data-job-id="${job.id}" type="button">💬 FEEDBACK</button>`;
+            }
+
+            card.innerHTML = `
+              <div class="mc-card-top-row">
+                <div class="mc-card-title-stack">
+                  <span class="mc-card-role-title">${job.title}</span>
+                  <span class="mc-card-company-sub">${job.company} • ${job.location} • ${job.salary}</span>
+                </div>
+                <span class="mc-card-score-badge">${job.score}% MATCH</span>
+              </div>
+              <div class="mc-card-snippet-box">
+                <span>${job.snippet}</span>
+              </div>
+              <div class="mc-card-action-bar">
+                <div class="mc-card-decision-group">
+                  <button class="mc-card-act-btn approve-btn ${job.decision === 'approved' ? 'is-active' : ''}" data-act="approve" type="button">
+                    ${job.decision === 'approved' ? '✓ Approved' : '✓ Approve'}
+                  </button>
+                  <button class="mc-card-act-btn reject-btn ${job.decision === 'rejected' ? 'is-active' : ''}" data-act="reject" type="button">
+                    ${job.decision === 'rejected' ? '✕ Rejected' : '✕ Reject'}
+                  </button>
+                  ${statusBtnHtml}
+                </div>
+                <button class="mc-card-act-btn details-btn" data-act="details" type="button">Details ↗</button>
+              </div>
+            `;
+
+            const cardApproveBtn = card.querySelector(".mc-card-act-btn.approve-btn");
+            const cardRejectBtn = card.querySelector(".mc-card-act-btn.reject-btn");
+            const cardDetailsBtn = card.querySelector(".mc-card-act-btn.details-btn");
+            const cardViewCvBtn = card.querySelector(".mc-card-act-btn.view-cv-btn");
+            const cardFeedbackBtn = card.querySelector(".mc-card-act-btn.feedback-btn");
+
+            if (cardApproveBtn) {
+              cardApproveBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                triggerApproveRole(job);
+              });
+            }
+
+            if (cardRejectBtn) {
+              cardRejectBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                playClickSound();
+                job.decision = job.decision === "rejected" ? "none" : "rejected";
+                if (job.decision === "none") {
+                  job.status = "NEW";
+                  job.statusClass = "new";
+                }
+                renderMissionJobs();
+              });
+            }
+
+            if (cardDetailsBtn) {
+              cardDetailsBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                openMissionJobModal(job.id);
+              });
+            }
+
+            if (cardViewCvBtn) {
+              cardViewCvBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                openCvTailorModal(job.id);
+              });
+            }
+
+            if (cardFeedbackBtn) {
+              cardFeedbackBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                openFeedbackLoopModal(job.id);
+              });
+            }
+
+            card.addEventListener("click", () => {
+              openMissionJobModal(job.id);
+            });
+
+            mcMobileCardsList.appendChild(card);
+          });
+        }
+      }
     }
 
     function openMissionControl() {
@@ -7331,7 +7783,15 @@ const cv = cvEntry?.data;
     }
 
     // Web Audio Synthesizer for UI Clicks & Notifications
+    // The interactive desktop is display:none below 860px, but its timers,
+    // toasts and terminal stream still tick. Never make noise where the UI
+    // that justifies it cannot be seen or reached.
+    function isDesktopSimAudible() {
+      return window.matchMedia("(min-width: 861px)").matches;
+    }
+
     function playClickSound() {
+      if (!isDesktopSimAudible()) return;
       try {
         const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
         if (!AudioCtx) return;
@@ -7351,6 +7811,7 @@ const cv = cvEntry?.data;
     }
 
     function playPopSound() {
+      if (!isDesktopSimAudible()) return;
       try {
         const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
         if (!AudioCtx) return;
@@ -7370,6 +7831,7 @@ const cv = cvEntry?.data;
     }
 
     function playChime() {
+      if (!isDesktopSimAudible()) return;
       try {
         const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
         if (!AudioCtx) return;
@@ -7389,6 +7851,7 @@ const cv = cvEntry?.data;
     }
 
     function playKeyTick() {
+      if (!isDesktopSimAudible()) return;
       try {
         const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
         if (!AudioCtx) return;
@@ -7407,6 +7870,7 @@ const cv = cvEntry?.data;
     }
 
     function playSlackSound() {
+      if (!isDesktopSimAudible()) return;
       try {
         const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
         if (!AudioCtx) return;
@@ -8178,8 +8642,18 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
       });
     });
 
-    // Expandable cards in Master CV (work experience & education)
-    document.querySelectorAll(".mcv-expandable-card").forEach((card) => {
+    // Expandable cards in this window's Master CV (work experience & education).
+    // Scoped to #osMasterCvModal on purpose: this used to be a document-wide
+    // query, so it also bound every card inside the Live CV modal, which has
+    // its own handler in LivingCV.astro. Two handlers on one toggle cancel
+    // each other out, which is why "+ details" did nothing there. The dataset
+    // guard covers this init running twice (ClientRouter fires astro:page-load
+    // on first load as well).
+    document
+      .querySelectorAll("#osMasterCvModal .mcv-expandable-card")
+      .forEach((card) => {
+      if ((card as HTMLElement).dataset.expandBound === "1") return;
+      (card as HTMLElement).dataset.expandBound = "1";
       card.addEventListener("click", (e) => {
         const target = e.target as HTMLElement;
         // Don't intercept if user clicks a link inside
@@ -8399,10 +8873,99 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
     onScroll();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initHowItWorks);
-  } else {
-    initHowItWorks();
+  // ---- Mobile workflow carousel ----------------------------------------
+  // The chain becomes a horizontal snap track below 860px (see the media
+  // query). This drives the dots + arrows and keeps them in sync with
+  // whatever the user swipes. Desktop keeps the vertical grid untouched.
+  function initWorkflowCarousel() {
+    const chain = document.querySelector(".wf-chain") as HTMLElement | null;
+    const nav = document.querySelector(".wf-swipe-nav") as HTMLElement | null;
+    const dotsWrap = document.querySelector("[data-wf-dots]") as HTMLElement | null;
+    const prevBtn = document.querySelector("[data-wf-prev]") as HTMLButtonElement | null;
+    const nextBtn = document.querySelector("[data-wf-next]") as HTMLButtonElement | null;
+    if (!chain || !nav || !dotsWrap || !prevBtn || !nextBtn) return;
+    if (chain.dataset.carouselBound === "true") return;
+    chain.dataset.carouselBound = "true";
+
+    const nodes = Array.from(chain.querySelectorAll<HTMLElement>(".wf-node"));
+    if (!nodes.length) return;
+
+    const isCarousel = () => window.matchMedia("(max-width: 860px)").matches;
+
+    dotsWrap.innerHTML = "";
+    const dots = nodes.map((_, i) => {
+      const d = document.createElement("button");
+      d.type = "button";
+      d.className = "wf-dot";
+      d.setAttribute("aria-label", `Go to step ${i + 1} of ${nodes.length}`);
+      d.addEventListener("click", () => scrollToIndex(i));
+      dotsWrap.appendChild(d);
+      return d;
+    });
+
+    let current = 0;
+
+    function scrollToIndex(i: number) {
+      const target = nodes[Math.max(0, Math.min(i, nodes.length - 1))];
+      if (!target || !chain) return;
+      // centre the card in the track, matching scroll-snap-align: center
+      chain.scrollTo({
+        left:
+          target.offsetLeft -
+          chain.offsetLeft -
+          (chain.clientWidth - target.offsetWidth) / 2,
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+    }
+
+    function syncFromScroll() {
+      if (!chain) return;
+      // Nearest card to the track's centre is the one in view.
+      const x = chain.scrollLeft + chain.offsetLeft + chain.clientWidth / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      nodes.forEach((n, i) => {
+        const dist = Math.abs(n.offsetLeft + n.offsetWidth / 2 - x);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = i;
+        }
+      });
+      current = best;
+      dots.forEach((d, i) => d.classList.toggle("is-current", i === best));
+      prevBtn!.disabled = best === 0;
+      nextBtn!.disabled = best === nodes.length - 1;
+    }
+
+    prevBtn.addEventListener("click", () => scrollToIndex(current - 1));
+    nextBtn.addEventListener("click", () => scrollToIndex(current + 1));
+    chain.addEventListener("scroll", syncFromScroll, { passive: true });
+
+    function applyMode() {
+      if (isCarousel()) {
+        nav.removeAttribute("hidden");
+        syncFromScroll();
+      } else {
+        nav.setAttribute("hidden", "");
+        chain!.scrollLeft = 0;
+      }
+    }
+
+    window.addEventListener("resize", applyMode);
+    applyMode();
   }
-  document.addEventListener("astro:page-load", initHowItWorks);
+
+  function initWorkflowAll() {
+    initHowItWorks();
+    initWorkflowCarousel();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initWorkflowAll);
+  } else {
+    initWorkflowAll();
+  }
+  document.addEventListener("astro:page-load", initWorkflowAll);
 </script>
