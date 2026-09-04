@@ -2,17 +2,11 @@
 export interface Props {
     project?: any;
     title?: string;
-    subtitle?: string;
-    category?: string;
     summary?: string;
-    statLabel?: string;
-    statValue?: string;
-    iconSrc?: string;
     imageUrl?: string;
     maskUrl?: string;
     backUrl?: string;
     cardBg?: string;
-    borderColor?: string;
     borderWidth?: string;
     holoEffect?: "secret_rare_etched" | "cosmos_galaxy" | "radiant_laser" | "rainbow_secret" | "shiny_rare" | "v_full_art" | string;
     active?: boolean;
@@ -22,16 +16,11 @@ const props = Astro.props;
 const pData = props.project?.data || props.project || {};
 
 const title = props.title || pData.projTitle || pData.title || "PROJECT TITLE";
-const subtitle = props.subtitle || "Case Study";
 const summary = props.summary !== undefined ? props.summary : (pData.summary || "");
-const statLabel = props.statLabel || pData.holoStatLabel || "RESULTS";
-const statValue = props.statValue || pData.holoStatValue || (pData.category === "operations" ? "+100 Efficiency" : (pData.category === "delivery" ? "+100 Delivery" : (pData.category === "development" ? "+100 Full-Stack" : "-")));
-const iconSrc = props.iconSrc !== undefined ? props.iconSrc : pData.iconSrc;
 const imageUrl = props.imageUrl !== undefined ? props.imageUrl : pData.imageUrl;
 const maskUrl = props.maskUrl !== undefined ? props.maskUrl : pData.maskUrl;
 const backUrl = props.backUrl || pData.backUrl || "/img/card-back-generic.svg";
 const cardBg = props.cardBg || pData.cardBg || "#00B3E3";
-const borderColor = props.borderColor || pData.borderColor || cardBg;
 const borderWidth = props.borderWidth || pData.borderWidth || "10px";
 const holoEffect = props.holoEffect || pData.holoEffect || "secret_rare_etched";
 const active = props.active !== undefined ? props.active : (pData.active !== undefined ? pData.active : true);
