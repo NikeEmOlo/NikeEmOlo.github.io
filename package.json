@@ -7,11 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "dev:chat": "node --env-file=../../.env server/chat-server.mjs",
     "build": "astro build",
     "preview": "astro preview",
-    "test:e2e": "node tests/verify_tarot_holo.mjs",
-    "test:deck": "node tests/verify_projects_page.mjs",
     "astro": "astro"
   },
   "dependencies": {
