@@ -1677,6 +1677,12 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     display: flex;
     gap: 16px;
     align-items: flex-start;
+    /* The two sub-agent cards share a grid row, so the shorter one is
+       stretched to match its neighbour. Without something to absorb that
+       slack the leftover height collected below the telemetry tray, leaving
+       Willow's footer floating mid-card. The body takes it instead, so the
+       tray stays pinned to the bottom edge of both cards. */
+    flex: 1;
   }
 
   .node-icon-col {
