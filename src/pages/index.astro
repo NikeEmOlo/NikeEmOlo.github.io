@@ -697,24 +697,53 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
             overflow-y: auto;
             overflow-x: hidden;
             padding: 24px 20px 32px;
-            gap: 20px;
+            gap: 12px;
         }
 
+        /* Centred on mobile. The right padding that used to keep the
+           left-aligned block clear of the hamburger would pull the optical
+           centre off-axis, so the block clears the button vertically instead. */
         .hero-header {
-            padding-right: 60px;
+            align-items: center;
+            text-align: center;
+            padding-right: 0;
+            /* Sits low in its own band: clears the hamburger above and closes
+               the run of empty canvas down to the "projects" heading. */
+            padding-top: 72px;
         }
 
+        /* The deck-top-group below gives up height (smaller "projects"
+           heading, tighter gap, collapsed filter), so the hero can carry it. */
         .hero-title {
-            font-size: clamp(1.5rem, 5.5vw, 2.25rem);
+            font-size: clamp(1.75rem, 7.4vw, 2.5rem);
         }
 
         .hero-subtitle {
-            font-size: clamp(0.95rem, 3.2vw, 1.25rem);
+            font-size: clamp(1.15rem, 4.6vw, 1.5rem);
+            margin: 8px auto 0;
         }
 
         .deck-flex-container {
             flex: none;
-            gap: 16px;
+            gap: 10px;
+            /* The filter rail no longer occupies three wrapped rows here, so
+               the deck can sit closer to the title. */
+            padding-top: 0;
+        }
+
+        .deck-top-group {
+            gap: 8px;
+        }
+
+        .projects-main-title {
+            font-size: 1.3rem;
+            padding-bottom: 5px;
+        }
+
+        .projects-main-title::after {
+            height: 2.5px;
+            left: -10px;
+            right: -10px;
         }
 
         .scroll-cue-desktop {
@@ -725,8 +754,10 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
             display: inline;
         }
 
+        /* The card is ~352px tall and sits centred in the stage, so every
+           pixel of extra stage height became dead space above and below it. */
         .deck-stage {
-            height: 440px;
+            height: 380px;
         }
 
         .playmat-slot {
