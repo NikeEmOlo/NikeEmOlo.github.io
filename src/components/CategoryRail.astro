@@ -5,7 +5,25 @@ const { counts, total } = Astro.props;
 ---
 
 <nav class="category-toolbar" id="category-rail" aria-label="Filter projects by discipline">
-    <div class="toolbar-pill-group">
+    <!-- Mobile-only trigger. Hidden on desktop, where the pills stay a rail. -->
+    <button
+        type="button"
+        class="rail-dropdown-trigger"
+        id="railDropdownTrigger"
+        aria-expanded="false"
+        aria-controls="railPillGroup"
+    >
+        <span class="trigger-label" aria-hidden="true">FILTER:</span>
+        <span class="trigger-value" data-trigger-value>All Work</span>
+        <span class="trigger-count" data-trigger-count>{String(total).padStart(2, "0")}</span>
+        <span class="trigger-chevron" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </span>
+    </button>
+
+    <div class="toolbar-pill-group" id="railPillGroup">
         <span class="toolbar-label" aria-hidden="true">FILTER:</span>
         <button
             type="button"
@@ -201,4 +219,200 @@ const { counts, total } = Astro.props;
         color: #000000;
         background: #ffffff;
     }
+
+    /* ── Mobile: collapse the rail into a dropdown ──
+       The pill rail wrapped onto three lines on a phone and ate the vertical
+       space the card deck needed. Below 900px the same buttons become a
+       panel that opens over the deck instead of pushing it down. */
+    .rail-dropdown-trigger {
+        display: none;
+    }
+
+    @media (max-width: 900px) {
+        .category-toolbar {
+            position: relative;
+            margin-bottom: 0;
+        }
+
+        /* Bare control, not a card: the panel it opens carries the chrome, so
+           the trigger only needs to read as a line of type. */
+        .rail-dropdown-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 4px;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+            cursor: pointer;
+            line-height: 1;
+            color: #0F172A;
+            transition: opacity 0.12s ease;
+        }
+
+        .rail-dropdown-trigger:active {
+            opacity: 0.6;
+        }
+
+        .trigger-label {
+            font-family: monospace;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(15, 23, 42, 0.45);
+        }
+
+        .trigger-value {
+            font-family: var(--archivo-font, 'Archivo', sans-serif);
+            font-weight: 800;
+            font-size: 0.8125rem;
+            letter-spacing: -0.04em;
+            color: #0F172A;
+        }
+
+        .trigger-count {
+            font-family: monospace;
+            font-size: 0.625rem;
+            font-weight: 800;
+            color: rgba(15, 23, 42, 0.5);
+            background: none;
+            padding: 0;
+        }
+
+        .trigger-chevron {
+            display: inline-flex;
+            color: #0F172A;
+            transition: transform 0.18s ease;
+        }
+
+        .rail-dropdown-trigger[aria-expanded="true"] .trigger-chevron {
+            transform: rotate(180deg);
+        }
+
+        /* The panel floats over the deck rather than reserving layout space. */
+        .toolbar-pill-group {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 900;
+            display: none;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 6px;
+            width: min(280px, calc(100vw - 48px));
+            padding: 10px;
+            background: #ffffff;
+            border: 2.5px solid #000000;
+            border-radius: 16px;
+            box-shadow: 4px 5px 0px #000000;
+            box-sizing: border-box;
+            max-height: min(60vh, 420px);
+            overflow-y: auto;
+        }
+
+        .category-toolbar.is-dropdown-open .toolbar-pill-group {
+            display: flex;
+        }
+
+        .toolbar-label {
+            display: none;
+        }
+
+        .toolbar-pill-group .rail-node {
+            width: 100%;
+            justify-content: flex-start;
+            padding: 10px 12px;
+            border-radius: 10px;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .toolbar-pill-group .rail-node .node-count {
+            margin-left: auto;
+        }
+
+        .toolbar-pill-group .rail-node[aria-pressed="true"] {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Absolutely positioned above the pill — inside a panel it would sit
+           on top of the row above it. */
+        .toolbar-pill-group .doodle-crown {
+            display: none;
+        }
+
+        .toolbar-pill-group .rail-node .node-label {
+            font-size: 0.875rem;
+        }
+    }
 </style>
+
+<script>
+    function initCategoryDropdown() {
+        const rail = document.getElementById("category-rail");
+        const trigger = document.getElementById("railDropdownTrigger");
+        const panel = document.getElementById("railPillGroup");
+        if (!rail || !trigger || !panel || rail.dataset.dropdownInit === "true") return;
+        rail.dataset.dropdownInit = "true";
+
+        const valueEl = trigger.querySelector("[data-trigger-value]");
+        const countEl = trigger.querySelector("[data-trigger-count]");
+
+        const isDropdownMode = () => window.matchMedia("(max-width: 900px)").matches;
+
+        const close = () => {
+            rail.classList.remove("is-dropdown-open");
+            trigger.setAttribute("aria-expanded", "false");
+        };
+
+        const open = () => {
+            rail.classList.add("is-dropdown-open");
+            trigger.setAttribute("aria-expanded", "true");
+        };
+
+        trigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (trigger.getAttribute("aria-expanded") === "true") close();
+            else open();
+        });
+
+        // The deck controller owns the aria-pressed swap; mirror whichever pill
+        // ends up pressed onto the trigger's label, then collapse the panel.
+        panel.querySelectorAll(".rail-node").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const label = btn.querySelector(".node-label")?.textContent?.trim();
+                const count = btn.querySelector(".node-count")?.textContent?.trim();
+                if (valueEl && label) valueEl.textContent = label;
+                if (countEl && count) countEl.textContent = count;
+                close();
+            });
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!rail.contains(e.target)) close();
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key !== "Escape") return;
+            if (trigger.getAttribute("aria-expanded") !== "true") return;
+            close();
+            trigger.focus();
+        });
+
+        // Resizing past the breakpoint must not leave the open-state class on
+        // the desktop rail, where it would mean nothing but still linger.
+        window.addEventListener("resize", () => {
+            if (!isDropdownMode()) close();
+        });
+    }
+
+    document.addEventListener("astro:page-load", initCategoryDropdown);
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCategoryDropdown);
+    } else {
+        initCategoryDropdown();
+    }
+</script>
