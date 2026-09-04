@@ -100,10 +100,6 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
                 <!-- Playmat Zone: Discard Pile (Left) -->
                 <div class="playmat-slot discard-slot" aria-hidden="true">
                     <div class="playmat-card-body">
-                        <div class="playmat-top-bar">
-                            <span class="playmat-badge">Discard pile</span>
-                        </div>
-
                         <div class="playmat-center-art">
                             <div class="playmat-sticker-graphic">
                                 <svg width="40" height="40" viewBox="0 0 64 64" fill="none" class="doodle-svg-icon" stroke="currentColor">
@@ -111,9 +107,7 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
                                     <rect x="16" y="10" width="40" height="34" rx="6" stroke-width="2" fill="rgba(255,255,255,0.7)" />
                                     <path d="M36 17v15m0 0l-5-5m5 5l5-5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <div class="playmat-label">
-                                    <span>Archive</span>
-                                </div>
+                                <div class="playmat-label">Discard pile</div>
                             </div>
                         </div>
                     </div>
@@ -122,10 +116,6 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
                 <!-- Playmat Zone: Draw Pile (Right) -->
                 <div class="playmat-slot draw-slot" aria-hidden="true">
                     <div class="playmat-card-body">
-                        <div class="playmat-top-bar">
-                            <span class="playmat-badge">Draw pile</span>
-                        </div>
-
                         <div class="playmat-center-art">
                             <div class="playmat-sticker-graphic">
                                 <svg width="40" height="40" viewBox="0 0 64 64" fill="none" class="doodle-svg-icon" stroke="currentColor">
@@ -134,9 +124,7 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
                                     <path d="M25 32a8 8 0 1 1 2.5 5.8" stroke-width="2.2" stroke-linecap="round" />
                                     <path d="M28 38h-6v-6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <div class="playmat-label">
-                                    <span>Reshuffle deck</span>
-                                </div>
+                                <div class="playmat-label">Draw pile</div>
                             </div>
                         </div>
                     </div>
@@ -498,32 +486,10 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
         border-radius: 12px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         padding: 14px 10px 16px;
         box-sizing: border-box;
-    }
-
-    .playmat-top-bar {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-
-    .playmat-badge {
-        display: inline-flex;
-        align-items: center;
-        border: 1.5px solid #000000;
-        border-radius: 9999px;
-        padding: 2px 10px;
-        font-family: monospace;
-        font-size: 0.625rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        background: #ffffff;
-        color: #000000;
     }
 
     .playmat-center-art {
@@ -547,20 +513,16 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
         opacity: 0.8;
     }
 
+    /* Plain type, not a pill: the playmat is a drop zone, and bordered
+       white labels on it read as buttons you could press. */
     .playmat-label {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 1.5px solid #000000;
-        border-radius: 9999px;
-        padding: 3px 12px;
         font-family: monospace;
         font-size: 0.625rem;
         font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        background: #ffffff;
         color: #000000;
+        text-align: center;
     }
 
     .deck-card-item {
