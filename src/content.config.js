@@ -10,9 +10,12 @@ const projects = defineCollection({
         order: z.number(),
         projTitle: z.string(),
         category: z.union([
-            z.enum(CATEGORIES),
-            z.array(z.enum(CATEGORIES)),
-        ]),
+            z.enum([...CATEGORIES, "coordination", "Project Coordination"]),
+            z.array(z.enum([...CATEGORIES, "coordination", "Project Coordination"])),
+        ]).transform((val) => {
+            const mapSlug = (c) => (c === "coordination" || c === "Project Coordination") ? "project_coordination" : c;
+            return Array.isArray(val) ? val.map(mapSlug) : mapSlug(val);
+        }),
         // The exact blurb written on the collectible card front
         summary: z.string(),
         // Controls whether the card is marked coming soon and unclickable or ready
@@ -22,6 +25,7 @@ const projects = defineCollection({
         imageUrl: z.string().optional(),
         maskUrl: z.string().optional(),
         holoEffect: z.string().default("secret_rare_etched"),
+        artInset: z.string().optional(),
         story: z.record(z.any()).optional(),
     }),
 });

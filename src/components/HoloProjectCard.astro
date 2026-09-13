@@ -9,6 +9,7 @@ export interface Props {
     cardBg?: string;
     borderWidth?: string;
     holoEffect?: "secret_rare_etched" | "cosmos_galaxy" | "radiant_laser" | "rainbow_secret" | "shiny_rare" | "v_full_art" | string;
+    artInset?: string;
     active?: boolean;
 }
 
@@ -23,6 +24,7 @@ const backUrl = props.backUrl || pData.backUrl || "/img/card-back-generic.svg";
 const cardBg = props.cardBg || pData.cardBg || "#00B3E3";
 const borderWidth = props.borderWidth || pData.borderWidth || "10px";
 const holoEffect = props.holoEffect || pData.holoEffect || "secret_rare_etched";
+const artInset = props.artInset || pData.artInset || "0px";
 const active = props.active !== undefined ? props.active : (pData.active !== undefined ? pData.active : true);
 
 const EFFECT_CONFIGS: Record<string, {
@@ -97,7 +99,7 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
             >
                 <div class="card-front-inner">
                     <!-- Colored Square (Image Background) with Character Art & Hologram -->
-                    <div class="artwork-square" style={{ "--square-bg": cardBg }}>
+                    <div class="artwork-square" style={{ "--square-bg": cardBg, "--art-inset": artInset }}>
                         {imageUrl && (
                             <div class="artwork-layer" aria-hidden="true">
                                 <img
@@ -112,21 +114,23 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
                         )}
 
                         <!-- Multi-Pass Holographic Foil Layers (Clipped & Aligned to Image Background) -->
-                        <div
-                            class="card__shine"
-                            style={{
-                                "--seedx": activeEffect.seedx || "0.14597468026856575",
-                                "--seedy": activeEffect.seedy || "0.5188117694209767",
-                                "--cosmosbg": activeEffect.cosmosbg || "107px 664px",
-                                "--mask": `url(${maskUrl})`,
-                                "--foil": `url(${activeEffect.foil})`,
-                            }}
-                        ></div>
+                        {maskUrl && (
+                            <div
+                                class="card__shine"
+                                style={{
+                                    "--seedx": activeEffect.seedx || "0.14597468026856575",
+                                    "--seedy": activeEffect.seedy || "0.5188117694209767",
+                                    "--cosmosbg": activeEffect.cosmosbg || "107px 664px",
+                                    "--mask": `url(${maskUrl})`,
+                                    "--foil": `url(${activeEffect.foil})`,
+                                }}
+                            ></div>
+                        )}
                     </div>
 
                     <!-- Bottom: Centered Title & Summary Text -->
                     <div class="card-bottom-info">
-                        <h2 class="card-title-text">{title.endsWith('.') ? title : `${title}.`}</h2>
+                        <h2 class="card-title-text">{title}</h2>
                         {summary && (
                             <p class="card-summary-text">{summary}</p>
                         )}
@@ -359,13 +363,13 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
     /* Character Artwork Layer */
     .artwork-layer {
         position: absolute;
-        inset: 0;
+        inset: var(--art-inset, 0px);
         z-index: 1;
         display: flex;
         align-items: center;
         justify-content: center;
         pointer-events: none;
-        padding: 8px;
+        padding: 0;
         box-sizing: border-box;
     }
 
@@ -380,10 +384,10 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
     /* Holographic Shine inside Artwork Square (Mask aligned 1:1, zero dark vignette overlay) */
     .artwork-square .card__shine {
         position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 4px !important;
+        inset: var(--art-inset, 0px);
+        width: auto;
+        height: auto;
+        border-radius: 0 !important;
         z-index: 2;
         pointer-events: none;
     }
@@ -393,14 +397,17 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
     }
 
     .artwork-square .card__shine:after {
+        -webkit-mask-image: var(--mask) !important;
+        mask-image: var(--mask) !important;
         -webkit-mask-size: contain !important;
         mask-size: contain !important;
         -webkit-mask-position: center !important;
         mask-position: center !important;
         -webkit-mask-repeat: no-repeat !important;
         mask-repeat: no-repeat !important;
-        padding: 8px;
-        box-sizing: border-box;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
     }
 
     /* Full-Card Subtle Spotlight Glare (Refined, gentle luminous sheen, zero grey tint) */
@@ -460,7 +467,7 @@ const activeEffect = EFFECT_CONFIGS[holoEffect] || EFFECT_CONFIGS["secret_rare_e
         font-size: clamp(0.68rem, 0.85vw, 0.80rem);
         line-height: 1.12;
         letter-spacing: -0.03em;
-        color: #1E293B;
+        color: #000000;
         margin: 0 auto;
         text-align: center;
         width: 100%;

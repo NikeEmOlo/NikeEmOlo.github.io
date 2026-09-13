@@ -1,10 +1,10 @@
 // Project categories, in nav display order (first = leftmost tab).
 // This is the single source of truth: the content schema validates against it,
 // and the navigation renders tabs in this order.
-export const CATEGORIES = ['development', 'ai', 'delivery', 'coordination']
+export const CATEGORIES = ['development', 'ai', 'delivery', 'project_coordination']
 
 // Per-category display label and deck accent for the home page. Accents are
-// drawn from the doodle-pop palette (global.css) — cyan stays reserved as
+// drawn from the doodle-pop palette (global.css), with cyan reserved as
 // the site's primary/active-state color, so each category gets one of the
 // other four.
 export const CATEGORY_META = {
@@ -26,8 +26,14 @@ export const CATEGORY_META = {
         gradient: 'linear-gradient(0.3turn, #A61449 0%, #FF1F70 50%, #FF6FA0 100%)',
         accent: '#FF1F70',
     },
+    project_coordination: {
+        label: 'Project Coordination',
+        description: 'Campaigns and partners pulled into one moving programme.',
+        gradient: 'linear-gradient(0.3turn, #A68E00 0%, #FFDA00 50%, #FFE666 100%)',
+        accent: '#FFDA00',
+    },
     coordination: {
-        label: 'Coordination',
+        label: 'Project Coordination',
         description: 'Campaigns and partners pulled into one moving programme.',
         gradient: 'linear-gradient(0.3turn, #A68E00 0%, #FFDA00 50%, #FFE666 100%)',
         accent: '#FFDA00',

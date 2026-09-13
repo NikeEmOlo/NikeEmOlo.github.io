@@ -1,0 +1,4044 @@
+---
+import Base from "../layouts/Base.astro";
+import NewZealandMap from "../components/case-study/NewZealandMap.astro";
+---
+
+<Base>
+    <noscript>
+        <style>
+            .editorial-slide-inner {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .type-cursor { display: none !important; }
+            .type-rest { visibility: visible !important; }
+        </style>
+    </noscript>
+    <div class="abc-page">
+        <!-- Persistent Adaptive Return to Deck Button -->
+        <a href="/" class="case-study-deck-btn" id="case-study-deck-btn" aria-label="Return to portfolio deck">
+            <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="m15 18-6-6 6-6"></path>
+            </svg>
+            <span>Deck</span>
+        </a>
+
+        <!-- Persistent Fixed Scroll Signal (Bottom-Left Corner) -->
+        <button
+            type="button"
+            class="scroll-mouse-signal is-fixed-bottom-left"
+            id="fixed-scroll-signal"
+            aria-label="Scroll to continue"
+        >
+            <span class="scroll-mouse-frame" aria-hidden="true">
+                <span class="scroll-wheel-dot"></span>
+            </span>
+        </button>
+
+        <!-- Section 1: Saturated Yellow Full-Bleed 100dvh Landing Cover Page -->
+        <header class="abc-cover-hero" id="cover-landing" aria-label="The Aotearoa Bike Challenge Landing">
+            <div class="cover-hero-row">
+                <!-- Child 1: All text (Title + 3 Metadata columns) -->
+                <div class="cover-text-col">
+                    <h1 class="cover-main-title">
+                        <span class="title-line">The Aotearoa</span>
+                        <span class="title-line">Bike Challenge</span>
+                    </h1>
+
+                    <div class="cover-meta-cluster">
+                        <div class="cover-meta-col meta-role">
+                            <span class="cover-meta-label">My role</span>
+                            <span class="cover-meta-val">Project coordinator</span>
+                        </div>
+                        <div class="cover-meta-col meta-org">
+                            <span class="cover-meta-label">Organisation</span>
+                            <span class="cover-meta-val">Auckland Transport</span>
+                        </div>
+                        <div class="cover-meta-col meta-when">
+                            <span class="cover-meta-label">When</span>
+                            <span class="cover-meta-val">2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Child 2: The doodle arrow + tag at the bottom -->
+                <div class="cover-arrow-col">
+                    <div class="cover-doodle-callout" aria-label="Emphasis on challenge">
+                        <img
+                            src="/img/aotearoa/abc-challenge-arrow.png"
+                            alt=""
+                            class="doodle-arrow-img"
+                            width="130"
+                            height="228"
+                            loading="eager"
+                        />
+                        <div class="doodle-caption-pill">
+                            <span class="pill-line">Emphasis on</span>
+                            <span class="pill-line">&ldquo;challenge&rdquo;</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section 2: What is the Aotearoa Bike Challenge? -->
+        <section class="abc-editorial-slide" id="intro-slide-1" aria-label="What is the Aotearoa Bike Challenge?">
+            <div class="editorial-slide-inner">
+                <div class="intro-split-content">
+                    <!-- Left: Text content -->
+                    <div class="intro-text-pane">
+                        <h2 class="intro-display-title">
+                            <span class="disp-line">What is the</span>
+                            <span class="disp-line">Aotearoa Bike</span>
+                            <span class="disp-line">Challenge (ABC)?</span>
+                        </h2>
+                        <p class="intro-body-lead">
+                            A month-long competition where people, workplaces, and organisations compete to see who can cycle the most, with prizes from sponsors up for grabs.
+                        </p>
+                    </div>
+
+                    <!-- Right: Feature Poster Image -->
+                    <div class="intro-media-pane">
+                        <img
+                            src="/img/aotearoa/aotearoa-challenge-poster.webp"
+                            alt="Aotearoa Bike Challenge, a fun friendly bike challenge"
+                            class="intro-feature-poster"
+                            loading="eager"
+                        />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: My role. Pinned so the WHY curtain can rise over it. -->
+        <div class="abc-pin" id="pin-role">
+        <section class="abc-editorial-slide" id="intro-slide-2" aria-label="My role as the project coordinator">
+            <div class="editorial-slide-inner">
+                <div class="intro-split-content intro-split-reverse">
+                    <!-- Left: Project Coordinator Feature Flyer Image -->
+                    <div class="intro-media-pane">
+                        <img
+                            src="/img/aotearoa/project-coordinator-flyer.jpg"
+                            alt="Discover Auckland all over again, free adult bike skills and guided rides"
+                            class="intro-feature-flyer"
+                            loading="eager"
+                        />
+                    </div>
+
+                    <!-- Right: Text content -->
+                    <div class="intro-text-pane">
+                        <h2 class="intro-display-title">
+                            <span class="disp-line">My role as the</span>
+                            <span class="disp-line">project coordinator.</span>
+                        </h2>
+                        <p class="intro-cyan-hook">
+                            In 2023, I was asked to run the ABC
+                        </p>
+                        <p class="intro-body-lead">
+                            I was solely responsible for the end to end delivery of the ABC. I ensured our contractors, like Love To Ride, were on schedule for a fixed launch date. I set up collaboration meetings with partner councils and emergency meetings when disaster struck.
+                        </p>
+                        <p class="intro-body-lead">
+                            My experience as a copywriter for a small marketing agency came in handy as I was tasked with creating the majority of social media, internal, and public comms surrounding the challenge. And, there was the data collection, and process improvements, so the subsequent coordinators had something better to work with.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </div>
+
+        <!-- Section 4: WHY. Rises over the previous slide as a black shutter,
+             holds while its copy slams in, then gets pushed off to the right. -->
+        <div class="abc-pin" id="pin-why">
+        <section class="abc-why-section" id="why-section" aria-label="Why Aotearoa Bike Challenge">
+            <div class="why-inner-container">
+                <div class="why-center-content">
+                    <h2 class="why-display-title">WHY</h2>
+                    <p class="why-tagline-p">
+                        For participants, it&rsquo;s a fun challenge. For our team, it was about behaviour change: getting more people out of cars and onto bikes.
+                    </p>
+                </div>
+                <div class="why-bottom-columns">
+                    <div class="why-col">
+                        <p>Gets people to<br />try cycling.</p>
+                    </div>
+                    <div class="why-col">
+                        <p>Training safer,<br />more confident<br />cyclists.</p>
+                    </div>
+                    <div class="why-col">
+                        <p>Making cycling<br />a daily habit.</p>
+                    </div>
+                    <div class="why-col">
+                        <p>Promoting local<br />cycling infrastructure.</p>
+                    </div>
+                    <div class="why-col">
+                        <p>Removing barriers<br />to cycling.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </div>
+
+        <!-- Section 5: Beat 1. Slides in from the left over the WHY panel. -->
+        <div class="abc-pin" id="pin-beat1">
+        <section class="abc-beat1-section" id="beat1-section" aria-label="Coordinating a city-wide cycling campaign">
+            <div class="beat1-typewriter-container">
+                <h2 class="beat1-typewriter" id="typewriter-text" aria-label="Coordinating a city-wide cycling campaign. Simple enough...">
+                    <span class="type-text"></span><span class="type-cursor" aria-hidden="true"></span><span class="type-rest" aria-hidden="true">Coordinating a city-wide cycling campaign. Simple enough...</span>
+                </h2>
+            </div>
+        </section>
+
+        </div>
+
+        <!-- Section 6: Pinned Cinematic Stage (Story Beats 2 to 5) -->
+        <div class="abc-reveal-stage" id="reveal-stage">
+            <section class="abc-cinematic-stage is-beat2" id="cinematic-stage" aria-label="Aotearoa Bike Challenge Presentation">
+                <!-- Stationary Sidebar History (docks on desktop when story beats begin) -->
+                <div class="stage-sidebar-history" aria-hidden="true">
+                    <div class="sidebar-track" id="sidebar-track">
+                        <div class="sidebar-item item-beat1">
+                            <p class="sidebar-text">Coordinating a city-wide cycling campaign. Simple enough...</p>
+                        </div>
+                        <div class="sidebar-item item-beat2">
+                            <p class="sidebar-text">
+                                The mayor is <strong class="sidebar-hl">anti-cycling</strong> and your <strong class="sidebar-hl">budget gets slashed</strong>.
+                            </p>
+                        </div>
+                        <div class="sidebar-item item-beat3">
+                            <p class="sidebar-text">
+                                Following 2022&rsquo;s lockdown peak, lower participation was expected.
+                            </p>
+                        </div>
+                        <div class="sidebar-item item-beat4">
+                            <p class="sidebar-text">
+                                Then Auckland gets hit by the <strong class="sidebar-hl">worst floods in modern history</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shared Cinematic New Zealand Map -->
+                <div class="cinematic-map-stage" id="cinematic-map-stage" aria-hidden="true">
+                    <NewZealandMap class="cinematic-map-svg" />
+                </div>
+
+                <!-- Beat 2: High Stakes Dark Beat -->
+                <div class="beat2-wrapper" id="beat2-wrapper">
+                    <div class="beat2-inner">
+                        <div class="beat2-copy-block">
+                            <p class="beat2-main-quote">
+                                Except the new mayor is openly <strong class="beat2-highlight">anti-cycling</strong>, your <strong class="beat2-highlight">budget gets slashed</strong> by more than half, and your team says: <em class="beat2-speech-quote">&ldquo;If this goes badly, funding is gone for good.&rdquo;</em>
+                            </p>
+                            <p class="beat2-kicker">
+                                No problem. It will take a lot more than that to faze me, you think.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beat 3: Benchmark Lockdown Surge -->
+                <div class="beat3-wrapper" id="beat3-wrapper">
+                    <div class="beat3-inner">
+                        <div class="beat3-stats-header">
+                            <div class="beat3-stats-row">
+                                <div class="beat3-stat-col">
+                                    <span class="beat3-stat-label">2021</span>
+                                    <span class="beat3-stat-val">24,000+</span>
+                                    <span class="beat3-stat-sub">participants</span>
+                                </div>
+                                <div class="beat3-stat-col">
+                                    <span class="beat3-stat-label">2022</span>
+                                    <span class="beat3-stat-val">32,992</span>
+                                    <span class="beat3-stat-sub">participants</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="beat3-copy-block">
+                            <p class="beat3-narrative">
+                                In 2022, national participation reached an all time peak. The challenge took place during a lockdown where cycling was one of the only things you were allowed to do outdoors. People jumped at the chance.
+                            </p>
+                            <p class="beat3-punchline">
+                                It was a tough year to follow. With life back to normal, lower participation was expected. Not pretty on paper, but understandable.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beat 4: Auckland Floods Deluge -->
+                <div class="beat4-wrapper" id="beat4-wrapper">
+                    <div class="beat4-inner">
+                        <div class="beat4-center-block">
+                            <p class="beat4-main-text">
+                                Then, three days before event launch, Auckland gets hit by the <strong class="beat4-highlight">worst floods in modern history</strong>. Seriously, it was bad, google it.
+                            </p>
+                            <p class="beat4-muted-sub">
+                                Cycle infrastructure was damaged across Auckland.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Real coverage of the Auckland Anniversary floods, quoted and attributed.
+                         Slams in on beat 4, flies out upward on beat 5. -->
+                    <div class="beat4-headlines-layer" aria-hidden="true">
+                        <div class="flood-headline hl-1" style="--slam-rot: -2.5deg; --slam-delay: 0.08s;">
+                            <div class="hl-header">
+                                <span class="hl-source-badge">NZ Herald</span>
+                                <span class="hl-timestamp">Jan 2023</span>
+                            </div>
+                            <p class="hl-text">Auckland flood: Deluge day three, state of emergency declared</p>
+                        </div>
+                        <div class="flood-headline hl-2" style="--slam-rot: 3deg; --slam-delay: 0.26s;">
+                            <div class="hl-header">
+                                <span class="hl-source-badge">The Guardian</span>
+                                <span class="hl-timestamp">Jan 2023</span>
+                            </div>
+                            <p class="hl-text">Entire airport terminal underwater as floods hit New Zealand</p>
+                        </div>
+                        <div class="flood-headline hl-3" style="--slam-rot: 2deg; --slam-delay: 0.44s;">
+                            <div class="hl-header">
+                                <span class="hl-source-badge">Stuff</span>
+                                <span class="hl-timestamp">Jan 2023</span>
+                            </div>
+                            <p class="hl-text">Clean up continues across region after record rain causes widespread flooding</p>
+                        </div>
+                        <div class="flood-headline hl-4" style="--slam-rot: -3deg; --slam-delay: 0.62s;">
+                            <div class="hl-header">
+                                <span class="hl-source-badge">RNZ</span>
+                                <span class="hl-timestamp">Jan 2023</span>
+                            </div>
+                            <p class="hl-text">Auckland storm: Devastation after record rainfall, airport reopens</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beat 5: Cyclone Gabrielle -->
+                <div class="beat5-wrapper" id="beat5-wrapper">
+                    <div class="beat5-inner">
+                        <div class="beat5-center-block">
+                            <p class="beat5-main-text">
+                                And just when you think you&rsquo;re in the clear, <strong class="beat5-highlight">Cyclone Gabrielle</strong> rolls in, two weeks into the event, to finish off the remaining cycle network.
+                            </p>
+                            <p class="beat5-muted-sub">
+                                One of the worst storms seen in decades.
+                            </p>
+                            <div class="beat5-smiley-callout" aria-hidden="true">
+                                <img
+                                    src="/img/aotearoa/melting-face-emoji.png"
+                                    alt="Melting face emoji"
+                                    class="melting-face-emoji-img"
+                                    width="160"
+                                    height="160"
+                                    loading="lazy"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Section 7: Results. Cream panel rises over the pinned black stage,
+             then the heading types, the map and stats land, and the map fills
+             with bikes as you keep scrolling. -->
+        <div class="abc-results-stage" id="results-stage">
+            <section class="abc-results-panel" id="results-panel" aria-label="The results in Auckland 2023">
+                <h2 class="results-heading" id="results-heading">
+                    <span class="results-type-text" data-type-out></span><span class="results-type-cursor" aria-hidden="true"></span><span class="results-type-rest" data-type-rest aria-hidden="true">So let&rsquo;s keep all that in mind when we look at the numbers</span>
+                </h2>
+
+                <div class="results-map-holder" id="results-map-holder" aria-hidden="true">
+                    <NewZealandMap class="results-map" />
+                </div>
+
+                <div class="results-stats-row">
+                    <div class="results-stats-label">
+                        <p>The results in<br /><strong>Auckland</strong> 2023</p>
+                    </div>
+                    <div class="results-stat-group">
+                        <div class="results-stat" style="--stat-delay: 0.10s;">
+                            <span class="results-stat-val">5,365</span>
+                            <span class="results-stat-sub">total participants</span>
+                        </div>
+                        <div class="results-stat" style="--stat-delay: 0.22s;">
+                            <span class="results-stat-val">817</span>
+                            <span class="results-stat-sub">new participants</span>
+                        </div>
+                        <div class="results-stat" style="--stat-delay: 0.34s;">
+                            <span class="results-stat-val">87.2%</span>
+                            <span class="results-stat-sub">participation retained</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Section 8: What I did. Six chapters share one pinned viewport: each
+             slides in from the right over the one before it, which stays put
+             and keeps only its numbered spine showing, so the stack doubles as
+             a chapter index. Script adds .is-deck once the layout can carry it;
+             below 1025px, for reduced motion, and without JS the same slides
+             read as a plain vertical column. -->
+        <section class="abc-did-section" id="what-i-did" aria-label="What I did">
+            <p class="did-section-label">What I did</p>
+
+            <div class="did-runway" id="did-runway">
+                <div class="did-viewport">
+                    <ol class="did-deck">
+
+                        <li class="did-slide" style="--i: 0;">
+                            <span class="did-spine" aria-hidden="true"><span class="did-spine-num">01</span></span>
+                            <div class="did-slide-inner">
+                                <div class="did-main">
+                                    <p class="did-step" aria-hidden="true">01<span class="did-step-of"> / 06</span></p>
+                                    <h2 class="did-title">Finding the data</h2>
+                                    <p class="did-body">
+                                        The ABC had been running for a few years before I arrived at AT, but the data to show for it was scattered across individuals, contractors, and teams.
+                                    </p>
+                                </div>
+
+                                <div class="did-aside">
+                                    <div class="did-note">
+                                        <h3 class="did-note-title">Consolidation</h3>
+                                        <p class="did-body">
+                                            The first step was building a single source of truth. I used a spreadsheet, because it was the one format every team could open regardless of skill set.
+                                        </p>
+                                        <p class="did-body">
+                                            Then I set up standard processes so future data gets collected and consolidated as it comes in, and nobody has to do this again.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="did-slide" style="--i: 1;">
+                            <span class="did-spine" aria-hidden="true"><span class="did-spine-num">02</span></span>
+                            <div class="did-slide-inner">
+                                <div class="did-main">
+                                    <p class="did-step" aria-hidden="true">02<span class="did-step-of"> / 06</span></p>
+                                    <h2 class="did-title">Data informed decision making</h2>
+                                    <p class="did-body">The data gave me:</p>
+                                    <ol class="did-list is-two-col">
+                                        <li>Registered workplaces</li>
+                                        <li>Registered individuals</li>
+                                        <li>Highly engaged individuals</li>
+                                        <li>Which routes and areas had the most cyclists</li>
+                                        <li>Events with high engagement</li>
+                                        <li>Events with a high drop-out rate</li>
+                                        <li>Costs</li>
+                                    </ol>
+                                </div>
+
+                                <div class="did-aside">
+                                    <p class="did-pull">
+                                        From that I worked out the best locations and people to target, and which events were actually worth running.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="did-slide" style="--i: 2;">
+                            <span class="did-spine" aria-hidden="true"><span class="did-spine-num">03</span></span>
+                            <div class="did-slide-inner">
+                                <div class="did-main">
+                                    <p class="did-step" aria-hidden="true">03<span class="did-step-of"> / 06</span></p>
+                                    <h2 class="did-title">A new approach to marketing</h2>
+                                    <p class="did-body">
+                                        Bus adverts, radio spots, and big budget campaigns were a thing of the past. I moved to social media instead, calling on my experience as a copywriter to write posts worth reading.
+                                    </p>
+                                    <p class="did-body">I used the data to send personalised marketing to:</p>
+                                    <ol class="did-list">
+                                        <li>Large organisations with a history of high participation, encouraging them to enter again this year.</li>
+                                        <li>Individuals with high participation, encouraging them to bring in friends and family. There were prizes for the most sign-ups.</li>
+                                        <li>The busiest locations, which got priority for signage and ads.</li>
+                                        <li>Participants in events with a history of drop-outs, who got a cheap email chain prompting them to show up.</li>
+                                    </ol>
+                                </div>
+
+                                <div class="did-aside">
+                                    <p class="did-pull">
+                                        Cost effective marketing, calling on my time as a copywriter in a marketing agency.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="did-slide" style="--i: 3;">
+                            <span class="did-spine" aria-hidden="true"><span class="did-spine-num">04</span></span>
+                            <div class="did-slide-inner">
+                                <div class="did-main">
+                                    <p class="did-step" aria-hidden="true">04<span class="did-step-of"> / 06</span></p>
+                                    <h2 class="did-title">Cost cutting</h2>
+                                    <p class="did-body">
+                                        Events with historically low participation, or that cost a lot to run for little payoff, were cut. I could see cost per participant, total participation, and whether those participants kept cycling afterwards.
+                                    </p>
+                                </div>
+
+                                <div class="did-aside">
+                                    <p class="did-pull">
+                                        Doing a lot of the work contractors would previously have done myself: putting up posters, contacting businesses and individuals.
+                                    </p>
+                                    <p class="did-pull">
+                                        I helped run events like bike maintenance and night rides, to cut the number of contractors needed.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="did-slide" style="--i: 4;">
+                            <span class="did-spine" aria-hidden="true"><span class="did-spine-num">05</span></span>
+                            <div class="did-slide-inner">
+                                <div class="did-main">
+                                    <p class="did-step" aria-hidden="true">05<span class="did-step-of"> / 06</span></p>
+                                    <h2 class="did-title">Sensitivity</h2>
+                                    <p class="did-body">
+                                        I called an <strong>emergency meeting</strong> with contractors to rework the marketing and conduct around outsourced events, so it stayed considerate to Aucklanders dealing with serious devastation after the floods and the cyclone.
+                                    </p>
+                                </div>
+
+                                <div class="did-aside">
+                                    <p class="did-pull">
+                                        Marketing was scaled back to give Aucklanders the time they needed.
+                                    </p>
+                                    <p class="did-pull">
+                                        In the cyclone aftermath, I helped clear many of the blocked cycle paths.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="did-slide is-single" style="--i: 5;">
+                            <span class="did-spine" aria-hidden="true"><span class="did-spine-num">06</span></span>
+                            <div class="did-slide-inner">
+                                <div class="did-main">
+                                    <p class="did-step" aria-hidden="true">06<span class="did-step-of"> / 06</span></p>
+                                    <h2 class="did-title">Cross-council collaboration</h2>
+                                    <p class="did-body">
+                                        I set up weekly meetings with coordinators from partner councils to compare what was working: approaches, social posts, marketing strategies. We swapped content and ideas that were already tried and tested, and could be used straight away.
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</Base>
+
+<style>
+    /* Page Container & Canvas */
+    .abc-page {
+        --abc-yellow: #FFDA00;
+        --abc-cyan: #00B3E3;
+        --abc-orange: #FAA945;
+        --abc-pink: #EB4E83;
+        --abc-ink: #0F172A;
+        --abc-border: #000000;
+        --abc-sans: var(--archivo-font, 'Archivo', sans-serif);
+        --abc-gutter: clamp(20px, 3vw, 48px);
+        --abc-grid-gap: clamp(12px, 1.6vw, 20px);
+
+        background-color: var(--cream, #FAF8F5);
+        color: var(--abc-ink);
+        font-family: var(--abc-sans);
+        min-height: 100vh;
+        overflow-x: clip;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    /* Persistent Adaptive Return to Deck Button */
+    .case-study-deck-btn {
+        position: fixed;
+        top: clamp(22px, 3.5vh, 36px);
+        left: clamp(20px, 3.5vw, 48px);
+        z-index: 100;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #000000;
+        border: 2px solid #000000;
+        border-radius: 9999px;
+        padding: 7px 18px;
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 2px 2px 0px #000000;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        cursor: pointer;
+    }
+
+    .case-study-deck-btn:hover {
+        background-color: #000000;
+        color: #FFDA00;
+        transform: translateY(-2px);
+        box-shadow: 3px 4px 0px rgba(0, 0, 0, 0.4);
+    }
+
+    .case-study-deck-btn.is-dark-nav {
+        background-color: rgba(24, 24, 27, 0.82);
+        color: #FFFFFF;
+        border-color: rgba(255, 255, 255, 0.45);
+        box-shadow: 2px 2px 0px rgba(255, 255, 255, 0.2);
+    }
+
+    .case-study-deck-btn.is-dark-nav:hover {
+        background-color: #FFFFFF;
+        color: #000000;
+        border-color: #FFFFFF;
+        box-shadow: 3px 4px 0px rgba(255, 255, 255, 0.4);
+    }
+
+    /* Fixed Persistent Mouse Scroll Signal (Bottom-Left Corner) */
+    .scroll-mouse-signal {
+        background: transparent;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+
+    .scroll-mouse-signal.is-fixed-bottom-left {
+        position: fixed;
+        bottom: clamp(22px, 3.5vh, 36px);
+        left: clamp(20px, 3.5vw, 48px);
+        z-index: 100;
+        pointer-events: auto;
+    }
+
+    .scroll-mouse-signal:hover {
+        transform: translateY(3px);
+    }
+
+    .scroll-mouse-signal .scroll-mouse-frame {
+        width: 22px;
+        height: 36px;
+        border: 2.2px solid #000000;
+        border-radius: 12px;
+        display: inline-flex;
+        justify-content: center;
+        padding-top: 6px;
+        box-sizing: border-box;
+        transition: border-color 0.25s ease;
+    }
+
+    .scroll-mouse-signal .scroll-wheel-dot {
+        width: 3.5px;
+        height: 6px;
+        background-color: #000000;
+        border-radius: 2px;
+        animation: mouseWheelDrop 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        transition: background-color 0.25s ease;
+    }
+
+    .scroll-mouse-signal.is-dark-mouse .scroll-mouse-frame {
+        border-color: rgba(255, 255, 255, 0.75);
+    }
+
+    .scroll-mouse-signal.is-dark-mouse .scroll-wheel-dot {
+        background-color: #FFFFFF;
+    }
+
+    @keyframes mouseWheelDrop {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        60% {
+            transform: translateY(11px);
+            opacity: 0.1;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 0;
+        }
+    }
+
+
+    /* =============================================================
+       PINNED SECTION TRANSITIONS
+
+       Each pin holds its section still while the next one moves over the top
+       of it. The tail height on a pin is the window the following section
+       travels through, so the overlaps below are deliberate:
+
+         pin-role   2vh  -> WHY shutters up through its second vh
+         pin-why    3vh  (-1vh)  -> beat 1 slides in across its third vh
+         pin-beat1  4vh  (-2vh)  -> black stage shutters up across its fourth
+         reveal     (-1vh)
+       ============================================================= */
+    .abc-pin {
+        position: relative;
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+    }
+
+    .abc-pin > section {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    #pin-role {
+        height: 200vh;
+        height: 200dvh;
+        z-index: 5;
+    }
+
+    #pin-why {
+        height: 300vh;
+        height: 300dvh;
+        margin-top: -100vh;
+        margin-top: -100dvh;
+        z-index: 6;
+    }
+
+    #pin-beat1 {
+        height: 400vh;
+        height: 400dvh;
+        margin-top: -200vh;
+        margin-top: -200dvh;
+        z-index: 7;
+    }
+
+    /* Beat 1 is driven horizontally by script, so it starts off to the left. */
+    #pin-beat1 > .abc-beat1-section {
+        transform: translate3d(-100%, 0, 0);
+        will-change: transform;
+    }
+
+    /* WHY copy is carried off to the right as beat 1 arrives. */
+    .why-inner-container {
+        will-change: transform;
+    }
+
+    /* Slam entrances. Content lands hard once its panel is in place. */
+    .abc-why-section .why-center-content,
+    .abc-why-section .why-bottom-columns {
+        opacity: 0;
+        will-change: transform, opacity;
+    }
+
+    .abc-why-section.is-slammed .why-center-content {
+        animation: panelSlam 0.52s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .abc-why-section.is-slammed .why-bottom-columns {
+        animation: panelSlam 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both;
+    }
+
+    .abc-cinematic-stage .beat2-copy-block {
+        will-change: transform, opacity;
+    }
+
+    .abc-cinematic-stage.is-slammed .beat2-copy-block {
+        animation: panelSlam 0.52s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Opacity only. A transform on the mobile column scroller nudges its
+       snap position, so it must not be animated. */
+    @keyframes panelFade {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+    @keyframes panelSlam {
+        0% {
+            opacity: 0;
+            transform: scale(1.28);
+            filter: blur(9px);
+        }
+        62% {
+            opacity: 1;
+            filter: blur(0);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+            filter: blur(0);
+        }
+    }
+
+    /* Nothing on the cinematic stage shows until the shutter has landed. */
+    .abc-cinematic-stage:not(.is-armed) .beat2-wrapper,
+    .abc-cinematic-stage:not(.is-armed) .cinematic-map-stage,
+    .abc-cinematic-stage:not(.is-armed) .stage-sidebar-history {
+        opacity: 0 !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        #pin-beat1 > .abc-beat1-section {
+            transform: none;
+        }
+
+        .abc-why-section .why-center-content,
+        .abc-why-section .why-bottom-columns,
+        .abc-cinematic-stage .beat2-copy-block {
+            opacity: 1;
+            animation: none !important;
+        }
+    }
+
+    /* =============================================================
+       REVEAL STAGE: CINEMATIC STORY BEATS 2, 3, 4 & 5
+       ============================================================= */
+    .abc-reveal-stage {
+        position: relative;
+        z-index: 8;
+        width: 100vw;
+        height: 600vh;
+        height: 600dvh;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        margin-top: -100vh;
+        margin-top: -100dvh;
+    }
+
+    /* Pinned Cinematic Canvas (#000000 black across beats 2-5) */
+    .abc-cinematic-stage {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        background-color: #000000;
+        color: #FFFFFF;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: clamp(28px, 4.5vh, 48px) clamp(24px, 8.6vw, 130px);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* Stage Sidebar History - Desktop Docked Notes (Stationary, fades in without flying) */
+    .stage-sidebar-history {
+        position: absolute;
+        top: clamp(84px, 10.5vh, 104px);
+        left: clamp(24px, 3.5vw, 48px);
+        width: clamp(220px, 16vw, 255px);
+        max-height: calc(100vh - clamp(120px, 14vh, 140px));
+        max-height: calc(100dvh - clamp(120px, 14vh, 140px));
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 9;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    .abc-cinematic-stage.is-beat2 .stage-sidebar-history,
+    .abc-cinematic-stage.is-beat3 .stage-sidebar-history,
+    .abc-cinematic-stage.is-beat4 .stage-sidebar-history,
+    .abc-cinematic-stage.is-beat5 .stage-sidebar-history {
+        opacity: 1;
+    }
+
+    .sidebar-track {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(12px, 1.6vh, 16px);
+        width: 100%;
+        padding-bottom: 28px;
+        transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .sidebar-item {
+        width: 100%;
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        margin: 0;
+        transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+                    max-height 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        pointer-events: none;
+    }
+
+    .sidebar-item .sidebar-text {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.85rem, 1.05vw, 1.05rem);
+        font-weight: 500;
+        line-height: 1.34;
+        letter-spacing: -0.01em;
+        color: rgba(255, 255, 255, 0.68);
+        text-align: left;
+        text-wrap: pretty;
+        margin: 0;
+    }
+
+    .sidebar-item.item-beat1 .sidebar-text {
+        font-weight: 600;
+        line-height: 1.32;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .sidebar-item .sidebar-hl {
+        font-weight: 700;
+        color: #FFFFFF;
+    }
+
+    /* Activation states for sidebar history items */
+    .abc-cinematic-stage.is-beat2 .sidebar-item.item-beat1,
+    .abc-cinematic-stage.is-beat3 .sidebar-item.item-beat1,
+    .abc-cinematic-stage.is-beat4 .sidebar-item.item-beat1,
+    .abc-cinematic-stage.is-beat5 .sidebar-item.item-beat1 {
+        opacity: 1;
+        max-height: 90px;
+    }
+
+    .abc-cinematic-stage.is-beat3 .sidebar-item.item-beat2,
+    .abc-cinematic-stage.is-beat4 .sidebar-item.item-beat2,
+    .abc-cinematic-stage.is-beat5 .sidebar-item.item-beat2 {
+        opacity: 1;
+        max-height: 90px;
+    }
+
+    .abc-cinematic-stage.is-beat4 .sidebar-item.item-beat3,
+    .abc-cinematic-stage.is-beat5 .sidebar-item.item-beat3 {
+        opacity: 1;
+        max-height: 90px;
+    }
+
+    .abc-cinematic-stage.is-beat5 .sidebar-item.item-beat4 {
+        opacity: 1;
+        max-height: 90px;
+    }
+
+    /* Shared cinematic map. Anchored by its BOTTOM edge above the centre line so
+       it always hangs above the centred text instead of being pinned to the top
+       of the viewport, where it used to collide with the copy on short screens. */
+    .cinematic-map-stage {
+        position: absolute;
+        left: 50%;
+        bottom: 50%;
+        transform: translateX(-50%);
+        pointer-events: none;
+        z-index: 4;
+        opacity: 0;
+        transition: opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+                    bottom 0.85s cubic-bezier(0.2, 0.8, 0.2, 1),
+                    transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .cinematic-map-stage :global(.nz-map-wrapper) {
+        min-height: unset !important;
+        min-width: unset !important;
+        width: auto !important;
+        transition: height 0.85s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    /* Beat 2: map clears the centred quote. The lift covers half the text plus a gap. */
+    .abc-cinematic-stage.is-beat2 .cinematic-map-stage {
+        opacity: 1;
+        bottom: calc(50% + clamp(132px, 11vw, 185px));
+        transform: translateX(-50%);
+    }
+
+    .abc-cinematic-stage.is-beat2 .cinematic-map-stage :global(.nz-map-wrapper) {
+        height: clamp(150px, 22vh, 250px) !important;
+    }
+
+    /* Beat 3: the lift has to clear half the copy, the gap, AND the stats block
+       that hangs above it, so it sits higher than beat 2. */
+    .abc-cinematic-stage.is-beat3 .cinematic-map-stage {
+        opacity: 1;
+        bottom: calc(50% + clamp(232px, 18.3vw, 300px));
+        transform: translateX(-50%);
+    }
+
+    .abc-cinematic-stage.is-beat3 .cinematic-map-stage :global(.nz-map-wrapper) {
+        height: clamp(100px, 13vh, 165px) !important;
+    }
+
+    /* Beat 4 & 5: map fades out and drifts up out of the way */
+    .abc-cinematic-stage.is-beat4 .cinematic-map-stage,
+    .abc-cinematic-stage.is-beat5 .cinematic-map-stage {
+        opacity: 0;
+        bottom: calc(50% + clamp(180px, 14vw, 240px));
+        transform: translateX(-50%) scale(0.65);
+        pointer-events: none;
+    }
+
+    /* Beat 2 Wrapper */
+    .beat2-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.45s ease;
+        z-index: 5;
+    }
+
+    .abc-cinematic-stage.is-beat2 .beat2-wrapper {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .abc-cinematic-stage.is-beat3 .beat2-wrapper,
+    .abc-cinematic-stage.is-beat4 .beat2-wrapper,
+    .abc-cinematic-stage.is-beat5 .beat2-wrapper {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Beat 2 Inner - Text is EXACTLY in the center of the screen, pops into center */
+    .beat2-inner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.94);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: clamp(400px, 50vw, 720px);
+        width: 100%;
+        margin: 0;
+        opacity: 0;
+        transition: opacity 0.45s ease,
+                    transform 0.55s cubic-bezier(0.34, 1.35, 0.64, 1);
+    }
+
+    .abc-cinematic-stage.is-beat2 .beat2-inner {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .abc-cinematic-stage.is-beat3 .beat2-inner,
+    .abc-cinematic-stage.is-beat4 .beat2-inner,
+    .abc-cinematic-stage.is-beat5 .beat2-inner {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.96);
+        pointer-events: none;
+    }
+
+    .beat2-copy-block {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(14px, 2vh, 22px);
+    }
+
+    .beat2-main-quote {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.4rem, 2.3vw, 2.35rem);
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: -0.025em;
+        color: #FFFFFF;
+        text-wrap: balance;
+        margin: 0;
+    }
+
+    .beat2-main-quote strong {
+        font-weight: 900;
+    }
+
+    .beat2-highlight {
+        font-weight: 900;
+        white-space: nowrap;
+    }
+
+    .beat2-speech-quote {
+        font-style: italic;
+        font-weight: 700;
+        opacity: 0.95;
+    }
+
+    .beat2-kicker {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.95rem, 1.25vw, 1.3rem);
+        font-weight: 600;
+        line-height: 1.34;
+        letter-spacing: 0.01em;
+        color: var(--doodle-cyan, #00B3E3);
+        text-wrap: balance;
+        margin: 0;
+    }
+
+    /* Beat 3 - Benchmark Lockdown Surge */
+    .beat3-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.45s ease;
+        z-index: 6;
+    }
+
+    .abc-cinematic-stage.is-beat3 .beat3-wrapper {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .abc-cinematic-stage.is-beat4 .beat3-wrapper,
+    .abc-cinematic-stage.is-beat5 .beat3-wrapper {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Beat 3 stats hang off the top edge of the narrative rather than being
+       placed against the viewport, so they track the text at every size and can
+       never overlap it. */
+    .beat3-stats-header {
+        position: absolute;
+        bottom: calc(100% + clamp(18px, 2.6vh, 30px));
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .beat3-stats-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: clamp(40px, 6.5vw, 80px);
+        margin-bottom: 0;
+        width: 100%;
+    }
+
+    .beat3-stat-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .beat3-stat-label {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.85rem, 1.05vw, 1.1rem);
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--doodle-cyan, #00B3E3);
+        line-height: 1.2;
+    }
+
+    .beat3-stat-val {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.65rem, 2.3vw, 2.4rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        color: var(--doodle-cyan, #00B3E3);
+    }
+
+    .beat3-stat-sub {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.72rem, 0.85vw, 0.88rem);
+        font-weight: 300;
+        letter-spacing: 0.02em;
+        color: var(--doodle-cyan, #00B3E3);
+        line-height: 1.2;
+        opacity: 0.9;
+    }
+
+    /* Beat 3 Inner - the narrative is what sits on the centre line; the stats
+       hang above it. */
+    .beat3-inner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.94);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: clamp(440px, 57vw, 840px);
+        width: 100%;
+        margin: 0;
+        opacity: 0;
+        transition: opacity 0.45s ease,
+                    transform 0.55s cubic-bezier(0.34, 1.35, 0.64, 1);
+    }
+
+    .abc-cinematic-stage.is-beat3 .beat3-inner {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .abc-cinematic-stage.is-beat4 .beat3-inner,
+    .abc-cinematic-stage.is-beat5 .beat3-inner {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.96);
+        pointer-events: none;
+    }
+
+    .beat3-copy-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(14px, 2vh, 22px);
+        width: 100%;
+    }
+
+    .beat3-narrative {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.4rem, 2.3vw, 2.35rem);
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: -0.025em;
+        color: #FFFFFF;
+        text-wrap: balance;
+        margin: 0;
+    }
+
+    .beat3-narrative strong {
+        font-weight: 900;
+    }
+
+    .beat3-punchline {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.95rem, 1.25vw, 1.3rem);
+        font-weight: 600;
+        line-height: 1.34;
+        letter-spacing: 0.01em;
+        color: var(--doodle-cyan, #00B3E3);
+        text-wrap: balance;
+        margin: 0;
+    }
+
+    /* Beat 4 - Auckland Floods Deluge */
+    .beat4-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        z-index: 7;
+    }
+
+    .abc-cinematic-stage.is-beat4 .beat4-wrapper {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .beat4-inner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.94);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: clamp(400px, 50vw, 720px);
+        width: 100%;
+        margin: 0;
+        opacity: 0;
+        transition: opacity 0.45s ease,
+                    transform 0.55s cubic-bezier(0.34, 1.35, 0.64, 1);
+    }
+
+    .abc-cinematic-stage.is-beat4 .beat4-inner {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .beat4-center-block {
+        width: 100%;
+    }
+
+    .beat4-main-text {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.4rem, 2.3vw, 2.35rem);
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: -0.025em;
+        color: #FFFFFF;
+        text-wrap: balance;
+        margin: 0;
+    }
+
+    .beat4-main-text strong {
+        font-weight: 900;
+    }
+
+    .beat4-highlight {
+        font-weight: 900;
+        color: var(--abc-yellow, #FFDA00);
+        text-shadow: 0 0 24px rgba(255, 218, 0, 0.35);
+    }
+
+    .beat4-muted-sub {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.95rem, 1.25vw, 1.3rem);
+        font-weight: 600;
+        line-height: 1.34;
+        letter-spacing: -0.01em;
+        color: rgba(255, 255, 255, 0.65);
+        margin: clamp(12px, 1.8vh, 18px) 0 0 0;
+        text-wrap: balance;
+    }
+
+    .abc-cinematic-stage.is-beat5 .beat4-wrapper {
+        pointer-events: none;
+    }
+
+    .abc-cinematic-stage.is-beat5 .beat4-inner {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.95);
+        pointer-events: none;
+        transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Slamming Real Headlines Layer */
+    .beat4-headlines-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 5;
+    }
+
+    .flood-headline {
+        position: absolute;
+        max-width: clamp(230px, 24vw, 340px);
+        background: rgba(18, 18, 20, 0.92);
+        border: 1.5px solid rgba(255, 255, 255, 0.18);
+        border-radius: 8px;
+        padding: clamp(10px, 1.2vh, 14px) clamp(12px, 1.2vw, 16px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        box-sizing: border-box;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        will-change: transform, opacity;
+    }
+
+    .abc-cinematic-stage.is-beat4 .flood-headline {
+        opacity: 1;
+        animation: headlineSlam 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        animation-delay: var(--slam-delay, 0s);
+    }
+
+    /* Beat 5: Headlines fly out upwards consecutively */
+    .abc-cinematic-stage.is-beat5 .flood-headline {
+        animation: headlineFlyUp 0.48s cubic-bezier(0.16, 1, 0.3, 1) both !important;
+        pointer-events: none;
+    }
+
+    .abc-cinematic-stage.is-beat5 .hl-1 { animation-delay: 0.00s !important; }
+    .abc-cinematic-stage.is-beat5 .hl-2 { animation-delay: 0.05s !important; }
+    .abc-cinematic-stage.is-beat5 .hl-3 { animation-delay: 0.10s !important; }
+    .abc-cinematic-stage.is-beat5 .hl-4 { animation-delay: 0.15s !important; }
+
+    @keyframes headlineFlyUp {
+        0% {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotate(var(--slam-rot, 0deg));
+            filter: blur(0px);
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(-85px) scale(0.96) rotate(calc(var(--slam-rot, 0deg) * 0.75));
+            filter: blur(4px);
+        }
+    }
+
+    @keyframes headlineSlam {
+        0% {
+            opacity: 0;
+            transform: scale(2.4) rotate(var(--slam-rot, 0deg));
+            filter: blur(10px);
+        }
+        60% {
+            opacity: 1;
+            filter: blur(0);
+        }
+        82% {
+            transform: scale(0.96) rotate(var(--slam-rot, 0deg));
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) rotate(var(--slam-rot, 0deg));
+        }
+    }
+
+    /* Orbital headline positions. The left gutter above 60% is reserved for the
+       sidebar history, so the top-left corner stays clear on desktop. */
+    .hl-1 {
+        top: 11%;
+        left: 34%;
+    }
+
+    .hl-2 {
+        top: 15%;
+        right: clamp(20px, 3.5vw, 60px);
+    }
+
+    .hl-3 {
+        bottom: 15%;
+        left: clamp(48px, 6vw, 124px);
+    }
+
+    .hl-4 {
+        bottom: 15%;
+        right: clamp(28px, 6vw, 96px);
+    }
+
+    .hl-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 6px;
+    }
+
+    .hl-source-badge {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        background: var(--abc-yellow, #FFDA00);
+        color: #000000;
+        padding: 2px 6px;
+        border-radius: 4px;
+        line-height: 1.2;
+    }
+
+    .hl-timestamp {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.55);
+        letter-spacing: 0.02em;
+    }
+
+    .hl-text {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.82rem, 1.0vw, 0.98rem);
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -0.015em;
+        color: #FFFFFF;
+        margin: 0;
+    }
+
+    /* Beat 5 - Cyclone Gabrielle Deluge */
+    .beat5-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.45s ease;
+        z-index: 8;
+    }
+
+    .abc-cinematic-stage.is-beat5 .beat5-wrapper {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .beat5-inner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.94);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: clamp(400px, 50vw, 720px);
+        width: 100%;
+        margin: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease 0.45s,
+                    transform 0.6s cubic-bezier(0.34, 1.35, 0.64, 1) 0.45s;
+        z-index: 10;
+    }
+
+    .abc-cinematic-stage.is-beat5 .beat5-inner {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .beat5-center-block {
+        width: 100%;
+    }
+
+    .beat5-main-text {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.4rem, 2.3vw, 2.35rem);
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: -0.025em;
+        color: #FFFFFF;
+        text-wrap: balance;
+        margin: 0;
+    }
+
+    .beat5-main-text strong {
+        font-weight: 900;
+    }
+
+    .beat5-highlight {
+        font-weight: 900;
+        color: var(--abc-yellow, #FFDA00);
+        text-shadow: 0 0 24px rgba(255, 218, 0, 0.35);
+    }
+
+    .beat5-muted-sub {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.95rem, 1.25vw, 1.3rem);
+        font-weight: 600;
+        line-height: 1.34;
+        letter-spacing: -0.01em;
+        color: rgba(255, 255, 255, 0.65);
+        margin: clamp(12px, 1.8vh, 18px) 0 0 0;
+        text-wrap: balance;
+    }
+
+    /* Melting face hangs off the bottom edge of the text, so the text itself
+       stays on the centre line. */
+    .beat5-center-block {
+        position: relative;
+    }
+
+    .beat5-smiley-callout {
+        position: absolute;
+        top: calc(100% + clamp(20px, 3vh, 32px));
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+    }
+
+    .melting-face-emoji-img {
+        width: clamp(64px, 6.5vw, 88px);
+        height: auto;
+        display: block;
+        filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Saturated Yellow Full-Bleed 100dvh Cover Hero */
+    .abc-cover-hero {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        background-color: #FFDA00;
+        color: #000000;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(28px, 4.5vh, 48px) clamp(24px, 8.6vw, 130px);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* Central Two-Column Flex Hero Row */
+    .cover-hero-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        gap: clamp(8px, 1.2vw, 18px);
+        width: 100%;
+        max-width: 100%;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-top: clamp(16px, 2.5vh, 32px);
+        padding-bottom: clamp(16px, 2.5vh, 32px);
+        box-sizing: border-box;
+    }
+
+    /* Child 1: All Text */
+    .cover-text-col {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(24px, 3.8vh, 44px);
+        align-items: flex-start;
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+
+    /* Giant Title: 180px display with -6% letter-spacing */
+    .cover-main-title {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-weight: 800;
+        font-size: clamp(2.6rem, 8.9vw, 150px);
+        line-height: 0.94;
+        letter-spacing: -0.06em;
+        color: #000000;
+        margin: 0;
+        text-transform: none;
+    }
+
+    .title-line {
+        display: block;
+        white-space: nowrap;
+    }
+
+    /* Evenly Spaced Metadata Cluster: 3 equal column tracks */
+    .cover-meta-cluster {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, auto));
+        justify-content: start;
+        column-gap: clamp(28px, 3.8vw, 68px);
+        width: 100%;
+        align-items: start;
+    }
+
+    .cover-meta-col {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        text-align: left;
+    }
+
+    /* Subtitles: Size 36px with -3% letter-spacing */
+    .cover-meta-label {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.35rem, 2.5vw, 36px);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: #000000;
+        line-height: 1.15;
+    }
+
+    /* Text under subtitles: Size 24px with -3% letter-spacing */
+    .cover-meta-val {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.05rem, 1.66vw, 24px);
+        font-weight: 500;
+        letter-spacing: -0.03em;
+        color: #000000;
+        line-height: 1.25;
+    }
+
+    /* Child 2: Doodle Arrow + Tag */
+    .cover-arrow-col {
+        display: flex;
+        align-items: flex-end;
+        flex: 0 0 auto;
+        margin-left: clamp(-10px, -1vw, 6px);
+    }
+
+    .cover-doodle-callout {
+        display: inline-flex;
+        align-items: flex-end;
+        gap: clamp(10px, 1.2vw, 16px);
+        pointer-events: auto;
+        user-select: none;
+    }
+
+    .doodle-arrow-img {
+        width: clamp(88px, 8.5vw, 142px);
+        height: auto;
+        display: block;
+        animation: arrowDoodlePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s backwards,
+                   arrowBob 3.6s ease-in-out 0.8s infinite alternate;
+        transform-origin: top left;
+        cursor: pointer;
+        transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .doodle-arrow-img:hover {
+        transform: scale(1.08) rotate(-4deg);
+    }
+
+    .doodle-caption-pill {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #FFFFFF;
+        color: #000000;
+        border: 2px solid #000000;
+        border-radius: 10px;
+        padding: clamp(8px, 1vh, 12px) clamp(12px, 1.2vw, 18px);
+        box-shadow: 3px 3.5px 0px #000000;
+        animation: badgeDoodlePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s backwards,
+                   badgeWobble 4s ease-in-out 0.95s infinite alternate;
+        transform-origin: bottom left;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    }
+
+    .doodle-caption-pill:hover {
+        transform: scale(1.06) rotate(2deg) translateY(-2px);
+        box-shadow: 4px 5px 0px #000000;
+    }
+
+    .pill-line {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.88rem, 1.05vw, 1.15rem);
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: #000000;
+        text-align: center;
+        display: block;
+    }
+
+    @keyframes arrowDoodlePop {
+        0% {
+            opacity: 0;
+            transform: scale(0.18) rotate(-22deg) translateY(-28px);
+        }
+        60% {
+            opacity: 1;
+            transform: scale(1.12) rotate(4deg) translateY(4px);
+        }
+        80% {
+            transform: scale(0.96) rotate(-2deg) translateY(-1px);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) rotate(0deg) translateY(0);
+        }
+    }
+
+    @keyframes badgeDoodlePop {
+        0% {
+            opacity: 0;
+            transform: scale(0) translateY(14px) rotate(8deg);
+        }
+        65% {
+            opacity: 1;
+            transform: scale(1.14) translateY(-3px) rotate(-2deg);
+        }
+        85% {
+            transform: scale(0.97) translateY(1px) rotate(1deg);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) translateY(0) rotate(0deg);
+        }
+    }
+
+    @keyframes arrowBob {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-5px) rotate(1.5deg);
+        }
+    }
+
+    @keyframes badgeWobble {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-3px) rotate(-1.2deg);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .doodle-arrow-img,
+        .doodle-caption-pill {
+            animation: none;
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    /* =============================================================
+       INDEPENDENT SCROLLING EDITORIAL SLIDES & SECTIONS
+       ============================================================= */
+    .abc-editorial-slide {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        background-color: #FAF8F5;
+        color: #000000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: clamp(36px, 6vh, 64px) clamp(24px, 8.6vw, 130px);
+        box-sizing: border-box;
+        z-index: 5;
+    }
+
+    .editorial-slide-inner {
+        width: 100%;
+        max-width: clamp(960px, 84vw, 1340px);
+        margin: auto 0;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+    }
+
+    /* Two-Column Split Content for Intro Slides 1 & 2 */
+    .intro-split-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(36px, 5.5vw, 84px);
+        align-items: center;
+        width: 100%;
+    }
+
+    .intro-text-pane {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(16px, 2.2vh, 26px);
+        max-width: 540px;
+    }
+
+    .intro-media-pane {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .intro-display-title {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+        font-weight: 800;
+        line-height: 1.06;
+        letter-spacing: -0.035em;
+        color: #000000;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .disp-line {
+        display: block;
+    }
+
+    .intro-body-lead {
+        font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+        font-weight: 500;
+        line-height: 1.48;
+        color: #000000;
+        margin: 0;
+    }
+
+    .intro-cyan-hook {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.2rem, 1.65vw, 1.55rem);
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+        color: #02B4E3;
+        margin: 0;
+    }
+
+    /* Images */
+    .intro-feature-poster {
+        width: 100%;
+        max-width: 460px;
+        max-height: clamp(340px, 60vh, 560px);
+        object-fit: contain;
+        filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.08));
+    }
+
+    .intro-feature-flyer {
+        width: 100%;
+        max-width: 320px;
+        max-height: clamp(340px, 58vh, 520px);
+        object-fit: contain;
+        transform: rotate(-2deg);
+        filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.08));
+    }
+
+    /* Section 4: WHY (Rising Black Curtain Transition) */
+    .abc-why-section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        background-color: #000000;
+        color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        padding: clamp(36px, 6vh, 64px) clamp(20px, 4vw, 48px);
+        overflow: hidden;
+        z-index: 6;
+    }
+
+    .why-inner-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(38px, 6vh, 78px);
+        width: 100%;
+        max-width: clamp(960px, 86vw, 1260px);
+        margin: auto 0;
+    }
+
+    .abc-why-section .why-inner-container {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    /* Reveal for the free-scrolling editorial slides. Beat 1 is excluded: it
+       arrives with the horizontal slide, so it must never start hidden. */
+    .editorial-slide-inner {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .abc-editorial-slide.is-revealed .editorial-slide-inner {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .editorial-slide-inner {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    }
+
+    .why-center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: clamp(14px, 2.2vh, 22px);
+        max-width: 820px;
+        margin: 0;
+    }
+
+    .why-display-title {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(5.5rem, 16vw, 11.5rem);
+        font-weight: 900;
+        line-height: 0.88;
+        letter-spacing: -0.04em;
+        color: #FFFFFF;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .why-tagline-p {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.1rem, 1.55vw, 1.38rem);
+        font-weight: 700;
+        line-height: 1.38;
+        letter-spacing: -0.01em;
+        color: #FFDA00;
+        margin: 0;
+        text-align: center;
+        text-wrap: balance;
+        max-width: 760px;
+    }
+
+    /* Flexbox centered bottom columns */
+    .why-bottom-columns {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: clamp(24px, 3.5vw, 64px);
+        width: 100%;
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 clamp(16px, 2.5vw, 32px);
+        box-sizing: border-box;
+    }
+
+    .why-col {
+        flex: 0 1 auto;
+        max-width: 185px;
+        text-align: center;
+    }
+
+    .why-col p {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.92rem, 1.1vw, 1.12rem);
+        font-weight: 500;
+        line-height: 1.35;
+        letter-spacing: -0.02em;
+        color: #FFFFFF;
+        margin: 0;
+    }
+
+    /* Section 5: Beat 1 (Rising Cream Curtain Transition) */
+    .abc-beat1-section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        background-color: #FAF8F5;
+        color: #000000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: clamp(36px, 6vh, 64px) clamp(24px, 8.6vw, 130px);
+        box-sizing: border-box;
+        overflow: hidden;
+        z-index: 7;
+    }
+
+    .beat1-typewriter-container {
+        width: 100%;
+        max-width: clamp(700px, 68vw, 1100px);
+        margin: auto 0;
+    }
+
+    .beat1-typewriter {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(2.4rem, 5.2vw, 4.5rem);
+        font-weight: 800;
+        line-height: 1.12;
+        letter-spacing: -0.03em;
+        color: #000000;
+        margin: 0;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    .type-text {
+        display: inline;
+    }
+
+    /* The untyped remainder stays in the layout, invisible. That keeps the line
+       breaks and the block height identical from the first character to the
+       last, so words never reflow mid-animation. */
+    .type-rest {
+        display: inline;
+        visibility: hidden;
+    }
+
+    .beat1-typewriter.is-typed .type-rest {
+        display: none;
+    }
+
+    .type-cursor {
+        display: inline-block;
+        width: clamp(4px, 0.35vw, 6px);
+        height: 0.92em;
+        vertical-align: -0.06em;
+        background-color: #000000;
+        margin-left: 4px;
+        /* Net zero layout footprint, so the cursor cannot nudge the remainder
+           onto another line and change the wrap. */
+        margin-right: calc(-4px - clamp(4px, 0.35vw, 6px));
+        animation: cursorBlink 0.8s infinite steps(2, start);
+    }
+
+    @keyframes cursorBlink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+
+    .beat1-typewriter.is-typed .type-cursor {
+        animation: none;
+        opacity: 0;
+        transition: opacity 0.4s ease 0.3s;
+    }
+
+
+    /* =============================================================
+       RESULTS STAGE: CREAM PANEL RISES, THEN FILLS WITH BIKES
+       ============================================================= */
+
+    /* Pulled up by one viewport so the panel slides over the still-pinned
+       black stage instead of following it down the page. */
+    .abc-results-stage {
+        position: relative;
+        z-index: 12;
+        width: 100vw;
+        height: 400vh;
+        height: 400dvh;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        margin-top: -100vh;
+        margin-top: -100dvh;
+    }
+
+    .abc-results-panel {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        background-color: var(--cream, #FAF8F5);
+        color: #000000;
+        overflow: hidden;
+        box-sizing: border-box;
+        padding: clamp(28px, 4.5vh, 48px) clamp(24px, 8.6vw, 130px);
+        box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.28);
+    }
+
+    /* Heading, top left */
+    .results-heading {
+        position: absolute;
+        top: clamp(72px, 12vh, 132px);
+        left: clamp(24px, 8.6vw, 130px);
+        width: min(46%, 620px);
+        margin: 0;
+        z-index: 2;
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.9rem, 3.5vw, 3.5rem);
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: -0.035em;
+        color: #000000;
+        text-wrap: pretty;
+    }
+
+    .results-type-text {
+        display: inline;
+    }
+
+    /* Same trick as beat 1: the untyped tail holds the layout so the heading
+       never reflows while it types. */
+    .results-type-rest {
+        display: inline;
+        visibility: hidden;
+    }
+
+    .results-heading.is-typed .results-type-rest {
+        display: none;
+    }
+
+    .results-type-cursor {
+        display: none;
+    }
+
+    .results-heading.is-typing .results-type-cursor {
+        display: inline-block;
+        width: clamp(4px, 0.3vw, 6px);
+        height: 0.86em;
+        vertical-align: -0.04em;
+        background-color: #000000;
+        margin-left: 4px;
+        margin-right: calc(-4px - clamp(4px, 0.3vw, 6px));
+        animation: cursorBlink 0.8s infinite steps(2, start);
+    }
+
+    .results-heading.is-typed .results-type-cursor {
+        animation: none;
+        opacity: 0;
+        transition: opacity 0.4s ease 0.3s;
+    }
+
+    /* Map, right hand side */
+    .results-map-holder {
+        position: absolute;
+        top: clamp(26px, 4.5vh, 64px);
+        bottom: clamp(84px, 13vh, 150px);
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(26px) scale(0.94);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.7s cubic-bezier(0.34, 1.35, 0.64, 1);
+        pointer-events: none;
+    }
+
+    .abc-results-panel.is-map-in .results-map-holder {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    .results-map-holder :global(.nz-map-wrapper) {
+        height: 100% !important;
+        width: 100% !important;
+        min-height: unset !important;
+        min-width: unset !important;
+        aspect-ratio: auto !important;
+    }
+
+    /* The beacon belongs to the story beats, not to this panel. */
+    .results-map-holder :global(.auckland-beacon) {
+        display: none;
+    }
+
+    .results-map-holder :global(.nz-map-svg) {
+        overflow: visible;
+    }
+
+    /* Bicycles injected into the map */
+    .results-map-holder :global(.bike-layer) {
+        filter: drop-shadow(0 0 1.1px rgba(0, 40, 60, 0.55));
+    }
+
+    .results-map-holder :global(.bike-mark) {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        transform: scale(0.2);
+        transition: opacity 0.28s ease, transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1);
+        will-change: transform, opacity;
+    }
+
+    .results-map-holder :global(.bike-mark.is-on) {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Stats row, along the bottom */
+    .results-stats-row {
+        position: absolute;
+        z-index: 2;
+        left: clamp(24px, 8.6vw, 130px);
+        right: clamp(24px, 8.6vw, 130px);
+        bottom: clamp(36px, 7vh, 76px);
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: clamp(20px, 4vw, 64px);
+    }
+
+    .results-stat-group {
+        display: flex;
+        align-items: flex-end;
+        gap: clamp(24px, 4.5vw, 76px);
+    }
+
+    .results-stats-label {
+        flex: 0 1 auto;
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .abc-results-panel.is-stats-in .results-stats-label {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .results-stats-label p {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1rem, 1.4vw, 1.5rem);
+        font-weight: 400;
+        line-height: 1.24;
+        letter-spacing: -0.02em;
+        color: #000000;
+        margin: 0;
+    }
+
+    .results-stats-label strong {
+        font-weight: 800;
+    }
+
+    .results-stat {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        opacity: 0;
+        transform: translateY(22px) scale(0.9);
+        transition: opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1) var(--stat-delay, 0s),
+                    transform 0.5s cubic-bezier(0.34, 1.5, 0.64, 1) var(--stat-delay, 0s);
+    }
+
+    .abc-results-panel.is-stats-in .results-stat {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    .results-stat-val {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(2.6rem, 6.2vw, 6.4rem);
+        font-weight: 800;
+        line-height: 0.9;
+        letter-spacing: -0.05em;
+        color: #000000;
+    }
+
+    .results-stat-sub {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.85rem, 1.2vw, 1.2rem);
+        font-weight: 400;
+        letter-spacing: -0.01em;
+        color: #000000;
+        line-height: 1.24;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .results-map-holder,
+        .results-stats-label,
+        .results-stat {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+
+        .results-map-holder :global(.bike-mark) {
+            transition: none;
+        }
+    }
+
+
+    /* =============================================================
+       WHAT I DID: NUMBERED SLIDE DECK
+
+       Two layouts from one markup. The base rules below are the plain
+       vertical read: six chapters stacked down the yellow ground, each
+       revealing on scroll. Script adds .is-deck on wide viewports, and
+       that turns the same list into a pinned horizontal deck — every
+       chapter slides in from the right over the last, which parks and
+       keeps only its numbered spine visible at the left edge.
+       ============================================================= */
+    .abc-did-section {
+        --did-pad-x: clamp(24px, 5vw, 80px);
+        --did-spine-w: clamp(46px, 4.4vw, 64px);
+
+        position: relative;
+        z-index: 14;
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        background-color: var(--doodle-yellow, #FFDA00);
+        color: #000000;
+        box-sizing: border-box;
+        padding: clamp(96px, 14vh, 168px) var(--did-pad-x) clamp(96px, 16vh, 190px);
+        /* Label sits in its own gutter so the copy can never run underneath it. */
+        display: grid;
+        grid-template-columns: clamp(110px, 12vw, 180px) minmax(0, 1fr);
+        align-items: start;
+    }
+
+    /* Rides along in the gutter, below the fixed deck button. */
+    .did-section-label {
+        grid-column: 1;
+        position: sticky;
+        top: clamp(72px, 9.5vh, 104px);
+        z-index: 3;
+        margin: 0;
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.15rem, 1.75vw, 1.7rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        color: #FFFFFF;
+        padding-right: clamp(16px, 2vw, 32px);
+        pointer-events: none;
+    }
+
+    .did-runway {
+        grid-column: 2;
+        position: relative;
+        max-width: 1240px;
+    }
+
+    .did-deck {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(80px, 13vh, 168px);
+    }
+
+    .did-slide {
+        position: relative;
+    }
+
+    /* The spine is the deck's chapter index; it has nothing to say in the
+       vertical read, where the folio above each title already numbers it. */
+    .did-spine {
+        display: none;
+    }
+
+    /* Wide left column for the argument, narrower right column for the asides. */
+    .did-slide-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+        column-gap: clamp(40px, 7vw, 132px);
+        align-items: start;
+    }
+
+    .did-slide.is-single .did-slide-inner {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    /* Reveal belongs to the vertical read only. In deck mode the script owns
+       the slide's transform, so the two must never both write to it. */
+    .abc-did-section:not(.is-deck) .did-slide-inner {
+        opacity: 0;
+        transform: translateY(26px);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .abc-did-section:not(.is-deck) .did-slide.is-revealed .did-slide-inner {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .did-main {
+        max-width: 62ch;
+    }
+
+    .did-aside {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(26px, 4vh, 44px);
+        max-width: 46ch;
+    }
+
+    /* Folio above the title: small, quiet, and tabular so the numbers line up
+       chapter to chapter. */
+    .did-step {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.72rem, 0.85vw, 0.84rem);
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+        color: #000000;
+        margin: 0 0 clamp(14px, 2vh, 22px);
+    }
+
+    .did-step-of {
+        font-weight: 600;
+        opacity: 0.45;
+    }
+
+    .did-title {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.85rem, 3.3vw, 3.1rem);
+        font-weight: 800;
+        line-height: 1.03;
+        letter-spacing: -0.035em;
+        color: #000000;
+        margin: 0 0 clamp(18px, 2.6vh, 30px);
+        text-wrap: balance;
+    }
+
+    .did-note-title {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.05rem, 1.5vw, 1.4rem);
+        font-weight: 800;
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+        color: #000000;
+        margin: 0 0 clamp(8px, 1.2vh, 12px);
+    }
+
+    .did-body {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+        font-weight: 400;
+        line-height: 1.58;
+        letter-spacing: -0.005em;
+        color: #000000;
+        margin: 0 0 clamp(12px, 1.8vh, 18px);
+        text-wrap: pretty;
+    }
+
+    .did-body:last-child {
+        margin-bottom: 0;
+    }
+
+    .did-body strong {
+        font-weight: 700;
+    }
+
+    .did-note + .did-note {
+        margin-top: clamp(22px, 3.4vh, 38px);
+    }
+
+    /* Numbers hang in the margin so the text edge stays flush with the heading. */
+    .did-list {
+        list-style: none;
+        counter-reset: did-item;
+        margin: 0 0 clamp(18px, 2.6vh, 28px);
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(5px, 0.8vh, 9px);
+    }
+
+    .did-list:last-child {
+        margin-bottom: 0;
+    }
+
+    .did-list li {
+        counter-increment: did-item;
+        position: relative;
+        padding-left: 2.1em;
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+        font-weight: 400;
+        line-height: 1.5;
+        letter-spacing: -0.005em;
+        color: #000000;
+        text-wrap: pretty;
+    }
+
+    .did-list li::before {
+        content: counter(did-item) ".";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1.6em;
+        text-align: right;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .did-pull {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(1.15rem, 1.75vw, 1.6rem);
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        color: #000000;
+        margin: 0;
+        text-wrap: pretty;
+    }
+
+    /* -------------------------------------------------------------
+       DECK MODE
+       ------------------------------------------------------------- */
+
+    /* The runway is the scroll budget: one viewport per chapter, plus half a
+       one so the last chapter holds still before the page runs out. */
+    .is-deck .did-runway {
+        height: calc((var(--did-count, 6) + 0.5) * 100vh);
+        height: calc((var(--did-count, 6) + 0.5) * 100dvh);
+        max-width: none;
+    }
+
+    .is-deck .did-viewport {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        /* Bleed back out to the section gutter so chapters enter and leave at
+           the true screen edge rather than at the text margin. */
+        margin-right: calc(-1 * var(--did-pad-x));
+    }
+
+    .is-deck .did-deck {
+        display: block;
+        height: 100%;
+        gap: 0;
+    }
+
+    .is-deck .did-slide {
+        position: absolute;
+        inset: 0;
+        z-index: var(--i);
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        /* Opaque, so a chapter arriving from the right wipes the one behind it.
+           The rule is the only seam you actually see: same ground, new column. */
+        background-color: var(--doodle-yellow, #FFDA00);
+        border-left: 2px solid #000000;
+        padding-left: var(--did-spine-w);
+        /* Everything to the right of the screen edge is off-stage, so the copy
+           column is inset by however many spines are parked to the left. */
+        padding-right: calc(var(--did-pad-x) + var(--i) * var(--did-spine-w));
+        /* Off to the right until the first frame of the scroll loop lands. */
+        transform: translate3d(100%, 0, 0);
+        will-change: transform;
+    }
+
+    .is-deck .did-slide-inner {
+        width: 100%;
+        max-height: 100%;
+    }
+
+    .is-deck .did-spine {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--did-spine-w);
+        padding-top: clamp(88px, 12vh, 136px);
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .did-spine-num {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.7rem, 0.8vw, 0.84rem);
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        line-height: 1;
+        font-variant-numeric: tabular-nums;
+        color: #000000;
+        /* Parked chapters read as a passed index; the live one is full black. */
+        opacity: 0.34;
+        transition: opacity 0.45s ease;
+    }
+
+    .did-slide.is-current .did-spine-num {
+        opacity: 1;
+    }
+
+    /* The folio would only repeat the spine sitting an inch to its left. */
+    .is-deck .did-step {
+        display: none;
+    }
+
+    /* A chapter has one screen, so the display sizes come down a step and the
+       longest list runs in two columns rather than off the bottom edge. */
+    .is-deck .did-title {
+        font-size: clamp(1.7rem, 2.9vw, 2.7rem);
+    }
+
+    .is-deck .did-pull {
+        font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+    }
+
+    .is-deck .did-list.is-two-col {
+        display: block;
+        columns: 2;
+        column-gap: clamp(28px, 3.4vw, 56px);
+    }
+
+    .is-deck .did-list.is-two-col li {
+        break-inside: avoid;
+        margin-bottom: clamp(5px, 0.8vh, 9px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .did-slide-inner {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+    }
+
+    /* Tablet Responsive Adaptation (768px - 1024px) */
+    @media (max-width: 1024px) {
+        .cover-hero-row {
+            gap: 12px;
+        }
+
+        .cover-meta-cluster {
+            column-gap: 24px;
+        }
+
+        .cover-main-title {
+            font-size: clamp(2.6rem, 8vw, 96px);
+        }
+
+        .doodle-arrow-img {
+            width: clamp(72px, 7.8vw, 96px);
+        }
+
+        .doodle-caption-pill {
+            padding: 7px 12px;
+        }
+
+        .pill-line {
+            font-size: 0.85rem;
+        }
+
+        .intro-split-content {
+            gap: 28px;
+        }
+
+        .why-bottom-columns {
+            gap: 16px;
+        }
+
+        .why-col p {
+            font-size: 0.88rem;
+        }
+
+        .results-heading {
+            width: min(52%, 460px);
+            font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+        }
+
+        .results-stat-group {
+            gap: 26px;
+        }
+
+        .results-stat-val {
+            font-size: clamp(2rem, 4.6vw, 3rem);
+        }
+
+        .results-stat-sub {
+            font-size: 0.78rem;
+        }
+
+        .did-slide-inner {
+            column-gap: 40px;
+        }
+
+        .did-title {
+            font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+        }
+
+        .did-pull {
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+        }
+    }
+
+    /* Mobile Responsive Adaptation (<= 767px) */
+    @media (max-width: 767px) {
+        .abc-cover-hero {
+            padding: 24px 20px 28px;
+            min-height: 100dvh;
+        }
+
+        .cover-arrow-col {
+            display: none !important;
+        }
+
+        .case-study-deck-btn {
+            top: 16px;
+            left: 16px;
+            padding: 6px 14px;
+            font-size: 0.82rem;
+        }
+
+        .scroll-mouse-signal.is-fixed-bottom-left {
+            display: none !important;
+        }
+
+        .abc-editorial-slide {
+            padding: 64px 20px 24px;
+            min-height: 100dvh;
+        }
+
+        .abc-why-section {
+            padding: 64px 16px 24px;
+            min-height: 100dvh;
+        }
+
+        .abc-beat1-section {
+            padding: 64px 20px 24px;
+            min-height: 100dvh;
+        }
+
+        .intro-split-content {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .intro-split-reverse .intro-media-pane {
+            order: 2;
+        }
+
+        .intro-split-reverse .intro-text-pane {
+            order: 1;
+        }
+
+        .intro-display-title {
+            font-size: clamp(1.85rem, 8vw, 2.5rem);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+        }
+
+        .intro-body-lead {
+            font-size: clamp(0.92rem, 3.8vw, 1.05rem);
+            line-height: 1.4;
+        }
+
+        .intro-cyan-hook {
+            font-size: clamp(1.05rem, 4.4vw, 1.25rem);
+            line-height: 1.25;
+        }
+
+        .intro-media-pane {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro-feature-poster {
+            max-width: 320px;
+            max-height: clamp(180px, 28vh, 260px);
+        }
+
+        .intro-feature-flyer {
+            max-width: 280px;
+            max-height: clamp(180px, 28vh, 260px);
+        }
+
+        .why-inner-container {
+            width: 100%;
+            padding: 0;
+        }
+
+        .why-center-content {
+            margin: auto 0;
+            gap: 12px;
+        }
+
+        .why-display-title {
+            font-size: clamp(4.2rem, 20vw, 6.5rem);
+            line-height: 0.88;
+        }
+
+        .why-tagline-p {
+            font-size: clamp(0.95rem, 4vw, 1.15rem);
+            line-height: 1.35;
+        }
+
+        .why-bottom-columns {
+            display: flex;
+            /* Centring an overflowing flex row clips the first item out of
+               reach of the scroller, so the row starts flush instead. */
+            justify-content: flex-start;
+            overflow-x: auto;
+            scroll-snap-type: x proximity;
+            gap: 14px;
+            padding: 4px 4px 12px;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 16px;
+            width: 100%;
+        }
+
+        .why-col {
+            flex: 0 0 170px;
+            scroll-snap-align: start;
+        }
+
+        .why-col p {
+            font-size: 0.86rem;
+            line-height: 1.3;
+        }
+
+        .abc-why-section.is-slammed .why-bottom-columns {
+            animation: panelFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both;
+        }
+
+        .abc-cinematic-stage {
+            padding: 24px 20px 28px;
+        }
+
+        .beat1-typewriter {
+            font-size: clamp(1.75rem, 8vw, 2.75rem);
+            line-height: 1.15;
+        }
+
+        .stage-sidebar-history {
+            display: none !important;
+        }
+
+        /* Mobile Cinematic Map Stage - Anchored higher, sits above centered text */
+        .abc-cinematic-stage.is-beat2 .cinematic-map-stage {
+            bottom: calc(50% + clamp(104px, 15vh, 132px));
+        }
+
+        .abc-cinematic-stage.is-beat3 .cinematic-map-stage {
+            bottom: calc(50% + clamp(150px, 21vh, 186px));
+        }
+
+        .abc-cinematic-stage.is-beat2 .cinematic-map-stage :global(.nz-map-wrapper),
+        .abc-cinematic-stage.is-beat3 .cinematic-map-stage :global(.nz-map-wrapper) {
+            height: clamp(115px, 14.5vh, 135px) !important;
+        }
+
+        .abc-cinematic-stage.is-beat4 .cinematic-map-stage,
+        .abc-cinematic-stage.is-beat5 .cinematic-map-stage {
+            bottom: calc(50% + clamp(140px, 19vh, 170px));
+        }
+
+        .beat2-wrapper {
+            padding: 16px 20px 24px;
+        }
+
+        .beat2-inner {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: calc(100% - 40px);
+            width: 100%;
+            margin: 0;
+        }
+
+        .beat2-main-quote {
+            font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+            line-height: 1.24;
+            letter-spacing: -0.025em;
+        }
+
+        .beat2-kicker {
+            font-size: clamp(0.85rem, 3.4vw, 0.95rem);
+        }
+
+        .abc-cinematic-stage.is-beat3 .beat2-inner,
+        .abc-cinematic-stage.is-beat4 .beat2-inner,
+        .abc-cinematic-stage.is-beat5 .beat2-inner {
+            display: none !important;
+        }
+
+        .beat3-wrapper {
+            padding: 16px 20px 24px;
+        }
+
+        .beat3-inner {
+            top: calc(50% + 1.5rem);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: calc(100% - 40px);
+            width: 100%;
+            margin: 0;
+            padding-top: 0;
+        }
+
+        .abc-cinematic-stage.is-beat4 .beat3-inner,
+        .abc-cinematic-stage.is-beat5 .beat3-inner {
+            display: none !important;
+        }
+
+        .beat3-stats-row {
+            gap: 24px;
+            margin-bottom: 0;
+        }
+
+        .beat3-stat-label {
+            font-size: 0.68rem;
+        }
+
+        .beat3-stat-val {
+            font-size: 1.35rem;
+        }
+
+        .beat3-stat-sub {
+            font-size: 0.65rem;
+            color: var(--doodle-cyan, #00B3E3);
+        }
+
+        .beat3-narrative {
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+
+        .beat3-punchline {
+            font-size: 0.92rem;
+            line-height: 1.28;
+        }
+
+        .beat4-wrapper {
+            padding: 16px 20px 24px;
+        }
+
+        .beat4-inner {
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: calc(100% - 40px);
+            width: 100%;
+            margin: 0;
+            padding-top: 0;
+        }
+
+        .beat4-main-text {
+            font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+            line-height: 1.25;
+        }
+
+        .beat4-muted-sub {
+            font-size: clamp(0.85rem, 3.4vw, 0.98rem);
+            margin-top: 8px;
+        }
+
+        .abc-cinematic-stage.is-beat5 .beat4-inner,
+        .abc-cinematic-stage.is-beat5 .beat4-headlines-layer {
+            display: none !important;
+        }
+
+        .beat4-headlines-layer {
+            position: absolute !important;
+            top: 54% !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: calc(100% - 40px) !important;
+            max-width: 320px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+            align-items: center !important;
+            margin: 0 !important;
+            bottom: auto !important;
+            right: auto !important;
+            z-index: 10;
+        }
+
+        .flood-headline,
+        .flood-headline.hl-1,
+        .flood-headline.hl-2,
+        .flood-headline.hl-3,
+        .flood-headline.hl-4 {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            transform: none !important;
+            width: 100%;
+            max-width: 320px;
+            padding: 8px 12px;
+        }
+
+        .hl-3, .hl-4 {
+            display: none !important;
+        }
+
+        /* Beat 5 Mobile Adaptation */
+        .beat5-wrapper {
+            padding: 16px 20px 24px;
+        }
+
+        .beat5-inner {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: calc(100% - 40px);
+            width: 100%;
+            margin: 0;
+            padding-top: 0;
+        }
+
+        .beat5-main-text {
+            font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+            line-height: 1.28;
+        }
+
+        .beat5-muted-sub {
+            font-size: clamp(0.85rem, 3.4vw, 0.98rem);
+            margin-top: 8px;
+        }
+
+        .beat5-smiley-callout {
+            top: calc(100% + 16px);
+        }
+
+        .melting-face-emoji-img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .cover-hero-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            width: 100%;
+            margin-top: auto;
+            margin-bottom: auto;
+            position: relative;
+        }
+
+        .cover-text-col {
+            width: 100%;
+            gap: 24px;
+        }
+
+        .cover-main-title {
+            font-size: clamp(2.8rem, 12vw, 4.6rem);
+            line-height: 0.96;
+            letter-spacing: -0.05em;
+        }
+
+        .cover-meta-cluster {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            width: 100%;
+        }
+
+        .cover-meta-label {
+            font-size: clamp(1.2rem, 5.5vw, 26px);
+        }
+
+        .cover-meta-val {
+            font-size: clamp(0.95rem, 4vw, 18px);
+        }
+
+        /* Results panel stacks: heading, then map, then the figures. */
+        .abc-results-panel {
+            padding: 24px 20px 24px;
+        }
+
+        .results-heading {
+            top: 72px;
+            left: 20px;
+            right: 20px;
+            width: auto;
+            font-size: clamp(1.3rem, 5.6vw, 1.75rem);
+            line-height: 1.12;
+        }
+
+        .results-map-holder {
+            top: 150px;
+            bottom: 210px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .results-stats-row {
+            left: 20px;
+            right: 20px;
+            bottom: 34px;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+        }
+
+        .results-stat-group {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 8px;
+            align-items: start;
+        }
+
+        .results-stats-label p {
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        .results-stat-val {
+            font-size: clamp(1.35rem, 6.4vw, 1.85rem);
+            letter-spacing: -0.04em;
+        }
+
+        .results-stat-sub {
+            font-size: 0.64rem;
+            line-height: 1.2;
+        }
+
+        .abc-did-section {
+            grid-template-columns: minmax(0, 1fr);
+            padding: 84px 20px 96px;
+        }
+
+        .did-section-label {
+            grid-column: 1;
+            position: static;
+            margin-bottom: 36px;
+            font-size: 1.1rem;
+        }
+
+        .did-runway {
+            grid-column: 1;
+        }
+
+        .did-deck {
+            gap: 64px;
+        }
+
+        .did-slide-inner {
+            grid-template-columns: minmax(0, 1fr);
+            row-gap: 28px;
+        }
+
+        .did-main,
+        .did-aside {
+            max-width: none;
+        }
+
+        .did-title {
+            font-size: clamp(1.6rem, 7.4vw, 2.1rem);
+        }
+
+        .did-pull {
+            font-size: clamp(1.1rem, 5vw, 1.35rem);
+        }
+
+        .did-list li {
+            padding-left: 1.9em;
+        }
+    }
+</style>
+
+<script>
+    // Everything registered during a page init, torn down before Astro swaps the
+    // document. Without this the window scroll listeners stack up on every
+    // client-side navigation and the page gets progressively jankier.
+    let teardown: Array<() => void> = [];
+
+    function onWindow(type: string, handler: EventListener) {
+        window.addEventListener(type, handler, { passive: true });
+        teardown.push(() => window.removeEventListener(type, handler));
+    }
+
+    const prefersReducedMotion = () =>
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /**
+     * One rAF-throttled scroll loop for the whole page. Each subscriber runs at
+     * most once per frame, so layout reads stay off the scroll event itself.
+     */
+    function createScrollLoop() {
+        const subscribers: Array<() => void> = [];
+        let ticking = false;
+
+        function run() {
+            ticking = false;
+            for (const fn of subscribers) fn();
+        }
+
+        function request() {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(run);
+        }
+
+        onWindow("scroll", request);
+        onWindow("resize", request);
+
+        return {
+            subscribe(fn: () => void) {
+                subscribers.push(fn);
+            },
+            run,
+            request
+        };
+    }
+
+    /**
+     * Shared reveal for every full-height section. Fires when a section's top
+     * edge passes the middle of the viewport, which is the same trigger point
+     * the WHY section used to compute by hand.
+     */
+    function initSectionReveals() {
+        const sections = document.querySelectorAll<HTMLElement>(".abc-editorial-slide");
+        if (!sections.length) return;
+
+        if (prefersReducedMotion() || typeof IntersectionObserver === "undefined") {
+            sections.forEach((el) => el.classList.add("is-revealed"));
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (!entry.isIntersecting) continue;
+                    entry.target.classList.add("is-revealed");
+                    observer.unobserve(entry.target);
+                }
+            },
+            { rootMargin: "0px 0px -50% 0px", threshold: 0 }
+        );
+
+        sections.forEach((el) => observer.observe(el));
+        teardown.push(() => observer.disconnect());
+    }
+
+    /**
+     * Reveal for the individual chapters of "What I did" while they are a
+     * vertical read. Uses a gentler trigger than the full-height sections,
+     * since these are shorter than a viewport and would otherwise never cross
+     * the halfway line. In deck mode the CSS ignores the class it sets.
+     */
+    function initBlockReveals() {
+        const blocks = document.querySelectorAll<HTMLElement>(".did-slide");
+        if (!blocks.length) return;
+
+        if (prefersReducedMotion() || typeof IntersectionObserver === "undefined") {
+            blocks.forEach((el) => el.classList.add("is-revealed"));
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (!entry.isIntersecting) continue;
+                    entry.target.classList.add("is-revealed");
+                    observer.unobserve(entry.target);
+                }
+            },
+            { rootMargin: "0px 0px -12% 0px", threshold: 0 }
+        );
+
+        blocks.forEach((el) => observer.observe(el));
+        teardown.push(() => observer.disconnect());
+    }
+
+    function initMouseScrollSignal() {
+        const btn = document.getElementById("fixed-scroll-signal");
+        if (!btn) return;
+
+        const handler = () => {
+            const vh = window.innerHeight;
+
+            // Pinned stages are checked first. If we are already inside one, the
+            // next stop is its next phase, not whatever section comes after it.
+            const didRunway = document.getElementById("did-runway");
+            const didIsDeck = document
+                .getElementById("what-i-did")
+                ?.classList.contains("is-deck");
+
+            const pinned: Array<{ el: HTMLElement | null; steps: number }> = [
+                { el: document.getElementById("reveal-stage"), steps: 4 },
+                { el: document.getElementById("results-stage"), steps: 4 },
+                // Only while the chapters are pinned; in the vertical read the
+                // runway is just ordinary page height with no phases in it.
+                {
+                    el: didIsDeck ? didRunway : null,
+                    steps: didRunway?.querySelectorAll(".did-slide").length ?? 0
+                }
+            ];
+
+            for (const { el, steps } of pinned) {
+                if (!el) continue;
+                // Not offsetTop: the deck's runway sits inside a positioned
+                // section, so its offsetParent is not the document.
+                const top = el.getBoundingClientRect().top + window.scrollY;
+                const phase = Math.floor((window.scrollY - top) / vh);
+                if (phase >= 0 && phase < steps - 1) {
+                    window.scrollTo({ top: top + (phase + 1) * vh, behavior: "smooth" });
+                    return;
+                }
+            }
+
+            const sections = [
+                "cover-landing",
+                "intro-slide-1",
+                "intro-slide-2",
+                "why-section",
+                "beat1-section",
+                "reveal-stage",
+                "results-stage"
+            ]
+                .map((id) => document.getElementById(id))
+                .filter((s): s is HTMLElement => Boolean(s));
+
+            for (const section of sections) {
+                if (section.getBoundingClientRect().top > 40) {
+                    section.scrollIntoView({ behavior: "smooth" });
+                    return;
+                }
+            }
+
+            window.scrollBy({ top: vh * 0.85, behavior: "smooth" });
+        };
+
+        btn.addEventListener("click", handler);
+        teardown.push(() => btn.removeEventListener("click", handler));
+    }
+
+    function initBeat1Typewriter() {
+        const textContainer = document.getElementById("typewriter-text");
+        const outputElem = textContainer?.querySelector(".type-text") as HTMLElement | null;
+        const restElem = textContainer?.querySelector(".type-rest") as HTMLElement | null;
+        if (!textContainer || !outputElem || !restElem) {
+            return { start: () => {}, complete: () => {} };
+        }
+
+        const part1 = "Coordinating a city-wide cycling campaign. ";
+        const fullText = part1 + "Simple enough...";
+
+        // Remainder carries the untyped tail so the box never changes shape.
+        restElem.textContent = fullText;
+        outputElem.textContent = "";
+
+        let isCompleted = false;
+        let hasStarted = false;
+        let typeTimer: ReturnType<typeof setTimeout> | null = null;
+
+        function complete() {
+            if (isCompleted) return;
+            isCompleted = true;
+            if (typeTimer) clearTimeout(typeTimer);
+            outputElem!.textContent = fullText;
+            restElem!.textContent = "";
+            textContainer!.classList.add("is-typed");
+        }
+
+        function start() {
+            if (hasStarted || isCompleted) return;
+            hasStarted = true;
+
+            if (prefersReducedMotion()) {
+                complete();
+                return;
+            }
+
+            let charIndex = 0;
+            (function typeNextChar() {
+                if (isCompleted) return;
+                if (charIndex >= fullText.length) {
+                    restElem!.textContent = "";
+                    textContainer!.classList.add("is-typed");
+                    return;
+                }
+                outputElem!.textContent = fullText.slice(0, charIndex + 1);
+                restElem!.textContent = fullText.slice(charIndex + 1);
+                charIndex++;
+                const delay = charIndex === part1.length ? 440 : 30 + Math.random() * 22;
+                typeTimer = setTimeout(typeNextChar, delay);
+            })();
+        }
+
+        teardown.push(() => {
+            if (typeTimer) clearTimeout(typeTimer);
+        });
+
+        return { start, complete };
+    }
+
+    /**
+     * Recolours the fixed deck button and scroll signal to suit whatever is
+     * actually behind them. Panels are listed in paint order, so the last one
+     * covering the control wins; that matters because light and dark panels
+     * slide over each other during the transitions.
+     */
+    function createThemeSync() {
+        const controls: Array<{ el: HTMLElement; cls: string }> = [];
+        const deckBtn = document.getElementById("case-study-deck-btn");
+        const scrollBtn = document.getElementById("fixed-scroll-signal");
+        if (deckBtn) controls.push({ el: deckBtn, cls: "is-dark-nav" });
+        if (scrollBtn) controls.push({ el: scrollBtn, cls: "is-dark-mouse" });
+        if (!controls.length) return () => {};
+
+        const panels = (
+            [
+                ["intro-slide-2", false],
+                ["why-section", true],
+                ["beat1-section", false],
+                ["cinematic-stage", true],
+                ["results-panel", false],
+                ["what-i-did", false]
+            ] as Array<[string, boolean]>
+        )
+            .map(([id, dark]) => ({ el: document.getElementById(id), dark }))
+            .filter((p): p is { el: HTMLElement; dark: boolean } => Boolean(p.el));
+
+        return function syncTheme() {
+            const boxes = panels.map((p) => ({ dark: p.dark, r: p.el.getBoundingClientRect() }));
+
+            for (const { el, cls } of controls) {
+                const rect = el.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+
+                let isDark = false;
+                for (let i = boxes.length - 1; i >= 0; i--) {
+                    const { dark, r } = boxes[i];
+                    if (y >= r.top && y <= r.bottom && x >= r.left && x <= r.right) {
+                        isDark = dark;
+                        break;
+                    }
+                }
+                el.classList.toggle(cls, isDark);
+            }
+        };
+    }
+
+    function initStoryBeats(onEnterStage: () => void) {
+        const stage = document.getElementById("cinematic-stage");
+        const stageWrapper = document.getElementById("reveal-stage");
+        if (!stage || !stageWrapper) return () => {};
+
+        const track = document.getElementById("sidebar-track");
+        const sidebar = document.querySelector(".stage-sidebar-history") as HTMLElement | null;
+
+        // offsetTop forces a reflow, so measure it on resize rather than per frame.
+        let stageTop = stageWrapper.offsetTop;
+        const remeasure = () => {
+            stageTop = stageWrapper.offsetTop;
+        };
+        onWindow("resize", remeasure);
+
+        function updateSidebarScroll() {
+            if (!track || !sidebar) return;
+            const overflow = track.scrollHeight - sidebar.clientHeight;
+            track.style.transform =
+                stage!.classList.contains("is-beat5") && overflow > 0
+                    ? `translateY(-${overflow}px)`
+                    : "translateY(0px)";
+        }
+
+        if (typeof ResizeObserver !== "undefined" && track) {
+            const ro = new ResizeObserver(updateSidebarScroll);
+            ro.observe(track);
+            if (sidebar) ro.observe(sidebar);
+            teardown.push(() => ro.disconnect());
+        }
+
+        // Beats are cumulative: reaching beat 4 means beats 2 and 3 stay applied,
+        // which is what keeps the sidebar history stacked up.
+        const BEATS = ["is-beat2", "is-beat3", "is-beat4", "is-beat5"];
+        let lastIndex = -1;
+
+        return function updateBeats() {
+            const vh = window.innerHeight;
+            const progress = (window.scrollY - stageTop) / vh;
+
+            // Each beat owns exactly 1vh of pinned scroll. A small hysteresis band
+            // stops the state flickering when a scroll lands right on a boundary.
+            const hysteresis = 0.08;
+            let index = Math.floor(progress);
+            if (index < 0) index = 0;
+            if (index > 3) index = 3;
+
+            if (index < lastIndex && progress > index + 1 - hysteresis) {
+                index = lastIndex;
+            }
+
+            if (progress > 0) onEnterStage();
+
+            // The shutter runs from progress -1 to 0; hold the content until it lands.
+            stage!.classList.toggle("is-armed", progress >= -0.02);
+            stage!.classList.toggle("is-slammed", progress >= -0.02);
+
+            if (index !== lastIndex) {
+                BEATS.forEach((cls, i) => stage!.classList.toggle(cls, i <= index));
+                lastIndex = index;
+            }
+
+            updateSidebarScroll();
+        };
+    }
+
+    /**
+     * Generic typewriter over a typed span plus a hidden remainder that holds
+     * the layout, so the line never reflows while it types.
+     */
+    function createTypewriter(root: HTMLElement | null, text: string) {
+        const out = root?.querySelector<HTMLElement>("[data-type-out]");
+        const rest = root?.querySelector<HTMLElement>("[data-type-rest]");
+        if (!root || !out || !rest) return { start: () => {}, complete: () => {} };
+
+        rest.textContent = text;
+        out.textContent = "";
+
+        let started = false;
+        let done = false;
+        let timer: ReturnType<typeof setTimeout> | null = null;
+
+        function complete() {
+            if (done) return;
+            done = true;
+            if (timer) clearTimeout(timer);
+            out!.textContent = text;
+            rest!.textContent = "";
+            root!.classList.add("is-typed");
+        }
+
+        function start() {
+            if (started || done) return;
+            started = true;
+            if (prefersReducedMotion()) {
+                complete();
+                return;
+            }
+            root!.classList.add("is-typing");
+            let i = 0;
+            (function step() {
+                if (done) return;
+                if (i >= text.length) {
+                    rest!.textContent = "";
+                    root!.classList.add("is-typed");
+                    return;
+                }
+                out!.textContent = text.slice(0, i + 1);
+                rest!.textContent = text.slice(i + 1);
+                i++;
+                timer = setTimeout(step, 26 + Math.random() * 20);
+            })();
+        }
+
+        teardown.push(() => {
+            if (timer) clearTimeout(timer);
+        });
+
+        return { start, complete };
+    }
+
+    const SVG_NS = "http://www.w3.org/2000/svg";
+
+    /**
+     * Scatters bicycle marks across the landmass. Candidate points are tested
+     * against the actual map geometry with isPointInFill, so no bike ever lands
+     * in the sea or hangs over a coastline.
+     */
+    function buildBikes(svg: SVGSVGElement) {
+        const paths = Array.from(svg.querySelectorAll<SVGPathElement>("g > path"));
+        if (!paths.length) return [];
+
+        const group = paths[0].parentElement as unknown as SVGGraphicsElement | null;
+        if (!group) return [];
+
+        // Bikes are appended to the <svg>, so their coordinates are viewBox
+        // units, while the paths live inside a flipped/scaled <g>. Going via
+        // screen space converts between the two correctly; getCTM alone would
+        // not, because it resolves to CSS pixels rather than viewBox units.
+        let svgCTM = svg.getScreenCTM();
+        let groupCTM = group.getScreenCTM();
+        if (!svgCTM || !groupCTM) return [];
+
+        // The shared map's viewBox has a lot of empty ocean around the land, so
+        // on this panel it would sit off-centre and undersized. Crop the viewBox
+        // to the coastline itself before anything is measured or placed.
+        const toViewBox = svgCTM.inverse().multiply(groupCTM);
+        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+        for (const path of paths) {
+            const b = path.getBBox();
+            for (const [bx, by] of [
+                [b.x, b.y],
+                [b.x + b.width, b.y],
+                [b.x, b.y + b.height],
+                [b.x + b.width, b.y + b.height]
+            ]) {
+                const v = new DOMPoint(bx, by).matrixTransform(toViewBox);
+                if (v.x < minX) minX = v.x;
+                if (v.x > maxX) maxX = v.x;
+                if (v.y < minY) minY = v.y;
+                if (v.y > maxY) maxY = v.y;
+            }
+        }
+        if (Number.isFinite(minX) && maxX > minX && maxY > minY) {
+            const pad = 18;
+            svg.setAttribute(
+                "viewBox",
+                `${(minX - pad).toFixed(1)} ${(minY - pad).toFixed(1)} ` +
+                    `${(maxX - minX + pad * 2).toFixed(1)} ${(maxY - minY + pad * 2).toFixed(1)}`
+            );
+            // Cropping changes the viewBox transform, so re-read the matrices.
+            svgCTM = svg.getScreenCTM();
+            groupCTM = group.getScreenCTM();
+            if (!svgCTM || !groupCTM) return [];
+        }
+
+        const toUser = groupCTM.inverse().multiply(svgCTM);
+
+        // The map is ~90 separate paths. Testing every point against every one
+        // is far too slow, so cache each path's bounding box and only run the
+        // real fill test on the few whose box could contain the point.
+        const boxes = paths.map((path) => {
+            const b = path.getBBox();
+            return { path, x1: b.x, y1: b.y, x2: b.x + b.width, y2: b.y + b.height };
+        });
+
+        const vb = svg.viewBox.baseVal;
+
+        // On a small rendered map, keep the glyph readable by drawing fewer,
+        // proportionally larger bikes rather than a mush of tiny ones.
+        const renderedW = svg.getBoundingClientRect().width || vb.width;
+        const drawnW = Math.min(renderedW, (svg.getBoundingClientRect().height || vb.height) * (vb.width / vb.height));
+        const scale = drawnW < 340 ? 1.55 : drawnW < 460 ? 1.25 : 1;
+
+        const BIKE_W = 26 * scale;
+        const BIKE_H = 17 * scale;
+        const STEP_X = 28 * scale;
+        const STEP_Y = 19 * scale;
+
+        const probe = new DOMPoint();
+        function inside(x: number, y: number) {
+            probe.x = x;
+            probe.y = y;
+            const u = probe.matrixTransform(toUser);
+            for (const b of boxes) {
+                if (u.x < b.x1 || u.x > b.x2 || u.y < b.y1 || u.y > b.y2) continue;
+                if (b.path.isPointInFill(u)) return true;
+            }
+            return false;
+        }
+
+        // Auckland, so the fill spreads out from where the story happened.
+        const AKL_X = 678;
+        const AKL_Y = 228;
+
+        const spots: Array<{ x: number; y: number; order: number }> = [];
+        for (let gy = vb.y + STEP_Y; gy < vb.y + vb.height; gy += STEP_Y) {
+            for (let gx = vb.x + STEP_X; gx < vb.x + vb.width; gx += STEP_X) {
+                const x = gx + (Math.random() - 0.5) * STEP_X * 0.45;
+                const y = gy + (Math.random() - 0.5) * STEP_Y * 0.45;
+                if (!inside(x, y)) continue;
+                // Keep the glyph on land, not just its centre.
+                if (!inside(x - BIKE_W * 0.35, y)) continue;
+                if (!inside(x + BIKE_W * 0.35, y)) continue;
+                if (!inside(x, y - BIKE_H * 0.3)) continue;
+                if (!inside(x, y + BIKE_H * 0.3)) continue;
+
+                const d = Math.hypot(x - AKL_X, y - AKL_Y);
+                spots.push({ x, y, order: d + Math.random() * 80 });
+            }
+        }
+
+        spots.sort((a, b) => a.order - b.order);
+
+        // A re-init without a DOM swap would otherwise stack a second layer of
+        // bikes on top of the first.
+        svg.querySelectorAll(".bike-layer").forEach((old) => old.remove());
+
+        const layer = document.createElementNS(SVG_NS, "g");
+        layer.setAttribute("class", "bike-layer");
+        const frag = document.createDocumentFragment();
+        const marks: SVGGElement[] = [];
+
+        for (const spot of spots) {
+            // Position lives on an outer group. The animated class goes on an
+            // inner one, because a CSS transform would otherwise replace the
+            // transform attribute outright and stack every bike on the origin.
+            const pos = document.createElementNS(SVG_NS, "g");
+            pos.setAttribute("transform", `translate(${spot.x.toFixed(1)} ${spot.y.toFixed(1)})`);
+
+            const g = document.createElementNS(SVG_NS, "g");
+            g.setAttribute("class", "bike-mark");
+            pos.appendChild(g);
+
+            const bike = document.createElementNS(SVG_NS, "g");
+            bike.setAttribute("fill", "none");
+            bike.setAttribute("stroke", "#FFDA00");
+            bike.setAttribute("stroke-width", (2.1 * scale).toFixed(2));
+            bike.setAttribute("stroke-linecap", "round");
+            bike.setAttribute("stroke-linejoin", "round");
+
+            const k = (n: number) => (n * scale).toFixed(2);
+            for (const cx of [-7.8, 7.8]) {
+                const wheel = document.createElementNS(SVG_NS, "circle");
+                wheel.setAttribute("cx", k(cx));
+                wheel.setAttribute("cy", k(3.6));
+                wheel.setAttribute("r", k(4.8));
+                bike.appendChild(wheel);
+            }
+
+            const frame = document.createElementNS(SVG_NS, "path");
+            frame.setAttribute(
+                "d",
+                `M${k(-7.8)} ${k(3.6)} L${k(-1.4)} ${k(-4.8)} L${k(7.8)} ${k(3.6)} ` +
+                    `M${k(-1.4)} ${k(-4.8)} L${k(3.4)} ${k(-4.8)} ` +
+                    `M${k(-4.5)} ${k(3.6)} L${k(1.7)} ${k(-4.8)}`
+            );
+            bike.appendChild(frame);
+
+            g.appendChild(bike);
+            frag.appendChild(pos);
+            marks.push(g);
+        }
+
+        layer.appendChild(frag);
+        svg.appendChild(layer);
+        return marks;
+    }
+
+    function initResultsStage() {
+        const stage = document.getElementById("results-stage");
+        const panel = document.getElementById("results-panel");
+        if (!stage || !panel) return () => {};
+
+        const heading = document.getElementById("results-heading");
+        const typer = createTypewriter(
+            heading,
+            "So let’s keep all that in mind when we look at the numbers"
+        );
+
+        let stageTop = stage.offsetTop;
+        onWindow("resize", () => {
+            stageTop = stage.offsetTop;
+        });
+
+        let bikes: SVGGElement[] = [];
+        let bikesBuilt = false;
+        let shown = 0;
+
+        function ensureBikes() {
+            if (bikesBuilt) return;
+            const svg = document.querySelector<SVGSVGElement>(
+                "#results-map-holder .nz-map-svg"
+            );
+            if (!svg) return;
+            bikesBuilt = true;
+            bikes = buildBikes(svg);
+            teardown.push(() => {
+                svg.querySelectorAll(".bike-layer").forEach((layer) => layer.remove());
+            });
+        }
+
+        // The fill runs on its own clock once the map is in view, rather than
+        // being dragged frame by frame by the scrollbar.
+        const FILL_MS = 2800;
+        let fillStart = 0;
+        let filling = false;
+        let fillRaf = 0;
+
+        function paint(fraction: number) {
+            if (!bikes.length) return;
+            const target = Math.round(Math.max(0, Math.min(1, fraction)) * bikes.length);
+            // Only touch the elements that actually changed state this frame.
+            while (shown < target) bikes[shown++].classList.add("is-on");
+            while (shown > target) bikes[--shown].classList.remove("is-on");
+        }
+
+        function step(now: number) {
+            const t = Math.min(1, (now - fillStart) / FILL_MS);
+            // Ease out, so the island crowds up quickly then settles.
+            paint(1 - Math.pow(1 - t, 2));
+            if (t < 1) {
+                fillRaf = requestAnimationFrame(step);
+            } else {
+                fillRaf = 0;
+            }
+        }
+
+        function startFill() {
+            if (filling || !bikes.length) return;
+            filling = true;
+            if (prefersReducedMotion()) {
+                paint(1);
+                return;
+            }
+            fillStart = performance.now();
+            fillRaf = requestAnimationFrame(step);
+        }
+
+        teardown.push(() => {
+            if (fillRaf) cancelAnimationFrame(fillRaf);
+        });
+
+        return function updateResults() {
+            const vh = window.innerHeight;
+            const p = (window.scrollY - stageTop) / vh;
+
+            // Build the bikes just before they are needed, never on first paint.
+            if (p > -1.4) ensureBikes();
+
+            if (p >= 0) typer.start();
+
+            panel!.classList.toggle("is-map-in", p >= 0.9);
+            panel!.classList.toggle("is-stats-in", p >= 1.1);
+
+            if (p >= 1.55) startFill();
+        };
+    }
+
+    /**
+     * Drives the panel-to-panel transitions: the WHY slam once its shutter has
+     * landed, and the horizontal handover where beat 1 slides in from the left
+     * and carries the WHY copy off to the right.
+     */
+    function initPanelTransitions(onBeat1Ready: () => void) {
+        const pinWhy = document.getElementById("pin-why");
+        const pinBeat1 = document.getElementById("pin-beat1");
+        const why = document.getElementById("why-section");
+        const beat1 = document.getElementById("beat1-section");
+        const whyInner = document.querySelector<HTMLElement>(".why-inner-container");
+        if (!pinWhy || !pinBeat1 || !why || !beat1 || !whyInner) return () => {};
+
+        let whyTop = pinWhy.offsetTop;
+        let slideTop = pinBeat1.offsetTop;
+        onWindow("resize", () => {
+            whyTop = pinWhy.offsetTop;
+            slideTop = pinBeat1.offsetTop;
+        });
+
+        const reduced = prefersReducedMotion();
+        let slid = -1;
+
+        return function updatePanels() {
+            const vh = window.innerHeight;
+            const y = window.scrollY;
+
+            // WHY lands when its shutter reaches the top of the viewport.
+            why.classList.toggle("is-slammed", y >= whyTop - 2);
+
+            // Beat 1 takes over across the vh that follows.
+            let p = (y - slideTop) / vh;
+            p = p < 0 ? 0 : p > 1 ? 1 : p;
+            // Ease so the handover starts and finishes softly.
+            const e = reduced ? (p < 1 ? 0 : 1) : p * p * (3 - 2 * p);
+
+            if (e !== slid) {
+                slid = e;
+                beat1.style.transform = `translate3d(${(e - 1) * 100}%, 0, 0)`;
+                whyInner.style.transform = `translate3d(${e * 108}%, 0, 0)`;
+            }
+
+            if (p >= 1) onBeat1Ready();
+        };
+    }
+
+    /**
+     * The "What I did" deck. Every chapter shares one pinned viewport and is
+     * absolutely positioned on top of the last, so scrolling only has to move
+     * them sideways: chapter i slides in from the right edge across the
+     * viewport of scroll before it, then parks at i spine widths from the left
+     * and stays there while the rest arrive over the top of it. What is left
+     * showing of a parked chapter is its spine, which turns the stack into a
+     * running index of where you are.
+     *
+     * Wide viewports only. Narrow ones have no room for the spines, and the
+     * whole thing is a scroll hijack, so reduced motion opts out too — both
+     * fall back to the plain vertical read the base CSS already describes.
+     */
+    function initDidDeck() {
+        const section = document.getElementById("what-i-did");
+        const runway = document.getElementById("did-runway");
+        const viewport = runway?.querySelector<HTMLElement>(".did-viewport");
+        const slides = Array.from(
+            runway?.querySelectorAll<HTMLElement>(".did-slide") ?? []
+        );
+        if (!section || !runway || !viewport || slides.length < 2) return () => {};
+
+        // The runway's height is one viewport per chapter, so the count has to
+        // come from the DOM rather than being kept in step by hand.
+        runway.style.setProperty("--did-count", String(slides.length));
+
+        const wide = window.matchMedia("(min-width: 1025px)");
+        const still = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        let deck = false;
+        let runwayTop = 0;
+        let stageWidth = 0;
+        let spineWidth = 0;
+
+        // These all force layout, so they are read on resize and on mode
+        // changes rather than every frame.
+        function measure() {
+            runwayTop = runway!.getBoundingClientRect().top + window.scrollY;
+            stageWidth = viewport!.clientWidth;
+            // The slide pads itself by exactly one spine, which is the only
+            // place the clamped width resolves to a number we can read back.
+            spineWidth = parseFloat(getComputedStyle(slides[0]).paddingLeft) || 0;
+        }
+
+        function setMode() {
+            const next = wide.matches && !still.matches;
+            if (next === deck) return;
+            deck = next;
+            section!.classList.toggle("is-deck", deck);
+            if (!deck) {
+                for (const slide of slides) {
+                    slide.style.transform = "";
+                    slide.classList.remove("is-current");
+                }
+            }
+            measure();
+        }
+
+        // Resize covers the width query as well: a viewport emulator or a
+        // desktop window drag does not always deliver a matchMedia change.
+        onWindow("resize", () => {
+            setMode();
+            measure();
+        });
+        for (const query of [wide, still]) {
+            const onChange = () => {
+                setMode();
+                update();
+            };
+            query.addEventListener("change", onChange);
+            teardown.push(() => query.removeEventListener("change", onChange));
+        }
+
+        setMode();
+
+        function update() {
+            if (!deck) return;
+
+            const vh = window.innerHeight;
+            const last = slides.length - 1;
+            let p = (window.scrollY - runwayTop) / vh;
+            p = p < 0 ? 0 : p > last ? last : p;
+
+            // The live chapter is the highest one that has finished arriving.
+            const current = Math.min(last, Math.floor(p));
+
+            for (let i = 0; i < slides.length; i++) {
+                // Chapter i travels across the viewport of scroll that ends on
+                // it, so slide 0 is already home at p = 0.
+                let t = p - i + 1;
+                t = t < 0 ? 0 : t > 1 ? 1 : t;
+                const e = t * t * (3 - 2 * t);
+
+                const rest = i * spineWidth;
+                const x = rest + (1 - e) * (stageWidth - rest);
+
+                slides[i].style.transform = `translate3d(${x.toFixed(2)}px, 0, 0)`;
+                slides[i].classList.toggle("is-current", i === current);
+            }
+        }
+
+        return update;
+    }
+
+    function initAll() {
+        // Tear down anything left over from the previous page before rebinding.
+        teardown.forEach((fn) => fn());
+        teardown = [];
+
+        if (!document.querySelector(".abc-page")) return;
+
+        const loop = createScrollLoop();
+        const typewriter = initBeat1Typewriter();
+
+        initMouseScrollSignal();
+        initSectionReveals();
+        initBlockReveals();
+
+        loop.subscribe(initPanelTransitions(typewriter.start));
+        loop.subscribe(initStoryBeats(typewriter.complete));
+        loop.subscribe(createThemeSync());
+        loop.subscribe(initResultsStage());
+        loop.subscribe(initDidDeck());
+        loop.run();
+    }
+
+    document.addEventListener("astro:page-load", initAll);
+    document.addEventListener("astro:before-swap", () => {
+        teardown.forEach((fn) => fn());
+        teardown = [];
+    });
+</script>

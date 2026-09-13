@@ -1,0 +1,914 @@
+---
+// VerticalStoryTimeline.astro
+// Full-screen, cinematic editorial documentary timeline inspired by cancelculture.framer.website/JUSTINE
+// Disciplined palette: Deep void black (#050505), electric cyan (#00B3E3), stark white (#FFFFFF)
+// Giant Archivo condensed typography, kinetic horizontal line connectors, sparse live stream
+// Strict constraint: Zero em dashes anywhere.
+---
+
+<section class="cinematic-timeline-section" id="story-timeline" aria-label="Aotearoa Bike Challenge Chronology">
+
+    <!-- Top Sticky Flight/Rider Tracker Header Bar -->
+    <header class="timeline-hud-bar">
+        <div class="hud-left">
+            <span class="hud-indicator-dot"></span>
+            <span class="hud-live-tag">AUCKLAND DOSSIER</span>
+            <span class="hud-year-display" id="hudYearDisplay">2019</span>
+        </div>
+        <div class="hud-center">
+            <span class="hud-title">THE AOTEAROA BIKE CHALLENGE</span>
+        </div>
+        <div class="hud-right">
+            <span class="hud-stat-ticker" id="hudStatTicker">5,347 RIDERS</span>
+        </div>
+    </header>
+
+    <!-- The Left Continuous Tracking Spine -->
+    <aside class="timeline-vertical-spine" aria-hidden="true">
+        <div class="spine-line-base"></div>
+        <div class="spine-line-progress" id="spineProgress"></div>
+        <div class="spine-rider-marker" id="spineRiderMarker">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#00B3E3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18.5" cy="17.5" r="3.5"></circle>
+                <circle cx="5.5" cy="17.5" r="3.5"></circle>
+                <circle cx="15" cy="5" r="1"></circle>
+                <path d="M12 17.5V14l-3-3 4-3 2 3h2"></path>
+            </svg>
+        </div>
+    </aside>
+
+    <!-- SCENE 1: 2019 THE BASELINE -->
+    <section class="cinema-scene scene-dark" data-scene-year="2019" data-scene-stat="5,347 RIDERS">
+        <div class="scene-stream-col">
+            <div class="stream-item">
+                <span class="stream-source">@AucklandTransport</span>
+                <p class="stream-msg">Six-figure public campaign deployed across radio, digital billboards, and bus shelters.</p>
+                <span class="stream-tag">#AOTEAROABIKECHALLENGE</span>
+            </div>
+            <div class="stream-item">
+                <span class="stream-source">@WakaKotahi</span>
+                <p class="stream-msg">Full central government co-funding confirmed for regional transport authorities.</p>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <p class="connector-caption">This was when six-figure budgets bought citywide reach.</p>
+            </div>
+            <h2 class="hero-impact-title">THE HIGH-SPEND PLAYBOOK</h2>
+            <div class="hero-meta-strip">
+                <span class="meta-stat-giant">5,347</span>
+                <span class="meta-stat-sub">AUCKLAND ACTIVE RIDERS (24.6% OF NATIONWIDE TOTAL)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 2: 2020 PRE-LOCKDOWN GROWTH -->
+    <section class="cinema-scene scene-dark" data-scene-year="2020" data-scene-stat="6,002 RIDERS (+12.2%)">
+        <div class="scene-stream-col">
+            <div class="stream-item">
+                <span class="stream-source">@NZHerald</span>
+                <p class="stream-msg">First COVID-19 case confirmed in New Zealand (28 February 2020).</p>
+            </div>
+            <div class="stream-item active-alert">
+                <span class="stream-source">@NZ_CivilDefence</span>
+                <p class="stream-msg">Alert Level 4 lockdown declared. Entire nation ordered indoors.</p>
+                <span class="stream-tag">#COVID19NZ</span>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <p class="connector-caption">February growth ended right before the borders slammed shut.</p>
+            </div>
+            <h2 class="hero-impact-title">EMPTY STREETS</h2>
+            <div class="hero-sub-statement">
+                Bikes became the only legal escape.
+            </div>
+            <div class="hero-meta-strip">
+                <span class="meta-stat-giant">6,002</span>
+                <span class="meta-stat-sub">+12.25% GROWTH BEFORE LOCKDOWNS ARRIVED</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 3: 2021 THE 107-DAY LOCKDOWN -->
+    <section class="cinema-scene scene-dark" data-scene-year="2021" data-scene-stat="6,526 RIDERS (PEAK)">
+        <div class="scene-stream-col">
+            <div class="stream-item">
+                <span class="stream-source">@AucklandTransport</span>
+                <p class="stream-msg">I step into Auckland Transport as Travel Demand Planner across 20+ organisations.</p>
+            </div>
+            <div class="stream-item active-alert">
+                <span class="stream-source">@Covid19NZ</span>
+                <p class="stream-msg">Delta detected in community. Auckland enters Level 4 lockdown.</p>
+                <span class="stream-tag">#107DAYS</span>
+            </div>
+            <div class="stream-item">
+                <span class="stream-source">@StuffNZ</span>
+                <p class="stream-msg">Rest of NZ reopens. Auckland remains sealed off for 15 straight weeks.</p>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <h2 class="hero-giant-hashtag">107 DAYS</h2>
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <p class="connector-caption">Locked down in Auckland while the rest of the country re-opened.</p>
+            </div>
+            <div class="hero-sub-statement">
+                Confined to local suburbs, thousands of Aucklanders adopted cycling as their daily lifeline.
+            </div>
+            <div class="hero-meta-strip">
+                <span class="meta-stat-giant cyan-glow">6,526</span>
+                <span class="meta-stat-sub">AUCKLAND RECORD PEAK (HIGHEST REGIONAL RIDERSHIP IN HISTORY)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 4: 2022 THE SURGE -->
+    <section class="cinema-scene scene-dark" data-scene-year="2022" data-scene-stat="6,153 RIDERS">
+        <div class="scene-stream-col">
+            <div class="stream-item">
+                <span class="stream-source">@LoveToRide</span>
+                <p class="stream-msg">Record 32,992 riders register nationwide following lockdown boom.</p>
+            </div>
+            <div class="stream-item">
+                <span class="stream-source">@AucklandCouncil</span>
+                <p class="stream-msg">Offices reopen and commuter traffic climbs back to pre-pandemic levels.</p>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <p class="connector-caption">The lockdown surge peaked. Everyday routines resumed.</p>
+            </div>
+            <h2 class="hero-impact-title">THE REOPENING SURGE</h2>
+            <div class="hero-meta-strip">
+                <span class="meta-stat-giant">6,153</span>
+                <span class="meta-stat-sub">AUCKLAND ACTIVE RIDERS (EARLY NORMALIZATION COMMENCES)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 5: OCTOBER 2022 MAYORAL ATTACK (CONSEQUENCE 1) -->
+    <section class="cinema-scene scene-dark" data-scene-year="OCT 2022" data-scene-stat="MAYOR ELECTED">
+        <div class="scene-stream-col">
+            <div class="stream-item active-alert">
+                <span class="stream-source">@MayorWayneBrown</span>
+                <p class="stream-msg">Elected Mayor of Auckland. Immediately demands resignation of Auckland Transport board chair.</p>
+                <span class="stream-tag">#FIXAUCKLAND</span>
+            </div>
+            <div class="stream-item">
+                <span class="stream-source">@NZHerald</span>
+                <p class="stream-msg">Mayor issues formal Letter of Expectation ordering transport policy overhaul.</p>
+            </div>
+            <div class="stream-item">
+                <span class="stream-source">@AucklandCouncil</span>
+                <p class="stream-msg">Mayor announces immediate $295 million council budget deficit.</p>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="consequence-kicker">CONSEQUENCE #1</div>
+            <h2 class="hero-impact-title cyan-text">"STOP FORCING BEHAVIOURAL CHANGE"</h2>
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <blockquote class="cinematic-quote">
+                    <p class="quote-text">"Cease spending on cycleways and speed bumps that nobody uses."</p>
+                    <cite class="quote-by">Mayor Wayne Brown, Letter of Expectation to Auckland Transport, October 2022</cite>
+                </blockquote>
+            </div>
+            <div class="hero-meta-strip">
+                <span class="meta-stat-giant alert-text">$295M</span>
+                <span class="meta-stat-sub">COUNCIL DEFICIT (IMMEDIATE FREEZES ON SUSTAINABILITY INCENTIVES)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 6: JANUARY 2023 PLANNING IN THE DARK -->
+    <section class="cinema-scene scene-dark" data-scene-year="JAN 2023" data-scene-stat="BUDGET CUT">
+        <div class="scene-stream-col">
+            <div class="stream-item active-alert">
+                <span class="stream-source">@WakaKotahi</span>
+                <p class="stream-msg">Central co-funding slashed. Auckland allocation delayed until weeks before launch.</p>
+            </div>
+            <div class="stream-item">
+                <span class="stream-source">@Internal_Memo</span>
+                <p class="stream-msg">Zero budget for billboards. Zero budget for radio. Zero agency retainers.</p>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="consequence-kicker">THE SQUEEZE</div>
+            <h2 class="hero-impact-title">PLANNING IN THE DARK</h2>
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <p class="connector-caption">Delivering a month-long regional challenge without knowing the final budget.</p>
+            </div>
+            <div class="hero-sub-statement">
+                I threw out the old agency playbook and shifted everything to workplace champions and partner pooling.
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 7: 27 JANUARY 2023 THE FLOODS (CONSEQUENCE 2) -->
+    <section class="cinema-scene scene-dark" data-scene-year="27 JAN 2023" data-scene-stat="STATE OF EMERGENCY">
+        <div class="scene-stream-col">
+            <div class="stream-item active-alert">
+                <span class="stream-source">@MetService</span>
+                <p class="stream-msg">RED WARNING: 245mm of rainfall in 24 hours. The wettest day in Auckland's history.</p>
+                <span class="stream-tag">#AUCKLANDFLOODS</span>
+            </div>
+            <div class="stream-item">
+                <span class="stream-source">@Auckland_EM</span>
+                <p class="stream-msg">Regional State of Emergency declared. Trails washed out. Critical corridors closed.</p>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="consequence-kicker">CONSEQUENCE #2</div>
+            <h2 class="hero-giant-hashtag alert-text">245MM</h2>
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <p class="connector-caption">Five days before launch, Auckland experienced the wettest day in recorded history.</p>
+            </div>
+            <div class="hero-sub-statement">
+                Flash floods destroyed paths, tore out roading, and declared a Regional State of Emergency.
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 8: 12-14 FEBRUARY 2023 CYCLONE GABRIELLE (CONSEQUENCE 3) -->
+    <section class="cinema-scene scene-dark" data-scene-year="FEB 2023" data-scene-stat="NATIONAL EMERGENCY">
+        <div class="scene-stream-col">
+            <div class="stream-item active-alert">
+                <span class="stream-source">@CivilDefence</span>
+                <p class="stream-msg">Cyclone Gabrielle hits. National State of Emergency declared.</p>
+                <span class="stream-tag">#CYCLONEGABRIELLE</span>
+            </div>
+            <div class="stream-item">
+                <span class="stream-source">@AT_Commuter</span>
+                <p class="stream-msg">Fallen trees and slip debris across cycleways. Commuter gridlock.</p>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="consequence-kicker">CONSEQUENCE #3</div>
+            <h2 class="hero-impact-title alert-text">CYCLONE GABRIELLE</h2>
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <p class="connector-caption">Two weeks into the challenge, only the third National State of Emergency in NZ history.</p>
+            </div>
+            <div class="hero-sub-statement">
+                Just getting to work on two wheels was an act of sheer persistence.
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 9: THE INVERTED SHOCK FRAME (FULL SCREEN STARK WHITE) -->
+    <section class="cinema-scene scene-inverted" data-scene-year="OUTCOME" data-scene-stat="87% RETAINED">
+        <div class="scene-stream-col">
+            <div class="stream-item-dark">
+                <span class="stream-source-dark">Zero billboard spend</span>
+                <span class="stream-source-dark">Zero broadcast radio</span>
+                <span class="stream-source-dark">Zero external agencies</span>
+            </div>
+            <div class="stream-item-dark">
+                <span class="stream-source-dark">Fraction of the budget</span>
+                <span class="stream-source-dark">Back-to-back state emergencies</span>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="inverted-kicker">THE 2023 RESULT</div>
+            <h2 class="hero-giant-hashtag black-text">87.2%</h2>
+            <div class="connector-group connector-dark">
+                <div class="connector-line line-dark"></div>
+                <p class="connector-caption caption-dark">Auckland retained 87% of riders on a fraction of previous budgets.</p>
+            </div>
+            <div class="hero-sub-statement statement-dark">
+                5,365 Aucklanders still rode. Community champions and workplace networks held the line when the old model collapsed.
+            </div>
+            <div class="hero-meta-strip strip-dark">
+                <span class="meta-stat-giant black-text">5,365</span>
+                <span class="meta-stat-sub sub-dark">ACTIVE RIDERS (ALL-TIME LOW COST PER PARTICIPANT)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 10: 2024 FINAL CO-FUNDED YEAR -->
+    <section class="cinema-scene scene-dark" data-scene-year="2024" data-scene-stat="5,148 RIDERS">
+        <div class="scene-stream-col">
+            <div class="stream-item">
+                <span class="stream-source">@WakaKotahi</span>
+                <p class="stream-msg">Final year of central co-funding before nationwide policy shift.</p>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <p class="connector-caption">The last year public funding remained intact.</p>
+            </div>
+            <h2 class="hero-impact-title">THE FINAL CHAPTER</h2>
+            <div class="hero-meta-strip">
+                <span class="meta-stat-giant">5,148</span>
+                <span class="meta-stat-sub">AUCKLAND ACTIVE RIDERS (21.4% NATIONAL SHARE)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 11: 2025 THE CLIFF -->
+    <section class="cinema-scene scene-dark" data-scene-year="2025" data-scene-stat="THE CLIFF: -38%">
+        <div class="scene-stream-col">
+            <div class="stream-item active-alert">
+                <span class="stream-source">@Transport_NZ</span>
+                <p class="stream-msg">Central and council subsidies pulled completely. Local coordination ends.</p>
+                <span class="stream-tag">#UNFUNDED</span>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="consequence-kicker alert-text">THE CLIFF</div>
+            <h2 class="hero-giant-hashtag alert-text">-38.0%</h2>
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <p class="connector-caption">Participation plummeted from 5,148 to 3,190 in a single year.</p>
+            </div>
+            <div class="hero-sub-statement">
+                When active coordination was removed, the event crumbled. Retrospective proof that in 2023, coordination was what held the programme together.
+            </div>
+            <div class="hero-meta-strip">
+                <span class="meta-stat-giant alert-text">3,190</span>
+                <span class="meta-stat-sub">AUCKLAND RIDERS (SINGLE-YEAR COLLAPSE)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCENE 12: 2026 THE UNSPONSORED BASELINE -->
+    <section class="cinema-scene scene-dark" data-scene-year="2026" data-scene-stat="3,981 RIDERS">
+        <div class="scene-stream-col">
+            <div class="stream-item">
+                <span class="stream-source">@LoveToRide_NZ</span>
+                <p class="stream-msg">Platform kept open without council or government promotion.</p>
+            </div>
+        </div>
+
+        <div class="scene-focus-col">
+            <div class="connector-group">
+                <div class="connector-line"></div>
+                <p class="connector-caption">The challenge lives on purely through self-organised community habit.</p>
+            </div>
+            <h2 class="hero-impact-title">THE GRASSROOTS BASELINE</h2>
+            <div class="hero-meta-strip">
+                <span class="meta-stat-giant">3,981</span>
+                <span class="meta-stat-sub">UNSPONSORED RIDERS (SELF-ORGANIZING COMMUTERS)</span>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+<style>
+    /* -------------------------------------------------------------
+       FULL-SCREEN BREAKOUT
+       Breaks out of any max-width wrappers to own 100vw edge-to-edge
+       ------------------------------------------------------------- */
+    .cinematic-timeline-section {
+        position: relative;
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        background-color: #050505;
+        color: #FFFFFF;
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        overflow-x: hidden;
+        box-sizing: border-box;
+        padding-bottom: 120px;
+    }
+
+    /* -------------------------------------------------------------
+       STICKY HUD BAR (Fixed to top of timeline)
+       ------------------------------------------------------------- */
+    .timeline-hud-bar {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 52px;
+        background-color: rgba(5, 5, 5, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 clamp(20px, 4vw, 60px);
+        z-index: 100;
+        box-sizing: border-box;
+    }
+
+    .hud-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .hud-indicator-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #00B3E3;
+        box-shadow: 0 0 10px #00B3E3;
+        animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .hud-live-tag {
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .hud-year-display {
+        font-size: 0.82rem;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        color: #00B3E3;
+        background: rgba(0, 179, 227, 0.1);
+        padding: 2px 8px;
+        border-radius: 4px;
+        border: 1px solid rgba(0, 179, 227, 0.3);
+    }
+
+    .hud-center .hud-title {
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .hud-right .hud-stat-ticker {
+        font-size: 0.82rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        color: #FFFFFF;
+    }
+
+    /* -------------------------------------------------------------
+       LEFT RUNNING SPINE & GLIDING BICYCLE
+       ------------------------------------------------------------- */
+    .timeline-vertical-spine {
+        position: absolute;
+        top: 52px;
+        bottom: 120px;
+        left: clamp(24px, 4.5vw, 72px);
+        width: 2px;
+        z-index: 20;
+        pointer-events: none;
+    }
+
+    .spine-line-base {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .spine-line-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0%;
+        background-color: #00B3E3;
+        box-shadow: 0 0 8px rgba(0, 179, 227, 0.8);
+    }
+
+    .spine-rider-marker {
+        position: absolute;
+        top: 0;
+        left: -10px;
+        width: 22px;
+        height: 22px;
+        filter: drop-shadow(0 0 8px #00B3E3);
+        transform: translateY(0);
+        will-change: transform;
+        transition: transform 0.08s linear;
+    }
+
+    /* -------------------------------------------------------------
+       CINEMATIC SCENES (Spacious, full-screen scenes)
+       ------------------------------------------------------------- */
+    .cinema-scene {
+        position: relative;
+        min-height: clamp(520px, 85vh, 900px);
+        display: grid;
+        grid-template-columns: minmax(280px, 380px) 1fr;
+        column-gap: clamp(40px, 6vw, 120px);
+        align-items: center;
+        padding-left: clamp(64px, 9vw, 140px);
+        padding-right: clamp(24px, 6vw, 100px);
+        padding-top: clamp(60px, 10vh, 120px);
+        padding-bottom: clamp(60px, 10vh, 120px);
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* -------------------------------------------------------------
+       STREAM COLUMN (Left Side Micro-Chater)
+       ------------------------------------------------------------- */
+    .scene-stream-col {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(18px, 2.5vh, 28px);
+        z-index: 5;
+    }
+
+    .stream-item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        opacity: 0.35;
+        transform: translateY(8px);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .cinema-scene.is-focused .stream-item {
+        opacity: 0.85;
+        transform: translateY(0);
+    }
+
+    .stream-item.active-alert {
+        opacity: 0.5;
+    }
+
+    .cinema-scene.is-focused .stream-item.active-alert {
+        opacity: 1;
+    }
+
+    .stream-source {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: 0.82rem;
+        font-weight: 800;
+        color: #00B3E3;
+        letter-spacing: -0.01em;
+    }
+
+    .stream-msg {
+        font-family: var(--archivo-font, 'Archivo', sans-serif);
+        font-size: clamp(0.88rem, 1.05vw, 0.98rem);
+        line-height: 1.5;
+        font-weight: 500;
+        color: #E2E8F0;
+        margin: 0;
+    }
+
+    .stream-tag {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: #00B3E3;
+        letter-spacing: 0.04em;
+    }
+
+    /* Inverted Scene Stream (Dark on White) */
+    .stream-item-dark {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .stream-source-dark {
+        font-size: 0.9rem;
+        font-weight: 800;
+        color: #00B3E3;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    /* -------------------------------------------------------------
+       FOCUS COLUMN (Right Side Hero Typography)
+       ------------------------------------------------------------- */
+    .scene-focus-col {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: clamp(16px, 2.5vh, 28px);
+        max-width: 920px;
+    }
+
+    /* Horizontal Hairpin Line Connector */
+    .connector-group {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .connector-line {
+        flex: 0 0 clamp(40px, 6vw, 90px);
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.4);
+        transform-origin: left;
+        transform: scaleX(0.7);
+        transition: transform 0.4s ease, background-color 0.4s ease;
+    }
+
+    .cinema-scene.is-focused .connector-line {
+        transform: scaleX(1);
+        background-color: #00B3E3;
+    }
+
+    .connector-caption {
+        font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+        line-height: 1.45;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.75);
+        margin: 0;
+        text-wrap: balance;
+    }
+
+    /* Massive Display Typography */
+    .hero-giant-hashtag {
+        font-size: clamp(3.8rem, 9vw, 9rem);
+        font-weight: 900;
+        line-height: 1.04;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        margin: 0;
+    }
+
+    .hero-impact-title {
+        font-size: clamp(2.6rem, 5.5vw, 5.5rem);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        margin: 0;
+        text-wrap: balance;
+    }
+
+    .hero-sub-statement {
+        font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+        line-height: 1.45;
+        font-weight: 500;
+        color: #94A3B8;
+        max-width: 680px;
+        margin: 0;
+        text-wrap: pretty;
+    }
+
+    .hero-meta-strip {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 20px;
+    }
+
+    .meta-stat-giant {
+        font-size: clamp(2.4rem, 4vw, 4.2rem);
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: #FFFFFF;
+        margin-bottom: 2px;
+    }
+
+    .meta-stat-sub {
+        font-size: clamp(0.72rem, 0.9vw, 0.85rem);
+        font-weight: 800;
+        line-height: 1.35;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Editorial Pullquote */
+    .cinematic-quote {
+        margin: 0;
+        padding-left: 18px;
+        border-left: 2px solid #00B3E3;
+    }
+
+    .quote-text {
+        font-size: clamp(1.1rem, 1.5vw, 1.45rem);
+        line-height: 1.45;
+        font-weight: 600;
+        font-style: italic;
+        color: #FFFFFF;
+        margin: 0 0 8px 0;
+    }
+
+    .quote-by {
+        display: block;
+        font-size: 0.75rem;
+        line-height: 1.35;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #00B3E3;
+        font-style: normal;
+    }
+
+    /* Consequence Kicker */
+    .consequence-kicker {
+        font-size: clamp(0.85rem, 1.1vw, 1rem);
+        font-weight: 900;
+        line-height: 1.2;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #00B3E3;
+        margin-bottom: 2px;
+    }
+
+    /* Accent Modifiers */
+    .cyan-text { color: #00B3E3; }
+    .cyan-glow { color: #00B3E3; text-shadow: 0 0 30px rgba(0, 179, 227, 0.4); }
+    .alert-text { color: #FF1F70; }
+
+    /* -------------------------------------------------------------
+       SCENE 9: INVERTED STARK WHITE SHOCK FRAME
+       ------------------------------------------------------------- */
+    .scene-inverted {
+        background-color: #FFFFFF;
+        color: #000000;
+        border-top: 1px solid #000000;
+        border-bottom: 1px solid #000000;
+    }
+
+    .inverted-kicker {
+        font-size: clamp(0.85rem, 1.1vw, 1rem);
+        font-weight: 900;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #00B3E3;
+    }
+
+    .black-text {
+        color: #000000;
+    }
+
+    .line-dark {
+        background-color: #000000;
+    }
+
+    .caption-dark {
+        color: #334155;
+    }
+
+    .statement-dark {
+        color: #1E293B;
+    }
+
+    .sub-dark {
+        color: #64748B;
+    }
+
+    /* -------------------------------------------------------------
+       RESPONSIVE DESIGN
+       Mobile & Tablet Layouts
+       ------------------------------------------------------------- */
+    @media (max-width: 900px) {
+        .cinema-scene {
+            grid-template-columns: 1fr;
+            row-gap: 32px;
+            padding-left: clamp(48px, 8vw, 72px);
+            padding-right: 24px;
+            min-height: auto;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+
+        .timeline-vertical-spine {
+            left: 20px;
+        }
+
+        .spine-rider-marker {
+            left: -10px;
+        }
+
+        .timeline-hud-bar {
+            padding: 0 16px;
+        }
+
+        .hud-center {
+            display: none;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .hero-giant-hashtag {
+            font-size: clamp(2.8rem, 13vw, 4.2rem);
+            line-height: 1.05;
+        }
+
+        .hero-impact-title {
+            font-size: clamp(2.1rem, 9vw, 3rem);
+            line-height: 1.12;
+        }
+
+        .connector-group {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .connector-line {
+            width: 40px;
+            height: 1.5px;
+        }
+    }
+</style>
+
+<script>
+    // Smooth, high-performance scroll tracking for spine progress, rider icon, and HUD ticker
+    function initCinematicTimeline() {
+        const timeline = document.getElementById("story-timeline");
+        const spineProgress = document.getElementById("spineProgress");
+        const riderMarker = document.getElementById("spineRiderMarker");
+        const hudYear = document.getElementById("hudYearDisplay");
+        const hudStat = document.getElementById("hudStatTicker");
+        const scenes = document.querySelectorAll(".cinema-scene");
+
+        if (!timeline || !spineProgress || !riderMarker || !scenes.length) return;
+
+        let ticking = false;
+
+        function updateScenePositions() {
+            const rect = timeline.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            // Calculate overall timeline progress (0 to 1)
+            const totalScroll = rect.height - windowHeight;
+            const currentScroll = -rect.top;
+            const progress = Math.max(0, Math.min(1, currentScroll / totalScroll));
+
+            // Move spine fill & bicycle icon
+            spineProgress.style.height = `${progress * 100}%`;
+            
+            // Marker travels down along the spine
+            const spineHeight = timeline.querySelector(".timeline-vertical-spine").clientHeight;
+            const markerY = progress * (spineHeight - 24);
+            riderMarker.style.transform = `translateY(${markerY}px)`;
+
+            // Detect active scene based on center of viewport
+            const triggerLine = windowHeight * 0.45;
+            let currentActiveScene = null;
+
+            scenes.forEach((scene) => {
+                const sRect = scene.getBoundingClientRect();
+                if (sRect.top <= triggerLine && sRect.bottom >= triggerLine) {
+                    scene.classList.add("is-focused");
+                    currentActiveScene = scene;
+                } else {
+                    scene.classList.remove("is-focused");
+                }
+            });
+
+            // Update HUD ticker values
+            if (currentActiveScene) {
+                const yr = currentActiveScene.getAttribute("data-scene-year");
+                const stat = currentActiveScene.getAttribute("data-scene-stat");
+                if (yr && hudYear && hudYear.textContent !== yr) hudYear.textContent = yr;
+                if (stat && hudStat && hudStat.textContent !== stat) hudStat.textContent = stat;
+            }
+
+            ticking = false;
+        }
+
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(updateScenePositions);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll, { passive: true });
+        updateScenePositions();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCinematicTimeline);
+    } else {
+        initCinematicTimeline();
+    }
+</script>
