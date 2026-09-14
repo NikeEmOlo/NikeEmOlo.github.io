@@ -1,4 +1,6 @@
 ---
+import fs from "node:fs";
+import path from "node:path";
 import Base from "../layouts/Base.astro";
 import NewZealandMap from "../components/case-study/NewZealandMap.astro";
 
@@ -7,11 +9,27 @@ import NewZealandMap from "../components/case-study/NewZealandMap.astro";
 const SLIDES = [
     { id: "cover", num: "00", label: "Cover" },
     { id: "overview", num: "01", label: "Overview" },
-    { id: "programme", num: "02", label: "The programme" },
+    { id: "programme", num: "02", label: "The task" },
     { id: "challenge", num: "03", label: "The challenge" },
     { id: "handled", num: "04", label: "How I handled it" },
     { id: "results", num: "05", label: "The results" },
 ];
+
+// Who paid for it and who built it. Drop a real logo into
+// public/img/aotearoa/logos and it replaces the wordmark automatically; the
+// check runs at build time so a missing file never ships as a broken image.
+const LOGO_DIR = path.join(process.cwd(), "public", "img", "aotearoa", "logos");
+
+const PARTNERS = [
+    { name: "NZ Transport Agency", role: "Co-funder", file: "nzta" },
+    { name: "Auckland Transport", role: "Delivery and co-funder", file: "auckland-transport" },
+    { name: "Love To Ride", role: "Platform and prizes", file: "love-to-ride" },
+].map((partner) => {
+    const found = ["svg", "png", "webp"]
+        .map((ext) => `${partner.file}.${ext}`)
+        .find((name) => fs.existsSync(path.join(LOGO_DIR, name)));
+    return { ...partner, src: found ? `/img/aotearoa/logos/${found}` : null };
+});
 ---
 
 <Base>
@@ -72,23 +90,6 @@ const SLIDES = [
                         </div>
                     </div>
                 </div>
-
-                <div class="cover-arrow-col">
-                    <div class="cover-doodle">
-                        <img
-                            src="/img/aotearoa/abc-challenge-arrow.png"
-                            alt=""
-                            class="doodle-arrow"
-                            width="130"
-                            height="228"
-                            loading="eager"
-                        />
-                        <div class="doodle-pill">
-                            <span class="pill-line">Emphasis on</span>
-                            <span class="pill-line">&ldquo;challenge&rdquo;</span>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <p class="cover-scroll" aria-hidden="true">
@@ -105,7 +106,7 @@ const SLIDES = [
                 <p class="eyebrow reveal" style="--d: 0">01 / Overview</p>
 
                 <div class="ov-head">
-                    <h2 class="title reveal" style="--d: 1">What I was<br />asked to do</h2>
+                    <h2 class="title reveal" style="--d: 1">The ask</h2>
                 </div>
 
                 <div class="ov-body">
@@ -113,35 +114,32 @@ const SLIDES = [
                         In late 2022 I was asked to coordinate the Aotearoa Bike Challenge for the following February. I had about three months.
                     </p>
                     <p class="body reveal" style="--d: 3">
-                        The challenge is run by Auckland Transport, the council organisation I worked for, co-funded with Waka Kotahi (NZTA), and delivered with a contractor called Love To Ride. Their platform logs riders&rsquo; trips, runs the leaderboards, and sources the prizes.
+                        The ABC is an annual challenge for individuals and businesses to compete to find out who can cycle the most. It is run by local councils, in this case Auckland Transport, in partnership with a private contractor called Love To Ride. They bring the digital platform which logs riders&rsquo; trips and collects the data, and they source the prizes for the winners. The funding comes from the NZ Transport Agency and Auckland Transport, specifically my team: the Sustainable Mobility Team.
                     </p>
                 </div>
 
                 <figure class="ov-map reveal" style="--d: 4">
                     <NewZealandMap class="ov-map-svg" />
                     <figcaption>
-                        Nation-wide challenge.<br /><strong>Auckland was my patch.</strong>
+                        Nation-wide challenge.<br /><strong>Regionally managed.</strong>
                     </figcaption>
                 </figure>
 
-                <dl class="ov-facts reveal" style="--d: 5">
-                    <div class="fact">
-                        <dt>My role</dt>
-                        <dd>Project coordinator, end to end</dd>
-                    </div>
-                    <div class="fact">
-                        <dt>Team</dt>
-                        <dd>Sustainable Mobility, Auckland Transport</dd>
-                    </div>
-                    <div class="fact">
-                        <dt>Partners</dt>
-                        <dd>Waka Kotahi (NZTA), Love To Ride</dd>
-                    </div>
-                    <div class="fact">
-                        <dt>Runway</dt>
-                        <dd>Three months to launch</dd>
-                    </div>
-                </dl>
+                <div class="ov-partners reveal" style="--d: 5">
+                    <p class="ov-partners-label">Funded and delivered with</p>
+                    <ul class="ov-logos">
+                        {PARTNERS.map((partner) => (
+                            <li>
+                                {partner.src ? (
+                                    <img src={partner.src} alt={partner.name} loading="lazy" />
+                                ) : (
+                                    <span class="ov-logo-mark">{partner.name}</span>
+                                )}
+                                <span class="ov-logo-role">{partner.role}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
                 <aside class="ov-brief reveal" style="--d: 6">
                     <p class="brief-label">The brief</p>
@@ -155,17 +153,17 @@ const SLIDES = [
         <!-- ==========================================================
              SLIDE 3: The programme, and my part in it
              ========================================================== -->
-        <section class="slide slide--paper" id="programme" data-slide="2" data-tone="light" aria-label="The programme">
+        <section class="slide slide--paper" id="programme" data-slide="2" data-tone="light" aria-label="The task">
             <div class="slide-inner grid12">
-                <p class="eyebrow reveal" style="--d: 0">02 / The programme</p>
+                <p class="eyebrow reveal" style="--d: 0">02 / The task</p>
 
                 <div class="pr-head">
-                    <h2 class="title reveal" style="--d: 1">The whole country,<br />on bikes, every February</h2>
+                    <h2 class="title reveal" style="--d: 1">Time and money<br />well spent?</h2>
                     <p class="lead reveal" style="--d: 2">
-                        Individuals, workplaces, and organisations compete to see who can cycle the most. Riders log their trips in the app, and prizes go to the most kilometres, the most commutes, and whoever signs up the most people.
+                        For the participants, it is a fun challenge. Individuals, workplaces, and organisations compete to see who can cycle the most, and prizes go to the most kilometres, the most commutes, and the most sign-ups. But for the Sustainable Mobility Team, the ABC was about <strong>carbon reduction</strong>.
                     </p>
                     <p class="body reveal" style="--d: 3">
-                        I worked in Auckland Transport&rsquo;s Sustainable Mobility team, where the job was behaviour change: getting people out of cars and onto bikes. New Zealand cannot hit its climate targets without cutting transport emissions, and as the biggest city, much of that has to happen here.
+                        My team&rsquo;s primary purpose was behaviour change: getting people out of cars and onto other modes. New Zealand cannot hit its climate targets without cutting transport emissions, and as the biggest city, much of that has to happen in Auckland.
                     </p>
                 </div>
 
@@ -180,40 +178,48 @@ const SLIDES = [
                     <figcaption>The 2023 campaign artwork</figcaption>
                 </figure>
 
-                <ol class="pr-why">
-                    <li class="reveal" style="--d: 5">
-                        <span class="why-n">01</span>
-                        <h3>First rides</h3>
-                        <p>Gets people onto a bike who otherwise never would have.</p>
-                    </li>
-                    <li class="reveal" style="--d: 6">
-                        <span class="why-n">02</span>
-                        <h3>Confidence</h3>
-                        <p>Free skills training, so the road stops being frightening.</p>
-                    </li>
-                    <li class="reveal" style="--d: 7">
-                        <span class="why-n">03</span>
-                        <h3>Fewer barriers</h3>
-                        <p>Bikes to borrow, free repairs, and someone to ask.</p>
-                    </li>
-                    <li class="reveal" style="--d: 8">
-                        <span class="why-n">04</span>
-                        <h3>The network</h3>
-                        <p>Shows people cycleways they did not know were there.</p>
-                    </li>
-                    <li class="reveal" style="--d: 9">
-                        <span class="why-n">05</span>
-                        <h3>A habit</h3>
-                        <p>A month is long enough for one to stick.</p>
-                    </li>
-                </ol>
-
-                <div class="pr-mine reveal" style="--d: 10">
-                    <p class="pr-mine-label">My part</p>
-                    <p class="pr-mine-text">
-                        All of it. Keeping contractors on schedule for a launch date that could not move, keeping partner councils in the loop, and writing most of the public, social, and internal copy myself.
+                <div class="pr-role">
+                    <p class="pr-job reveal" style="--d: 4">
+                        As project coordinator, my job was to make the challenge a success by <mark>retaining participation,</mark> so we could secure funding for the next one.
                     </p>
+                    <div class="pr-mine reveal" style="--d: 5">
+                        <p class="pr-mine-label">My part</p>
+                        <p class="pr-mine-text">
+                            Communications, marketing, event planning and delivery, keeping contractors on track, and all the administration.
+                        </p>
+                    </div>
                 </div>
+
+                <section class="pr-why">
+                    <h3 class="pr-why-title reveal" style="--d: 5">The benefits to Auckland</h3>
+                    <ol>
+                        <li class="reveal" style="--d: 6">
+                            <span class="why-n">01</span>
+                            <h4>First rides</h4>
+                            <p>Gets people onto a bike who otherwise never would have.</p>
+                        </li>
+                        <li class="reveal" style="--d: 7">
+                            <span class="why-n">02</span>
+                            <h4>Confidence</h4>
+                            <p>Free skills training, so the road stops being frightening.</p>
+                        </li>
+                        <li class="reveal" style="--d: 8">
+                            <span class="why-n">03</span>
+                            <h4>Fewer barriers</h4>
+                            <p>Bikes to borrow, free repairs, and someone to ask.</p>
+                        </li>
+                        <li class="reveal" style="--d: 9">
+                            <span class="why-n">04</span>
+                            <h4>The network</h4>
+                            <p>Shows people cycleways they did not know were there.</p>
+                        </li>
+                        <li class="reveal" style="--d: 10">
+                            <span class="why-n">05</span>
+                            <h4>A habit</h4>
+                            <p>A month is long enough for one to stick.</p>
+                        </li>
+                    </ol>
+                </section>
             </div>
         </section>
 
@@ -226,18 +232,15 @@ const SLIDES = [
 
                 <div class="ch-head">
                     <h2 class="title reveal" style="--d: 1">Then four things<br />went wrong</h2>
-                    <p class="lead reveal" style="--d: 2">
-                        None of them were in the plan, and none of them were mine to control.
-                    </p>
                 </div>
 
                 <ol class="ch-timeline">
                     <li class="reveal" style="--d: 3">
                         <span class="ch-n">01</span>
                         <p class="ch-date">October 2022</p>
-                        <h3 class="ch-title">A new mayor</h3>
+                        <h3 class="ch-title">A new mayor, a smaller budget</h3>
                         <p class="ch-text">
-                            Auckland elected a mayor who had campaigned against cycling. Auckland Transport&rsquo;s funding was cut, and this project&rsquo;s budget went with it. Same target, a fraction of the money.
+                            Auckland elected a new mayor who had campaigned against sustainability in favour of cars. A couple of weeks into the planning phase, I discovered AT&rsquo;s funding was slashed, and the budget for this project went with it. I had to execute the same programme, for the same results, on a fraction of the budget.
                         </p>
                     </li>
                     <li class="reveal" style="--d: 4">
@@ -251,9 +254,9 @@ const SLIDES = [
                     <li class="reveal" style="--d: 5">
                         <span class="ch-n">03</span>
                         <p class="ch-date">27 January 2023</p>
-                        <h3 class="ch-title">Floods, three days out</h3>
+                        <h3 class="ch-title">Floods, three days to launch</h3>
                         <p class="ch-text">
-                            The worst flooding in Auckland&rsquo;s modern history. Cycleways were damaged and closed, the weather was miserable, and people had lost their homes. Marketing a bike competition into that was not an option.
+                            The worst flooding in Auckland&rsquo;s modern history. Cycleways were damaged and closed, the weather was miserable and dangerous, and people had lost their homes. Marketing a bike competition during this needed some serious re-thinking.
                         </p>
                     </li>
                     <li class="reveal" style="--d: 6">
@@ -261,13 +264,13 @@ const SLIDES = [
                         <p class="ch-date">February 2023</p>
                         <h3 class="ch-title">Cyclone Gabrielle</h3>
                         <p class="ch-text">
-                            Two weeks into the month, another storm took out more of the network. For most of the city, cycling had stopped being a reasonable way to get to work.
+                            Two weeks into the month, another storm hit, the strongest in decades. It took out even more of the cycle network, and for a lot of the city, cycling became an unreasonable mode of transport.
                         </p>
                     </li>
                 </ol>
 
                 <p class="ch-kicker reveal" style="--d: 7">
-                    The goal had not moved: <mark>hold participation, and keep the programme alive.</mark>
+                    Yet the goal had not moved: <mark>hold participation, and keep the programme alive.</mark>
                 </p>
             </div>
         </section>
@@ -307,10 +310,10 @@ const SLIDES = [
                             <aside class="panel-aside reveal" style="--d: 3">
                                 <h3>One spreadsheet</h3>
                                 <p>
-                                    I pulled the lot into a single spreadsheet. Not because a spreadsheet is elegant, but because every team could open one without being taught how.
+                                    I pulled as much as possible into a single source of truth: a spreadsheet. Not for elegance, but because most people can open a spreadsheet without being taught how.
                                 </p>
                                 <p>
-                                    Then I wrote down how each number gets collected and by whom, so the next coordinator would inherit a process instead of a scavenger hunt.
+                                    Then I wrote the documentation. Where each figure comes from, who is responsible for it, who to contact. The next coordinator would inherit a process instead of a scavenger hunt.
                                 </p>
                             </aside>
                         </div>
@@ -332,15 +335,15 @@ const SLIDES = [
                                 </li>
                                 <li class="reveal" style="--d: 3">
                                     <h3>Who brings others?</h3>
-                                    <p>Love To Ride tracks who recruits the most riders, and there is a prize for it. I went straight to the people who had won it before.</p>
+                                    <p>Love To Ride tracks who recruits the most riders, and there is a prize for it. I went straight to the high performers and the workplace champions and asked for their support.</p>
                                 </li>
                                 <li class="reveal" style="--d: 4">
                                     <h3>Where are the people?</h3>
-                                    <p>The busiest routes and spots in the city. Posters, stalls, and my own time in person went there, and nowhere else.</p>
+                                    <p>The busiest cycle and walking routes in the city. Posters, Q&amp;A stalls, and my own time in person were concentrated in these locations.</p>
                                 </li>
                                 <li class="reveal" style="--d: 5">
                                     <h3>What is wasted?</h3>
-                                    <p>Expensive events with thin turnout. Those got cut, and the money moved to the events people actually showed up to, so they could take more riders.</p>
+                                    <p>Expensive events with thin turnout? Cut. Events that could be run more efficiently? Trimmed. The saved money went straight into the most popular events, so they could take more riders.</p>
                                 </li>
                             </ol>
                         </div>
@@ -350,26 +353,35 @@ const SLIDES = [
                         <div class="slide-inner grid12">
                             <p class="panel-step"><span>03</span> / 04</p>
                             <div class="panel-main">
-                                <h2 class="title reveal" style="--d: 0">Spend nothing,<br />borrow everything</h2>
+                                <h2 class="title reveal" style="--d: 0">Sharing is caring&hellip;<br />and cheap</h2>
                                 <p class="lead reveal" style="--d: 1">
-                                    Previous years had bus adverts, bus stop posters, and radio. I had social media and word of mouth.
+                                    Previous years had bus side adverts, bus stop posters, and radio adverts. I had social media and word of mouth.
                                 </p>
                                 <p class="body reveal" style="--d: 2">
-                                    So I wrote the posts myself, and set up weekly calls with the coordinators at the other councils. Anything that worked for one of us got passed around: social copy, email sequences, cheaper ways to run an event. Tested material, free.
+                                    So I wrote the posts myself (years as a digital marketing copywriter finally paid off), and I set up weekly calls with the coordinators at the other councils. Anything that worked for one of us got passed around: social copy, email sequences, cheaper ways to run an event. Tested material, free.
                                 </p>
                                 <p class="body reveal" style="--d: 3">
                                     And a lot of what contractors used to do, I did. Putting up the posters. Standing on the cycleway talking to riders. Helping run the bike maintenance sessions.
                                 </p>
                             </div>
                             <figure class="panel-figure reveal" style="--d: 3">
-                                <img
-                                    src="/img/aotearoa/project-coordinator-flyer.jpg"
-                                    alt="Auckland Transport flyer reading Discover Auckland all over again, free adult bike skills and guided rides"
-                                    width="497"
-                                    height="1024"
-                                    loading="lazy"
-                                />
-                                <figcaption>Free skills and guided rides: the events that survived the cuts</figcaption>
+                                <!-- The tag and arrow are positioned as percentages of the image
+                                     box, so they stay locked to her face at any size. -->
+                                <div class="fig-frame">
+                                    <img
+                                        src="/img/aotearoa/project-coordinator-flyer.jpg"
+                                        alt="Auckland Transport flyer reading Discover Auckland all over again, free adult bike skills and guided rides"
+                                        width="497"
+                                        height="1024"
+                                        loading="lazy"
+                                    />
+                                    <svg class="fig-arrow" viewBox="0 0 100 80" fill="none" aria-hidden="true">
+                                        <path d="M6 72 C 4 40, 30 16, 78 18" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" />
+                                        <path d="M64 8 L 82 18 L 64 29" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <p class="fig-tag">Hey, that&rsquo;s me!</p>
+                                </div>
+                                <figcaption>Some events that survived the cuts</figcaption>
                             </figure>
                         </div>
                     </article>
@@ -378,15 +390,15 @@ const SLIDES = [
                         <div class="slide-inner grid12">
                             <p class="panel-step"><span>04</span> / 04</p>
                             <div class="panel-main">
-                                <h2 class="title reveal" style="--d: 0">Know when<br />to stop talking</h2>
+                                <h2 class="title reveal" style="--d: 0">Know when<br />to stop pushing</h2>
                                 <p class="lead reveal" style="--d: 1">
-                                    Three days before launch, the city flooded. The instinct in a campaign is to push harder.
+                                    Three days before launch, the city flooded. Cycle lanes and roads were unusable, but more importantly, people were really struggling.
                                 </p>
                                 <p class="body reveal" style="--d: 2">
-                                    It would have been the wrong call, and it would have made Auckland Transport look oblivious to people who had just lost their houses.
+                                    Working for a council organisation, I was called into the emergency response, in the journey planning team: helping people who had lost their homes and vehicles get where they needed to be on our fleets. Pushing for sign-ups amid this would have been the wrong call, and damaging to the reputation of Auckland Transport.
                                 </p>
                                 <p class="body reveal" style="--d: 3">
-                                    I called an emergency meeting with the contractors and we reworked it. Marketing scaled right back, event conduct changed, and the tone shifted to match a city that was still cleaning up. We went quiet, then came back when it was appropriate to.
+                                    I called an emergency meeting with contractors and we reworked our approach. Marketing was scaled right back, event conduct changed, locations changed, and the tone shifted. And when the cyclone hit, I was on the ground in the aftermath helping with the cleanup of the cycle network.
                                 </p>
                             </div>
                             <aside class="panel-aside reveal" style="--d: 4">
@@ -414,45 +426,50 @@ const SLIDES = [
 
                 <div class="rs-head">
                     <h2 class="title reveal" style="--d: 1">Auckland,<br />February 2023</h2>
+
+                    <figure class="rs-bars reveal" style="--d: 2">
+                        <figcaption>Auckland participants, year on year</figcaption>
+                        <div class="bar-row">
+                            <span class="bar-year">2022</span>
+                            <span class="bar-track"><span class="bar-fill" style="--w: 100%"></span></span>
+                            <span class="bar-val">6,153</span>
+                            <span class="bar-note">lockdown year</span>
+                        </div>
+                        <div class="bar-row">
+                            <span class="bar-year">2023</span>
+                            <span class="bar-track"><span class="bar-fill is-now" style="--w: 87.2%"></span></span>
+                            <span class="bar-val">5,365</span>
+                            <span class="bar-note">the year above</span>
+                        </div>
+                    </figure>
+
+                    <p class="rs-note reveal" style="--d: 3">
+                        A 13% drop. Not bad for a year with no mass advertising, two weeks of the worst weather in the history of the event, and measured against a lockdown-inflated all time high.
+                    </p>
+
+                    <p class="rs-kicker reveal" style="--d: 4">The challenge was funded again the next year.</p>
+                </div>
+
+                <!-- The map fills with bikes once the slide is reached: the
+                     country on bikes for a month, which is the whole point. -->
+                <div class="rs-map reveal" style="--d: 2" id="rs-map">
+                    <NewZealandMap class="rs-map-svg" />
                 </div>
 
                 <dl class="rs-stats">
-                    <div class="stat reveal" style="--d: 2">
+                    <div class="stat reveal" style="--d: 3">
                         <dt>Total participants</dt>
                         <dd class="num">5,365</dd>
                     </div>
-                    <div class="stat reveal" style="--d: 3">
+                    <div class="stat reveal" style="--d: 4">
                         <dt>Riders new to the challenge</dt>
                         <dd class="num">817</dd>
                     </div>
-                    <div class="stat reveal" style="--d: 4">
+                    <div class="stat reveal" style="--d: 5">
                         <dt>Of last year&rsquo;s participation held</dt>
                         <dd class="num">87.2%</dd>
                     </div>
                 </dl>
-
-                <figure class="rs-bars reveal" style="--d: 5">
-                    <figcaption>Auckland participants, year on year</figcaption>
-                    <div class="bar-row">
-                        <span class="bar-year">2022</span>
-                        <span class="bar-track"><span class="bar-fill" style="--w: 100%"></span></span>
-                        <span class="bar-val">6,153</span>
-                        <span class="bar-note">lockdown year</span>
-                    </div>
-                    <div class="bar-row">
-                        <span class="bar-year">2023</span>
-                        <span class="bar-track"><span class="bar-fill is-now" style="--w: 87.2%"></span></span>
-                        <span class="bar-val">5,365</span>
-                        <span class="bar-note">the year above</span>
-                    </div>
-                </figure>
-
-                <div class="rs-close reveal" style="--d: 6">
-                    <p class="rs-note">
-                        A 13% drop, in a year with a fraction of the budget, no mass-market advertising, two weeks of the month unrideable, and a lockdown number to be measured against.
-                    </p>
-                    <p class="rs-kicker">The challenge was funded again the next year.</p>
-                </div>
             </div>
         </section>
 
@@ -788,10 +805,6 @@ const SLIDES = [
     }
 
     .cover-row {
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-start;
-        gap: clamp(8px, 1.2vw, 18px);
         width: 100%;
         margin-block: auto;
         padding-block: clamp(16px, 2.5vh, 32px);
@@ -802,7 +815,6 @@ const SLIDES = [
         flex-direction: column;
         gap: clamp(24px, 3.8vh, 44px);
         align-items: flex-start;
-        flex: 0 1 auto;
         min-width: 0;
     }
 
@@ -847,90 +859,6 @@ const SLIDES = [
         font-weight: 500;
         letter-spacing: -0.03em;
         line-height: 1.25;
-    }
-
-    .cover-arrow-col {
-        display: flex;
-        align-items: flex-end;
-        flex: 0 0 auto;
-        margin-left: clamp(-10px, -1vw, 6px);
-    }
-
-    .cover-doodle {
-        display: inline-flex;
-        align-items: flex-end;
-        gap: clamp(10px, 1.2vw, 16px);
-        user-select: none;
-    }
-
-    .doodle-arrow {
-        width: clamp(88px, 8.5vw, 142px);
-        height: auto;
-        transform-origin: top left;
-        animation:
-            arrowPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s backwards,
-            arrowBob 3.6s ease-in-out 0.8s infinite alternate;
-        transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .doodle-arrow:hover {
-        transform: scale(1.08) rotate(-4deg);
-    }
-
-    .doodle-pill {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: clamp(8px, 1vh, 12px) clamp(12px, 1.2vw, 18px);
-        border: 2px solid #000000;
-        border-radius: 10px;
-        background-color: #FFFFFF;
-        box-shadow: 3px 3.5px 0 #000000;
-        white-space: nowrap;
-        transform-origin: bottom left;
-        animation:
-            pillPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.45s backwards,
-            pillWobble 4s ease-in-out 0.95s infinite alternate;
-        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
-    }
-
-    .doodle-pill:hover {
-        transform: scale(1.06) rotate(2deg) translateY(-2px);
-        box-shadow: 4px 5px 0 #000000;
-    }
-
-    .pill-line {
-        display: block;
-        font-size: clamp(0.88rem, 1.05vw, 1.15rem);
-        font-weight: 800;
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-        text-align: center;
-    }
-
-    @keyframes arrowPop {
-        0%   { opacity: 0; transform: scale(0.18) rotate(-22deg) translateY(-28px); }
-        60%  { opacity: 1; transform: scale(1.12) rotate(4deg) translateY(4px); }
-        80%  { transform: scale(0.96) rotate(-2deg) translateY(-1px); }
-        100% { opacity: 1; transform: none; }
-    }
-
-    @keyframes pillPop {
-        0%   { opacity: 0; transform: scale(0) translateY(14px) rotate(8deg); }
-        65%  { opacity: 1; transform: scale(1.14) translateY(-3px) rotate(-2deg); }
-        85%  { transform: scale(0.97) translateY(1px) rotate(1deg); }
-        100% { opacity: 1; transform: none; }
-    }
-
-    @keyframes arrowBob {
-        0%, 100% { transform: translateY(0) rotate(0deg); }
-        50%      { transform: translateY(-5px) rotate(1.5deg); }
-    }
-
-    @keyframes pillWobble {
-        0%, 100% { transform: translateY(0) rotate(0deg); }
-        50%      { transform: translateY(-3px) rotate(-1.2deg); }
     }
 
     /* A quiet cue that the cover is the first of six, not the whole page. */
@@ -978,14 +906,14 @@ const SLIDES = [
     /* =============================================================
        SLIDE 2: OVERVIEW
        ============================================================= */
-    .ov-head { grid-column: 1 / span 5; }
-    .ov-body { grid-column: 6 / span 4; display: flex; flex-direction: column; gap: 1.1em; }
+    .ov-head { grid-column: 1 / span 3; }
+    .ov-body { grid-column: 4 / span 6; display: flex; flex-direction: column; gap: 1.1em; }
     .ov-map  { grid-column: 10 / span 3; margin: 0; justify-self: end; text-align: right; }
-    .ov-facts { grid-column: 1 / span 8; }
-    .ov-brief { grid-column: 9 / span 4; }
+    .ov-partners { grid-column: 1 / -1; }
+    .ov-brief { grid-column: 1 / -1; }
 
     .ov-map :global(.ov-map-svg) {
-        height: clamp(180px, 27vh, 300px);
+        height: clamp(170px, 25vh, 280px);
         min-height: 0;
         min-width: 0;
         color: rgba(17, 17, 17, 0.19);
@@ -1008,36 +936,68 @@ const SLIDES = [
 
     .ov-map figcaption strong { color: var(--ink); font-weight: 700; }
 
-    .ov-facts {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        column-gap: var(--col-gap);
-        margin: 0;
+    /* Partners. Monochrome by design: these are other people's marks, so
+       they sit quietly on a rule rather than competing with the brief. */
+    .ov-partners {
         border-top: 1px solid var(--line);
-        padding-top: 18px;
+        padding-top: 15px;
     }
 
-    .fact dt {
+    .ov-partners-label {
         font-size: 0.66rem;
         font-weight: 800;
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--ink-3);
-        margin-bottom: 7px;
     }
 
-    .fact dd {
-        margin: 0;
-        font-size: clamp(0.95rem, 0.86rem + 0.2vw, 1.1rem);
-        font-weight: 550;
-        line-height: 1.35;
-        letter-spacing: -0.018em;
+    .ov-logos {
+        list-style: none;
+        margin: 14px 0 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: clamp(22px, 4vw, 68px);
     }
 
+    .ov-logos li {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .ov-logos img {
+        height: clamp(24px, 2.4vw, 38px);
+        width: auto;
+        object-fit: contain;
+        object-position: left bottom;
+    }
+
+    .ov-logo-mark {
+        font-size: clamp(1rem, 0.88rem + 0.3vw, 1.2rem);
+        font-weight: 800;
+        letter-spacing: -0.032em;
+        line-height: 1;
+    }
+
+    .ov-logo-role {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: -0.005em;
+        color: var(--ink-3);
+    }
+
+    /* The last thing read before the trouble starts, so it is the loudest
+       block on the slide: full width, accent ground, one sentence. */
     .ov-brief {
         background-color: var(--accent);
-        padding: clamp(18px, 2vw, 26px) clamp(18px, 2vw, 26px) clamp(20px, 2.2vw, 28px);
         border-radius: 3px;
+        padding: clamp(19px, 2.2vw, 30px) clamp(20px, 2.5vw, 36px);
+        display: grid;
+        grid-template-columns: minmax(0, 8rem) minmax(0, 1fr);
+        column-gap: clamp(18px, 2.4vw, 36px);
+        align-items: start;
     }
 
     .brief-label {
@@ -1045,36 +1005,41 @@ const SLIDES = [
         font-weight: 800;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        margin-bottom: 10px;
+        border-top: 2px solid var(--ink);
+        padding-top: 9px;
     }
 
     .brief-text {
-        font-size: clamp(1.04rem, 0.9rem + 0.32vw, 1.25rem);
-        font-weight: 600;
-        line-height: 1.42;
-        letter-spacing: -0.022em;
+        font-size: clamp(1.2rem, 0.92rem + 1.1vw, 2.1rem);
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -0.035em;
+        max-width: 36ch;
     }
 
     /* =============================================================
        SLIDE 3: THE PROGRAMME
        ============================================================= */
+    /* The lead runs at a larger size than the body, so it gets the wider
+       column and the two land at roughly the same depth. */
     .pr-head {
         grid-column: 1 / span 8;
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
         column-gap: var(--col-gap);
-        row-gap: clamp(16px, 2.2vh, 30px);
+        row-gap: clamp(12px, 1.5vh, 20px);
         align-content: start;
     }
 
     .pr-head .title { grid-column: 1 / -1; }
     .pr-head .lead { grid-column: 1; max-width: none; }
+    .pr-head .lead strong { font-weight: 750; color: var(--ink); }
     .pr-head .body { grid-column: 2; max-width: none; }
 
     .pr-poster {
         grid-column: 10 / span 3;
         margin: 0;
-        align-self: start;
+        align-self: center;
     }
 
     .pr-poster img {
@@ -1089,36 +1054,73 @@ const SLIDES = [
         font-weight: 600;
         letter-spacing: 0.04em;
         color: var(--ink-3);
+        text-align: center;
+    }
+
+    /* The brief restated as the job, next to the shape of the job. The
+       block is the same component as the brief on slide 01, because it is
+       the same kind of statement: what success had to look like. */
+    .pr-role {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+        column-gap: clamp(20px, 3vw, 44px);
+        row-gap: 16px;
+        align-items: start;
+    }
+
+    .pr-job {
+        background-color: var(--accent);
+        border-radius: 3px;
+        padding: clamp(14px, 1.5vw, 19px) clamp(17px, 1.9vw, 26px);
+        font-size: clamp(1.06rem, 0.9rem + 0.58vw, 1.44rem);
+        font-weight: 700;
+        line-height: 1.26;
+        letter-spacing: -0.034em;
+    }
+
+    /* Yellow on yellow, so the emphasis has to become a rule rather than
+       a fill. It still lands on the clause the whole page answers to. */
+    .pr-job mark {
+        background: none;
+        color: inherit;
+        padding: 0;
+        border-bottom: 2px solid var(--ink);
     }
 
     .pr-mine {
-        grid-column: 1 / -1;
-        display: grid;
-        grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
-        column-gap: clamp(14px, 1.6vw, 24px);
-        align-items: baseline;
-        border-left: 3px solid var(--accent);
-        padding-left: clamp(14px, 1.4vw, 20px);
+        align-self: start;
+        border-top: 2px solid var(--ink);
+        padding-top: clamp(11px, 1.2vh, 15px);
     }
 
     .pr-mine-label {
-        font-size: 0.7rem;
+        font-size: 0.66rem;
         font-weight: 800;
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--ink-3);
+        margin-bottom: 7px;
     }
 
     .pr-mine-text {
-        font-size: clamp(0.98rem, 0.86rem + 0.26vw, 1.14rem);
+        font-size: clamp(0.9rem, 0.82rem + 0.2vw, 1.02rem);
         font-weight: 500;
         line-height: 1.5;
-        letter-spacing: -0.016em;
-        max-width: 74ch;
+        letter-spacing: -0.014em;
+        color: var(--ink-2);
     }
 
-    .pr-why {
-        grid-column: 1 / -1;
+    .pr-why { grid-column: 1 / -1; }
+
+    .pr-why-title {
+        font-size: clamp(0.95rem, 0.86rem + 0.24vw, 1.12rem);
+        font-weight: 800;
+        letter-spacing: -0.028em;
+        margin: 0 0 clamp(9px, 1.1vh, 13px);
+    }
+
+    .pr-why ol {
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
         column-gap: var(--col-gap);
@@ -1138,10 +1140,10 @@ const SLIDES = [
         font-weight: 800;
         letter-spacing: 0.12em;
         color: var(--ink-3);
-        margin-bottom: 9px;
+        margin-bottom: 7px;
     }
 
-    .pr-why h3 {
+    .pr-why h4 {
         font-size: clamp(1.02rem, 0.9rem + 0.26vw, 1.2rem);
         font-weight: 700;
         letter-spacing: -0.024em;
@@ -1155,19 +1157,18 @@ const SLIDES = [
         color: var(--ink-2);
     }
 
+    /* This slide carries four rows of content against everyone else's three,
+       so it runs a little tighter to stay one screen tall. */
+    #programme .pr-head .lead { line-height: 1.38; }
+    #programme .pr-head .body { line-height: 1.55; }
+    #programme .pr-why p { line-height: 1.45; }
+
     /* =============================================================
        SLIDE 4: THE CHALLENGE
        ============================================================= */
     .ch-head {
         grid-column: 1 / -1;
-        display: grid;
-        grid-template-columns: repeat(12, minmax(0, 1fr));
-        column-gap: var(--col-gap);
-        align-items: end;
     }
-
-    .ch-head .title { grid-column: 1 / span 6; }
-    .ch-head .lead  { grid-column: 8 / span 5; color: var(--on-night-2); }
 
     .ch-timeline {
         grid-column: 1 / -1;
@@ -1345,19 +1346,60 @@ const SLIDES = [
         color: var(--ink-2);
     }
 
+    /* Full column width, so the frame below has a definite percentage to
+       resolve against instead of shrink-to-fitting around its own contents. */
     .panel-figure {
         grid-column: 9 / span 4;
         margin: 0;
-        justify-self: end;
+    }
+
+    /* A definite width, taken from the height the panel can spare, so the
+       frame never sizes itself from its own contents: the tag below is laid
+       out in container units and would otherwise feed back into the width.
+       Percentages then keep the tag and the arrow locked to her at any size. */
+    .fig-frame {
+        position: relative;
+        display: block;
+        width: min(100%, calc(54vh * 497 / 1024));
+        margin-inline-start: auto;
+        container-type: inline-size;
+    }
+
+    .fig-arrow {
+        position: absolute;
+        left: 25%;
+        top: 38.6%;
+        width: 28%;
+        height: auto;
+        color: var(--accent);
+        filter: drop-shadow(0 1.5px 2px rgba(17, 17, 17, 0.5));
+        pointer-events: none;
+    }
+
+    .fig-tag {
+        position: absolute;
+        left: 2%;
+        top: 50%;
+        transform: rotate(-5deg);
+        background-color: #FFFFFF;
+        color: var(--ink);
+        border: 2px solid var(--ink);
+        border-radius: 999px;
+        padding: 0.34em 0.8em;
+        font-size: max(10px, 5.6cqw);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+        line-height: 1.1;
+        white-space: nowrap;
+        box-shadow: 3px 3px 0 var(--ink);
+        pointer-events: none;
     }
 
     .panel-figure img {
+        display: block;
         width: 100%;
         height: auto;
-        max-height: 54vh;
-        width: auto;
         border-radius: 3px;
-        margin-inline-start: auto;
     }
 
     .panel-figure figcaption {
@@ -1481,10 +1523,60 @@ const SLIDES = [
         border-bottom-color: rgba(17, 17, 17, 0.22);
     }
 
-    .rs-head { grid-column: 1 / span 4; }
+    .rs-head {
+        grid-column: 1 / span 6;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(16px, 2.4vh, 30px);
+    }
+
+    /* A definite height here, because the script crops the viewBox to the
+       coastline and the svg would otherwise size itself from that and run
+       away with the whole row. */
+    .rs-map {
+        grid-column: 8 / span 5;
+        align-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: clamp(240px, 52vh, 500px);
+    }
+
+    .rs-map :global(.rs-map-svg) {
+        height: 100%;
+        width: 100%;
+        min-height: 0;
+        min-width: 0;
+        aspect-ratio: auto;
+        color: rgba(17, 17, 17, 0.14);
+    }
+
+    .rs-map :global(.nz-map-svg) { height: 100%; width: 100%; }
+
+    .rs-map :global(.nz-map-svg) {
+        filter: none;
+        overflow: visible;
+    }
+
+    /* The pin did its job back on slide 1. Here the bikes are the content. */
+    .rs-map :global(.auckland-beacon) { display: none; }
+    .rs-map :global(.bike-layer) { color: var(--ink); }
+
+    .rs-map :global(.bike-mark) {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        transform: scale(0.2);
+        transition: opacity 0.26s ease, transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .rs-map :global(.bike-mark.is-on) {
+        opacity: 1;
+        transform: scale(1);
+    }
 
     .rs-stats {
-        grid-column: 6 / span 7;
+        grid-column: 1 / -1;
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         column-gap: var(--col-gap);
@@ -1516,11 +1608,10 @@ const SLIDES = [
     }
 
     .rs-bars {
-        grid-column: 1 / span 7;
         margin: 0;
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 13px;
     }
 
     .rs-bars figcaption {
@@ -1529,7 +1620,7 @@ const SLIDES = [
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: rgba(17, 17, 17, 0.62);
-        padding-bottom: 6px;
+        padding-bottom: 4px;
     }
 
     .bar-row {
@@ -1583,18 +1674,12 @@ const SLIDES = [
         color: rgba(17, 17, 17, 0.58);
     }
 
-    .rs-close {
-        grid-column: 9 / span 4;
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-    }
-
     .rs-note {
-        font-size: clamp(0.96rem, 0.86rem + 0.22vw, 1.1rem);
-        line-height: 1.6;
+        font-size: clamp(0.94rem, 0.85rem + 0.2vw, 1.06rem);
+        line-height: 1.58;
         letter-spacing: -0.008em;
         color: rgba(17, 17, 17, 0.78);
+        max-width: 52ch;
     }
 
     /* The last line of the case study, and the only inverted block on a
@@ -1602,9 +1687,9 @@ const SLIDES = [
     .rs-kicker {
         background-color: var(--ink);
         color: var(--accent);
-        padding: clamp(16px, 1.8vw, 24px);
+        padding: clamp(15px, 1.7vw, 22px) clamp(16px, 1.8vw, 24px);
         border-radius: 3px;
-        font-size: clamp(1.08rem, 0.9rem + 0.45vw, 1.5rem);
+        font-size: clamp(1.06rem, 0.9rem + 0.42vw, 1.45rem);
         font-weight: 700;
         line-height: 1.3;
         letter-spacing: -0.03em;
@@ -1621,6 +1706,51 @@ const SLIDES = [
         }
     }
 
+    /* These three slides carry the most rows, so they run on a tighter
+       vertical rhythm than the rest of the deck to stay one screen tall. */
+    @media (min-width: 821px) {
+        #overview .grid12,
+        #programme .grid12,
+        #results .grid12 {
+            row-gap: clamp(16px, 2vh, 26px);
+        }
+    }
+
+    /* A shorter desktop screen still owes the reader one slide per screen,
+       so the frame gives way before the type does. */
+    @media (min-width: 821px) and (max-height: 870px) {
+        .abc {
+            --pad-y: clamp(52px, 7.4vh, 78px);
+            --row-gap: clamp(20px, 3.4vh, 40px);
+        }
+
+        #overview .grid12,
+        #programme .grid12,
+        #results .grid12 {
+            row-gap: clamp(15px, 2.2vh, 26px);
+        }
+
+        .title { font-size: clamp(2.1rem, 1.3rem + 2.4vw, 4.3rem); }
+        .lead { font-size: clamp(1.05rem, 0.84rem + 0.5vw, 1.34rem); }
+
+        .pr-why p,
+        .qa-grid p { line-height: 1.45; }
+
+        .pr-job {
+            padding: clamp(12px, 1.3vw, 16px) clamp(15px, 1.7vw, 22px);
+            font-size: clamp(1rem, 0.86rem + 0.5vw, 1.3rem);
+        }
+
+        .rs-map { height: clamp(230px, 46vh, 420px); }
+
+        /* Pinning is decided by measurement, so the panels have to earn their
+           place on a short screen rather than assume it. */
+        .stack.is-pinned .panel { padding-top: calc(var(--pad-y) + 2.2rem); }
+        .stack.is-pinned .panel-step { font-size: clamp(2rem, 1.1rem + 2.4vw, 3.9rem); }
+        .stack.is-pinned .panel .title { font-size: clamp(2.2rem, 1.4rem + 2.4vw, 4.4rem); }
+        .stack.is-pinned .panel .lead { font-size: clamp(1.1rem, 0.88rem + 0.56vw, 1.5rem); }
+    }
+
     /* =============================================================
        RESPONSIVE
        Below the desktop breakpoint every slide collapses to a single
@@ -1631,15 +1761,13 @@ const SLIDES = [
         .ov-body { grid-column: 7 / span 6; }
         .ov-map  { grid-column: 1 / span 4; justify-self: start; text-align: left; }
         .ov-map :global(.ov-map-svg) { margin-inline-start: 0; }
-        .ov-facts { grid-column: 5 / span 8; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+        .ov-partners { grid-column: 5 / span 8; }
         .ov-brief { grid-column: 1 / -1; }
 
         .pr-head { grid-column: 1 / span 7; }
         .pr-poster { grid-column: 8 / span 5; }
-        .pr-why { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 22px; }
+        .pr-why ol { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 22px; }
 
-        .ch-head .title { grid-column: 1 / span 7; }
-        .ch-head .lead  { grid-column: 1 / span 7; }
         .ch-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
 
         .panel-main { grid-column: 1 / span 7; }
@@ -1647,10 +1775,9 @@ const SLIDES = [
         .panel-figure { grid-column: 8 / span 5; }
         .qa-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; }
 
-        .rs-head { grid-column: 1 / span 5; }
-        .rs-stats { grid-column: 6 / span 7; }
-        .rs-bars { grid-column: 1 / span 12; }
-        .rs-close { grid-column: 1 / span 12; }
+        .rs-head { grid-column: 1 / span 7; }
+        .rs-map { grid-column: 9 / span 4; }
+        .rs-stats { grid-column: 1 / -1; }
         .bar-row { grid-template-columns: 3rem minmax(0, 1fr) 4rem 7rem; }
     }
 
@@ -1664,25 +1791,25 @@ const SLIDES = [
 
         .grid12 { grid-template-columns: minmax(0, 1fr); }
 
-        .ov-head, .ov-body, .ov-map, .ov-facts, .ov-brief,
-        .pr-head, .pr-poster, .pr-why,
+        .ov-head, .ov-body, .ov-map, .ov-partners, .ov-brief,
+        .pr-head, .pr-poster, .pr-role, .pr-why,
         .ch-head, .ch-timeline, .ch-kicker,
         .panel-step, .panel-main, .panel-aside, .panel-figure, .qa-grid,
-        .rs-head, .rs-stats, .rs-bars, .rs-close {
+        .rs-head, .rs-map, .rs-stats {
             grid-column: 1 / -1;
         }
 
         .ov-map { justify-self: start; text-align: left; }
-        .ov-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
-        .pr-poster { max-width: 400px; }
-        .pr-why { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 22px; }
+        .ov-brief { grid-template-columns: minmax(0, 1fr); row-gap: 14px; }
+        .pr-poster { max-width: 400px; margin-inline: auto; }
+        .pr-role { grid-template-columns: minmax(0, 1fr); }
+        .pr-why ol { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 22px; }
 
-        /* align-items: end is a grid instruction on desktop; in a column
-           flexbox it would shove the copy to the right edge. */
-        .ch-head { display: flex; flex-direction: column; align-items: stretch; gap: 16px; }
-
-        .pr-mine { grid-template-columns: minmax(0, 1fr); row-gap: 8px; }
+        /* One column, and the children have to be told: an explicit
+           grid-column: 2 would otherwise conjure a second one back. */
         .pr-head { grid-template-columns: minmax(0, 1fr); }
+        .pr-head .lead,
+        .pr-head .body { grid-column: 1; }
 
         /* Section label and progress ticks stay on one line on a phone. */
         .stack-head { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
@@ -1691,17 +1818,16 @@ const SLIDES = [
         .ch-timeline { grid-template-columns: minmax(0, 1fr); row-gap: 26px; }
 
         .qa-grid { grid-template-columns: minmax(0, 1fr); row-gap: 22px; }
-        .panel-figure { justify-self: start; }
-        .panel-figure img { max-height: none; max-width: 320px; margin-inline-start: 0; }
+        .panel-figure { justify-self: stretch; }
+        .fig-frame { width: min(100%, 320px); margin-inline-start: 0; }
         .panel-figure figcaption { text-align: left; margin-inline-start: 0; }
 
+        .rs-map { justify-self: start; width: min(100%, 320px); min-height: 260px; }
         .rs-stats { grid-template-columns: minmax(0, 1fr); row-gap: 22px; }
         .stat dt { min-height: 0; }
         .bar-row { grid-template-columns: 2.8rem minmax(0, 1fr) 4rem; row-gap: 4px; }
         .bar-note { grid-column: 2 / -1; }
 
-        .cover-row { flex-direction: column; align-items: flex-start; gap: 28px; }
-        .cover-arrow-col { margin-left: 0; }
         .title-line { white-space: normal; }
 
         /* Three metadata columns will not fit a phone, so they pair up. */
@@ -1724,8 +1850,8 @@ const SLIDES = [
 
         .bar-fill { width: var(--w); transition: none; }
 
-        .doodle-arrow,
-        .doodle-pill,
+        .rs-map :global(.bike-mark) { transition: none; }
+
         .cover-scroll-line::after {
             animation: none;
         }
@@ -1807,6 +1933,232 @@ const SLIDES = [
         );
 
         targets.forEach((el) => observer.observe(el));
+        teardown.push(() => observer.disconnect());
+    }
+
+    const SVG_NS = "http://www.w3.org/2000/svg";
+
+    /**
+     * Slide 6. Scatters bicycle marks across the landmass. Candidate points are
+     * tested against the real map geometry with isPointInFill, so no bike ever
+     * lands in the sea or hangs over a coastline.
+     */
+    function buildBikes(svg: SVGSVGElement) {
+        const paths = Array.from(svg.querySelectorAll<SVGPathElement>("g > path"));
+        if (!paths.length) return [];
+
+        const group = paths[0].parentElement as unknown as SVGGraphicsElement | null;
+        if (!group) return [];
+
+        // Bikes are appended to the <svg>, so their coordinates are viewBox
+        // units, while the paths live inside a flipped, scaled <g>. Going via
+        // screen space converts between the two; getCTM alone would not,
+        // because it resolves to CSS pixels rather than viewBox units.
+        let svgCTM = svg.getScreenCTM();
+        let groupCTM = group.getScreenCTM();
+        if (!svgCTM || !groupCTM) return [];
+
+        // The shared map's viewBox carries a lot of empty ocean, which would
+        // leave the map small and off-centre here. Crop to the coastline
+        // before anything is measured or placed.
+        const toViewBox = svgCTM.inverse().multiply(groupCTM);
+        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+        for (const path of paths) {
+            const b = path.getBBox();
+            for (const [bx, by] of [
+                [b.x, b.y],
+                [b.x + b.width, b.y],
+                [b.x, b.y + b.height],
+                [b.x + b.width, b.y + b.height],
+            ]) {
+                const v = new DOMPoint(bx, by).matrixTransform(toViewBox);
+                if (v.x < minX) minX = v.x;
+                if (v.x > maxX) maxX = v.x;
+                if (v.y < minY) minY = v.y;
+                if (v.y > maxY) maxY = v.y;
+            }
+        }
+        if (Number.isFinite(minX) && maxX > minX && maxY > minY) {
+            const pad = 18;
+            svg.setAttribute(
+                "viewBox",
+                `${(minX - pad).toFixed(1)} ${(minY - pad).toFixed(1)} ` +
+                    `${(maxX - minX + pad * 2).toFixed(1)} ${(maxY - minY + pad * 2).toFixed(1)}`
+            );
+            // Cropping changes the viewBox transform, so re-read the matrices.
+            svgCTM = svg.getScreenCTM();
+            groupCTM = group.getScreenCTM();
+            if (!svgCTM || !groupCTM) return [];
+        }
+
+        const toUser = groupCTM.inverse().multiply(svgCTM);
+
+        // The map is about ninety separate paths. Testing every candidate
+        // against all of them is far too slow, so cache each path's bounding
+        // box and run the real fill test only on the few that could contain it.
+        const boxes = paths.map((path) => {
+            const b = path.getBBox();
+            return { path, x1: b.x, y1: b.y, x2: b.x + b.width, y2: b.y + b.height };
+        });
+
+        const vb = svg.viewBox.baseVal;
+        const rect = svg.getBoundingClientRect();
+
+        // On a small rendered map, keep the glyph readable by drawing fewer,
+        // proportionally larger bikes rather than a mush of tiny ones.
+        const drawnW = Math.min(rect.width || vb.width, (rect.height || vb.height) * (vb.width / vb.height));
+        const scale = drawnW < 340 ? 1.55 : drawnW < 460 ? 1.25 : 1;
+
+        const BIKE_W = 26 * scale;
+        const BIKE_H = 17 * scale;
+        const STEP_X = 28 * scale;
+        const STEP_Y = 19 * scale;
+
+        const probe = new DOMPoint();
+        function inside(x: number, y: number) {
+            probe.x = x;
+            probe.y = y;
+            const u = probe.matrixTransform(toUser);
+            for (const b of boxes) {
+                if (u.x < b.x1 || u.x > b.x2 || u.y < b.y1 || u.y > b.y2) continue;
+                if (b.path.isPointInFill(u)) return true;
+            }
+            return false;
+        }
+
+        // Auckland, so the fill spreads out from where the story happened.
+        const AKL_X = 678;
+        const AKL_Y = 228;
+
+        const spots: Array<{ x: number; y: number; order: number }> = [];
+        for (let gy = vb.y + STEP_Y; gy < vb.y + vb.height; gy += STEP_Y) {
+            for (let gx = vb.x + STEP_X; gx < vb.x + vb.width; gx += STEP_X) {
+                const x = gx + (Math.random() - 0.5) * STEP_X * 0.45;
+                const y = gy + (Math.random() - 0.5) * STEP_Y * 0.45;
+                if (!inside(x, y)) continue;
+                // Keep the whole glyph on land, not just its centre.
+                if (!inside(x - BIKE_W * 0.35, y)) continue;
+                if (!inside(x + BIKE_W * 0.35, y)) continue;
+                if (!inside(x, y - BIKE_H * 0.3)) continue;
+                if (!inside(x, y + BIKE_H * 0.3)) continue;
+
+                spots.push({ x, y, order: Math.hypot(x - AKL_X, y - AKL_Y) + Math.random() * 80 });
+            }
+        }
+
+        spots.sort((a, b) => a.order - b.order);
+
+        // A re-init without a document swap would otherwise stack a second
+        // layer of bikes on top of the first.
+        svg.querySelectorAll(".bike-layer").forEach((old) => old.remove());
+
+        const layer = document.createElementNS(SVG_NS, "g");
+        layer.setAttribute("class", "bike-layer");
+        const frag = document.createDocumentFragment();
+        const marks: SVGGElement[] = [];
+
+        const k = (n: number) => (n * scale).toFixed(2);
+
+        for (const spot of spots) {
+            // Position lives on an outer group. The animated class goes on an
+            // inner one, because a CSS transform would otherwise replace the
+            // transform attribute outright and stack every bike on the origin.
+            const pos = document.createElementNS(SVG_NS, "g");
+            pos.setAttribute("transform", `translate(${spot.x.toFixed(1)} ${spot.y.toFixed(1)})`);
+
+            const g = document.createElementNS(SVG_NS, "g");
+            g.setAttribute("class", "bike-mark");
+            pos.appendChild(g);
+
+            const bike = document.createElementNS(SVG_NS, "g");
+            bike.setAttribute("fill", "none");
+            bike.setAttribute("stroke", "currentColor");
+            bike.setAttribute("stroke-width", (2.1 * scale).toFixed(2));
+            bike.setAttribute("stroke-linecap", "round");
+            bike.setAttribute("stroke-linejoin", "round");
+
+            for (const cx of [-7.8, 7.8]) {
+                const wheel = document.createElementNS(SVG_NS, "circle");
+                wheel.setAttribute("cx", k(cx));
+                wheel.setAttribute("cy", k(3.6));
+                wheel.setAttribute("r", k(4.8));
+                bike.appendChild(wheel);
+            }
+
+            const frame = document.createElementNS(SVG_NS, "path");
+            frame.setAttribute(
+                "d",
+                `M${k(-7.8)} ${k(3.6)} L${k(-1.4)} ${k(-4.8)} L${k(7.8)} ${k(3.6)} ` +
+                    `M${k(-1.4)} ${k(-4.8)} L${k(3.4)} ${k(-4.8)} ` +
+                    `M${k(-4.5)} ${k(3.6)} L${k(1.7)} ${k(-4.8)}`
+            );
+            bike.appendChild(frame);
+
+            g.appendChild(bike);
+            frag.appendChild(pos);
+            marks.push(g);
+        }
+
+        layer.appendChild(frag);
+        svg.appendChild(layer);
+        return marks;
+    }
+
+    /**
+     * Fills the results map with bikes the first time the slide is reached.
+     * Built lazily, because placing them costs a few hundred hit tests and
+     * nobody should pay for that on first paint.
+     */
+    function initResultsBikes() {
+        const holder = document.getElementById("rs-map");
+        if (!holder || typeof IntersectionObserver === "undefined") return;
+
+        let done = false;
+
+        function fill() {
+            if (done) return;
+            done = true;
+
+            const svg = holder!.querySelector<SVGSVGElement>(".nz-map-svg");
+            if (!svg) return;
+
+            const bikes = buildBikes(svg);
+            if (!bikes.length) return;
+
+            if (reducedMotion()) {
+                bikes.forEach((bike) => bike.classList.add("is-on"));
+                return;
+            }
+
+            // Spread the reveal over a fixed span rather than per-frame, so the
+            // run takes the same time however many bikes ended up on the map.
+            const DURATION = 1700;
+            const start = performance.now();
+            let shown = 0;
+            let frame = 0;
+
+            function step(now: number) {
+                const target = Math.round(clamp01((now - start) / DURATION) * bikes.length);
+                while (shown < target) bikes[shown++].classList.add("is-on");
+                if (shown < bikes.length) frame = requestAnimationFrame(step);
+            }
+
+            frame = requestAnimationFrame(step);
+            teardown.push(() => cancelAnimationFrame(frame));
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (!entry.isIntersecting) continue;
+                    observer.unobserve(entry.target);
+                    fill();
+                }
+            },
+            { rootMargin: "0px 0px -12% 0px", threshold: 0 }
+        );
+
+        observer.observe(holder);
         teardown.push(() => observer.disconnect());
     }
 
@@ -2032,6 +2384,7 @@ const SLIDES = [
         if (stack) stack();
 
         initReveals();
+        initResultsBikes();
 
         if (stack) loop.subscribe(stack);
         loop.subscribe(initChrome());
