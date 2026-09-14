@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Claude settings
 .claude/
+
+# Local working notes (never published)
+notes/
