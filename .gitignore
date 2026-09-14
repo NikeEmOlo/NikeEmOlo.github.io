@@ -26,5 +26,8 @@ pnpm-debug.log*
 # Claude settings
 .claude/
 
+# Antigravity / Gemini settings
+GEMINI.md
+
 # Local working notes (never published)
 notes/
