@@ -105,45 +105,51 @@ const PARTNERS = [
             <div class="slide-inner grid12">
                 <p class="eyebrow reveal" style="--d: 0">01 / Overview</p>
 
-                <div class="ov-head">
+                <div class="slide-head ov-head">
                     <h2 class="title reveal" style="--d: 1">The ask</h2>
+
+                    <div class="head-col">
+                        <p class="lead reveal" style="--d: 2">
+                            In late 2022 I was asked to coordinate the Aotearoa Bike Challenge for the following February. Three months to plan a month-long, nation-wide event I had never run.
+                        </p>
+                        <p class="body reveal" style="--d: 3">
+                            The ABC is an annual challenge for individuals and businesses to compete to find out who can cycle the most. It is run by local councils, in this case Auckland Transport, in partnership with a private contractor called Love To Ride.
+                        </p>
+                    </div>
+
+                    <div class="head-col">
+                        <p class="body reveal" style="--d: 4">
+                            They bring the digital platform which logs riders&rsquo; trips and collects the data, and they source the prizes for the winners. The funding comes from the NZ Transport Agency and Auckland Transport, specifically my team: the Sustainable Mobility Team.
+                        </p>
+                    </div>
                 </div>
 
-                <div class="ov-body">
-                    <p class="lead reveal" style="--d: 2">
-                        In late 2022 I was asked to coordinate the Aotearoa Bike Challenge for the following February. I had about three months.
-                    </p>
-                    <p class="body reveal" style="--d: 3">
-                        The ABC is an annual challenge for individuals and businesses to compete to find out who can cycle the most. It is run by local councils, in this case Auckland Transport, in partnership with a private contractor called Love To Ride. They bring the digital platform which logs riders&rsquo; trips and collects the data, and they source the prizes for the winners. The funding comes from the NZ Transport Agency and Auckland Transport, specifically my team: the Sustainable Mobility Team.
-                    </p>
-                </div>
-
-                <figure class="ov-map reveal" style="--d: 4">
+                <figure class="ov-map reveal" style="--d: 5">
                     <NewZealandMap class="ov-map-svg" />
-                    <figcaption>
+                    <figcaption class="body">
                         Nation-wide challenge.<br /><strong>Regionally managed.</strong>
                     </figcaption>
                 </figure>
 
-                <div class="ov-partners reveal" style="--d: 5">
-                    <p class="ov-partners-label">Funded and delivered with</p>
+                <div class="ov-partners reveal" style="--d: 6">
+                    <p class="label-micro ov-partners-label">Funded and delivered with</p>
                     <ul class="ov-logos">
                         {PARTNERS.map((partner) => (
                             <li>
+                                <span class="label-micro ov-logo-role">{partner.role}</span>
                                 {partner.src ? (
                                     <img src={partner.src} alt={partner.name} loading="lazy" />
                                 ) : (
-                                    <span class="ov-logo-mark">{partner.name}</span>
+                                    <span class="body ov-logo-mark">{partner.name}</span>
                                 )}
-                                <span class="ov-logo-role">{partner.role}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
 
-                <aside class="ov-brief reveal" style="--d: 6">
-                    <p class="brief-label">The brief</p>
-                    <p class="brief-text">
+                <aside class="ov-brief reveal" style="--d: 7">
+                    <p class="label-micro brief-label">The brief</p>
+                    <p class="statement brief-text">
                         Hold participation as close to last year&rsquo;s as possible, and secure the programme&rsquo;s future. On a shoestring budget.
                     </p>
                 </aside>
@@ -157,14 +163,20 @@ const PARTNERS = [
             <div class="slide-inner grid12">
                 <p class="eyebrow reveal" style="--d: 0">02 / The task</p>
 
-                <div class="pr-head">
+                <div class="slide-head pr-head">
                     <h2 class="title reveal" style="--d: 1">Time and money<br />well spent?</h2>
-                    <p class="lead reveal" style="--d: 2">
-                        For the participants, it is a fun challenge. Individuals, workplaces, and organisations compete to see who can cycle the most, and prizes go to the most kilometres, the most commutes, and the most sign-ups. But for the Sustainable Mobility Team, the ABC was about <strong>carbon reduction</strong>.
-                    </p>
-                    <p class="body reveal" style="--d: 3">
-                        My team&rsquo;s primary purpose was behaviour change: getting people out of cars and onto other modes. New Zealand cannot hit its climate targets without cutting transport emissions, and as the biggest city, much of that has to happen in Auckland.
-                    </p>
+
+                    <div class="head-col">
+                        <p class="lead reveal" style="--d: 2">
+                            For the participants it is a fun competition: individuals, workplaces and organisations racing to log the most kilometres, commutes and sign-ups. But for the Sustainable Mobility Team paying for it, the ABC was <strong>carbon reduction</strong>, bought cheaply.
+                        </p>
+                    </div>
+
+                    <div class="head-col">
+                        <p class="body reveal" style="--d: 3">
+                            My team&rsquo;s primary purpose was behaviour change: getting people out of cars and onto other modes. New Zealand cannot hit its climate targets without cutting transport emissions, and as the biggest city, much of that has to happen in Auckland.
+                        </p>
+                    </div>
                 </div>
 
                 <figure class="pr-poster reveal" style="--d: 3">
@@ -175,48 +187,48 @@ const PARTNERS = [
                         height="1024"
                         loading="eager"
                     />
-                    <figcaption>The 2023 campaign artwork</figcaption>
+                    <figcaption class="label-micro">The 2023 campaign artwork</figcaption>
                 </figure>
 
                 <div class="pr-role">
-                    <p class="pr-job reveal" style="--d: 4">
+                    <p class="statement pr-job reveal" style="--d: 4">
                         As project coordinator, my job was to make the challenge a success by <mark>retaining participation,</mark> so we could secure funding for the next one.
                     </p>
                     <div class="pr-mine reveal" style="--d: 5">
-                        <p class="pr-mine-label">My part</p>
-                        <p class="pr-mine-text">
+                        <p class="label-micro pr-mine-label">My part</p>
+                        <p class="body pr-mine-text">
                             Communications, marketing, event planning and delivery, keeping contractors on track, and all the administration.
                         </p>
                     </div>
                 </div>
 
                 <section class="pr-why">
-                    <h3 class="pr-why-title reveal" style="--d: 5">The benefits to Auckland</h3>
+                    <h3 class="label-micro pr-why-title reveal" style="--d: 5">The benefits to Auckland</h3>
                     <ol>
                         <li class="reveal" style="--d: 6">
-                            <span class="why-n">01</span>
-                            <h4>First rides</h4>
-                            <p>Gets people onto a bike who otherwise never would have.</p>
+                            <span class="label-micro why-n">01</span>
+                            <h4>More new cyclists</h4>
+                            <p class="body-sm">Gets people onto a bike who otherwise never would have.</p>
                         </li>
                         <li class="reveal" style="--d: 7">
-                            <span class="why-n">02</span>
-                            <h4>Confidence</h4>
-                            <p>Free skills training, so the road stops being frightening.</p>
+                            <span class="label-micro why-n">02</span>
+                            <h4>Safer, confident cyclists</h4>
+                            <p class="body-sm">Free skills training, so the road stops being frightening.</p>
                         </li>
                         <li class="reveal" style="--d: 8">
-                            <span class="why-n">03</span>
-                            <h4>Fewer barriers</h4>
-                            <p>Bikes to borrow, free repairs, and someone to ask.</p>
+                            <span class="label-micro why-n">03</span>
+                            <h4>Removes barriers to cycling</h4>
+                            <p class="body-sm">Bikes to borrow, free repairs, and someone to ask.</p>
                         </li>
                         <li class="reveal" style="--d: 9">
-                            <span class="why-n">04</span>
-                            <h4>The network</h4>
-                            <p>Shows people cycleways they did not know were there.</p>
+                            <span class="label-micro why-n">04</span>
+                            <h4>Promotes the cycle network</h4>
+                            <p class="body-sm">Shows people cycleways they did not know were there.</p>
                         </li>
                         <li class="reveal" style="--d: 10">
-                            <span class="why-n">05</span>
-                            <h4>A habit</h4>
-                            <p>A month is long enough for one to stick.</p>
+                            <span class="label-micro why-n">05</span>
+                            <h4>Makes cycling a habit</h4>
+                            <p class="body-sm">A month is long enough for one to stick.</p>
                         </li>
                     </ol>
                 </section>
@@ -232,44 +244,47 @@ const PARTNERS = [
 
                 <div class="ch-head">
                     <h2 class="title reveal" style="--d: 1">Then four things<br />went wrong</h2>
+                    <p class="lead ch-lead reveal" style="--d: 2">
+                        Between being handed the project and the end of the challenge, I lost the budget, the benchmark, and most of the cycle network.
+                    </p>
                 </div>
 
                 <ol class="ch-timeline">
                     <li class="reveal" style="--d: 3">
-                        <span class="ch-n">01</span>
-                        <p class="ch-date">October 2022</p>
+                        <span class="label-micro ch-n">01</span>
+                        <p class="label-micro ch-date">October 2022</p>
                         <h3 class="ch-title">A new mayor, a smaller budget</h3>
-                        <p class="ch-text">
+                        <p class="body-sm ch-text">
                             Auckland elected a new mayor who had campaigned against sustainability in favour of cars. A couple of weeks into the planning phase, I discovered AT&rsquo;s funding was slashed, and the budget for this project went with it. I had to execute the same programme, for the same results, on a fraction of the budget.
                         </p>
                     </li>
                     <li class="reveal" style="--d: 4">
-                        <span class="ch-n">02</span>
-                        <p class="ch-date">The year before</p>
+                        <span class="label-micro ch-n">02</span>
+                        <p class="label-micro ch-date">The year before</p>
                         <h3 class="ch-title">An inflated benchmark</h3>
-                        <p class="ch-text">
+                        <p class="body-sm ch-text">
                             The 2022 challenge ran during lockdown, when a bike ride was one of the few things you were allowed to do outdoors. Participation was artificially high. A drop was already certain, and on paper it would read as failure.
                         </p>
                     </li>
                     <li class="reveal" style="--d: 5">
-                        <span class="ch-n">03</span>
-                        <p class="ch-date">27 January 2023</p>
+                        <span class="label-micro ch-n">03</span>
+                        <p class="label-micro ch-date">27 January 2023</p>
                         <h3 class="ch-title">Floods, three days to launch</h3>
-                        <p class="ch-text">
+                        <p class="body-sm ch-text">
                             The worst flooding in Auckland&rsquo;s modern history. Cycleways were damaged and closed, the weather was miserable and dangerous, and people had lost their homes. Marketing a bike competition during this needed some serious re-thinking.
                         </p>
                     </li>
                     <li class="reveal" style="--d: 6">
-                        <span class="ch-n">04</span>
-                        <p class="ch-date">February 2023</p>
+                        <span class="label-micro ch-n">04</span>
+                        <p class="label-micro ch-date">February 2023</p>
                         <h3 class="ch-title">Cyclone Gabrielle</h3>
-                        <p class="ch-text">
+                        <p class="body-sm ch-text">
                             Two weeks into the month, another storm hit, the strongest in decades. It took out even more of the cycle network, and for a lot of the city, cycling became an unreasonable mode of transport.
                         </p>
                     </li>
                 </ol>
 
-                <p class="ch-kicker reveal" style="--d: 7">
+                <p class="statement ch-kicker reveal" style="--d: 7">
                     Yet the goal had not moved: <mark>hold participation, and keep the programme alive.</mark>
                 </p>
             </div>
@@ -297,7 +312,7 @@ const PARTNERS = [
 
                     <article class="panel" data-panel="0">
                         <div class="slide-inner grid12">
-                            <p class="panel-step"><span>01</span> / 04</p>
+                            <p class="label-micro panel-step"><span>01</span> / 04</p>
                             <div class="panel-main">
                                 <h2 class="title reveal" style="--d: 0">Find the data first</h2>
                                 <p class="lead reveal" style="--d: 1">
@@ -308,11 +323,11 @@ const PARTNERS = [
                                 </p>
                             </div>
                             <aside class="panel-aside reveal" style="--d: 3">
-                                <h3>One spreadsheet</h3>
-                                <p>
+                                <h3 class="label-micro">One spreadsheet</h3>
+                                <p class="body">
                                     I pulled as much as possible into a single source of truth: a spreadsheet. Not for elegance, but because most people can open a spreadsheet without being taught how.
                                 </p>
-                                <p>
+                                <p class="body">
                                     Then I wrote the documentation. Where each figure comes from, who is responsible for it, who to contact. The next coordinator would inherit a process instead of a scavenger hunt.
                                 </p>
                             </aside>
@@ -321,7 +336,7 @@ const PARTNERS = [
 
                     <article class="panel" data-panel="1">
                         <div class="slide-inner grid12">
-                            <p class="panel-step"><span>02</span> / 04</p>
+                            <p class="label-micro panel-step"><span>02</span> / 04</p>
                             <div class="panel-main">
                                 <h2 class="title reveal" style="--d: 0">Ask it four questions</h2>
                                 <p class="lead reveal" style="--d: 1">
@@ -331,19 +346,23 @@ const PARTNERS = [
                             <ol class="qa-grid">
                                 <li class="reveal" style="--d: 2">
                                     <h3>Who comes back?</h3>
-                                    <p>The big workplaces with a history of high sign-ups. I went to them first and got large numbers registered early.</p>
+                                    <p class="qa-sub">Big businesses</p>
+                                    <p class="body-sm">The large workplaces with a history of high sign-ups. I went to them first and had big numbers registered before the campaign even opened.</p>
                                 </li>
                                 <li class="reveal" style="--d: 3">
                                     <h3>Who brings others?</h3>
-                                    <p>Love To Ride tracks who recruits the most riders, and there is a prize for it. I went straight to the high performers and the workplace champions and asked for their support.</p>
+                                    <p class="qa-sub">Previous high performers</p>
+                                    <p class="body-sm">Love To Ride tracks who recruits the most riders, and there is a prize for it. I went straight to last year&rsquo;s winners and workplace champions and asked them to do it again.</p>
                                 </li>
                                 <li class="reveal" style="--d: 4">
                                     <h3>Where are the people?</h3>
-                                    <p>The busiest cycle and walking routes in the city. Posters, Q&amp;A stalls, and my own time in person were concentrated in these locations.</p>
+                                    <p class="qa-sub">Concentrated in the CBD</p>
+                                    <p class="body-sm">The busiest cycle and walking routes in the city. Posters, Q&amp;A stalls, and my own time in person all went where the traffic already was.</p>
                                 </li>
                                 <li class="reveal" style="--d: 5">
                                     <h3>What is wasted?</h3>
-                                    <p>Expensive events with thin turnout? Cut. Events that could be run more efficiently? Trimmed. The saved money went straight into the most popular events, so they could take more riders.</p>
+                                    <p class="qa-sub">Expensive events</p>
+                                    <p class="body-sm">Events with thin turnout were cut, and the rest run leaner. The saved money went into the most popular events, so they could take more riders.</p>
                                 </li>
                             </ol>
                         </div>
@@ -351,11 +370,11 @@ const PARTNERS = [
 
                     <article class="panel" data-panel="2">
                         <div class="slide-inner grid12">
-                            <p class="panel-step"><span>03</span> / 04</p>
+                            <p class="label-micro panel-step"><span>03</span> / 04</p>
                             <div class="panel-main">
-                                <h2 class="title reveal" style="--d: 0">Sharing is caring&hellip;<br />and cheap</h2>
+                                <h2 class="title reveal" style="--d: 0">Borrow what<br />I could not buy</h2>
                                 <p class="lead reveal" style="--d: 1">
-                                    Previous years had bus side adverts, bus stop posters, and radio adverts. I had social media and word of mouth.
+                                    Previous years had bus-side adverts, bus stop posters and radio. I had social media, word of mouth, and every other council running the same campaign at the same time.
                                 </p>
                                 <p class="body reveal" style="--d: 2">
                                     So I wrote the posts myself (years as a digital marketing copywriter finally paid off), and I set up weekly calls with the coordinators at the other councils. Anything that worked for one of us got passed around: social copy, email sequences, cheaper ways to run an event. Tested material, free.
@@ -381,14 +400,14 @@ const PARTNERS = [
                                     </svg>
                                     <p class="fig-tag">Hey, that&rsquo;s me!</p>
                                 </div>
-                                <figcaption>Some events that survived the cuts</figcaption>
+                                <figcaption class="body-sm">Some events that survived the cuts</figcaption>
                             </figure>
                         </div>
                     </article>
 
                     <article class="panel" data-panel="3">
                         <div class="slide-inner grid12">
-                            <p class="panel-step"><span>04</span> / 04</p>
+                            <p class="label-micro panel-step"><span>04</span> / 04</p>
                             <div class="panel-main">
                                 <h2 class="title reveal" style="--d: 0">Know when<br />to stop pushing</h2>
                                 <p class="lead reveal" style="--d: 1">
@@ -402,11 +421,11 @@ const PARTNERS = [
                                 </p>
                             </div>
                             <aside class="panel-aside reveal" style="--d: 4">
-                                <h3>The trade</h3>
-                                <p>
+                                <h3 class="label-micro">The trade</h3>
+                                <p class="body">
                                     Going quiet in the launch window is the most expensive thing you can do to a month-long campaign. It cost participation.
                                 </p>
-                                <p>
+                                <p class="body">
                                     It also meant no one had to defend a tone-deaf council amid a crisis, and the programme kept the goodwill it needed to run again.
                                 </p>
                             </aside>
@@ -428,26 +447,26 @@ const PARTNERS = [
                     <h2 class="title reveal" style="--d: 1">Auckland,<br />February 2023</h2>
 
                     <figure class="rs-bars reveal" style="--d: 2">
-                        <figcaption>Auckland participants, year on year</figcaption>
+                        <figcaption class="label-micro">Auckland participants, year on year</figcaption>
                         <div class="bar-row">
                             <span class="bar-year">2022</span>
                             <span class="bar-track"><span class="bar-fill" style="--w: 100%"></span></span>
                             <span class="bar-val">6,153</span>
-                            <span class="bar-note">lockdown year</span>
+                            <span class="body-sm bar-note">lockdown year</span>
                         </div>
                         <div class="bar-row">
                             <span class="bar-year">2023</span>
                             <span class="bar-track"><span class="bar-fill is-now" style="--w: 87.2%"></span></span>
                             <span class="bar-val">5,365</span>
-                            <span class="bar-note">the year above</span>
+                            <span class="body-sm bar-note">the year above</span>
                         </div>
                     </figure>
 
-                    <p class="rs-note reveal" style="--d: 3">
-                        A 13% drop. Not bad for a year with no mass advertising, two weeks of the worst weather in the history of the event, and measured against a lockdown-inflated all time high.
+                    <p class="body rs-note reveal" style="--d: 3">
+                        A 13% drop, against a lockdown-inflated all-time high, with no mass advertising and two of the four weeks lost to the worst weather in the event&rsquo;s history.
                     </p>
 
-                    <p class="rs-kicker reveal" style="--d: 4">The challenge was funded again the next year.</p>
+                    <p class="statement rs-kicker reveal" style="--d: 4">The challenge was funded again the next year.</p>
                 </div>
 
                 <!-- The map fills with bikes once the slide is reached: the
@@ -512,6 +531,58 @@ const PARTNERS = [
         --rail-gap: clamp(30px, 3vw, 54px);
         --col-gap: clamp(14px, 1.7vw, 26px);
         --row-gap: clamp(24px, 4vh, 50px);
+
+        /* ---------------------------------------------------------
+           SPACING
+           One scale, used for every gap, margin and pad on the deck.
+           Steps are roughly 1.5x apart, so two of them never read as
+           the same amount of air.
+           --------------------------------------------------------- */
+        --s-1: 6px;
+        --s-2: 10px;
+        --s-3: 16px;
+        --s-4: clamp(20px, 2.2vh, 28px);
+        --s-5: clamp(28px, 3.4vh, 42px);
+        --s-6: clamp(40px, 5vh, 64px);
+
+        /* ---------------------------------------------------------
+           TYPE SYSTEM
+           One ladder for the whole deck. Every piece of text picks a
+           role from this list; a slide never invents a size.
+
+             cover    the cover title, and nothing else
+             display  a figure read as a number, not as a word
+             title    the one headline per slide
+             lead     the opening paragraph, and any single sentence
+                      set apart to carry the stakes
+             body     prose
+             body-sm  prose inside a multi-column row, where the
+                      column is too narrow for body to set well
+             micro    a small-caps label naming what follows it
+
+           Weight does one job: it separates a label from its content.
+           Labels and figures are black (800), sub-headings and the
+           emphasis inside prose are bold (700), and everything a
+           reader actually reads is regular (400). Nothing else.
+           --------------------------------------------------------- */
+        --t-cover: clamp(2.6rem, 8.9vw, 150px);
+        --t-display: clamp(2.2rem, 1.4rem + 2.5vw, 4.4rem);
+        --t-title: clamp(2.3rem, 1.55rem + 2.7vw, 5rem);
+        --t-lead: clamp(1.1rem, 0.86rem + 0.6vw, 1.5rem);
+        --t-body: clamp(1rem, 0.86rem + 0.28vw, 1.16rem);
+        --t-body-sm: clamp(0.9rem, 0.82rem + 0.2vw, 1.02rem);
+        --t-micro: clamp(0.8rem, 0.74rem + 0.16vw, 0.9rem);
+
+        --w-regular: 400;
+        --w-bold: 700;
+        --w-black: 800;
+
+        /* Tracking follows size: the bigger the type, the tighter it
+           sets, and small-caps labels open up instead. */
+        --track-display: -0.05em;
+        --track-title: -0.045em;
+        --track-text: -0.012em;
+        --track-micro: 0.1em;
 
         --sans: var(--archivo-font, 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
 
@@ -582,14 +653,24 @@ const PARTNERS = [
     }
 
     /* ---------- Shared type ---------- */
+    /* MICRO. Every label on the deck is this one class, set in small
+       caps: a label is recognised by its case, not by being tiny. */
+    .label-micro,
+    .eyebrow {
+        font-size: var(--t-micro);
+        font-weight: var(--w-black);
+        font-variant-caps: all-small-caps;
+        letter-spacing: var(--track-micro);
+        line-height: 1.2;
+        color: var(--ink-3);
+        margin: 0;
+    }
+
+    /* The section marker is the same label, given a rule and the full
+       width of the grid: position tells you it is the top of a slide. */
     .eyebrow {
         grid-column: 1 / -1;
-        font-size: clamp(0.68rem, 0.78vw, 0.78rem);
-        font-weight: 800;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--ink-3);
-        padding-bottom: 0.85em;
+        padding-bottom: var(--s-3);
         border-bottom: 1px solid var(--line);
     }
 
@@ -599,46 +680,97 @@ const PARTNERS = [
     }
 
     .title {
-        font-size: clamp(2.3rem, 1.55rem + 2.7vw, 5rem);
-        font-weight: 800;
+        font-size: var(--t-title);
+        font-weight: var(--w-black);
         line-height: 0.97;
-        letter-spacing: -0.045em;
+        letter-spacing: var(--track-title);
         margin: 0;
     }
 
-    .lead {
-        font-size: clamp(1.1rem, 0.86rem + 0.6vw, 1.5rem);
-        font-weight: 450;
+    /* LEAD. The opening paragraph, and every sentence the deck sets
+       apart to carry a point. A statement is marked out by the block it
+       sits in, not by being bigger or heavier than the writing around
+       it, so it runs at exactly the size and weight of a lead. */
+    .lead,
+    .statement {
+        font-size: var(--t-lead);
+        font-weight: var(--w-regular);
         line-height: 1.45;
-        letter-spacing: -0.016em;
+        letter-spacing: var(--track-text);
         color: var(--ink);
-        max-width: 46ch;
+        margin: 0;
     }
 
-    .slide--night .lead {
-        color: var(--on-night);
-    }
+    /* A statement is the one sentence on a slide that has to be read even
+       by someone skimming, so it takes bold - never black, which is
+       reserved for labels and figures. */
+    .statement { font-weight: var(--w-bold); }
+
+    .lead { max-width: 46ch; }
 
     .body {
-        font-size: clamp(1rem, 0.86rem + 0.28vw, 1.16rem);
-        font-weight: 400;
+        font-size: var(--t-body);
+        font-weight: var(--w-regular);
         line-height: 1.62;
         letter-spacing: -0.008em;
         color: var(--ink-2);
+        margin: 0;
         max-width: 54ch;
     }
 
-    .slide--night .body {
-        color: var(--on-night-2);
+    /* Prose in a narrow column of a multi-column row. */
+    .body-sm {
+        font-size: var(--t-body-sm);
+        font-weight: var(--w-regular);
+        line-height: 1.55;
+        letter-spacing: -0.006em;
+        color: var(--ink-2);
+        margin: 0;
     }
 
+    .body strong,
+    .lead strong,
+    .statement strong { font-weight: var(--w-bold); color: inherit; }
+
+    .slide--night .lead,
+    .slide--night .statement { color: var(--on-night); }
+
+    .slide--night .body,
+    .slide--night .body-sm { color: var(--on-night-2); }
+
     .label {
-        font-size: 0.68rem;
-        font-weight: 800;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
+        font-size: var(--t-micro);
+        font-weight: var(--w-black);
+        font-variant-caps: all-small-caps;
+        letter-spacing: var(--track-micro);
         color: var(--ink-3);
     }
+
+    /* ---------- Shared head block ----------
+       Title first, at full width, then the prose beneath it in two
+       columns of the page grid. The block is a subgrid, so its columns
+       are the page's columns: the text lines up with the rows further
+       down the slide instead of merely looking as though it does. */
+    .slide-head {
+        grid-column: 1 / span 8;
+        display: grid;
+        grid-template-columns: subgrid;
+        row-gap: var(--s-4);
+        align-content: start;
+    }
+
+    .slide-head > .title { grid-column: 1 / -1; }
+
+    .slide-head > .head-col {
+        grid-column: span 4;
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-4);
+        min-width: 0;
+    }
+
+    .slide-head .lead,
+    .slide-head .body { max-width: none; }
 
     /* ---------- Reveal. One transition, staggered by --d ---------- */
     .reveal {
@@ -672,9 +804,10 @@ const PARTNERS = [
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         color: var(--ink);
-        font-size: 0.8rem;
-        font-weight: 700;
-        letter-spacing: -0.01em;
+        font-size: var(--t-micro);
+        font-weight: var(--w-black);
+        font-variant-caps: all-small-caps;
+        letter-spacing: var(--track-micro);
         text-decoration: none;
         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
     }
@@ -727,9 +860,9 @@ const PARTNERS = [
     }
 
     .rail-num {
-        font-size: 0.6rem;
-        font-weight: 800;
-        letter-spacing: 0.1em;
+        font-size: var(--t-micro);
+        font-weight: var(--w-black);
+        letter-spacing: var(--track-micro);
         color: var(--ink-3);
         opacity: 0;
         transform: translateX(5px);
@@ -819,8 +952,8 @@ const PARTNERS = [
     }
 
     .cover-title {
-        font-size: clamp(2.6rem, 8.9vw, 150px);
-        font-weight: 800;
+        font-size: var(--t-cover);
+        font-weight: var(--w-black);
         line-height: 0.94;
         letter-spacing: -0.06em;
         color: #000000;
@@ -847,16 +980,19 @@ const PARTNERS = [
         gap: 6px;
     }
 
+    /* The cover states the same label-then-answer pattern the slides
+       use, at the only size on the deck that is allowed to be this
+       large: the label carries the weight, the answer is set plainly. */
     .cover-meta-label {
         font-size: clamp(1.35rem, 2.5vw, 36px);
-        font-weight: 800;
+        font-weight: var(--w-black);
         letter-spacing: -0.03em;
         line-height: 1.15;
     }
 
     .cover-meta-val {
         font-size: clamp(1.05rem, 1.66vw, 24px);
-        font-weight: 500;
+        font-weight: var(--w-regular);
         letter-spacing: -0.03em;
         line-height: 1.25;
     }
@@ -890,10 +1026,10 @@ const PARTNERS = [
     }
 
     .cover-scroll-word {
-        font-size: 0.68rem;
-        font-weight: 800;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
+        font-size: var(--t-micro);
+        font-weight: var(--w-black);
+        font-variant-caps: all-small-caps;
+        letter-spacing: var(--track-micro);
         color: rgba(0, 0, 0, 0.62);
     }
 
@@ -906,8 +1042,7 @@ const PARTNERS = [
     /* =============================================================
        SLIDE 2: OVERVIEW
        ============================================================= */
-    .ov-head { grid-column: 1 / span 3; }
-    .ov-body { grid-column: 4 / span 6; display: flex; flex-direction: column; gap: 1.1em; }
+    /* The head is the shared block; the map is the slide's one figure. */
     .ov-map  { grid-column: 10 / span 3; margin: 0; justify-self: end; text-align: right; }
     .ov-partners { grid-column: 1 / -1; }
     .ov-brief { grid-column: 1 / -1; }
@@ -927,114 +1062,99 @@ const PARTNERS = [
     .ov-map :global(.beacon-core) { fill: var(--ink); filter: none; r: 26; }
 
     .ov-map figcaption {
-        margin-top: 16px;
-        font-size: 0.84rem;
-        line-height: 1.5;
-        letter-spacing: -0.01em;
+        margin-top: var(--s-3);
+        margin-inline-start: auto;
         color: var(--ink-3);
+        max-width: 24ch;
     }
 
-    .ov-map figcaption strong { color: var(--ink); font-weight: 700; }
+    .ov-map figcaption strong { color: var(--ink); }
 
     /* Partners. Monochrome by design: these are other people's marks, so
        they sit quietly on a rule rather than competing with the brief. */
     .ov-partners {
-        border-top: 1px solid var(--line);
-        padding-top: 15px;
+        display: grid;
+        grid-template-columns: subgrid;
+        row-gap: var(--s-3);
     }
 
-    .ov-partners-label {
-        font-size: 0.66rem;
-        font-weight: 800;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--ink-3);
-    }
+    .ov-partners-label { grid-column: 1 / -1; }
 
+    /* The row runs on the page grid, two columns per partner, so the
+       third partner starts exactly where the second column of prose
+       above it starts and the first two sit under the first column. */
     .ov-logos {
         list-style: none;
-        margin: 14px 0 0;
+        margin: 0;
         padding: 0;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-end;
-        gap: clamp(22px, 4vw, 68px);
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-column: 1 / -1;
+        grid-auto-rows: auto;
+        row-gap: var(--s-4);
     }
 
+    /* Label above the thing it names, the same way the cover reads
+       "My role" and then the answer. The label carries the weight; the
+       answer is set plainly, because it is the part being read. The
+       rows are shared, so a label that wraps cannot push one partner's
+       name out of line with the others. */
     .ov-logos li {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
+        grid-column: span 2;
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 2;
+        align-content: start;
+        row-gap: var(--s-2);
+        min-width: 0;
+        border-top: 1px solid var(--line);
+        padding-top: var(--s-3);
     }
+
+    .ov-logo-role { color: var(--ink); }
 
     .ov-logos img {
         height: clamp(24px, 2.4vw, 38px);
         width: auto;
         object-fit: contain;
-        object-position: left bottom;
+        object-position: left top;
     }
 
     .ov-logo-mark {
-        font-size: clamp(1rem, 0.88rem + 0.3vw, 1.2rem);
-        font-weight: 800;
-        letter-spacing: -0.032em;
-        line-height: 1;
+        font-weight: var(--w-bold);
+        letter-spacing: var(--track-text);
+        color: var(--ink);
+        max-width: none;
     }
 
-    .ov-logo-role {
-        font-size: 0.68rem;
-        font-weight: 600;
-        letter-spacing: -0.005em;
-        color: var(--ink-3);
-    }
-
-    /* The last thing read before the trouble starts, so it is the loudest
-       block on the slide: full width, accent ground, one sentence. */
+    /* The last thing read before the trouble starts. It is the widest
+       block on the slide and the only one on accent, which is what
+       makes it loud: the sentence inside runs at the same size and
+       weight as any other lead on the deck. */
     .ov-brief {
         background-color: var(--accent);
         border-radius: 3px;
-        padding: clamp(19px, 2.2vw, 30px) clamp(20px, 2.5vw, 36px);
+        padding: var(--s-5) var(--s-5);
         display: grid;
         grid-template-columns: minmax(0, 8rem) minmax(0, 1fr);
-        column-gap: clamp(18px, 2.4vw, 36px);
+        column-gap: var(--s-5);
         align-items: start;
     }
 
     .brief-label {
-        font-size: 0.66rem;
-        font-weight: 800;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
+        color: var(--ink);
         border-top: 2px solid var(--ink);
-        padding-top: 9px;
+        padding-top: var(--s-2);
     }
 
-    .brief-text {
-        font-size: clamp(1.2rem, 0.92rem + 1.1vw, 2.1rem);
-        font-weight: 700;
-        line-height: 1.2;
-        letter-spacing: -0.035em;
-        max-width: 36ch;
-    }
+    .brief-text { max-width: 52ch; }
 
     /* =============================================================
        SLIDE 3: THE PROGRAMME
        ============================================================= */
     /* The lead runs at a larger size than the body, so it gets the wider
        column and the two land at roughly the same depth. */
-    .pr-head {
-        grid-column: 1 / span 8;
-        display: grid;
-        grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
-        column-gap: var(--col-gap);
-        row-gap: clamp(12px, 1.5vh, 20px);
-        align-content: start;
-    }
-
-    .pr-head .title { grid-column: 1 / -1; }
-    .pr-head .lead { grid-column: 1; max-width: none; }
-    .pr-head .lead strong { font-weight: 750; color: var(--ink); }
-    .pr-head .body { grid-column: 2; max-width: none; }
+    /* Layout comes from .slide-head; slide 02 adds nothing to it. */
 
     .pr-poster {
         grid-column: 10 / span 3;
@@ -1049,11 +1169,7 @@ const PARTNERS = [
     }
 
     .pr-poster figcaption {
-        margin-top: 12px;
-        font-size: 0.72rem;
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        color: var(--ink-3);
+        margin-top: var(--s-3);
         text-align: center;
     }
 
@@ -1072,11 +1188,7 @@ const PARTNERS = [
     .pr-job {
         background-color: var(--accent);
         border-radius: 3px;
-        padding: clamp(14px, 1.5vw, 19px) clamp(17px, 1.9vw, 26px);
-        font-size: clamp(1.06rem, 0.9rem + 0.58vw, 1.44rem);
-        font-weight: 700;
-        line-height: 1.26;
-        letter-spacing: -0.034em;
+        padding: var(--s-4);
     }
 
     /* Yellow on yellow, so the emphasis has to become a rule rather than
@@ -1091,33 +1203,15 @@ const PARTNERS = [
     .pr-mine {
         align-self: start;
         border-top: 2px solid var(--ink);
-        padding-top: clamp(11px, 1.2vh, 15px);
+        padding-top: var(--s-3);
     }
 
-    .pr-mine-label {
-        font-size: 0.66rem;
-        font-weight: 800;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--ink-3);
-        margin-bottom: 7px;
-    }
-
-    .pr-mine-text {
-        font-size: clamp(0.9rem, 0.82rem + 0.2vw, 1.02rem);
-        font-weight: 500;
-        line-height: 1.5;
-        letter-spacing: -0.014em;
-        color: var(--ink-2);
-    }
+    .pr-mine-label { margin-bottom: var(--s-2); }
 
     .pr-why { grid-column: 1 / -1; }
 
     .pr-why-title {
-        font-size: clamp(0.95rem, 0.86rem + 0.24vw, 1.12rem);
-        font-weight: 800;
-        letter-spacing: -0.028em;
-        margin: 0 0 clamp(9px, 1.1vh, 13px);
+        margin: 0 0 var(--s-3);
     }
 
     .pr-why ol {
@@ -1131,30 +1225,19 @@ const PARTNERS = [
 
     .pr-why li {
         border-top: 1px solid var(--line);
-        padding-top: 12px;
+        padding-top: var(--s-3);
     }
 
     .why-n {
         display: block;
-        font-size: 0.66rem;
-        font-weight: 800;
-        letter-spacing: 0.12em;
-        color: var(--ink-3);
-        margin-bottom: 7px;
+        margin-bottom: var(--s-2);
     }
 
     .pr-why h4 {
-        font-size: clamp(1.02rem, 0.9rem + 0.26vw, 1.2rem);
-        font-weight: 700;
-        letter-spacing: -0.024em;
-        margin: 0 0 5px;
-    }
-
-    .pr-why p {
-        font-size: clamp(0.86rem, 0.78rem + 0.16vw, 0.96rem);
-        line-height: 1.5;
-        letter-spacing: -0.008em;
-        color: var(--ink-2);
+        font-size: var(--t-body);
+        font-weight: var(--w-bold);
+        letter-spacing: var(--track-text);
+        margin: 0 0 var(--s-1);
     }
 
     /* This slide carries four rows of content against everyone else's three,
@@ -1168,7 +1251,14 @@ const PARTNERS = [
        ============================================================= */
     .ch-head {
         grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: subgrid;
+        column-gap: var(--col-gap);
+        align-items: end;
     }
+
+    .ch-head > .title { grid-column: 1 / span 6; }
+    .ch-lead { grid-column: 8 / -1; color: var(--on-night); }
 
     .ch-timeline {
         grid-column: 1 / -1;
@@ -1183,7 +1273,7 @@ const PARTNERS = [
     .ch-timeline li {
         position: relative;
         border-top: 1px solid var(--night-line);
-        padding-top: 18px;
+        padding-top: var(--s-4);
     }
 
     /* The marker that walks the timeline. Accent, because it is the only
@@ -1201,51 +1291,34 @@ const PARTNERS = [
 
     .ch-n {
         display: block;
-        font-size: 0.66rem;
-        font-weight: 800;
-        letter-spacing: 0.12em;
         color: var(--on-night-2);
-        margin-bottom: 14px;
+        margin-bottom: var(--s-3);
     }
 
     .ch-date {
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
         color: var(--accent);
-        margin-bottom: 6px;
+        margin-bottom: var(--s-1);
     }
 
     .ch-title {
-        font-size: clamp(1.2rem, 1rem + 0.44vw, 1.7rem);
-        font-weight: 700;
-        letter-spacing: -0.032em;
-        line-height: 1.1;
-        margin: 0 0 10px;
-    }
-
-    .ch-text {
-        font-size: clamp(0.9rem, 0.82rem + 0.18vw, 1.02rem);
-        line-height: 1.6;
-        letter-spacing: -0.006em;
-        color: var(--on-night-2);
+        font-size: var(--t-lead);
+        font-weight: var(--w-bold);
+        letter-spacing: var(--track-text);
+        line-height: 1.15;
+        margin: 0 0 var(--s-2);
     }
 
     .ch-kicker {
         grid-column: 1 / -1;
         border-top: 1px solid var(--night-line);
-        padding-top: clamp(20px, 2.6vh, 30px);
-        font-size: clamp(1.1rem, 0.88rem + 0.55vw, 1.7rem);
-        font-weight: 600;
-        letter-spacing: -0.028em;
+        padding-top: var(--s-5);
         color: var(--on-night-2);
     }
 
     .ch-kicker mark {
         background: none;
         color: var(--accent);
-        font-weight: 700;
+        font-weight: var(--w-bold);
     }
 
     /* =============================================================
@@ -1305,11 +1378,7 @@ const PARTNERS = [
 
     .panel-step {
         grid-column: 1 / -1;
-        font-size: clamp(0.68rem, 0.78vw, 0.78rem);
-        font-weight: 800;
-        letter-spacing: 0.2em;
-        color: var(--ink-3);
-        padding-bottom: 0.85em;
+        padding-bottom: var(--s-3);
         border-bottom: 1px solid var(--line);
     }
 
@@ -1325,26 +1394,13 @@ const PARTNERS = [
     .panel-aside {
         grid-column: 9 / span 4;
         border-top: 2px solid var(--ink);
-        padding-top: 16px;
+        padding-top: var(--s-3);
         display: flex;
         flex-direction: column;
-        gap: 0.95em;
+        gap: var(--s-3);
     }
 
-    .panel-aside h3 {
-        font-size: 0.68rem;
-        font-weight: 800;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        margin: 0;
-    }
-
-    .panel-aside p {
-        font-size: clamp(0.96rem, 0.86rem + 0.22vw, 1.1rem);
-        line-height: 1.6;
-        letter-spacing: -0.008em;
-        color: var(--ink-2);
-    }
+    .panel-aside h3 { color: var(--ink); }
 
     /* Full column width, so the frame below has a definite percentage to
        resolve against instead of shrink-to-fitting around its own contents. */
@@ -1403,9 +1459,7 @@ const PARTNERS = [
     }
 
     .panel-figure figcaption {
-        margin-top: 12px;
-        font-size: 0.72rem;
-        line-height: 1.45;
+        margin-top: var(--s-3);
         color: var(--ink-3);
         text-align: right;
         max-width: 30ch;
@@ -1425,15 +1479,24 @@ const PARTNERS = [
 
     .qa-grid li {
         border-top: 1px solid var(--line);
-        padding-top: 15px;
+        padding-top: var(--s-3);
     }
 
     .qa-grid h3 {
-        font-size: clamp(1.1rem, 0.94rem + 0.42vw, 1.5rem);
-        font-weight: 700;
-        letter-spacing: -0.03em;
+        font-size: var(--t-lead);
+        font-weight: var(--w-bold);
+        letter-spacing: var(--track-text);
         line-height: 1.15;
-        margin: 0 0 9px;
+        margin: 0 0 var(--s-2);
+    }
+
+    .qa-sub {
+        font-size: var(--t-body);
+        font-weight: var(--w-bold);
+        letter-spacing: var(--track-text);
+        line-height: 1.3;
+        color: var(--ink);
+        margin: 0 0 var(--s-1);
     }
 
     /* The question mark is the pop: it marks the four things the data
@@ -1447,12 +1510,7 @@ const PARTNERS = [
         background-color: var(--accent);
     }
 
-    .qa-grid p {
-        font-size: clamp(0.88rem, 0.8rem + 0.18vw, 1.0rem);
-        line-height: 1.58;
-        letter-spacing: -0.006em;
-        color: var(--ink-2);
-    }
+
 
     /* Pinned mode. Panels share one sticky viewport and are cross-faded
        by scroll position. */
@@ -1491,18 +1549,16 @@ const PARTNERS = [
         grid-column: 1 / -1;
         border-bottom: none;
         padding-bottom: 0;
-        font-size: clamp(2.2rem, 1.3rem + 2.8vw, 4.6rem);
-        font-weight: 800;
-        letter-spacing: -0.05em;
+        font-size: var(--t-display);
+        font-variant-caps: normal;
+        letter-spacing: var(--track-display);
         line-height: 1;
         color: rgba(17, 17, 17, 0.14);
     }
 
     .stack.is-pinned .panel-step span { color: rgba(17, 17, 17, 0.34); }
 
-    .stack.is-pinned .panel .title {
-        font-size: clamp(2.4rem, 1.6rem + 2.8vw, 5.2rem);
-    }
+    .stack.is-pinned .panel .title { font-size: clamp(2.4rem, 1.6rem + 2.8vw, 5.2rem); }
 
     /* Extra head room so a tall panel can never ride up under the pinned
        section header. */
@@ -1510,10 +1566,7 @@ const PARTNERS = [
         padding-top: calc(var(--pad-y) + 3rem);
     }
 
-    .stack.is-pinned .panel .lead {
-        font-size: clamp(1.16rem, 0.9rem + 0.68vw, 1.7rem);
-        max-width: 40ch;
-    }
+    .stack.is-pinned .panel .lead { max-width: 40ch; }
 
     /* =============================================================
        SLIDE 6: THE RESULTS
@@ -1590,20 +1643,20 @@ const PARTNERS = [
     }
 
     .stat dt {
-        font-size: clamp(0.74rem, 0.68rem + 0.12vw, 0.86rem);
-        font-weight: 700;
-        letter-spacing: 0.02em;
-        line-height: 1.35;
+        font-size: var(--t-body-sm);
+        font-weight: var(--w-bold);
+        letter-spacing: var(--track-text);
+        line-height: 1.4;
         color: rgba(17, 17, 17, 0.7);
-        min-height: 2.7em;
+        min-height: 2.8em;
     }
 
     .stat .num {
-        margin: 4px 0 0;
-        font-size: clamp(2.2rem, 1.4rem + 2.5vw, 4.4rem);
-        font-weight: 800;
+        margin: var(--s-1) 0 0;
+        font-size: var(--t-display);
+        font-weight: var(--w-black);
         line-height: 1;
-        letter-spacing: -0.05em;
+        letter-spacing: var(--track-display);
         font-variant-numeric: tabular-nums;
     }
 
@@ -1615,12 +1668,8 @@ const PARTNERS = [
     }
 
     .rs-bars figcaption {
-        font-size: 0.66rem;
-        font-weight: 800;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
         color: rgba(17, 17, 17, 0.62);
-        padding-bottom: 4px;
+        padding-bottom: var(--s-1);
     }
 
     .bar-row {
@@ -1631,9 +1680,9 @@ const PARTNERS = [
     }
 
     .bar-year {
-        font-size: 0.82rem;
-        font-weight: 800;
-        letter-spacing: -0.01em;
+        font-size: var(--t-body-sm);
+        font-weight: var(--w-black);
+        letter-spacing: var(--track-text);
     }
 
     .bar-track {
@@ -1661,23 +1710,15 @@ const PARTNERS = [
     .is-in .bar-fill { width: var(--w); }
 
     .bar-val {
-        font-size: 0.95rem;
-        font-weight: 800;
-        letter-spacing: -0.03em;
+        font-size: var(--t-body-sm);
+        font-weight: var(--w-black);
+        letter-spacing: var(--track-text);
         font-variant-numeric: tabular-nums;
     }
 
-    .bar-note {
-        font-size: 0.72rem;
-        font-weight: 600;
-        letter-spacing: -0.005em;
-        color: rgba(17, 17, 17, 0.58);
-    }
+    .bar-note { color: rgba(17, 17, 17, 0.58); }
 
     .rs-note {
-        font-size: clamp(0.94rem, 0.85rem + 0.2vw, 1.06rem);
-        line-height: 1.58;
-        letter-spacing: -0.008em;
         color: rgba(17, 17, 17, 0.78);
         max-width: 52ch;
     }
@@ -1687,12 +1728,8 @@ const PARTNERS = [
     .rs-kicker {
         background-color: var(--ink);
         color: var(--accent);
-        padding: clamp(15px, 1.7vw, 22px) clamp(16px, 1.8vw, 24px);
+        padding: var(--s-4);
         border-radius: 3px;
-        font-size: clamp(1.06rem, 0.9rem + 0.42vw, 1.45rem);
-        font-weight: 700;
-        line-height: 1.3;
-        letter-spacing: -0.03em;
     }
 
     /* The fixed rail gets its own lane on the right, so nothing on any
@@ -1712,7 +1749,7 @@ const PARTNERS = [
         #overview .grid12,
         #programme .grid12,
         #results .grid12 {
-            row-gap: clamp(16px, 2vh, 26px);
+            row-gap: var(--s-5);
         }
     }
 
@@ -1727,19 +1764,18 @@ const PARTNERS = [
         #overview .grid12,
         #programme .grid12,
         #results .grid12 {
-            row-gap: clamp(15px, 2.2vh, 26px);
+            row-gap: clamp(18px, 2.6vh, 30px);
         }
 
-        .title { font-size: clamp(2.1rem, 1.3rem + 2.4vw, 4.3rem); }
-        .lead { font-size: clamp(1.05rem, 0.84rem + 0.5vw, 1.34rem); }
+        .abc {
+            --t-title: clamp(2.1rem, 1.3rem + 2.4vw, 4.3rem);
+            --t-lead: clamp(1.05rem, 0.84rem + 0.5vw, 1.34rem);
+        }
 
         .pr-why p,
         .qa-grid p { line-height: 1.45; }
 
-        .pr-job {
-            padding: clamp(12px, 1.3vw, 16px) clamp(15px, 1.7vw, 22px);
-            font-size: clamp(1rem, 0.86rem + 0.5vw, 1.3rem);
-        }
+        .pr-job { padding: var(--s-3); }
 
         .rs-map { height: clamp(230px, 46vh, 420px); }
 
@@ -1748,7 +1784,6 @@ const PARTNERS = [
         .stack.is-pinned .panel { padding-top: calc(var(--pad-y) + 2.2rem); }
         .stack.is-pinned .panel-step { font-size: clamp(2rem, 1.1rem + 2.4vw, 3.9rem); }
         .stack.is-pinned .panel .title { font-size: clamp(2.2rem, 1.4rem + 2.4vw, 4.4rem); }
-        .stack.is-pinned .panel .lead { font-size: clamp(1.1rem, 0.88rem + 0.56vw, 1.5rem); }
     }
 
     /* =============================================================
@@ -1757,15 +1792,25 @@ const PARTNERS = [
        readable column and stops pretending to be one screen tall.
        ============================================================= */
     @media (max-width: 1100px) {
-        .ov-head { grid-column: 1 / span 6; }
-        .ov-body { grid-column: 7 / span 6; }
+        /* The head keeps its two columns but takes the whole grid, and
+           the figure drops to its own row beside the partner list. */
+        .slide-head { grid-column: 1 / -1; }
+        .slide-head > .head-col { grid-column: span 6; }
+
         .ov-map  { grid-column: 1 / span 4; justify-self: start; text-align: left; }
         .ov-map :global(.ov-map-svg) { margin-inline-start: 0; }
-        .ov-partners { grid-column: 5 / span 8; }
+        .ov-map figcaption { margin-inline-start: 0; }
+        /* Off the page grid at this width: three even columns in the
+           space the list actually has. */
+        .ov-partners { grid-column: 5 / -1; }
+        .ov-logos {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            column-gap: var(--col-gap);
+        }
+        .ov-logos li { grid-column: auto; }
         .ov-brief { grid-column: 1 / -1; }
 
-        .pr-head { grid-column: 1 / span 7; }
-        .pr-poster { grid-column: 8 / span 5; }
+        .pr-poster { grid-column: 9 / span 4; }
         .pr-why ol { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 22px; }
 
         .ch-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
@@ -1791,14 +1836,23 @@ const PARTNERS = [
 
         .grid12 { grid-template-columns: minmax(0, 1fr); }
 
-        .ov-head, .ov-body, .ov-map, .ov-partners, .ov-brief,
-        .pr-head, .pr-poster, .pr-role, .pr-why,
+        .slide-head, .ov-map, .ov-partners, .ov-brief,
+        .pr-poster, .pr-role, .pr-why,
         .ch-head, .ch-timeline, .ch-kicker,
         .panel-step, .panel-main, .panel-aside, .panel-figure, .qa-grid,
         .rs-head, .rs-map, .rs-stats {
             grid-column: 1 / -1;
         }
 
+        .slide-head > .head-col { grid-column: 1 / -1; }
+        .ov-partners { display: block; }
+        .ov-logos {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-rows: repeat(4, auto);
+            column-gap: var(--col-gap);
+        }
+        .ov-logos li { grid-column: auto; }
         .ov-map { justify-self: start; text-align: left; }
         .ov-brief { grid-template-columns: minmax(0, 1fr); row-gap: 14px; }
         .pr-poster { max-width: 400px; margin-inline: auto; }
@@ -1807,9 +1861,9 @@ const PARTNERS = [
 
         /* One column, and the children have to be told: an explicit
            grid-column: 2 would otherwise conjure a second one back. */
-        .pr-head { grid-template-columns: minmax(0, 1fr); }
-        .pr-head .lead,
-        .pr-head .body { grid-column: 1; }
+        .slide-head { grid-template-columns: minmax(0, 1fr); }
+        .ch-head { grid-template-columns: minmax(0, 1fr); row-gap: var(--s-4); }
+        .ch-head > .title, .ch-lead { grid-column: 1 / -1; }
 
         /* Section label and progress ticks stay on one line on a phone. */
         .stack-head { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
