@@ -612,7 +612,18 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     overflow-x: clip;
   }
 
+  /* ------------------------------------------------------------------
+     LABELS
+     This page keeps its own voice — monospace eyebrows, hard shadows —
+     but every label on it is one definition, the way the bike challenge
+     case study does it: a label is recognised by its case and tracking,
+     not by each section picking its own size and weight.
+     ------------------------------------------------------------------ */
   .height-story-wrap {
+    --t-micro: 0.75rem;
+    --w-label: 800;
+    --track-micro: 0.14em;
+
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -667,9 +678,9 @@ const agents = story?.agents || story?.vignette3?.agents || [];
   }
 
   .header-case-no {
-    font-size: 0.75rem;
+    font-size: var(--t-micro);
     font-family: monospace;
-    font-weight: 700;
+    font-weight: var(--w-label);
     color: #0f172a;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -677,7 +688,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     border: 2px solid #000000;
     border-radius: 9999px;
     padding: 7px 16px;
-    letter-spacing: 0.06em;
+    letter-spacing: var(--track-micro);
     box-shadow: 2px 3px 0px #000000;
   }
 
@@ -803,9 +814,9 @@ const agents = story?.agents || story?.vignette3?.agents || [];
 
   .dilemma-eyebrow {
     font-family: monospace;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
+    font-size: var(--t-micro);
+    font-weight: var(--w-label);
+    letter-spacing: var(--track-micro);
     color: #71717A;
     text-transform: uppercase;
   }
@@ -1265,9 +1276,9 @@ const agents = story?.agents || story?.vignette3?.agents || [];
 
   .benefits-eyebrow {
     font-family: monospace;
-    font-size: 0.75rem;
-    font-weight: 900;
-    letter-spacing: 0.14em;
+    font-size: var(--t-micro);
+    font-weight: var(--w-label);
+    letter-spacing: var(--track-micro);
     color: #000000;
     background: #FFFFFF;
     border: 2px solid #000000;
@@ -1505,9 +1516,10 @@ const agents = story?.agents || story?.vignette3?.agents || [];
   }
 
   .team-eyebrow {
-    font-size: 11px;
+    font-size: var(--t-micro);
+    font-weight: var(--w-label);
     font-family: monospace;
-    letter-spacing: 0.14em;
+    letter-spacing: var(--track-micro);
     color: #71717a;
     text-transform: uppercase;
     margin-bottom: 10px;
@@ -1797,14 +1809,14 @@ const agents = story?.agents || story?.vignette3?.agents || [];
   }
 
   .doom-section-eyebrow {
-    font-size: 11px;
+    font-size: var(--t-micro);
+    font-weight: var(--w-label);
     font-family: monospace;
-    letter-spacing: 0.14em;
+    letter-spacing: var(--track-micro);
     color: rgba(255, 255, 255, 0.85);
     text-transform: uppercase;
     margin-bottom: 8px;
     display: block;
-    font-weight: 800;
   }
 
   .doom-standalone-title {
