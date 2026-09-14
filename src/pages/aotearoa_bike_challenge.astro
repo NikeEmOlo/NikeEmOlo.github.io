@@ -455,7 +455,6 @@ const PARTNERS = [
                             <span class="bar-year">2023</span>
                             <span class="bar-track"><span class="bar-fill is-now" style="--w: 87.2%"></span></span>
                             <span class="bar-val">5,365</span>
-                            <span class="body-sm bar-note">the year above</span>
                         </div>
                     </figure>
 
@@ -1773,8 +1772,13 @@ const PARTNERS = [
         .rs-map { height: clamp(230px, 46vh, 420px); }
 
         /* Pinning is decided by measurement, so the panels have to earn their
-           place on a short screen rather than assume it. */
-        .stack.is-pinned .panel { padding-top: calc(var(--pad-y) + 2.2rem); }
+           place on a short screen rather than assume it. The top padding is
+           spoken for -- it clears the pinned head -- so the room comes out of
+           the bottom, which is only a gutter. */
+        .stack.is-pinned .panel {
+            padding-top: calc(var(--pad-y) + 2.2rem);
+            padding-bottom: clamp(30px, 4.2vh, 56px);
+        }
         .stack.is-pinned .panel-step { font-size: clamp(2rem, 1.1rem + 2.4vw, 3.9rem); }
         .stack.is-pinned .panel .title { font-size: clamp(2.2rem, 1.4rem + 2.4vw, 4.4rem); }
     }
@@ -2228,6 +2232,13 @@ const PARTNERS = [
         // safe while every panel actually fits one. Measured rather than
         // assumed, because the copy and the fonts decide the answer, not the
         // breakpoint. Only re-measured when the viewport changes size.
+        //
+        // Slack a panel has to clear the viewport by before the deck will pin.
+        // A panel that only just fits reads as cramped, and without a margin
+        // the whole deck flips between pinned and unpinned on a difference of
+        // a pixel or two -- a webfont swapping in, a scrollbar appearing.
+        const FIT_SLACK = 24;
+
         let lastW = -1;
         let lastH = -1;
         let fits = false;
@@ -2253,10 +2264,28 @@ const PARTNERS = [
                     inner.scrollHeight +
                     parseFloat(cs.paddingTop) +
                     parseFloat(cs.paddingBottom);
-                return box <= window.innerHeight;
+                return box + FIT_SLACK <= window.innerHeight;
             });
 
             if (!wasPinned) stack.classList.remove("is-pinned");
+        }
+
+        // The first measurement can run before the webfonts have swapped in,
+        // on fallback metrics that are not the ones the panels will settle at.
+        // The viewport has not changed by then, so refit() would keep its stale
+        // answer: invalidate it and measure once the real faces are in.
+        let disposed = false;
+        teardown.push(() => {
+            disposed = true;
+        });
+
+        if (document.fonts) {
+            document.fonts.ready.then(() => {
+                if (disposed) return;
+                lastW = -1;
+                lastH = -1;
+                update();
+            });
         }
 
         /** Scroll distance each panel is held for, as a share of a viewport. */
