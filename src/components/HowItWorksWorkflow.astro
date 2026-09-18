@@ -76,8 +76,8 @@ const cv = cvEntry?.data;
               <!-- Desktop Document Icons (Clickable) -->
               <div class="os-desktop-icons">
 
-                <!-- Desktop File 0: README.md - design decisions writeup -->
-                <div class="os-icon-item" data-file-key="readme" role="button" tabindex="0" aria-label="Click to read the design decisions">
+                <!-- Desktop File 0: README.md - system overview -->
+                <div class="os-icon-item" data-file-key="readme" role="button" tabindex="0" aria-label="Click to read the system overview">
                   <div class="os-icon-glyph">
                     <svg viewBox="0 0 28 34" fill="none">
                       <path d="M 3 2 L 18 2 L 25 9 L 25 32 L 3 32 Z" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
@@ -89,7 +89,22 @@ const cv = cvEntry?.data;
                     </svg>
                   </div>
                   <span class="os-icon-label">README.md</span>
-                  <span class="os-icon-tip" aria-hidden="true">Click to read the design decisions</span>
+                  <span class="os-icon-tip" aria-hidden="true">Click to read the system overview</span>
+                </div>
+
+                <!-- Desktop File 1: FAQ.md - architecture decisions & FAQs -->
+                <div class="os-icon-item" data-file-key="faq" role="button" tabindex="0" aria-label="Click to read frequently asked questions">
+                  <div class="os-icon-glyph">
+                    <svg viewBox="0 0 28 34" fill="none">
+                      <path d="M 3 2 L 18 2 L 25 9 L 25 32 L 3 32 Z" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
+                      <path d="M 18 2 L 18 9 L 25 9 Z" fill="#E4E4E7" stroke="#000000" stroke-width="1.5" />
+                      <line x1="6" y1="13" x2="15" y2="13" stroke="#71717A" stroke-width="1.8" stroke-linecap="round" />
+                      <rect x="5.5" y="17" width="17" height="11" rx="2" fill="#0F172A" stroke="#000000" stroke-width="1.5" />
+                      <text x="14" y="25.5" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="7.5" font-weight="900" fill="#38BDF8">FAQ</text>
+                    </svg>
+                  </div>
+                  <span class="os-icon-label">FAQ.md</span>
+                  <span class="os-icon-tip" aria-hidden="true">Click to read frequently asked questions</span>
                 </div>
 
                 <!-- Desktop File 1: master_cv -->
@@ -237,7 +252,7 @@ const cv = cvEntry?.data;
                     <button class="explorer-nav-btn" data-folder="mission_control" title="Mission Control">
                       <span class="nav-icon">🎯</span>
                       <span class="nav-label">Mission Control</span>
-                      <span class="nav-count">2</span>
+                      <span class="nav-count">3</span>
                     </button>
                   </div>
 
@@ -1092,34 +1107,16 @@ const cv = cvEntry?.data;
           <div class="wf-node-card">
             <div class="wf-node-top">
               <span class="wf-step-num">01</span>
-              <span class="wf-node-tag">CRON &middot; 3&times; DAILY</span>
+              <span class="wf-node-tag">AUTOMATED SCAN &middot; CRON</span>
             </div>
-            <h3 class="wf-node-title">Gateway daemon fires the schedule</h3>
-            <p class="wf-node-lead">The OpenClaw Gateway daemon runs in the background 24/7. Three times a day (09:00, 13:00, 18:00 BST), its built-in scheduler spins up a fresh, isolated agent session.</p>
+            <h3 class="wf-node-title">Scanning for new job postings</h3>
+            <p class="wf-node-lead">An automated schedule scans online job boards three times a day to find newly listed jobs that fit my target criteria.</p>
             <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-01">
-              <span class="wf-expand-label">Read more</span>
+              <span class="wf-expand-label">Read the techy details</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
             <div class="wf-detail" id="wf-detail-01" hidden>
-              <p class="wf-detail-p">The Gateway controls and fires the crons independently of whether any agent is in an active session. When a cron fires, it launches an ephemeral, single-task isolated session. It executes the scraper command, finishes, and is destroyed with zero lingering state or memory between runs.</p>
-            </div>
-          </div>
-          <span class="wf-connector" aria-hidden="true"></span>
-        </li>
-        <li class="wf-node" style="--wf-accent: var(--doodle-cyan, #00B3E3); --wf-ink: #000000;">
-          <div class="wf-node-card">
-            <div class="wf-node-top">
-              <span class="wf-step-num">02</span>
-              <span class="wf-node-tag">Ingestion</span>
-            </div>
-            <h3 class="wf-node-title">runner.py scrapes new listings</h3>
-            <p class="wf-node-lead">Jobs are scraped from publicly listed data, pulling newly posted roles that match target criteria.</p>
-            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-02">
-              <span class="wf-expand-label">Read more</span>
-              <span class="wf-chevron" aria-hidden="true">&#9662;</span>
-            </button>
-            <div class="wf-detail" id="wf-detail-02" hidden>
-              <p class="wf-detail-p">The script checks the last scrape timestamp to target only the exact time window since the previous run. It extracts structured job details (title, company, description, location, seniority) into clean data, ensuring no duplicate requests.</p>
+              <p class="wf-detail-p">The OpenClaw Gateway daemon runs in the background 24/7. Three times a day (09:00, 13:00, 18:00 BST), its built-in scheduler spins up an isolated, ephemeral container. It triggers <code>runner.py</code> to execute a delta scrape based on the last recorded timestamp, parsing and normalizing listings into structured JSON without lingering background state.</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -1127,17 +1124,17 @@ const cv = cvEntry?.data;
         <li class="wf-node" style="--wf-accent: var(--doodle-lime, #D1FF00); --wf-ink: #000000;">
           <div class="wf-node-card">
             <div class="wf-node-top">
-              <span class="wf-step-num">03</span>
-              <span class="wf-node-tag">Deterministic &middot; 0 LLM spend</span>
+              <span class="wf-step-num">02</span>
+              <span class="wf-node-tag">PYTHON FILTER &middot; ZERO AI COST</span>
             </div>
-            <h3 class="wf-node-title">scorer.py filters &amp; ranks</h3>
-            <p class="wf-node-lead">A fast Python algorithm scores each job against keyword matches, location, seniority, and salary floors with zero LLM cost.</p>
-            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-03">
-              <span class="wf-expand-label">Read more</span>
+            <h3 class="wf-node-title">Filtering out irrelevant listings</h3>
+            <p class="wf-node-lead">A fast sorting script grades every job on title, seniority, location, and salary floors to immediately toss out spam, low pay, and bad fits.</p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-02">
+              <span class="wf-expand-label">Read the techy details</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
-            <div class="wf-detail" id="wf-detail-03" hidden>
-              <p class="wf-detail-p"><code>scorer.py</code> deduplicates new listings against the local SQLite database. Roles that survive are saved with <code>new</code> status, and high-scoring matches (&ge;65) are posted straight to the <code>#career</code> Slack channel. Pure code does all the heavy filtering before any AI model is invoked.</p>
+            <div class="wf-detail" id="wf-detail-02" hidden>
+              <p class="wf-detail-p"><code>scorer.py</code> checks incoming data against a local SQLite database to prevent duplicates. It runs deterministic Python regex pattern matching and scoring matrices without making any AI model calls. Listings that meet the minimum threshold (&ge;65) get flagged for triage and posted straight to the <code>#career</code> Slack channel.</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -1145,17 +1142,17 @@ const cv = cvEntry?.data;
         <li class="wf-node" style="--wf-accent: var(--doodle-pink, #FF1F70); --wf-ink: #FFFFFF;">
           <div class="wf-node-card">
             <div class="wf-node-top">
-              <span class="wf-step-num">04</span>
-              <span class="wf-node-tag">Qualitative Vibe Check</span>
+              <span class="wf-step-num">03</span>
+              <span class="wf-node-tag">AI RESEARCH &middot; CULTURE FIT</span>
             </div>
-            <h3 class="wf-node-title">Cordy runs the vibe check</h3>
-            <p class="wf-node-lead">Only high-scoring roles reach an LLM. An automated trigger fires a one-shot cron spinning up an isolated Cordy session to conduct deep-dive company research and evaluate qualitative culture and role fit.</p>
-            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-04">
-              <span class="wf-expand-label">Read more</span>
+            <h3 class="wf-node-title">Checking company culture and fit</h3>
+            <p class="wf-node-lead">For the jobs that pass the initial filter, an AI agent researches the company background, workplace reputation, and news to check for cultural red flags.</p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-03">
+              <span class="wf-expand-label">Read the techy details</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
-            <div class="wf-detail" id="wf-detail-04" hidden>
-              <p class="wf-detail-p">Cordy does not rely solely on the job post. Online research is conducted across the company's website, recent news articles, leadership, and public projects. Findings are benchmarked against <code>job_ideals.md</code> (my values, ethics, preferred project types, and red flags) to assign a 1&ndash;10 vibe score. Any role scoring 3 or below is automatically archived.</p>
+            <div class="wf-detail" id="wf-detail-03" hidden>
+              <p class="wf-detail-p">A one-shot cron spins up an isolated Cordy (Claude) agent session. Cordy queries search tools to crawl engineering blogs, recent news, forums, and employee reviews. It compares findings against <code>job_ideals.md</code> (my defined values, preferred projects, and red lines), computes a 1 to 10 vibe score, and automatically archives anything rated 3 or lower.</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -1163,17 +1160,17 @@ const cv = cvEntry?.data;
         <li class="wf-node" style="--wf-accent: var(--doodle-purple, #7A00FF); --wf-ink: #FFFFFF;">
           <div class="wf-node-card">
             <div class="wf-node-top">
-              <span class="wf-step-num">05</span>
-              <span class="wf-node-tag">Human in the loop</span>
+              <span class="wf-step-num">04</span>
+              <span class="wf-node-tag">LOCAL DASHBOARD &middot; REVIEW</span>
             </div>
-            <h3 class="wf-node-title">Mission Control: I decide</h3>
-            <p class="wf-node-lead">High-priority jobs land on the Mission Control dashboard. I review the match reasoning and select which roles are worth pursuing.</p>
-            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-05">
-              <span class="wf-expand-label">Read more</span>
+            <h3 class="wf-node-title">Reviewing matches in Mission Control</h3>
+            <p class="wf-node-lead">Qualified roles appear on a private local dashboard where I can quickly review match reasons and choose whether to proceed.</p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-04">
+              <span class="wf-expand-label">Read the techy details</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
-            <div class="wf-detail" id="wf-detail-05" hidden>
-              <p class="wf-detail-p">Clicking <strong>Yes</strong> on a role updates the database and queues a new CV task. That action triggers a one-shot cron scheduled for +15 seconds, waking Cordy's session immediately to begin tailoring (with an 8pm daily sweep fallback).</p>
+            <div class="wf-detail" id="wf-detail-04" hidden>
+              <p class="wf-detail-p">Mission Control runs locally on <code>localhost</code>, powered by SQLite. It provides an instant, keyboard-driven UI to inspect match breakdowns, salary data, and company research notes. Clicking <strong>Yes</strong> marks the row as <code>approved</code> in SQLite and immediately dispatches a tailoring event.</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -1181,17 +1178,35 @@ const cv = cvEntry?.data;
         <li class="wf-node" style="--wf-accent: var(--doodle-cyan, #00B3E3); --wf-ink: #000000;">
           <div class="wf-node-card">
             <div class="wf-node-top">
-              <span class="wf-step-num">06</span>
-              <span class="wf-node-tag">Grounded output</span>
+              <span class="wf-step-num">05</span>
+              <span class="wf-node-tag">TAILORED CV &middot; JOB MATCH</span>
             </div>
-            <h3 class="wf-node-title">Cordy tailors the CV &amp; handles feedback</h3>
-            <p class="wf-node-lead">Cordy drafts a tailored CV anchored to master_cv.md to eliminate hallucinations, and updates revisions based on inline feedback.</p>
+            <h3 class="wf-node-title">Drafting a targeted CV</h3>
+            <p class="wf-node-lead">When I approve a role, an AI agent drafts a CV tailored directly to the job description, without making up false experience.</p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-05">
+              <span class="wf-expand-label">Read the techy details</span>
+              <span class="wf-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="wf-detail" id="wf-detail-05" hidden>
+              <p class="wf-detail-p">Approving a role schedules a one-shot cron (+15 seconds) that wakes Cordy in an isolated environment. Cordy analyzes the full job description and structures a targeted markdown draft. Content is strictly anchored to <code>master_cv.md</code>, ensuring factual accuracy while tailoring bullet points directly to the role requirements.</p>
+            </div>
+          </div>
+          <span class="wf-connector" aria-hidden="true"></span>
+        </li>
+        <li class="wf-node" style="--wf-accent: var(--doodle-yellow, #FFDA00); --wf-ink: #000000;">
+          <div class="wf-node-card">
+            <div class="wf-node-top">
+              <span class="wf-step-num">06</span>
+              <span class="wf-node-tag">HUMAN REVIEW &middot; PDF COMPILE</span>
+            </div>
+            <h3 class="wf-node-title">Reviewing and compiling the PDF</h3>
+            <p class="wf-node-lead">I inspect the drafted CV in markdown, make any desired tweaks which the agent remembers for future drafts, and generate a styled PDF with one click.</p>
             <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-06">
-              <span class="wf-expand-label">Read more</span>
+              <span class="wf-expand-label">Read the techy details</span>
               <span class="wf-chevron" aria-hidden="true">&#9662;</span>
             </button>
             <div class="wf-detail" id="wf-detail-06" hidden>
-              <p class="wf-detail-p"><code>master_cv.md</code> is the verified single source of truth for career achievements and skills. Cordy outputs the tailored CV and marks the role as ready for review in the database. If I submit feedback in Mission Control, a +15s cron wakes Cordy to revise it.</p>
+              <p class="wf-detail-p">The draft opens in Mission Control for human review. Any edits submitted back into the interface update <code>CORDELIA.md</code> prompt guidelines so the agent learns preferences over time. Clicking generate triggers a headless script that compiles the markdown through an HTML/CSS print template into a clean, recruiter-ready PDF.</p>
             </div>
           </div>
           <span class="wf-connector" aria-hidden="true"></span>
@@ -1203,16 +1218,22 @@ const cv = cvEntry?.data;
           <div class="wf-node-card">
             <div class="wf-node-top">
               <span class="wf-step-num">07</span>
-              <span class="wf-node-tag">HUMAN STARTS HERE</span>
+              <span class="wf-node-tag">MANUAL SUBMIT &middot; QUALITY CHECK</span>
             </div>
             <h3 class="wf-node-title">Nothing is submitted for me</h3>
             <p class="wf-node-lead">
-              This human-in-the-loop system means I check tailored CVs, and apply
-              myself to selected jobs. Why? Quality control.<span class="wf-readme-sentence">
+              I upload the compiled CV and submit the application myself. Keeping this manual guarantees total quality control and keeps me accountable for every application sent.<span class="wf-readme-sentence">
               For more information, view
               <button class="wf-readme-link" type="button" id="wfReadmeLink">README</button>
               in the interactive desktop.</span>
             </p>
+            <button class="wf-expand-btn" type="button" aria-expanded="false" aria-controls="wf-detail-07">
+              <span class="wf-expand-label">Read the techy details</span>
+              <span class="wf-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="wf-detail" id="wf-detail-07" hidden>
+              <p class="wf-detail-p">Automating the final submission creates significant risks: bot-detection bans, botched form parsing, and hallucinated answers to custom screening questions. Halting the workflow before submission protects recruiter trust, maintains 100% human accountability, and still saves over 80% of application time.</p>
+            </div>
           </div>
         </li>
       </ol>
@@ -1243,7 +1264,7 @@ const cv = cvEntry?.data;
   .how-runway {
     position: relative;
     width: 100%;
-    height: 220vh; /* Controlled sticky runway */
+    height: 125vh; /* Snappy sticky runway */
   }
 
   /* `position: sticky` makes this stage a stacking context, so the fullscreen
@@ -1503,11 +1524,11 @@ const cv = cvEntry?.data;
   /* ---------------------------------------------------- */
   .os-desktop-icons {
     position: absolute;
-    top: 68px; /* Safe clearance below the fixed Deck button */
-    left: 22px;
+    top: 18px;
+    left: 20px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 7px;
     z-index: 30;
     pointer-events: auto;
   }
@@ -1515,16 +1536,17 @@ const cv = cvEntry?.data;
   .desktop-zoom-container.is-fullscreen .os-desktop-icons {
     top: 78px;
     left: 28px;
+    gap: 12px;
   }
 
   .os-icon-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    gap: 2px;
     width: 68px;
     cursor: pointer;
-    padding: 4px;
+    padding: 3px 4px;
     border-radius: 6px;
     border: 1.5px solid transparent;
     pointer-events: auto !important;
@@ -1716,6 +1738,7 @@ const cv = cvEntry?.data;
     transform: translate(-50%, -50%) scale(0.9);
     width: 86%;
     max-width: 580px;
+    max-height: calc(100% - 24px);
     background: #ffffff;
     border: 3.5px solid #000000;
     border-radius: 10px;
@@ -1744,6 +1767,7 @@ const cv = cvEntry?.data;
     justify-content: space-between;
     padding: 0 10px;
     user-select: none;
+    flex-shrink: 0;
   }
 
   .os-modal-titlebar.info-bar {
@@ -3114,23 +3138,36 @@ const cv = cvEntry?.data;
   }
 
   .os-window-modal.file-info-modal {
-    width: min(640px, 94vw);
-    max-width: 640px;
-    max-height: 88vh;
+    width: min(500px, 70%);
+    max-width: 500px;
+    max-height: calc(100% - 24px);
     z-index: 90 !important;
     background: #FFFDF8;
     border: 3.5px solid #000000;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 8px 10px 0px #000000;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 6px 8px 0px #000000;
   }
 
   .os-info-content {
-    padding: 16px 20px 20px;
+    padding: 12px 16px 16px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
     overflow-y: auto;
-    max-height: calc(88vh - 40px);
+    flex: 1 1 auto;
+    min-height: 0;
     background: #FFFDF8;
+  }
+
+  .desktop-zoom-container.is-fullscreen .os-window-modal.file-info-modal {
+    width: min(640px, 92vw);
+    max-width: 640px;
+    max-height: calc(100% - 40px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 8px 10px 0px #000000;
+  }
+
+  .desktop-zoom-container.is-fullscreen .os-info-content {
+    padding: 18px 22px 22px;
+    gap: 14px;
   }
 
   /* Note Page Styling */
@@ -3142,13 +3179,19 @@ const cv = cvEntry?.data;
     background-color: #FFFFFF !important;
     border: 2.5px solid #000000 !important;
     border-radius: 10px !important;
-    padding: 18px 20px !important;
+    padding: 14px 16px !important;
     color: #0F172A !important;
     display: flex !important;
     flex-direction: column !important;
+    gap: 12px !important;
+    box-shadow: 3px 3px 0px #000000 !important;
+    position: relative !important;
+  }
+
+  .desktop-zoom-container.is-fullscreen :global(.info-desc-card) {
+    padding: 18px 20px !important;
     gap: 16px !important;
     box-shadow: 3.5px 3.5px 0px #000000 !important;
-    position: relative !important;
   }
 
   :global(.info-section-block) {
@@ -3188,10 +3231,16 @@ const cv = cvEntry?.data;
   }
 
   :global(.info-section-p) {
-    font-size: 0.88rem !important;
-    line-height: 1.6 !important;
+    font-size: 0.82rem !important;
+    line-height: 1.48 !important;
     color: #1E293B !important;
     font-weight: 500 !important;
+    margin: 0 0 6px 0 !important;
+  }
+
+  .desktop-zoom-container.is-fullscreen :global(.info-section-p) {
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
     margin: 0 0 8px 0 !important;
   }
 
@@ -3201,15 +3250,33 @@ const cv = cvEntry?.data;
 
   :global(.info-section-list) {
     margin: 6px 0 10px 0 !important;
-    padding-left: 22px !important;
+    padding-left: 20px !important;
     color: #1E293B !important;
+    font-size: 0.82rem !important;
+    line-height: 1.5 !important;
+    font-weight: 500 !important;
+  }
+
+  .desktop-zoom-container.is-fullscreen :global(.info-section-list) {
     font-size: 0.88rem !important;
     line-height: 1.6 !important;
-    font-weight: 500 !important;
+    padding-left: 22px !important;
   }
 
   :global(.info-section-list li) {
     margin-bottom: 5px !important;
+  }
+
+  :global(.info-steps-list li) {
+    margin-bottom: 8px !important;
+    line-height: 1.45 !important;
+    font-size: 0.82rem !important;
+  }
+
+  .desktop-zoom-container.is-fullscreen :global(.info-steps-list li) {
+    margin-bottom: 12px !important;
+    line-height: 1.55 !important;
+    font-size: 0.86rem !important;
   }
 
   :global(.file-jump-link) {
@@ -3315,6 +3382,135 @@ const cv = cvEntry?.data;
   :global(#dismissFileInfoBtn:active) {
     transform: translate(2px, 2px) !important;
     box-shadow: 1px 1px 0px #000000 !important;
+  }
+
+  :global(.readme-bottom-box) {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+    margin-top: 2px !important;
+  }
+
+  .desktop-zoom-container.is-fullscreen :global(.readme-bottom-box) {
+    gap: 12px !important;
+    margin-top: 4px !important;
+  }
+
+  :global(.readme-helper-text) {
+    font-family: var(--archivo-font), "Archivo", sans-serif !important;
+    font-size: 0.74rem !important;
+    font-weight: 600 !important;
+    line-height: 1.38 !important;
+    color: #334155 !important;
+    background: #F8FAFC !important;
+    border: 2px solid #000000 !important;
+    border-radius: 8px !important;
+    padding: 7px 10px !important;
+    margin: 0 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+  }
+
+  .desktop-zoom-container.is-fullscreen :global(.readme-helper-text) {
+    font-size: 0.82rem !important;
+    padding: 9px 13px !important;
+    line-height: 1.45 !important;
+  }
+
+  :global(.readme-buttons-row) {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .desktop-zoom-container.is-fullscreen :global(.readme-buttons-row) {
+    gap: 10px !important;
+  }
+
+  :global(.info-preview-workflow-btn) {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background: var(--doodle-cyan, #00B3E3) !important;
+    color: #000000 !important;
+    border: 2.5px solid #000000 !important;
+    border-radius: 8px !important;
+    padding: 6px 14px !important;
+    font-family: var(--archivo-font), "Archivo", sans-serif !important;
+    font-size: 0.76rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    cursor: pointer !important;
+    box-shadow: 2.5px 2.5px 0px #000000 !important;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease !important;
+  }
+
+  .desktop-zoom-container.is-fullscreen :global(.info-preview-workflow-btn) {
+    padding: 8px 20px !important;
+    font-size: 0.84rem !important;
+    box-shadow: 3.5px 3.5px 0px #000000 !important;
+  }
+
+  :global(.info-preview-workflow-btn:hover) {
+    background: #FFDA00 !important;
+    transform: translate(-2px, -2px) !important;
+    box-shadow: 5px 5px 0px #000000 !important;
+  }
+
+  :global(.info-preview-workflow-btn:active) {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 1px 1px 0px #000000 !important;
+  }
+
+  :global(.info-close-readme-btn) {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    border: 2.5px solid #000000 !important;
+    border-radius: 8px !important;
+    padding: 6px 14px !important;
+    font-family: var(--archivo-font), "Archivo", sans-serif !important;
+    font-size: 0.76rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    cursor: pointer !important;
+    box-shadow: 2.5px 2.5px 0px #000000 !important;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease !important;
+  }
+
+  .desktop-zoom-container.is-fullscreen :global(.info-close-readme-btn) {
+    padding: 8px 20px !important;
+    font-size: 0.84rem !important;
+    box-shadow: 3.5px 3.5px 0px #000000 !important;
+  }
+
+  :global(.info-close-readme-btn:hover) {
+    background: #FF1F70 !important;
+    color: #FFFFFF !important;
+    transform: translate(-2px, -2px) !important;
+    box-shadow: 5px 5px 0px #000000 !important;
+  }
+
+  :global(.info-close-readme-btn:active) {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 1px 1px 0px #000000 !important;
+  }
+
+  @media (max-width: 520px) {
+    :global(.readme-buttons-row) {
+      flex-direction: column-reverse !important;
+      align-items: stretch !important;
+    }
+    :global(.info-preview-workflow-btn),
+    :global(.info-close-readme-btn) {
+      width: 100% !important;
+      justify-content: center !important;
+    }
   }
 
   :global(.win-modal-back-btn) {
@@ -5380,6 +5576,26 @@ const cv = cvEntry?.data;
     border-radius: 6px;
   }
 
+  #taskbarSlackBtn {
+    display: none;
+  }
+
+  #taskbarSlackBtn.is-visible {
+    display: flex;
+    animation: slackPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes slackPopIn {
+    0% {
+      opacity: 0;
+      transform: translateY(6px) scale(0.7);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
   .app-active-dot {
     position: absolute;
     bottom: -2px;
@@ -5610,37 +5826,44 @@ const cv = cvEntry?.data;
   .wf-node-top {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: nowrap;
   }
 
   .wf-step-num {
     flex-shrink: 0;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #000000;
     color: #ffffff;
     font-family: monospace;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 900;
-    border-radius: 9px;
+    border-radius: 8px;
   }
 
   .wf-node-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    line-height: 1;
     font-family: monospace;
     font-size: 0.62rem;
     font-weight: 900;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--wf-ink, #ffffff);
     background: var(--wf-accent, #000000);
     border: 2px solid #000000;
     border-radius: 9999px;
-    padding: 3px 10px;
+    padding: 5px 10px;
     box-shadow: 2px 2px 0px #000000;
+    flex-shrink: 0;
   }
 
   .wf-node-title {
@@ -6075,6 +6298,32 @@ const cv = cvEntry?.data;
       background: #ffffff !important;
     }
 
+    .wf-node-top {
+      gap: 8px !important;
+      margin-bottom: 10px !important;
+      flex-wrap: nowrap !important;
+    }
+
+    .wf-step-num {
+      width: 28px !important;
+      height: 28px !important;
+      font-size: 0.8rem !important;
+      border-radius: 8px !important;
+      flex-shrink: 0 !important;
+    }
+
+    .wf-node-tag {
+      font-size: clamp(0.55rem, 1.8vw, 0.62rem) !important;
+      padding: 4.5px 9px !important;
+      letter-spacing: 0.03em !important;
+      white-space: nowrap !important;
+      line-height: 1 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+    }
+
     .wf-node-title {
       font-size: 1rem !important;
       line-height: 1.3 !important;
@@ -6123,9 +6372,9 @@ const cv = cvEntry?.data;
     .wf-chain {
       display: flex !important;
       grid-template-columns: none !important;
-      /* stretch, so every card matches the tallest in the track and the
-         carousel does not jump height as you swipe */
-      align-items: stretch !important;
+      /* Align to top so each card sizes to its own natural content height
+         and inactive cards never display empty vertical gaps */
+      align-items: flex-start !important;
       gap: 14px !important;
       overflow-x: auto !important;
       overflow-y: visible !important;
@@ -6157,24 +6406,23 @@ const cv = cvEntry?.data;
       scroll-snap-stop: always !important;
     }
 
-    /* Card fills the stretched track row, and its own column layout pushes
-       the Read more button to the bottom so the buttons line up card to card. */
+    /* Card sizes to its own natural content height on mobile */
     .wf-node-card {
-      height: 100% !important;
+      height: auto !important;
       display: flex !important;
       flex-direction: column !important;
       align-items: flex-start !important;
     }
 
+    .wf-node-lead {
+      margin-bottom: 14px !important;
+    }
+
     .wf-expand-btn {
-      margin-top: auto !important;
+      margin-top: 0 !important;
     }
 
-    .wf-node-outro .wf-node-lead {
-      margin-bottom: 0 !important;
-    }
-
-    /* Vertical spine between stacked steps — meaningless side by side. */
+    /* Vertical spine between stacked steps, meaningless side by side. */
     .wf-connector {
       display: none !important;
     }
@@ -6227,7 +6475,7 @@ const cv = cvEntry?.data;
     }
 
     /* Dots are created by initWorkflowCarousel(), so they never receive this
-       component's data-astro-cid attribute — they must be matched globally. */
+       component's data-astro-cid attribute: they must be matched globally. */
     .wf-swipe-dots :global(.wf-dot) {
       width: 10px !important;
       height: 10px !important;
@@ -6256,8 +6504,8 @@ const cv = cvEntry?.data;
     }
 
     /* This sits mid-sentence and its yellow highlight is an inset box-shadow
-       measured in em from the box's bottom edge — stretching the box to a
-       44px tap target dragged the highlight far below the text. Grow the hit
+       measured in em from the box's bottom edge (stretching the box to a
+       44px tap target dragged the highlight far below the text). Grow the hit
        area with an overlay instead, leaving the visual box alone. */
     .wf-readme-link {
       position: relative !important;
@@ -6337,48 +6585,81 @@ const cv = cvEntry?.data;
       }
     }
 
-    // Timer route into the cron toast: once the desktop stage has been in view
-    // for a few seconds, fire it regardless of how far the user scrolled.
-    const stageForToast = document.getElementById("how-sticky-viewport");
-    if (stageForToast && !stageForToast.hasAttribute("data-toast-timer")) {
-      stageForToast.setAttribute("data-toast-timer", "1");
-      let toastTimerId: number | null = null;
-      const toastObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting && !has8AMHit) {
-              if (toastTimerId === null) {
-                toastTimerId = window.setTimeout(() => {
-                  fire8AM();
-                  toastObserver.disconnect();
-                }, 3000);
-              }
-            } else if (toastTimerId !== null) {
-              // Scrolled away before it fired; start again on the next look
-              clearTimeout(toastTimerId);
-              toastTimerId = null;
-            }
-          });
-        },
-        { threshold: 0.6 },
-      );
-      toastObserver.observe(stageForToast);
-    }
+    // The cron toast notification now fires upon closing the README modal,
+    // rather than on an arbitrary timer or scroll threshold.
 
     // Expandable detail on the written-down workflow tiles. Bound defensively:
     // initHowItWorks runs on both DOMContentLoaded and astro:page-load.
+    function getRowNodes(clickedNode: HTMLElement): HTMLElement[] {
+      const isMobile = window.matchMedia("(max-width: 860px)").matches;
+      if (isMobile) {
+        return [clickedNode];
+      }
+      const chain = clickedNode.closest(".wf-chain");
+      if (!chain) return [clickedNode];
+      const allNodes = Array.from(chain.querySelectorAll<HTMLElement>(".wf-node"));
+      const idx = allNodes.indexOf(clickedNode);
+      if (idx === -1) return [clickedNode];
+
+      const isThreeCols = window.matchMedia("(min-width: 900px)").matches;
+      if (isThreeCols) {
+        if (idx <= 2) return allNodes.slice(0, 3);
+        if (idx <= 5) return allNodes.slice(3, 6);
+        return allNodes.slice(6, 7);
+      } else {
+        // 2 columns (620px to 899px)
+        if (idx <= 1) return allNodes.slice(0, 2);
+        if (idx <= 3) return allNodes.slice(2, 4);
+        if (idx <= 5) return allNodes.slice(4, 6);
+        return allNodes.slice(6, 7);
+      }
+    }
+
     document.querySelectorAll(".wf-expand-btn").forEach((btn) => {
       const el = btn as HTMLElement;
       if (el.dataset.wfBound) return;
       el.dataset.wfBound = "1";
       el.addEventListener("click", () => {
-        const panel = document.getElementById(el.getAttribute("aria-controls") || "");
-        if (!panel) return;
+        const clickedNode = el.closest<HTMLElement>(".wf-node");
+        if (!clickedNode) return;
+
+        const isMobile = window.matchMedia("(max-width: 860px)").matches;
         const isOpen = el.getAttribute("aria-expanded") === "true";
-        el.setAttribute("aria-expanded", String(!isOpen));
-        panel.hidden = isOpen;
-        const label = el.querySelector(".wf-expand-label");
-        if (label) label.textContent = isOpen ? "Read more" : "Show less";
+        const nextState = !isOpen;
+
+        if (isMobile) {
+          const panel = document.getElementById(el.getAttribute("aria-controls") || "");
+          if (!panel) return;
+          el.setAttribute("aria-expanded", String(nextState));
+          panel.hidden = !nextState;
+          const label = el.querySelector(".wf-expand-label");
+          if (label) label.textContent = nextState ? "Hide techy details" : "Read the techy details";
+
+          if (nextState) {
+            document.querySelectorAll<HTMLElement>(".wf-node").forEach((otherNode) => {
+              if (otherNode !== clickedNode) {
+                const otherBtn = otherNode.querySelector<HTMLElement>(".wf-expand-btn");
+                const otherPanel = otherNode.querySelector<HTMLElement>(".wf-detail");
+                const otherLabel = otherNode.querySelector<HTMLElement>(".wf-expand-label");
+                if (otherBtn && otherBtn.getAttribute("aria-expanded") === "true") {
+                  otherBtn.setAttribute("aria-expanded", "false");
+                  if (otherPanel) otherPanel.hidden = true;
+                  if (otherLabel) otherLabel.textContent = "Read the techy details";
+                }
+              }
+            });
+          }
+        } else {
+          const targetNodes = getRowNodes(clickedNode);
+          targetNodes.forEach((node) => {
+            const b = node.querySelector<HTMLElement>(".wf-expand-btn");
+            const p = node.querySelector<HTMLElement>(".wf-detail");
+            const l = node.querySelector<HTMLElement>(".wf-expand-label");
+            if (b) b.setAttribute("aria-expanded", String(nextState));
+            if (p) p.hidden = !nextState;
+            if (l) l.textContent = nextState ? "Hide techy details" : "Read the techy details";
+          });
+        }
       });
     });
 
@@ -6508,16 +6789,81 @@ const cv = cvEntry?.data;
 
     const taskbarStartBtn = document.getElementById("taskbarStartBtn");
 
-    // README.md: design rationale for the workflow. Rendered through the same
-    // Notes modal as every other desktop file so the styling stays identical.
+    // README.md: plain-English overview of the workflow for all visitors.
     const readmeFile = {
       key: "readme",
       name: "README.md",
-      type: "Design Decisions & Rationale",
-      tag: "DOCS",
+      type: "System Overview & Workflow Guide",
+      tag: "START HERE",
       path: "workspace\\README.md",
-      role: "Workflow Design Rationale",
+      role: "Plain-English Overview",
       sections: [
+        {
+          title: "In simple terms, how does this work?",
+          content: `
+            <p class="info-section-p">I wanted to reduce the time I spent looking for and applying for jobs, so I automated the majority of that process using AI, specifically AI agents.</p>
+            <p class="info-section-p">You can read more about what AI agents are in <a class="file-jump-link" data-open-file="faq">FAQ.md</a>, but in simple terms, an AI agent pairs an LLM (like Claude, ChatGPT, or Gemini) which acts as the 'brain', with a framework of files and rules that dictate how that 'brain' thinks, operates, and uses connected tools.</p>
+            <p class="info-section-p">I designed this workflow from scratch, then built a team of specialised agents to help me write the code and convert the workflow into automated scripts. You can read more about the scripts in the desktop files. The agents do not run this workflow; the workflow runs on a schedule (crons). The agents' roles are now limited to:</p>
+            <ol class="info-section-list">
+              <li><strong>Fixes and self-healing:</strong> Each day an automatic script runs to check for breaking updates in the software the workflow uses. If any are found, an agent automatically updates the workflow to keep it working.</li>
+              <li><strong>CV tailoring:</strong> One agent is used as part of the workflow to create tailored CVs for each role I want to apply for. More on that below.</li>
+            </ol>
+          `
+        },
+        {
+          title: "What are the steps in the workflow?",
+          content: `
+            <ol class="info-section-list info-steps-list">
+              <li><strong>Scrapes the internet</strong> to find newly listed jobs that match what I am looking for.</li>
+              <li><strong>Scores each job</strong> according to how well it matches my criteria, filtering out weak matches and recruitment spam so I do not waste time on irrelevant listings.</li>
+              <li><strong>Researches the companies behind high-scoring matches.</strong> I call this a vibe check (<a class="file-jump-link" data-open-file="vibe_check">vibe_check.md</a>). Instead of looking at whether the role matches my qualifications, it looks at whether the company values match mine: the ethics of the company, controversies, how they treat employees, and what life is actually like working there. The system can exclude companies based on these factors where I have drawn hard lines, or assign a lower vibe score indicating lower priority to help inform my decision on whether to apply.</li>
+              <li><strong>Populates a database</strong> with the jobs that make the cut, which I manage from a custom dashboard called Mission Control (<a class="file-jump-link" data-open-file="mission_control_html">mission_control.html</a>). This is a dashboard that runs on my computer, built with JS and HTML. It allows me to view top-ranking jobs, their descriptions, and their vibe scores all in one place, without having to sift through hundreds of ads and browser tabs. From here, I can select yes or no to decide whether I want to apply, using buttons on the dashboard.</li>
+              <li><strong>Tailors a CV if I say yes.</strong> The system instructs Cordy, one of the agents, to create a CV for that specific role. The agent follows strict instructions on how to tailor the CV and what information should and should not be included. Because most companies now use automated filtering systems (ATS) to manage applications, a script checks the application URL to determine what ATS is being used where possible, helping Cordy format and tailor the CV to the requirements of that system. This does not mean making things up: Cordy is anchored to a master CV (<a class="file-jump-link" data-open-file="master_cv">master_cv.md</a>) with completely true information, matching my genuine experience as closely as possible without inventing skills.</li>
+              <li><strong>Human-in-the-loop review and one-click PDF:</strong> Once the CV content is created as a simple markdown file, I review it manually and make changes if needed. When I make changes, Cordelia makes note and updates her rules to improve her CV writing skills over time. Then, directly from Mission Control, I can click "Make PDF". Keeping a human in the loop means I can spot any mistakes or awkward phrasing before sending it to a potential employer. Clicking "Make PDF" runs an automated script that turns the markdown CV into a consistently styled PDF using HTML and CSS, removing the need to manually format documents.</li>
+              <li><strong>Manual application:</strong> Once the PDF is ready, I apply for the job manually and upload the created CV. The whole process takes 83% less time than doing everything by hand, while keeping an eye on application quality.</li>
+            </ol>
+          `
+        },
+        {
+          title: "Self-healing & continuous learning",
+          content: `
+            <p class="info-section-p">The workflow also takes care of itself. An automated script runs each day to check that the tools and software used in the workflow are up to date. If something is outdated or broken, Willow (the builder agent) is automatically called in to fix the code. Using an LLM at this stage means that the fix can be made intelligently, using real live information.</p>
+            <p class="info-section-p">Cordy also continues learning. When I provide feedback on why I did not want to apply for a role, or why a CV was not written well, Cordy is able to turn this feedback into memorable rules and information, meaning each time, the results get better.</p>
+          `
+        }
+      ]
+    };
+
+    // FAQ.md: architectural decisions and deep-dive rationale.
+    const faqFile = {
+      key: "faq",
+      name: "FAQ.md",
+      type: "Architecture Decisions & FAQs",
+      tag: "DOCS",
+      path: "workspace\\FAQ.md",
+      role: "Design Rationale & Trade-offs",
+      sections: [
+        {
+          title: "What is an AI Agent?",
+          content: `
+            <p class="info-section-p">Most people are familiar with AI through chatbots like ChatGPT, Claude, or Gemini. A standard chatbot only responds when prompted: you ask a question, it replies with text, and then it stops. You still have to do all the manual follow-up work: copying the output, pasting it into other software, running checks, and deciding the next action.</p>
+            <p class="info-section-p">An AI agent goes much further. Instead of just answering questions, an agent is given an overall goal and the tools needed to complete it autonomously.</p>
+            <p class="info-section-p">In plain terms, an agent combines three key components:</p>
+            <ul class="info-section-list">
+              <li><strong>The Brain:</strong> A Large Language Model that provides reasoning, understands context, and decides what actions to take.</li>
+              <li><strong>The Rulebook and Memory:</strong> Clear rules, preferences, and guidelines that dictate how the agent should think, what standards it must follow, and what boundaries it cannot cross.</li>
+              <li><strong>The Tools:</strong> Connected software, scripts, web browsers, and file access that allow the agent to interact with the computer: searching the internet, reading documents, generating files, or running code.</li>
+            </ul>
+            <p class="info-section-p"><strong>Why do people use them?</strong></p>
+            <p class="info-section-p">People build and use AI agents to automate multi-step digital workflows that previously required hours of repetitive manual effort:</p>
+            <ul class="info-section-list">
+              <li><strong>Multi-step execution:</strong> Instead of doing one task at a time, an agent can break a complex objective into smaller steps, evaluate intermediate results, and self-correct if something goes wrong.</li>
+              <li><strong>Connecting separate software:</strong> Agents link different tools together (such as web scrapers, local databases, and messaging systems) without needing a person to act as the manual bridge between them.</li>
+              <li><strong>Consistent standards:</strong> An agent applies the same rigorous quality checks and rules every single time, avoiding human fatigue during monotonous tasks.</li>
+            </ul>
+            <p class="info-section-p">In this project, agents helped convert the pipeline design into automated Python scripts during the build phase. In daily operation, their runtime role is kept deliberate: Cordy tailors CVs against verified ground-truth data and learns from feedback, while Willow handles automated self-healing if daily dependency checks detect broken tools. Scheduled crons and deterministic scripts handle the rest with zero AI overhead.</p>
+          `
+        },
         {
           title: "Why isn't the whole process automated?",
           content: `<p class="info-section-p">The agents could go one step further and submit the applications for me, but is that really the right call?</p><p class="info-section-p">Recognising AI's strengths and weaknesses is half the battle when designing workflows that work.</p><p class="info-section-p">AI is better at:</p>
@@ -6558,8 +6904,12 @@ const cv = cvEntry?.data;
       ]
     };
 
-    function openReadme() {
-      openFileInfo(readmeFile);
+    function openReadme(skipFullscreen = false) {
+      openFileInfo(readmeFile, false, skipFullscreen);
+    }
+
+    function openFaq(skipFullscreen = false) {
+      openFileInfo(faqFile, false, skipFullscreen);
     }
 
     // Slack Notification Elements
@@ -6743,7 +7093,7 @@ const cv = cvEntry?.data;
               },
               {
                 title: "Why is this necessary?",
-                content: `<p class="info-section-p">Modern applicant tracking systems (ATS) often filter for high keyword alignment before human recruiters review a profile. Grounded AI tailoring ensures genuine skills are prominently surfaced without manual rewriting overhead.</p>`
+                content: `<p class="info-section-p">Every job description prioritizes different skills, tools, and responsibilities. Tailoring the CV ensures the most relevant experience and accomplishments for that specific role are front and center, saving hours of manual rewriting without inventing skills.</p>`
               }
             ]
           }
@@ -6954,7 +7304,8 @@ const cv = cvEntry?.data;
       vibe_check: pyFileIconSvg,
       what_is_mission_control: mdFileIconSvg,
       mission_control_html: htmlFileIconSvg,
-      readme: mdFileIconSvg
+      readme: mdFileIconSvg,
+      faq: mdFileIconSvg
     };
 
     function formatFileNameHtml(name: string) {
@@ -7077,10 +7428,12 @@ const cv = cvEntry?.data;
 
 
     // Open File Info Modal Function
-    function openFileInfo(file: any, isBackNav = false) {
-      ensureFullscreenOnInteraction();
+    function openFileInfo(file: any, isBackNav = false, skipFullscreen = false) {
+      if (!skipFullscreen) {
+        ensureFullscreenOnInteraction();
+        playPopSound();
+      }
       if (!file || !fileInfoModal) return;
-      playPopSound();
 
       if (!isBackNav && currentNoteFile && currentNoteFile.key !== file.key) {
         notesHistory.push(currentNoteFile);
@@ -7140,11 +7493,15 @@ const cv = cvEntry?.data;
             if (targetKey === "master_cv") {
               masterCvReturnFile = currentNoteFile;
               updateMasterCvBackButton();
-              closeFileInfo(false);
+              closeFileInfo(false, false);
               openMasterCvModal();
             } else if (targetKey === "mission_control_html" || targetKey === "mission_control") {
-              closeFileInfo(true);
+              closeFileInfo(true, false);
               openMissionControl();
+            } else if (targetKey === "faq") {
+              openFileInfo(faqFile);
+            } else if (targetKey === "readme") {
+              openFileInfo(readmeFile);
             } else if (targetKey) {
               // Find target file in explorer DB
               for (const fKey of Object.keys(explorerFoldersDB)) {
@@ -7162,39 +7519,81 @@ const cv = cvEntry?.data;
       const actionBar = document.getElementById("infoActionBar");
       if (actionBar) {
         let buttonsHtml = "";
-        if (notesHistory.length > 0) {
-          buttonsHtml += `<button class="info-back-btn" id="infoActionBackBtn" title="Back to previous note">← Back</button>`;
-        }
-        if (file.hasOpenMcAction) {
-          buttonsHtml += `<button class="modal-open-mc-btn" id="infoOpenMcBtn">🎯 Open Mission Control</button>`;
-        }
-        buttonsHtml += `<button class="info-close-btn" id="dismissFileInfoBtn">Got it</button>`;
-        actionBar.innerHTML = buttonsHtml;
+        if (file.key === "readme") {
+          buttonsHtml = `
+            <div class="readme-bottom-box">
+              <p class="readme-helper-text">If you're finished reading, you can watch a preview of the workflow in this interactive desktop or click on the files and icons for more information.</p>
+              <div class="readme-buttons-row">
+                <button type="button" class="info-preview-workflow-btn" id="readmePreviewWorkflowBtn">
+                  <span>Preview Workflow</span>
+                  <span class="btn-play-icon" aria-hidden="true">▶</span>
+                </button>
+                <button type="button" class="info-close-readme-btn" id="readmeCloseBtn">
+                  <span>Close</span>
+                </button>
+              </div>
+            </div>
+          `;
+          actionBar.innerHTML = buttonsHtml;
 
-        const actionBackBtn = document.getElementById("infoActionBackBtn");
-        if (actionBackBtn) actionBackBtn.addEventListener("click", goBackNote);
+          const previewWfBtn = document.getElementById("readmePreviewWorkflowBtn");
+          if (previewWfBtn) {
+            previewWfBtn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              closeFileInfo(true, false);
+              startAutoSequence();
+            });
+          }
+          const readmeCloseBtn = document.getElementById("readmeCloseBtn");
+          if (readmeCloseBtn) {
+            readmeCloseBtn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              closeFileInfo(true, true);
+            });
+          }
+        } else {
+          if (notesHistory.length > 0) {
+            buttonsHtml += `<button class="info-back-btn" id="infoActionBackBtn" title="Back to previous note">← Back</button>`;
+          }
+          if (file.hasOpenMcAction) {
+            buttonsHtml += `<button class="modal-open-mc-btn" id="infoOpenMcBtn">🎯 Open Mission Control</button>`;
+          }
+          buttonsHtml += `<button class="info-close-btn" id="dismissFileInfoBtn">Got it</button>`;
+          actionBar.innerHTML = buttonsHtml;
 
-        const openMcBtn = document.getElementById("infoOpenMcBtn");
-        if (openMcBtn) {
-          openMcBtn.addEventListener("click", () => {
-            closeFileInfo(true);
-            openMissionControl();
-          });
+          const actionBackBtn = document.getElementById("infoActionBackBtn");
+          if (actionBackBtn) actionBackBtn.addEventListener("click", goBackNote);
+
+          const openMcBtn = document.getElementById("infoOpenMcBtn");
+          if (openMcBtn) {
+            openMcBtn.addEventListener("click", () => {
+              closeFileInfo(true, false);
+              openMissionControl();
+            });
+          }
+          const dismissBtn = document.getElementById("dismissFileInfoBtn");
+          if (dismissBtn) {
+            dismissBtn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              closeFileInfo(true, true);
+            });
+          }
         }
-        const dismissBtn = document.getElementById("dismissFileInfoBtn");
-        if (dismissBtn) dismissBtn.addEventListener("click", () => closeFileInfo(true));
       }
 
       fileInfoModal.classList.add("is-open");
     }
 
-    function closeFileInfo(clearHistory = true) {
+    function closeFileInfo(clearHistory = true, shouldTriggerToast = true) {
       playClickSound();
       if (fileInfoModal) fileInfoModal.classList.remove("is-open");
       if (clearHistory) {
         notesHistory.length = 0;
         currentNoteFile = null;
         updateNotesBackButtons();
+      }
+      if (shouldTriggerToast && !has8AMHit) {
+        fire8AM();
       }
     }
 
@@ -7938,7 +8337,10 @@ const cv = cvEntry?.data;
               playSlackSound();
               hasSlackTriggered = true;
               if (slackNotification) slackNotification.classList.add("is-visible");
-              if (taskbarSlackBtn) taskbarSlackBtn.classList.add("has-notification");
+              if (taskbarSlackBtn) {
+                taskbarSlackBtn.classList.add("is-visible");
+                taskbarSlackBtn.classList.add("is-active-app");
+              }
               isTerminalRunning = false;
             }, 750);
             logTimers.push(slackTimer);
@@ -8128,6 +8530,7 @@ const cv = cvEntry?.data;
       if (feedbackLoopModal) feedbackLoopModal.classList.remove("is-open");
       if (terminalConsole) terminalConsole.classList.remove("is-active");
       if (slackNotification) slackNotification.classList.remove("is-visible");
+      if (taskbarSlackBtn) taskbarSlackBtn.classList.remove("is-active-app");
 
       const storyHeader = document.getElementById("storyHeader") || document.querySelector(".story-header");
       if (storyHeader) {
@@ -8314,6 +8717,11 @@ const cv = cvEntry?.data;
           }
           if (toastNotification) toastNotification.classList.remove("is-visible");
           if (slackNotification) slackNotification.classList.remove("is-visible");
+          if (taskbarSlackBtn) {
+            taskbarSlackBtn.classList.remove("is-visible");
+            taskbarSlackBtn.classList.remove("is-active-app");
+          }
+          hasSlackTriggered = false;
           if (expandWorkspaceBtn) expandWorkspaceBtn.classList.remove("is-visible");
           if (startWorkflowBtn) {
             startWorkflowBtn.classList.remove("is-running");
@@ -8323,10 +8731,6 @@ const cv = cvEntry?.data;
         }
         return;
       }
-
-      // Scroll route into the 08:00 alarm. fire8AM() is shared with the timer
-      // fallback below, so whichever happens first wins and it only runs once.
-      if (progress >= 0.04) fire8AM();
 
       // Fade the keep-scrolling cue once the runway is nearly spent
       if (scrollCue) scrollCue.classList.toggle("is-done", progress > 0.82);
@@ -8367,6 +8771,12 @@ const cv = cvEntry?.data;
           clockDigits.style.color = "#000000";
         }
         if (toastNotification) toastNotification.classList.remove("is-visible");
+        if (slackNotification) slackNotification.classList.remove("is-visible");
+        if (taskbarSlackBtn) {
+          taskbarSlackBtn.classList.remove("is-visible");
+          taskbarSlackBtn.classList.remove("is-active-app");
+        }
+        hasSlackTriggered = false;
         if (startWorkflowBtn) {
           startWorkflowBtn.classList.remove("is-running");
           startWorkflowBtn.innerHTML = `<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><polygon points="6,4 20,12 6,20" /></svg><span>Start</span>`;
@@ -8388,6 +8798,7 @@ const cv = cvEntry?.data;
         e.stopPropagation();
         playClickSound();
         if (slackNotification) slackNotification.classList.remove("is-visible");
+        if (taskbarSlackBtn) taskbarSlackBtn.classList.remove("is-active-app");
       });
     }
 
@@ -8395,6 +8806,7 @@ const cv = cvEntry?.data;
       slackOpenMissionBtn.addEventListener("click", (e) => {
         e.stopPropagation();
         if (slackNotification) slackNotification.classList.remove("is-visible");
+        if (taskbarSlackBtn) taskbarSlackBtn.classList.remove("is-active-app");
         openMissionControl();
       });
     }
@@ -8542,6 +8954,8 @@ const cv = cvEntry?.data;
           openMasterCvModal();
         } else if (key === "readme") {
           openReadme();
+        } else if (key === "faq") {
+          openFaq();
         } else if (key) {
           // Find file in explorer database
           for (const fKey of Object.keys(explorerFoldersDB)) {
@@ -8551,6 +8965,14 @@ const cv = cvEntry?.data;
               break;
             }
           }
+        }
+      });
+      item.addEventListener("keydown", (e) => {
+        const key = (e as KeyboardEvent).key;
+        if (key === "Enter" || key === " ") {
+          e.preventDefault();
+          e.stopPropagation();
+          (item as HTMLElement).click();
         }
       });
     });
@@ -8695,8 +9117,28 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
         goBackNote();
       });
     }
-    if (closeFileInfoBtn) closeFileInfoBtn.addEventListener("click", () => closeFileInfo(true));
-    if (dismissFileInfoBtn) dismissFileInfoBtn.addEventListener("click", () => closeFileInfo(true));
+    if (closeFileInfoBtn) {
+      closeFileInfoBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        closeFileInfo(true, true);
+      });
+    }
+    if (dismissFileInfoBtn) {
+      dismissFileInfoBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        closeFileInfo(true, true);
+      });
+    }
+
+    if (fileInfoModal) {
+      fileInfoModal.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        if (target && target.closest("#closeFileInfoBtn, #readmeCloseBtn, #dismissFileInfoBtn")) {
+          return;
+        }
+        ensureFullscreenOnInteraction();
+      });
+    }
 
     // Master CV Back to Notes trigger
     const masterCvBackBtn = document.getElementById("masterCvBackBtn");
@@ -8778,14 +9220,19 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
       });
     }
 
-    // Taskbar Slack toggle (only works after Slack has been triggered in the animation)
+    // Taskbar Slack toggle (active once Slack notification has appeared)
     if (taskbarSlackBtn) {
       taskbarSlackBtn.addEventListener("click", () => {
         ensureFullscreenOnInteraction();
         if (!hasSlackTriggered) return;
         playClickSound();
         if (slackNotification) {
-          slackNotification.classList.toggle("is-visible");
+          const isNowOpen = slackNotification.classList.toggle("is-visible");
+          if (isNowOpen) {
+            taskbarSlackBtn.classList.add("is-active-app");
+          } else {
+            taskbarSlackBtn.classList.remove("is-active-app");
+          }
         }
       });
     }
@@ -8827,26 +9274,23 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
       });
     }
 
-    // Desktop Wallpaper click
-    const desktopWallpaperStage = document.querySelector(".desktop-wallpaper-stage");
-    if (desktopWallpaperStage) {
-      desktopWallpaperStage.addEventListener("click", (e) => {
+    // In small mode, clicking anywhere on the desktop opens it
+    if (screenMockup) {
+      screenMockup.addEventListener("click", (e) => {
         const target = e.target as HTMLElement;
-        if (
-          target.classList.contains("desktop-wallpaper-stage") ||
-          target.classList.contains("desktop-icons-col") ||
-          target.classList.contains("screen-mockup-body") ||
-          target.id === "desktopCanvas"
-        ) {
-          ensureFullscreenOnInteraction();
+        if (target && target.closest("#closeFileInfoBtn, #readmeCloseBtn, #dismissFileInfoBtn")) {
+          return;
         }
+        ensureFullscreenOnInteraction();
       });
     }
 
     // Global Keyboard listener (Escape exits modal or fullscreen)
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
-        if (masterCvModal && masterCvModal.classList.contains("is-open")) {
+        if (fileInfoModal && fileInfoModal.classList.contains("is-open")) {
+          closeFileInfo(true, true);
+        } else if (masterCvModal && masterCvModal.classList.contains("is-open")) {
           closeMasterCvModal();
         } else if (feedbackLoopModal && feedbackLoopModal.classList.contains("is-open")) {
           closeFeedbackLoopModal();
@@ -8864,6 +9308,9 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", () => applyMorph(currentMorph));
     onScroll();
+
+    // Open README.md on load in the desktop without forcing full-page fullscreen
+    openReadme(true);
   }
 
   // ---- Mobile workflow carousel ----------------------------------------
@@ -8898,9 +9345,27 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
 
     let current = 0;
 
+    function collapseInactiveCards(activeIdx: number) {
+      if (!isCarousel()) return;
+      nodes.forEach((n, i) => {
+        if (i !== activeIdx) {
+          const btn = n.querySelector<HTMLElement>(".wf-expand-btn");
+          const panel = n.querySelector<HTMLElement>(".wf-detail");
+          const label = n.querySelector<HTMLElement>(".wf-expand-label");
+          if (btn && btn.getAttribute("aria-expanded") === "true") {
+            btn.setAttribute("aria-expanded", "false");
+            if (panel) panel.hidden = true;
+            if (label) label.textContent = "Read the techy details";
+          }
+        }
+      });
+    }
+
     function scrollToIndex(i: number) {
-      const target = nodes[Math.max(0, Math.min(i, nodes.length - 1))];
+      const idx = Math.max(0, Math.min(i, nodes.length - 1));
+      const target = nodes[idx];
       if (!target || !chain) return;
+      collapseInactiveCards(idx);
       // centre the card in the track, matching scroll-snap-align: center
       chain.scrollTo({
         left:
@@ -8913,6 +9378,7 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
       });
     }
 
+    let lastActive = -1;
     function syncFromScroll() {
       if (!chain) return;
       // Nearest card to the track's centre is the one in view.
@@ -8930,6 +9396,11 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
       dots.forEach((d, i) => d.classList.toggle("is-current", i === best));
       prevBtn!.disabled = best === 0;
       nextBtn!.disabled = best === nodes.length - 1;
+
+      if (best !== lastActive) {
+        collapseInactiveCards(best);
+        lastActive = best;
+      }
     }
 
     prevBtn.addEventListener("click", () => scrollToIndex(current - 1));

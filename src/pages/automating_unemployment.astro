@@ -244,14 +244,105 @@ const agents = story?.agents || story?.vignette3?.agents || [];
               </button>
             </div>
 
-            <!-- Mobile Desktop Preview Notice & Direct Scroll CTA (Mobile Only) -->
-            <div class="mobile-desktop-notice-card">
-              <span class="mobile-notice-badge">Desktop simulation</span>
-              <p class="mobile-notice-desc">Unavailable on mobile</p>
-              <button class="mobile-scroll-wf-cta" id="scrollToWorkflowStepsBtn" type="button">
-                <span>See the workflow written down</span>
-                <span class="btn-arrow-down">↓</span>
-              </button>
+            <!-- Mobile Overview & Expandable README Drawer (Mobile Only) -->
+            <div class="mobile-overview-container">
+              <div class="mobile-desktop-notice-card" id="mobileNoticeCard">
+                <div class="mobile-unavailable-banner">
+                  <svg
+                    class="mobile-unavailable-icon"
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                  <span>Interactive desktop unavailable on mobile</span>
+                </div>
+                <button class="mobile-scroll-wf-cta" id="openMobileReadmeBtn" type="button" aria-expanded="false" aria-controls="mobileReadmeDrawer">
+                  <span class="mobile-cta-btn-text">Read a simple overview</span>
+                  <span class="btn-arrow-down" id="mobileReadmeChevron" aria-hidden="true">&#9662;</span>
+                </button>
+                <button class="mobile-skip-link" id="scrollToWorkflowStepsBtn" type="button">
+                  <span>Or skip to the steps &darr;</span>
+                </button>
+              </div>
+
+              <!-- Mobile README Drawer (Mobile Only) -->
+              <div class="mobile-readme-drawer" id="mobileReadmeDrawer" hidden>
+                <div class="drawer-header">
+                  <span class="drawer-eyebrow">START HERE</span>
+                  <h3 class="drawer-title">In simple terms, how does this work?</h3>
+                </div>
+                <p class="drawer-p">
+                  Job hunting is exhausting and repetitive: searching boards every day, reading hundreds of listings, spotting automated screening questions, and tweaking CVs for each application.
+                </p>
+                <p class="drawer-p">
+                  This workflow was built to automate the heavy lifting so I could focus on interview prep and training instead.
+                </p>
+
+                <!-- Subcard: What is an AI agent? -->
+                <div class="drawer-subcard">
+                  <h4 class="drawer-subcard-title">What is an AI agent?</h4>
+                  <p class="drawer-subcard-p">
+                    Standard chatbots (like ChatGPT) only speak when spoken to: you ask a question, they reply, and they stop. You still have to do all the manual work copying, pasting, and running checks.
+                  </p>
+                  <p class="drawer-subcard-p">
+                    An AI agent is given an overall goal and the autonomy to use connected computer tools to get there. It pairs three things:
+                  </p>
+                  <ul class="drawer-list">
+                    <li><strong>The Brain:</strong> A Large Language Model (LLM) that reasons and decides next steps.</li>
+                    <li><strong>The Rulebook &amp; Memory:</strong> Clear boundaries, guidelines, and quality standards it must follow.</li>
+                    <li><strong>The Tools:</strong> Connected scripts, scrapers, and files that let it interact with the machine.</li>
+                  </ul>
+                </div>
+
+                <!-- Clarification: Scripts vs Agents -->
+                <h4 class="drawer-section-heading">The workflow runs on scripts, not agents</h4>
+                <p class="drawer-p">
+                  A common misconception is that AI agents run the entire pipeline all day long. That would be expensive, unpredictable, and unnecessary.
+                </p>
+                <p class="drawer-p">
+                  Instead, automated schedules (crons) and deterministic Python scripts run the daily scraping, deduplication, and database filtering with zero AI cost.
+                </p>
+                <p class="drawer-p">
+                  AI was used for three specific jobs:
+                </p>
+                <ol class="drawer-num-list">
+                  <li>
+                    <strong>Building the workflow scripts:</strong> AI was used upfront to write, test, and refine the deterministic Python scripts, scrapers, and database tooling that make up the pipeline.
+                  </li>
+                  <li>
+                    <strong>Self-fixing and maintenance:</strong> With the scripts in place, Willow steps in only when something breaks. If daily health checks detect broken website selectors or failing tools, Willow inspects the logs, repairs the code, and commits the fix.
+                  </li>
+                  <li>
+                    <strong>Vibe checks and CV tailoring:</strong> Cordy takes over for qualitative evaluation and drafting. Cordy researches company culture and reputation (the vibe check), and drafts CVs tailored directly to each role's job description, strictly anchored to verified master facts.
+                  </li>
+                </ol>
+
+                <h4 class="drawer-section-heading">Self-healing &amp; continuous learning</h4>
+                <p class="drawer-p">
+                  Whenever I review an application or request a change, the feedback is saved into the agents' rulebooks. Over time, the agents get smarter, the prompts get sharper, and the system runs smoother without manual intervention.
+                </p>
+
+                <!-- Bottom Action Callout -->
+                <div class="drawer-action-callout">
+                  <p class="drawer-action-prompt">Ready to see how each step works in action?</p>
+                  <button class="mobile-drawer-scroll-btn" id="mobileDrawerScrollStepsBtn" type="button">
+                    <span>Scroll to see the steps &darr;</span>
+                  </button>
+                  <button class="mobile-drawer-close-link" id="mobileDrawerCloseBtn" type="button">
+                    <span>Close overview &and;</span>
+                  </button>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -499,6 +590,147 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       </div>
     </section>
 
+    <!-- ============================================================ -->
+    <!-- 06 // MOBILE FREQUENTLY ASKED QUESTIONS (MOBILE ONLY)       -->
+    <!-- ============================================================ -->
+    <section class="mobile-faqs-section" id="mobileFaqsSection">
+      <div class="mobile-faqs-container">
+        <div class="mobile-faqs-header">
+          <span class="mobile-faqs-eyebrow">06 // QUESTIONS &amp; ANSWERS</span>
+          <h2 class="mobile-faqs-title">Frequently asked questions</h2>
+          <p class="mobile-faqs-desc">
+            Architecture decisions, costs, and design trade-offs behind this workflow.
+          </p>
+        </div>
+
+        <div class="mobile-faqs-accordion">
+          <!-- FAQ 1 -->
+          <div class="mobile-faq-item">
+            <button class="mobile-faq-trigger" type="button" aria-expanded="false" aria-controls="mfaq-content-1" id="mfaq-header-1">
+              <span class="mfaq-question">What is an AI agent?</span>
+              <span class="mfaq-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="mobile-faq-panel" id="mfaq-content-1" role="region" aria-labelledby="mfaq-header-1" hidden>
+              <div class="mfaq-content-inner">
+                <p class="mfaq-p">Most people are familiar with AI through chatbots like ChatGPT, Claude, or Gemini. A standard chatbot only responds when prompted: you ask a question, it replies with text, and then it stops. You still have to do all the manual follow-up work: copying the output, pasting it into other software, running checks, and deciding the next action.</p>
+                <p class="mfaq-p">An AI agent goes much further. Instead of just answering questions, an agent is given an overall goal and the tools needed to complete it autonomously.</p>
+                <p class="mfaq-p">In plain terms, an agent combines three key components:</p>
+                <ul class="mfaq-list">
+                  <li><strong>The Brain:</strong> A Large Language Model that provides reasoning, understands context, and decides what actions to take.</li>
+                  <li><strong>The Rulebook and Memory:</strong> Clear rules, preferences, and guidelines that dictate how the agent should think, what standards it must follow, and what boundaries it cannot cross.</li>
+                  <li><strong>The Tools:</strong> Connected software, scripts, web browsers, and file access that allow the agent to interact with the computer: searching the internet, reading documents, generating files, or running code.</li>
+                </ul>
+                <p class="mfaq-p"><strong>Why do people use them?</strong></p>
+                <p class="mfaq-p">People build and use AI agents to automate multi-step digital workflows that previously required hours of repetitive manual effort:</p>
+                <ul class="mfaq-list">
+                  <li><strong>Multi-step execution:</strong> Instead of doing one task at a time, an agent can break a complex objective into smaller steps, evaluate intermediate results, and self-correct if something goes wrong.</li>
+                  <li><strong>Connecting separate software:</strong> Agents link different tools together (such as web scrapers, local databases, and messaging systems) without needing a person to act as the manual bridge between them.</li>
+                  <li><strong>Consistent standards:</strong> An agent applies the same rigorous quality checks and rules every single time, avoiding human fatigue during monotonous tasks.</li>
+                </ul>
+                <p class="mfaq-p">In this project, agents helped convert the pipeline design into automated Python scripts during the build phase. In daily operation, their runtime role is kept deliberate: Cordy tailors CVs against verified ground-truth data and learns from feedback, while Willow handles automated self-healing if daily dependency checks detect broken tools. Scheduled crons and deterministic scripts handle the rest with zero AI overhead.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="mobile-faq-item">
+            <button class="mobile-faq-trigger" type="button" aria-expanded="false" aria-controls="mfaq-content-2" id="mfaq-header-2">
+              <span class="mfaq-question">Why isn't the whole process automated?</span>
+              <span class="mfaq-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="mobile-faq-panel" id="mfaq-content-2" role="region" aria-labelledby="mfaq-header-2" hidden>
+              <div class="mfaq-content-inner">
+                <p class="mfaq-p">The agents could go one step further and submit the applications for me, but is that really the right call?</p>
+                <p class="mfaq-p">Recognising AI's strengths and weaknesses is half the battle when designing workflows that work.</p>
+                <p class="mfaq-p">AI is better at:</p>
+                <ul class="mfaq-list">
+                  <li>Coding tasks</li>
+                  <li>Speed</li>
+                  <li>Debugging</li>
+                </ul>
+                <p class="mfaq-p">It's not so good at creativity, tone of voice, and producing consistent, repeatable outputs. AI can be unpredictable, and often wrong. Letting it represent me to an employer introduces risks I wasn't willing to accept, and there's every chance it could say something stupid.</p>
+                <p class="mfaq-p">Having a human in the loop, where I can read over tailored CVs and check the AI's reasoning for each score, keeps the standard of applications high. Quality matters.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="mobile-faq-item">
+            <button class="mobile-faq-trigger" type="button" aria-expanded="false" aria-controls="mfaq-content-3" id="mfaq-header-3">
+              <span class="mfaq-question">What is the benefit of three agents?</span>
+              <span class="mfaq-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="mobile-faq-panel" id="mfaq-content-3" role="region" aria-labelledby="mfaq-header-3" hidden>
+              <div class="mfaq-content-inner">
+                <p class="mfaq-p">Each agent comes with its own agent files: GILES.md, CORDELIA.md, and WILLOW.md.</p>
+                <p class="mfaq-p">Each agent can be tailored to run on a specific model, which can save costs, improve the results for specific tasks, or both. Splitting the job three ways is what makes that possible, and it is where a lot of the effectiveness of the workflow came from.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="mobile-faq-item">
+            <button class="mobile-faq-trigger" type="button" aria-expanded="false" aria-controls="mfaq-content-4" id="mfaq-header-4">
+              <span class="mfaq-question">How did I manage costs?</span>
+              <span class="mfaq-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="mobile-faq-panel" id="mfaq-content-4" role="region" aria-labelledby="mfaq-header-4" hidden>
+              <div class="mfaq-content-inner">
+                <ol class="mfaq-num-list">
+                  <li>Converting prompts into repeatable code that is free to run and produces predictable results</li>
+                  <li>Using open source software (OpenClaw), which allows greater flexibility in model usage</li>
+                  <li>Managing context windows</li>
+                  <li>Careful model selection, using a model capable enough for each task rather than the most expensive flagship for everything</li>
+                  <li>Reducing the volume of information that reaches the LLM at all</li>
+                </ol>
+                <p class="mfaq-p">The last one does most of the work. Cordelia only runs a vibe check on a short list of roles, because scoring metrics have already filtered the rest out in plain Python. That is where the savings come from.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="mobile-faq-item">
+            <button class="mobile-faq-trigger" type="button" aria-expanded="false" aria-controls="mfaq-content-5" id="mfaq-header-5">
+              <span class="mfaq-question">How do I communicate with the agents?</span>
+              <span class="mfaq-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="mobile-faq-panel" id="mfaq-content-5" role="region" aria-labelledby="mfaq-header-5" hidden>
+              <div class="mfaq-content-inner">
+                <p class="mfaq-p">Through Slack or Telegram, so I can monitor the workflow and ask for fixes or new features from anywhere. Secure tunneling gives me remote access to the Mission Control dashboard from any device.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="mobile-faq-item">
+            <button class="mobile-faq-trigger" type="button" aria-expanded="false" aria-controls="mfaq-content-6" id="mfaq-header-6">
+              <span class="mfaq-question">How is it kept secure?</span>
+              <span class="mfaq-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="mobile-faq-panel" id="mfaq-content-6" role="region" aria-labelledby="mfaq-header-6" hidden>
+              <div class="mfaq-content-inner">
+                <p class="mfaq-p">The agents operate on a virtual computer, completely separated from my personal files. For this task that was considered enough, since the agents have no need to log into accounts or access personal information.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 7 -->
+          <div class="mobile-faq-item">
+            <button class="mobile-faq-trigger" type="button" aria-expanded="false" aria-controls="mfaq-content-7" id="mfaq-header-7">
+              <span class="mfaq-question">How can I improve this workflow?</span>
+              <span class="mfaq-chevron" aria-hidden="true">&#9662;</span>
+            </button>
+            <div class="mobile-faq-panel" id="mfaq-content-7" role="region" aria-labelledby="mfaq-header-7" hidden>
+              <div class="mfaq-content-inner">
+                <p class="mfaq-p">The next addition is an API connection to an email account. Mail from my personal account would auto-forward to the agent's own address, keeping the separation intact.</p>
+                <p class="mfaq-p">Anything successful reaches me through Slack, and jobs I have applied for that are pending a response get tracked through Mission Control. Everything is consolidated into one easy-to-manage location, which removes another chunk of the work involved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- EPILOGUE / RETURN -->
     <footer class="story-epilogue">
       <div class="epilogue-links">
@@ -614,7 +846,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
 
   /* ------------------------------------------------------------------
      LABELS
-     This page keeps its own voice — monospace eyebrows, hard shadows —
+     This page keeps its own voice, monospace eyebrows, hard shadows :
      but every label on it is one definition, the way the bike challenge
      case study does it: a label is recognised by its case and tracking,
      not by each section picking its own size and weight.
@@ -1208,10 +1440,10 @@ const agents = story?.agents || story?.vignette3?.agents || [];
   /* The yellow panel is a curtain that lifts on scroll, revealing */
   /* the real "How it works" section pulled up underneath it.     */
   /* --benefits-lift  = how far we scroll to raise the curtain, and how far   */
-  /*   How-It-Works starts below the fold — which sets how much of the device */
+  /*   How-It-Works starts below the fold, which sets how much of the device */
   /*   peeks out in front of the curtain. Measured by syncBenefitsLift().     */
   /* ============================================================ */
-  /* Pure scroll spacer — supplies the distance the curtain travels. */
+  /* Pure scroll spacer, supplies the distance the curtain travels. */
   .benefits-scrolly-runway {
     --benefits-lift: 62vh;
     position: relative;
@@ -2264,7 +2496,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
 
     /* An eyebrow should sit under the body text, not over it. At 0.88rem/800
        the uppercase, letter-spaced monospace was out-weighing the 1rem lead
-       it was meant to introduce — more so now the title is hidden. */
+       it was meant to introduce, more so now the title is hidden. */
     .dilemma-eyebrow {
       font-size: 0.7rem !important;
       font-family: monospace !important;
@@ -2274,7 +2506,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     }
 
     /* The question ("Do you know how time consuming it is to be unemployed?
-       I do.") is dropped on mobile — the eyebrow and the sub-lead already set
+       I do.") is dropped on mobile, the eyebrow and the sub-lead already set
        up the scenario, and the height it frees is what lets the choice cards
        and the character breathe inside the one-screen stage. */
     .dilemma-title {
@@ -2488,7 +2720,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       width: 100% !important;
       max-width: 100% !important;
       height: auto !important;
-      /* The curtain animation is off below 860px, so this is just a section —
+      /* The curtain animation is off below 860px, so this is just a section :
          but it was still pinned to 100dvh, which parks a large void wherever
          the content is shorter than the screen (and the void lands somewhere
          different depending on where you have scrolled to). Size it to its
@@ -2535,7 +2767,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       margin: 0 !important;
     }
 
-    /* An eyebrow, not a button — same correction as the workflow section. */
+    /* An eyebrow, not a button, same correction as the workflow section. */
     .benefits-eyebrow {
       display: block !important;
       background: none !important;
@@ -2620,18 +2852,25 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       display: none !important;
     }
 
-    /* Stripped to the three things it actually has to say: what it is, that
-       you cannot have it here, and where to go instead. */
+    /* Mobile Overview Container */
+    .mobile-overview-container {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      width: 100% !important;
+      gap: 14px !important;
+    }
+
     .mobile-desktop-notice-card {
       display: flex !important;
       flex-direction: column !important;
       align-items: center !important;
-      gap: 6px !important;
+      gap: 8px !important;
       background: #ffffff !important;
       border: 2.5px solid #000000 !important;
       border-radius: 16px !important;
       box-shadow: 3.5px 5px 0px #000000 !important;
-      padding: 14px 16px !important;
+      padding: 16px 16px 14px !important;
       width: 100% !important;
       max-width: 340px !important;
       box-sizing: border-box !important;
@@ -2639,23 +2878,35 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       text-align: center !important;
     }
 
-    .mobile-notice-badge {
-      font-family: monospace !important;
-      font-size: 0.68rem !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.1em !important;
-      text-transform: uppercase !important;
-      color: rgba(0, 0, 0, 0.5) !important;
-      background: none !important;
-      border: none !important;
-      border-radius: 0 !important;
-      padding: 0 !important;
+    .mobile-unavailable-banner {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      background: #FFF0F4 !important;
+      color: #E60050 !important;
+      border: 2px solid #000000 !important;
+      border-radius: 10px !important;
+      padding: 8px 12px !important;
+      font-size: 0.84rem !important;
+      font-weight: 900 !important;
+      line-height: 1.3 !important;
+      text-align: center !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      box-shadow: 2.5px 3px 0px #000000 !important;
+      margin-bottom: 2px !important;
+    }
+
+    .mobile-unavailable-icon {
+      flex-shrink: 0 !important;
+      color: #E60050 !important;
     }
 
     .mobile-notice-desc {
-      font-size: 1.02rem !important;
+      font-size: 0.98rem !important;
       font-weight: 800 !important;
-      line-height: 1.25 !important;
+      line-height: 1.3 !important;
       color: #000000 !important;
       margin: 0 !important;
     }
@@ -2670,9 +2921,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       border: 2px solid #000000 !important;
       border-radius: 9999px !important;
       padding: 11px 16px !important;
-      /* Keep the label on one line so the trailing arrow stays beside it
-         instead of stranding on the right of a wrapped second line. */
-      font-size: 0.82rem !important;
+      font-size: 0.84rem !important;
       white-space: nowrap !important;
       font-weight: 800 !important;
       box-shadow: 3px 4px 0px #000000 !important;
@@ -2688,7 +2937,306 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       box-shadow: 0px 0px 0px #000000 !important;
     }
 
-    /* 5. Team Hierarchy Section — cards collapse to banner, name and role,
+    .mobile-skip-link {
+      background: none !important;
+      border: none !important;
+      font-family: monospace !important;
+      font-size: 0.76rem !important;
+      font-weight: 700 !important;
+      color: #444444 !important;
+      text-decoration: underline !important;
+      cursor: pointer !important;
+      padding: 6px 8px !important;
+      margin-top: 2px !important;
+      transition: color 0.15s ease !important;
+    }
+
+    .mobile-skip-link:active {
+      color: #000000 !important;
+    }
+
+    /* Expandable Mobile README Drawer */
+    .mobile-readme-drawer {
+      display: flex !important;
+      flex-direction: column !important;
+      background: #ffffff !important;
+      border: 2.5px solid #000000 !important;
+      border-radius: 16px !important;
+      box-shadow: 3.5px 5px 0px #000000 !important;
+      padding: 20px 16px !important;
+      width: 100% !important;
+      max-width: 340px !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      text-align: left !important;
+      gap: 12px !important;
+    }
+
+    .mobile-readme-drawer[hidden] {
+      display: none !important;
+    }
+
+    .drawer-header {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 4px !important;
+    }
+
+    .drawer-eyebrow {
+      font-family: monospace !important;
+      font-size: 0.68rem !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.1em !important;
+      color: #b36b00 !important;
+      text-transform: uppercase !important;
+    }
+
+    .drawer-title {
+      font-size: 1.15rem !important;
+      font-weight: 900 !important;
+      line-height: 1.25 !important;
+      color: #000000 !important;
+      margin: 0 !important;
+    }
+
+    .drawer-p {
+      font-size: 0.88rem !important;
+      line-height: 1.5 !important;
+      color: #333333 !important;
+      margin: 0 !important;
+    }
+
+    .drawer-subcard {
+      background: #faf8f5 !important;
+      border: 2px solid #000000 !important;
+      border-radius: 12px !important;
+      padding: 12px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 8px !important;
+      margin: 4px 0 !important;
+    }
+
+    .drawer-subcard-title {
+      font-size: 0.96rem !important;
+      font-weight: 900 !important;
+      color: #000000 !important;
+      margin: 0 !important;
+    }
+
+    .drawer-subcard-p {
+      font-size: 0.84rem !important;
+      line-height: 1.45 !important;
+      color: #333333 !important;
+      margin: 0 !important;
+    }
+
+    .drawer-list, .drawer-num-list {
+      margin: 0 !important;
+      padding-left: 20px !important;
+      font-size: 0.84rem !important;
+      line-height: 1.45 !important;
+      color: #333333 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 6px !important;
+    }
+
+    .drawer-section-heading {
+      font-size: 0.98rem !important;
+      font-weight: 900 !important;
+      color: #000000 !important;
+      margin: 8px 0 0 0 !important;
+    }
+
+    .drawer-action-callout {
+      margin-top: 8px !important;
+      padding-top: 14px !important;
+      border-top: 2px dashed #000000 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 10px !important;
+      text-align: center !important;
+    }
+
+    .drawer-action-prompt {
+      font-size: 0.85rem !important;
+      font-weight: 800 !important;
+      color: #000000 !important;
+      margin: 0 !important;
+    }
+
+    .mobile-drawer-scroll-btn {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      background: #ffcc00 !important;
+      color: #000000 !important;
+      border: 2px solid #000000 !important;
+      border-radius: 9999px !important;
+      padding: 11px 16px !important;
+      font-size: 0.84rem !important;
+      font-weight: 800 !important;
+      box-shadow: 3px 3.5px 0px #000000 !important;
+      cursor: pointer !important;
+      width: 100% !important;
+      min-height: 44px !important;
+      transition: transform 0.12s ease, box-shadow 0.12s ease !important;
+    }
+
+    .mobile-drawer-scroll-btn:active {
+      transform: translate(1px, 2px) !important;
+      box-shadow: 0px 0px 0px #000000 !important;
+    }
+
+    .mobile-drawer-close-link {
+      background: none !important;
+      border: none !important;
+      font-family: monospace !important;
+      font-size: 0.76rem !important;
+      font-weight: 700 !important;
+      color: #666666 !important;
+      text-decoration: underline !important;
+      cursor: pointer !important;
+      padding: 4px 8px !important;
+    }
+
+    .mobile-drawer-close-link:active {
+      color: #000000 !important;
+    }
+
+    /* Mobile-Only FAQ Section (accordion) */
+    .mobile-faqs-section {
+      display: block !important;
+      padding: 48px 18px 56px !important;
+      background: #f7f4ee !important;
+      border-top: 3px solid #000000 !important;
+      box-sizing: border-box !important;
+    }
+
+    .mobile-faqs-container {
+      max-width: 600px !important;
+      margin: 0 auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 22px !important;
+    }
+
+    .mobile-faqs-header {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 6px !important;
+    }
+
+    .mobile-faqs-eyebrow {
+      font-family: monospace !important;
+      font-size: 0.72rem !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.1em !important;
+      color: #71717a !important;
+      text-transform: uppercase !important;
+    }
+
+    .mobile-faqs-title {
+      font-size: clamp(1.75rem, 6.5vw, 2.2rem) !important;
+      font-weight: 900 !important;
+      line-height: 1.15 !important;
+      color: #000000 !important;
+      margin: 0 !important;
+      letter-spacing: -0.02em !important;
+    }
+
+    .mobile-faqs-desc {
+      font-size: 0.92rem !important;
+      line-height: 1.45 !important;
+      color: #444444 !important;
+      margin: 0 !important;
+    }
+
+    .mobile-faqs-accordion {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+    }
+
+    .mobile-faq-item {
+      background: #ffffff !important;
+      border: 2.5px solid #000000 !important;
+      border-radius: 12px !important;
+      box-shadow: 3.5px 4px 0px #000000 !important;
+      overflow: hidden !important;
+      transition: box-shadow 0.12s ease !important;
+    }
+
+    .mobile-faq-trigger {
+      width: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 12px !important;
+      padding: 14px 16px !important;
+      background: #ffffff !important;
+      border: none !important;
+      cursor: pointer !important;
+      text-align: left !important;
+      font-family: inherit !important;
+    }
+
+    .mfaq-question {
+      font-size: 0.95rem !important;
+      font-weight: 800 !important;
+      color: #000000 !important;
+      line-height: 1.35 !important;
+    }
+
+    .mfaq-chevron {
+      font-size: 1.1rem !important;
+      color: #000000 !important;
+      transition: transform 0.2s ease !important;
+      flex-shrink: 0 !important;
+    }
+
+    .mobile-faq-trigger[aria-expanded="true"] .mfaq-chevron {
+      transform: rotate(180deg) !important;
+    }
+
+    .mobile-faq-panel {
+      border-top: 2px dashed #000000 !important;
+      background: #faf8f5 !important;
+    }
+
+    .mobile-faq-panel[hidden] {
+      display: none !important;
+    }
+
+    .mfaq-content-inner {
+      padding: 14px 16px 18px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+
+    .mfaq-p {
+      font-size: 0.88rem !important;
+      line-height: 1.5 !important;
+      color: #222222 !important;
+      margin: 0 !important;
+    }
+
+    .mfaq-list, .mfaq-num-list {
+      margin: 0 !important;
+      padding-left: 20px !important;
+      font-size: 0.88rem !important;
+      line-height: 1.45 !important;
+      color: #222222 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 6px !important;
+    }
+
+    /* 5. Team Hierarchy Section, cards collapse to banner, name and role,
        with the brief and telemetry behind a Read more. Three full cards ran
        to roughly three screens; collapsed they are one. */
     .team-hierarchy-section {
@@ -2934,7 +3482,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
 
        `display: contents` dissolves the two .footer-contact-node wrappers so
        the button, both icons and the copy control become direct children of
-       .epilogue-links. That lets one flex row order and align all four —
+       .epilogue-links. That lets one flex row order and align all four :
        without it the copy pill was stacked inside the email wrapper, which
        is what threw the row out of alignment. */
     .footer-contact-node {
@@ -3071,9 +3619,14 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     }
   }
 
-  /* Desktop defaults for notice card & plain toggle */
-  .mobile-desktop-notice-card {
-    display: none;
+  /* Desktop defaults for mobile-only cards & sections */
+  @media (min-width: 861px) {
+    .mobile-overview-container,
+    .mobile-desktop-notice-card,
+    .mobile-readme-drawer,
+    .mobile-faqs-section {
+      display: none !important;
+    }
   }
 
 </style>
@@ -3101,9 +3654,14 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     const benefitsCurtainLayer = document.getElementById("benefitsCurtainLayer");
     const exploreWorkflowBtn = document.getElementById("exploreWorkflowBtn");
     const scrollToWorkflowStepsBtn = document.getElementById("scrollToWorkflowStepsBtn");
+    const openMobileReadmeBtn = document.getElementById("openMobileReadmeBtn");
+    const mobileReadmeDrawer = document.getElementById("mobileReadmeDrawer");
+    const mobileReadmeChevron = document.getElementById("mobileReadmeChevron");
+    const mobileDrawerCloseBtn = document.getElementById("mobileDrawerCloseBtn");
+    const mobileDrawerScrollStepsBtn = document.getElementById("mobileDrawerScrollStepsBtn");
 
     // The layout uses ClientRouter, so `astro:page-load` fires on the FIRST
-    // load as well as after every view transition — and this init also runs
+    // load as well as after every view transition, and this init also runs
     // from the readyState branch below. Every handler was therefore bound
     // twice, which silently cancelled anything that toggles: click once, the
     // first listener turns it on and the second turns it straight back off.
@@ -3192,7 +3750,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
         // On desktop the benefits curtain is absolutely positioned inside the
         // sticky viewport and moved by a scroll-driven transform, so
         // scrollIntoView resolves to "already in place" and nothing happens.
-        // Drive its runway instead — the same path the "Explore how it works"
+        // Drive its runway instead, the same path the "Explore how it works"
         // button takes. Below 860px that runway is display:none, so fall back
         // to scrolling the (then static) curtain into view.
         // Scroll to the START of the runway, where the yellow curtain is
@@ -3223,98 +3781,52 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     bindOnce(popupActionBtn, "click", handlePopupAction, "PopupAction");
 
     bindOnce(exploreWorkflowBtn, "click", raiseBenefitsCurtain, "ExploreWf");
-    bindOnce(scrollToWorkflowStepsBtn, "click", () => {
+
+    function scrollToWorkflowSteps() {
       const wf = document.getElementById("workflow-steps");
       if (wf) wf.scrollIntoView({ behavior: "smooth" });
-    }, "ScrollWf");
-
-    // ----------------------------------------------------
-    // MOBILE TOUCH GESTURE CONTROLLER (QUICK SWIPE VS SLOW SCROLL)
-    // ----------------------------------------------------
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchStartTime = 0;
-
-    function getSnapSections(): HTMLElement[] {
-      const selectors = [
-        "#hero-runway",
-        "#hero",
-        "#benefitsCurtainLayer",
-        ".team-hierarchy-section",
-        "#workflow-steps",
-        "#doom-section",
-        ".story-epilogue",
-      ];
-      return selectors
-        .map((s) => document.querySelector(s) as HTMLElement)
-        .filter((el): el is HTMLElement => !!el && el.offsetHeight > 0);
     }
 
-    function scrollToSection(direction: "next" | "prev") {
-      const sections = getSnapSections();
-      if (!sections.length) return;
+    bindOnce(scrollToWorkflowStepsBtn, "click", scrollToWorkflowSteps, "ScrollWf");
+    bindOnce(mobileDrawerScrollStepsBtn, "click", scrollToWorkflowSteps, "ScrollWfDrawer");
 
-      const buffer = 50;
+    function toggleMobileReadme(forceState?: boolean) {
+      if (!mobileReadmeDrawer || !openMobileReadmeBtn) return;
+      const isCurrentlyOpen = openMobileReadmeBtn.getAttribute("aria-expanded") === "true";
+      const nextState = typeof forceState === "boolean" ? forceState : !isCurrentlyOpen;
 
-      if (direction === "next") {
-        const next = sections.find((sec) => {
-          const rect = sec.getBoundingClientRect();
-          return rect.top > buffer;
-        });
-        if (next) {
-          next.scrollIntoView({ behavior: "smooth" });
-        }
-      } else {
-        const prevList = sections.filter((sec) => {
-          const rect = sec.getBoundingClientRect();
-          return rect.top < -buffer;
-        });
-        if (prevList.length > 0) {
-          const prev = prevList[prevList.length - 1];
-          prev.scrollIntoView({ behavior: "smooth" });
-        } else {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+      openMobileReadmeBtn.setAttribute("aria-expanded", String(nextState));
+      mobileReadmeDrawer.hidden = !nextState;
+
+      const labelSpan = openMobileReadmeBtn.querySelector(".mobile-cta-btn-text");
+      if (labelSpan) {
+        labelSpan.textContent = nextState ? "Close overview" : "Read a simple overview";
+      }
+      if (mobileReadmeChevron) {
+        mobileReadmeChevron.innerHTML = nextState ? "&#9652;" : "&#9662;";
       }
     }
 
-    window.addEventListener(
-      "touchstart",
-      (e) => {
-        if (window.innerWidth > 860) return;
-        if (e.touches.length !== 1) return;
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-        touchStartTime = Date.now();
-      },
-      { passive: true },
-    );
+    bindOnce(openMobileReadmeBtn, "click", () => toggleMobileReadme(), "ToggleMobileReadme");
+    bindOnce(mobileDrawerCloseBtn, "click", () => {
+      toggleMobileReadme(false);
+      document.getElementById("mobileNoticeCard")?.scrollIntoView({ behavior: "smooth" });
+    }, "CloseMobileDrawer");
 
-    window.addEventListener(
-      "touchend",
-      (e) => {
-        if (window.innerWidth > 860) return;
-        if (e.changedTouches.length !== 1) return;
-        const deltaX = touchStartX - e.changedTouches[0].clientX;
-        const deltaY = touchStartY - e.changedTouches[0].clientY;
-        const elapsed = Date.now() - touchStartTime;
+    // Mobile FAQ Accordion Handlers
+    const faqTriggers = document.querySelectorAll<HTMLButtonElement>(".mobile-faq-trigger");
+    faqTriggers.forEach((trigger, idx) => {
+      bindOnce(trigger, "click", () => {
+        const isExpanded = trigger.getAttribute("aria-expanded") === "true";
+        const targetId = trigger.getAttribute("aria-controls");
+        const panel = targetId ? document.getElementById(targetId) : null;
 
-        // Quick flick detection: fast duration (< 320ms), clear vertical motion (> 40px), predominantly vertical
-        const isQuickFlick = elapsed < 320 && Math.abs(deltaY) > 40 && Math.abs(deltaY) > Math.abs(deltaX) * 1.25;
-
-        if (isQuickFlick) {
-          if (deltaY > 0) {
-            // Quick swipe UP -> snap smoothly to next section
-            scrollToSection("next");
-          } else {
-            // Quick swipe DOWN -> snap smoothly to previous section
-            scrollToSection("prev");
-          }
+        trigger.setAttribute("aria-expanded", String(!isExpanded));
+        if (panel) {
+          panel.hidden = isExpanded;
         }
-        // Slow swipe / drag (elapsed >= 320ms) allows free natural scrolling!
-      },
-      { passive: true },
-    );
+      }, `MobileFaq_${idx}`);
+    });
 
     // Doom loop IntersectionObserver
     const doomOrbit = document.querySelector("[data-doom-orbit]");
