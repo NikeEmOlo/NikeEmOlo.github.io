@@ -345,7 +345,7 @@ export class CardDeckController {
 
             this._applyTransforms();
 
-            if (Math.abs(diff) > 0.0006 || Math.abs(this.velocity) > 0.0006) {
+            if (Math.abs(diff) > 0.002 || Math.abs(this.velocity) > 0.002) {
                 this.rafId = requestAnimationFrame(loop);
             } else {
                 this.progress = this.targetProgress;
@@ -481,8 +481,9 @@ export class CardDeckController {
                 shadowOpacity = 0.60;
             }
 
-            // Distinguish active center hero from background deck stack
-            const isActiveHero = (i === currentIdx && frac <= 0.40);
+            // Distinguish active center hero from background deck stack:
+            // activates smoothly when card is within center reading focus
+            const isActiveHero = Math.abs(p - i) <= 0.35;
             card.classList.toggle("is-active-hero", isActiveHero);
             card.classList.toggle("is-deck-stack", !isActiveHero);
 

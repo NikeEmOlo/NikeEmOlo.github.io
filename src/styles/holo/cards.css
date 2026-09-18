@@ -4,6 +4,7 @@
   --grain: url("/img/grain.webp");
   --glitter: url("/img/glitter.png");
   --glittersize: 25%;
+  --shift: 1px;
 
   --space: 5%;
   --angle: 133deg;

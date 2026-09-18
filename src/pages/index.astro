@@ -73,6 +73,12 @@ const tickerItems = (home.currentlyWorkingOn || []).map((item) => {
 ---
 
 <Base>
+    <Fragment slot="head">
+        <link rel="preload" as="image" href="/img/glitter.png" />
+        {projects.filter((p) => p.data.active !== false && p.data.maskUrl).map((p) => (
+            <link rel="preload" as="image" href={p.data.maskUrl} />
+        ))}
+    </Fragment>
     <main class="home-page">
         <!-- Top Hero Header: Semi-bold Title with Pink Dot & Regular Subtitle -->
         <header class="hero-header">
