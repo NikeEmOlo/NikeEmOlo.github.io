@@ -704,11 +704,11 @@ const cv = cvEntry?.data;
                     <button class="cv-back-to-notes-btn is-hidden" id="masterCvBackBtn" title="Back to note">← Back to Notes</button>
                     <span class="mcv-contact-email">nike.emily@pm.me</span>
                     <nav class="master-cv-nav">
-                      <button class="cv-nav-btn" data-target="mcv-about">About</button>
-                      <button class="cv-nav-btn" data-target="mcv-experience">Experience</button>
-                      <button class="cv-nav-btn" data-target="mcv-competencies">Competencies</button>
-                      <button class="cv-nav-btn" data-target="mcv-now">Currently</button>
-                      <button class="cv-nav-btn" data-target="mcv-certs">Certs</button>
+                      <button class="cv-nav-btn" data-target="mockup-mcv-about">About</button>
+                      <button class="cv-nav-btn" data-target="mockup-mcv-experience">Experience</button>
+                      <button class="cv-nav-btn" data-target="mockup-mcv-competencies">Competencies</button>
+                      <button class="cv-nav-btn" data-target="mockup-mcv-now">Currently</button>
+                      <button class="cv-nav-btn" data-target="mockup-mcv-certs">Certs</button>
                     </nav>
                   </div>
                   <div class="master-cv-top-actions">
@@ -733,7 +733,7 @@ const cv = cvEntry?.data;
                   </section>
 
                   <!-- Section 1: About & Education / Skills -->
-                  <section class="mcv-section" id="mcv-about">
+                  <section class="mcv-section" id="mockup-mcv-about">
                     <div class="mcv-grid-2">
                       <div class="mcv-col">
                         <h2 class="mcv-heading">about</h2>
@@ -780,7 +780,7 @@ const cv = cvEntry?.data;
                   </section>
 
                   <!-- Section 2: Work Experience (Expandable Timeline Items) -->
-                  <section class="mcv-section" id="mcv-experience">
+                  <section class="mcv-section" id="mockup-mcv-experience">
                     <h2 class="mcv-heading">work experience</h2>
                     <div class="mcv-timeline">
                       {cv && cv.experience.map((item) => (
@@ -821,7 +821,7 @@ const cv = cvEntry?.data;
                   </section>
 
                   <!-- Section 3: Key Competencies (Streetwear Doodle-Pop Cards) -->
-                  <section class="mcv-section" id="mcv-competencies">
+                  <section class="mcv-section" id="mockup-mcv-competencies">
                     <h2 class="mcv-heading">key competencies</h2>
                     <div class="mcv-cards-grid">
                       {cv && cv.competencies.map((comp) => (
@@ -901,7 +901,7 @@ const cv = cvEntry?.data;
                   </section>
 
                   <!-- Section 4: Currently (Dedicated High-Impact Active Grid) -->
-                  <section class="mcv-section" id="mcv-now">
+                  <section class="mcv-section" id="mockup-mcv-now">
                     <h2 class="mcv-heading">currently</h2>
                     <div class="mcv-now-grid">
                       {cv && cv.currently.map((item) => (
@@ -918,7 +918,7 @@ const cv = cvEntry?.data;
                   </section>
 
                   <!-- Section 5: Certificates -->
-                  <section class="mcv-section" id="mcv-certs">
+                  <section class="mcv-section" id="mockup-mcv-certs">
                     <h2 class="mcv-heading">certificates</h2>
                     <div class="mcv-cert-grid">
                       {cv && cv.certificates.map((cert) => (
@@ -2285,9 +2285,10 @@ const cv = cvEntry?.data;
   }
 
   .how-eyebrow {
-    font-size: 11px;
+    font-size: var(--t-micro, 0.72rem);
     font-family: monospace;
-    letter-spacing: 0.16em;
+    font-weight: 800;
+    letter-spacing: 0.14em;
     color: #71717a;
     text-transform: uppercase;
     display: block;
@@ -2301,9 +2302,10 @@ const cv = cvEntry?.data;
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    font-size: clamp(2rem, 3.2vw, 3.2rem);
+    font-size: clamp(2rem, 3.2vw, 3rem);
     font-weight: 800;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
     color: #000000;
     margin: 0 0 6px 0;
   }
@@ -10299,10 +10301,18 @@ const cv = cvEntry?.data;
 </style>
 
 <script>
+  let howItWorksCleanup: (() => void) | null = null;
+  let carouselCleanup: (() => void) | null = null;
+
   function initHowItWorks() {
     const sectionEl = document.getElementById("how-it-works");
     if (!sectionEl || sectionEl.dataset.initialized === "true") return;
     sectionEl.dataset.initialized = "true";
+
+    if (howItWorksCleanup) {
+      howItWorksCleanup();
+      howItWorksCleanup = null;
+    }
 
     const runway = document.getElementById("how-runway");
     const zoomContainer = document.querySelector("[data-desktop-zoom]") as HTMLElement;
@@ -12949,7 +12959,7 @@ const cv = cvEntry?.data;
         <div class="log-line" style="color: #94a3b8;"><span style="color: #22c55e; font-weight: 700;">nike@workstation</span>:<span style="color: #38bdf8;">~/job_hunter</span>$ <span style="color: #f1f5f9;">python -m workflow.morning_daemon</span></div>
       `;
 
-      const lineDelay = 1900; // Relaxed reading pace ~1.9s per line so visitors can comfortably read
+      const lineDelay = 750; // Fast, snappy reading pace (approx 0.75s per line)
 
       logScript.forEach((item, index) => {
         const timer = setTimeout(() => {
@@ -12997,7 +13007,7 @@ const cv = cvEntry?.data;
                 startWorkflowBtn.classList.remove("is-running");
                 startWorkflowBtn.innerHTML = `<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><polygon points="6,4 20,12 6,20" /></svg><span>Replay</span>`;
               }
-            }, 1000);
+            }, 700);
             logTimers.push(slackTimer);
           }
         }, 300 + index * lineDelay);
@@ -13251,107 +13261,98 @@ const cv = cvEntry?.data;
     // Scroll-to-Scale shrinking gesture listener:
     // Only DOWNWARD scroll causes shrink and exit. UPWARD scroll only recovers scale to 1.0 and never exits.
     // Exit ONLY occurs when NO user modals are open (other than the terminal) AND user is outside Mission Control.
-    window.addEventListener(
-      "wheel",
-      (e) => {
-        if (!zoomContainer || !zoomContainer.classList.contains("is-fullscreen")) return;
+    function onWheel(e: WheelEvent) {
+      if (!zoomContainer || !zoomContainer.classList.contains("is-fullscreen")) return;
 
-        // If Mission Control or any modal is open, NEVER trigger exit-on-scroll.
-        if (isAnyModalOpen()) return;
+      // If Mission Control or any modal is open, NEVER trigger exit-on-scroll.
+      if (isAnyModalOpen()) return;
 
-        const target = e.target as HTMLElement;
-        if (target && target.closest("#osMissionControlDashboard, .mission-control-fullscreen, .mc-table-container, #missionJobModal, #missionTailoredCvModal, .os-window-modal:not(#terminalConsole)")) {
+      const target = e.target as HTMLElement;
+      if (target && target.closest("#osMissionControlDashboard, .mission-control-fullscreen, .mc-table-container, #missionJobModal, #missionTailoredCvModal, .os-window-modal:not(#terminalConsole)")) {
+        return;
+      }
+
+      const inTerminal = target ? target.closest("#terminalOutput") as HTMLElement | null : null;
+      if (inTerminal) {
+        const isScrollDown = e.deltaY > 0;
+        const isScrollUp = e.deltaY < 0;
+        const canScrollDown = inTerminal.scrollTop + inTerminal.clientHeight < inTerminal.scrollHeight - 3;
+        const canScrollUp = inTerminal.scrollTop > 3;
+
+        // If terminal output has room to scroll, let it scroll naturally
+        if ((isScrollDown && canScrollDown) || (isScrollUp && canScrollUp)) {
           return;
         }
+      }
 
-        const inTerminal = target ? target.closest("#terminalOutput") as HTMLElement | null : null;
-        if (inTerminal) {
-          const isScrollDown = e.deltaY > 0;
-          const isScrollUp = e.deltaY < 0;
-          const canScrollDown = inTerminal.scrollTop + inTerminal.clientHeight < inTerminal.scrollHeight - 3;
-          const canScrollUp = inTerminal.scrollTop > 3;
-
-          // If terminal output has room to scroll, let it scroll naturally
-          if ((isScrollDown && canScrollDown) || (isScrollUp && canScrollUp)) {
-            return;
-          }
-        }
-
-        // 1. SCROLLING UP (deltaY < 0): NEVER exits. Recovers scale if partially shrunk.
-        if (e.deltaY < 0) {
-          if (exitScrollProgress > 0) {
-            e.preventDefault();
-            if (exitSpringAnim) cancelAnimationFrame(exitSpringAnim);
-            exitScrollProgress = Math.max(0, exitScrollProgress + e.deltaY / 320);
-            applyExitScale(exitScrollProgress);
-          }
-          return;
-        }
-
-        // 2. SCROLLING DOWN (deltaY > 0): Proportionally shrinks desktop based on scroll delta
-        if (e.deltaY > 0) {
+      // 1. SCROLLING UP (deltaY < 0): NEVER exits. Recovers scale if partially shrunk.
+      if (e.deltaY < 0) {
+        if (exitScrollProgress > 0) {
           e.preventDefault();
           if (exitSpringAnim) cancelAnimationFrame(exitSpringAnim);
-
-          exitScrollProgress = Math.min(1, exitScrollProgress + e.deltaY / 320);
+          exitScrollProgress = Math.max(0, exitScrollProgress + e.deltaY / 320);
           applyExitScale(exitScrollProgress);
-
-          if (exitScrollProgress >= 1) {
-            exitFullscreen(true);
-          }
         }
-      },
-      { passive: false }
-    );
+        return;
+      }
+
+      // 2. SCROLLING DOWN (deltaY > 0): Proportionally shrinks desktop based on scroll delta
+      if (e.deltaY > 0) {
+        e.preventDefault();
+        if (exitSpringAnim) cancelAnimationFrame(exitSpringAnim);
+
+        exitScrollProgress = Math.min(1, exitScrollProgress + e.deltaY / 320);
+        applyExitScale(exitScrollProgress);
+
+        if (exitScrollProgress >= 1) {
+          exitFullscreen(true);
+        }
+      }
+    }
+    window.addEventListener("wheel", onWheel, { passive: false });
 
     let touchStartY = 0;
-    window.addEventListener(
-      "touchstart",
-      (e) => {
-        if (e.touches && e.touches[0]) {
-          touchStartY = e.touches[0].clientY;
-        }
-      },
-      { passive: true }
-    );
-
-    window.addEventListener(
-      "touchmove",
-      (e) => {
-        if (!zoomContainer || !zoomContainer.classList.contains("is-fullscreen")) return;
-        if (!e.touches || !e.touches[0]) return;
-
-        // If Mission Control or any modal is open, NEVER trigger exit-on-scroll
-        if (isAnyModalOpen()) return;
-
-        const target = e.target as HTMLElement;
-        if (target && target.closest("#osMissionControlDashboard, .mission-control-fullscreen, .mc-table-container, #missionJobModal, #missionTailoredCvModal, .os-window-modal:not(#terminalConsole)")) {
-          return;
-        }
-        const inTerminal = target ? target.closest("#terminalOutput") as HTMLElement | null : null;
-        if (inTerminal) return;
-
-        // In touch: finger swiping UP (moving down in content) -> deltaY > 0
-        const deltaY = touchStartY - e.touches[0].clientY;
+    function onTouchStart(e: TouchEvent) {
+      if (e.touches && e.touches[0]) {
         touchStartY = e.touches[0].clientY;
+      }
+    }
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
 
-        if (deltaY > 0) {
-          // Scrolling down -> shrink desktop proportionally
-          exitScrollProgress = Math.min(1, exitScrollProgress + deltaY / 260);
-          applyExitScale(exitScrollProgress);
-          if (exitScrollProgress >= 1) {
-            exitFullscreen(true);
-          }
-        } else if (deltaY < 0) {
-          // Scrolling up -> restore scale towards 1.0, never exit
-          if (exitScrollProgress > 0) {
-            exitScrollProgress = Math.max(0, exitScrollProgress + deltaY / 260);
-            applyExitScale(exitScrollProgress);
-          }
+    function onTouchMove(e: TouchEvent) {
+      if (!zoomContainer || !zoomContainer.classList.contains("is-fullscreen")) return;
+      if (!e.touches || !e.touches[0]) return;
+
+      // If Mission Control or any modal is open, NEVER trigger exit-on-scroll
+      if (isAnyModalOpen()) return;
+
+      const target = e.target as HTMLElement;
+      if (target && target.closest("#osMissionControlDashboard, .mission-control-fullscreen, .mc-table-container, #missionJobModal, #missionTailoredCvModal, .os-window-modal:not(#terminalConsole)")) {
+        return;
+      }
+      const inTerminal = target ? target.closest("#terminalOutput") as HTMLElement | null : null;
+      if (inTerminal) return;
+
+      // In touch: finger swiping UP (moving down in content) -> deltaY > 0
+      const deltaY = touchStartY - e.touches[0].clientY;
+      touchStartY = e.touches[0].clientY;
+
+      if (deltaY > 0) {
+        // Scrolling down -> shrink desktop proportionally
+        exitScrollProgress = Math.min(1, exitScrollProgress + deltaY / 260);
+        applyExitScale(exitScrollProgress);
+        if (exitScrollProgress >= 1) {
+          exitFullscreen(true);
         }
-      },
-      { passive: true }
-    );
+      } else if (deltaY < 0) {
+        // Scrolling up -> restore scale towards 1.0, never exit
+        if (exitScrollProgress > 0) {
+          exitScrollProgress = Math.max(0, exitScrollProgress + deltaY / 260);
+          applyExitScale(exitScrollProgress);
+        }
+      }
+    }
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
 
     // Scroll listener: Displays cron toast at 08:00 AM as user scrolls into sticky runway
     function onScroll() {
@@ -13851,13 +13852,13 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
 
     // Master CV section nav button scrolling (strictly scoped to modal container)
     const masterCvScrollBody = document.getElementById("masterCvScrollBody");
-    document.querySelectorAll(".cv-nav-btn[data-target]").forEach((btn) => {
+    document.querySelectorAll("#osMasterCvModal .cv-nav-btn[data-target]").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         playClickSound();
         const targetId = btn.getAttribute("data-target");
         if (targetId && masterCvScrollBody) {
-          const targetEl = document.getElementById(targetId);
+          const targetEl = masterCvScrollBody.querySelector("#" + targetId) as HTMLElement | null;
           if (targetEl) {
             const topOffset = targetEl.offsetTop - masterCvScrollBody.offsetTop - 10;
             masterCvScrollBody.scrollTo({
@@ -14201,7 +14202,7 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
     }
 
     // Global Keyboard listener (Escape exits modal or fullscreen)
-    window.addEventListener("keydown", (e) => {
+    function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
         if (osBrowserModal && osBrowserModal.classList.contains("is-open")) {
           closeBrowserModal();
@@ -14221,7 +14222,8 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
           exitFullscreen();
         }
       }
-    });
+    }
+    window.addEventListener("keydown", onKeyDown);
 
     // Clicking any open desktop window or modal brings it to the top
     if (wallpaperStage) {
@@ -14242,8 +14244,9 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
     }
 
     // Attach IntersectionObserver on runway to kick off 5s notification timer when in view
+    let runwayObserver: IntersectionObserver | null = null;
     if (runway && "IntersectionObserver" in window) {
-      const runwayObserver = new IntersectionObserver(
+      runwayObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
@@ -14257,9 +14260,48 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
     }
 
     // Attach Scroll listener for sticky scrollytelling runway
+    function onMorphResize() {
+      applyMorph(currentMorph);
+    }
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", () => applyMorph(currentMorph));
+    window.addEventListener("resize", onMorphResize);
     onScroll();
+
+    howItWorksCleanup = () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onMorphResize);
+      if (runwayObserver) {
+        runwayObserver.disconnect();
+        runwayObserver = null;
+      }
+      if (desktopScreenTimer) {
+        clearTimeout(desktopScreenTimer);
+        desktopScreenTimer = null;
+      }
+      if (toastLaterTimer) {
+        clearTimeout(toastLaterTimer);
+        toastLaterTimer = null;
+      }
+      if (exitSpringAnim) {
+        cancelAnimationFrame(exitSpringAnim);
+        exitSpringAnim = null;
+      }
+    };
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        if (howItWorksCleanup) {
+          howItWorksCleanup();
+          howItWorksCleanup = null;
+        }
+      },
+      { once: true }
+    );
   }
 
   // ---- Mobile workflow carousel ----------------------------------------
@@ -14275,6 +14317,11 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
     if (!chain || !nav || !dotsWrap || !prevBtn || !nextBtn) return;
     if (chain.dataset.carouselBound === "true") return;
     chain.dataset.carouselBound = "true";
+
+    if (carouselCleanup) {
+      carouselCleanup();
+      carouselCleanup = null;
+    }
 
     const nodes = Array.from(chain.querySelectorAll<HTMLElement>(".wf-node"));
     if (!nodes.length) return;
@@ -14368,6 +14415,21 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
 
     window.addEventListener("resize", applyMode);
     applyMode();
+
+    carouselCleanup = () => {
+      window.removeEventListener("resize", applyMode);
+    };
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        if (carouselCleanup) {
+          carouselCleanup();
+          carouselCleanup = null;
+        }
+      },
+      { once: true }
+    );
   }
 
   function initWorkflowAll() {

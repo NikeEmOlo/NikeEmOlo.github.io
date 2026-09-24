@@ -986,6 +986,19 @@ const subagents = story?.subagents || [];
      case study does it: a label is recognised by its case and tracking,
      not by each section picking its own size and weight.
      ------------------------------------------------------------------ */
+  :global(html.au-snap) {
+    scroll-snap-type: y proximity;
+  }
+
+  :global(html.au-snap) #hero-runway,
+  :global(html.au-snap) #benefitsFrameWrap,
+  :global(html.au-snap) #workflow-steps,
+  :global(html.au-snap) #team-section,
+  :global(html.au-snap) #doom-section,
+  :global(html.au-snap) .story-epilogue {
+    scroll-snap-align: start;
+  }
+
   .height-story-wrap {
     --t-micro: 0.75rem;
     --w-label: 800;
@@ -1195,12 +1208,13 @@ const subagents = story?.subagents || [];
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    font-size: clamp(1.85rem, 3vw, 2.9rem);
+    font-size: clamp(2rem, 3.2vw, 3rem);
     font-weight: 800;
-    line-height: 1.18;
+    line-height: 1.15;
     letter-spacing: -0.025em;
     color: #000000;
     margin: 0;
+    text-wrap: balance;
   }
 
   .dilemma-punchline {
@@ -1662,13 +1676,14 @@ const subagents = story?.subagents || [];
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
-    font-weight: 900;
-    line-height: 1.2;
+    font-size: clamp(2rem, 3.2vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
     letter-spacing: -0.025em;
     color: #000000;
     margin: 0;
     text-align: center;
+    text-wrap: balance;
   }
 
   .benefits-highlight-pill {
@@ -1861,11 +1876,15 @@ const subagents = story?.subagents || [];
   /* ============================================================ */
   .team-hierarchy-section {
     width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
     background-color: #000000;
-    padding: clamp(80px, 12vh, 140px) 24px;
+    padding: clamp(32px, 5vh, 60px) 24px;
     box-sizing: border-box;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     border-top: 3px solid #000000;
     overflow-x: clip;
   }
@@ -1876,11 +1895,13 @@ const subagents = story?.subagents || [];
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    margin: auto 0;
   }
 
   .team-header-box {
     text-align: center;
-    margin-bottom: clamp(32px, 5vh, 56px);
+    margin-bottom: clamp(20px, 3vh, 36px);
   }
 
   .team-eyebrow {
@@ -1901,12 +1922,13 @@ const subagents = story?.subagents || [];
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    font-size: clamp(2.4rem, 4vw, 4.2rem);
+    font-size: clamp(2rem, 3.2vw, 3rem);
     font-weight: 800;
     letter-spacing: -0.025em;
-    line-height: 1.1;
+    line-height: 1.15;
     color: #FFFFFF;
     margin: 0;
+    text-wrap: balance;
   }
 
   .agent-tree-wrapper {
@@ -2516,11 +2538,15 @@ const subagents = story?.subagents || [];
   /* ============================================================ */
   .doom-loop-standalone-section {
     width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
     background-color: var(--doodle-cyan, #00B3E3);
-    padding: clamp(60px, 8vh, 100px) 24px;
+    padding: clamp(32px, 4.5vh, 56px) 24px;
     box-sizing: border-box;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     border-top: 3.5px solid #000000;
   }
 
@@ -2530,7 +2556,9 @@ const subagents = story?.subagents || [];
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(28px, 4vh, 48px);
+    justify-content: center;
+    gap: clamp(16px, 2.5vh, 32px);
+    margin: auto 0;
   }
 
   .doom-standalone-header {
@@ -2556,7 +2584,7 @@ const subagents = story?.subagents || [];
       -apple-system,
       BlinkMacSystemFont,
       sans-serif;
-    font-size: clamp(2rem, 3.4vw, 3.2rem);
+    font-size: clamp(2rem, 3.2vw, 3rem);
     font-weight: 800;
     line-height: 1.15;
     letter-spacing: -0.025em;
@@ -2705,7 +2733,7 @@ const subagents = story?.subagents || [];
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.92);
     text-align: center;
-    max-width: 60ch;
+    max-width: 68ch;
     margin: 0 auto;
     text-wrap: balance;
   }
@@ -3911,9 +3939,9 @@ const subagents = story?.subagents || [];
     }
 
     .doom-standalone-title {
-      font-size: clamp(1.75rem, 7vw, 2.3rem) !important;
+      font-size: clamp(1.75rem, 6.5vw, 2.25rem) !important;
       line-height: 1.18 !important;
-      font-weight: 900 !important;
+      font-weight: 800 !important;
       color: #ffffff !important;
       text-align: center !important;
       margin: 8px 0 0 !important;
@@ -3929,9 +3957,10 @@ const subagents = story?.subagents || [];
 
     /* Justified so both edges line up with the cards below. */
     .doom-standalone-lead {
-      font-size: 1rem !important;
+      font-size: 0.95rem !important;
       line-height: 1.48 !important;
       color: #ffffff !important;
+      font-weight: 500 !important;
       text-align: justify !important;
       text-wrap: auto !important;
       hyphens: auto !important;
@@ -4000,8 +4029,9 @@ const subagents = story?.subagents || [];
     }
 
     .doom-closing {
-      font-size: 1rem !important;
+      font-size: 0.95rem !important;
       line-height: 1.5 !important;
+      font-weight: 500 !important;
       color: #ffffff !important;
       text-align: center !important;
       max-width: 38ch !important;
@@ -4178,7 +4208,15 @@ const subagents = story?.subagents || [];
 </style>
 
 <script>
+  let auCleanup: (() => void) | null = null;
+
   function initAUScrollytelling() {
+    if (auCleanup) {
+      auCleanup();
+      auCleanup = null;
+    }
+
+    let orbitObserver: IntersectionObserver | null = null;
     const runway = document.getElementById("hero-runway");
     const curtain = document.getElementById("heroCurtainLayer");
     const titleEl = document.querySelector("[data-hero-title]");
@@ -4374,22 +4412,133 @@ const subagents = story?.subagents || [];
       }, `MobileFaq_${idx}`);
     });
 
-    // Doom loop IntersectionObserver
+    // Section snapping controller
+    const root = document.documentElement;
+    const snapQuery = window.matchMedia("(min-width: 861px) and (min-height: 600px)");
+
+    function updateSnapMode() {
+      if (snapQuery.matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        root.classList.add("au-snap");
+      } else {
+        root.classList.remove("au-snap");
+      }
+    }
+    updateSnapMode();
+    snapQuery.addEventListener("change", updateSnapMode);
+
+    // Mobile touch flick gesture controller (quick swipe vs natural drag)
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+
+    function getSnapSections(): HTMLElement[] {
+      const selectors = [
+        "#hero-runway",
+        "#benefitsFrameWrap",
+        "#workflow-steps",
+        "#team-section",
+        "#doom-section",
+        "#mobileFaqsSection",
+        ".story-epilogue",
+      ];
+      return selectors
+        .map((s) => document.querySelector(s) as HTMLElement)
+        .filter((el): el is HTMLElement => !!el && el.offsetHeight > 0);
+    }
+
+    function scrollToSection(direction: "next" | "prev") {
+      const sections = getSnapSections();
+      if (!sections.length) return;
+
+      const buffer = 50;
+
+      if (direction === "next") {
+        const next = sections.find((sec) => {
+          const rect = sec.getBoundingClientRect();
+          return rect.top > buffer;
+        });
+        if (next) {
+          next.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        const prevList = sections.filter((sec) => {
+          const rect = sec.getBoundingClientRect();
+          return rect.top < -buffer;
+        });
+        if (prevList.length > 0) {
+          const prev = prevList[prevList.length - 1];
+          prev.scrollIntoView({ behavior: "smooth" });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+    }
+
+    function onTouchStart(e: TouchEvent) {
+      if (window.innerWidth > 860) return;
+      if (e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+    }
+
+    function onTouchEnd(e: TouchEvent) {
+      if (window.innerWidth > 860) return;
+      if (e.changedTouches.length !== 1) return;
+      const deltaX = touchStartX - e.changedTouches[0].clientX;
+      const deltaY = touchStartY - e.changedTouches[0].clientY;
+      const elapsed = Date.now() - touchStartTime;
+
+      const isQuickFlick = elapsed < 320 && Math.abs(deltaY) > 40 && Math.abs(deltaY) > Math.abs(deltaX) * 1.25;
+
+      if (isQuickFlick) {
+        if (deltaY > 0) {
+          scrollToSection("next");
+        } else {
+          scrollToSection("prev");
+        }
+      }
+    }
+
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+
+    // Doom loop IntersectionObserver: reveal step tiles cleanly
     const doomOrbit = document.querySelector("[data-doom-orbit]");
     if (doomOrbit && !doomOrbit.hasAttribute("data-doom-bound")) {
       doomOrbit.setAttribute("data-doom-bound", "1");
       doomOrbit.classList.add("is-armed");
-      const orbitObserver = new IntersectionObserver(
+
+      const activateDoom = () => {
+        doomOrbit.classList.add("is-live");
+        if (orbitObserver) {
+          orbitObserver.disconnect();
+          orbitObserver = null;
+        }
+      };
+
+      orbitObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            doomOrbit.classList.add("is-live");
-            orbitObserver.disconnect();
+            if (entry.isIntersecting) {
+              activateDoom();
+            }
           });
         },
-        { threshold: 0.15, rootMargin: "0px 0px -20px 0px" },
+        { threshold: 0.01, rootMargin: "60px 0px 60px 0px" },
       );
       orbitObserver.observe(doomOrbit);
+      const doomSection = document.getElementById("doom-section");
+      if (doomSection) orbitObserver.observe(doomSection);
+
+      // Check if already in viewport
+      const doomRect = doomOrbit.getBoundingClientRect();
+      if (doomRect.top < window.innerHeight && doomRect.bottom > 0) {
+        activateDoom();
+      }
+
+      // Safety timeout: guarantees step tiles appear even if observer misses
+      setTimeout(activateDoom, 1200);
     }
 
     function syncBenefitsLift() {
@@ -4435,11 +4584,12 @@ const subagents = story?.subagents || [];
       benefitsCurtainLayer.style.pointerEvents = p >= 0.95 ? "none" : "auto";
     }
 
-    window.addEventListener("scroll", onBenefitsScroll, { passive: true });
-    window.addEventListener("resize", () => {
+    function onBenefitsResize() {
       syncBenefitsLift();
       onBenefitsScroll();
-    });
+    }
+    window.addEventListener("scroll", onBenefitsScroll, { passive: true });
+    window.addEventListener("resize", onBenefitsResize);
     syncBenefitsLift();
     onBenefitsScroll();
 
@@ -4564,6 +4714,31 @@ const subagents = story?.subagents || [];
 
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
+    auCleanup = () => {
+      window.removeEventListener("scroll", onBenefitsScroll);
+      window.removeEventListener("resize", onBenefitsResize);
+      window.removeEventListener("scroll", onScroll);
+      root.classList.remove("au-snap");
+      snapQuery.removeEventListener("change", updateSnapMode);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+      if (orbitObserver) {
+        orbitObserver.disconnect();
+        orbitObserver = null;
+      }
+    };
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        if (auCleanup) {
+          auCleanup();
+          auCleanup = null;
+        }
+      },
+      { once: true }
+    );
   }
 
   if (document.readyState === "loading") {

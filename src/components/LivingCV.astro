@@ -386,7 +386,14 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
 </div>
 
 <script>
+  let liveCvCleanup: (() => void) | null = null;
+
   function initLiveCvModal() {
+    if (liveCvCleanup) {
+      liveCvCleanup();
+      liveCvCleanup = null;
+    }
+
     const modal = document.getElementById("liveCvModal");
     if (!modal) return;
     if (modal.dataset.initialized === "true") return;
@@ -397,7 +404,9 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
     const copyBtn = document.getElementById("copyLiveCvMarkdownBtn");
     const scrollBody = document.getElementById("liveCvScrollBody");
 
-    let previousActiveElement = null;
+    let previousActiveElement: Element | null = null;
+    let onPillResize: (() => void) | null = null;
+    let pillResizeObserver: ResizeObserver | null = null;
 
     function openModal() {
       previousActiveElement = document.activeElement;
@@ -416,6 +425,12 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
       }
     }
 
+    function onEscapeKey(e: KeyboardEvent) {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) {
+        closeModal();
+      }
+    }
+
     // Attach to triggers across the page
     document.querySelectorAll("#open-living-cv, [data-open-cv]").forEach((btn) => {
       btn.addEventListener("click", (e) => {
@@ -425,6 +440,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
     });
 
     window.addEventListener("open-living-cv", openModal);
+    window.addEventListener("keydown", onEscapeKey);
 
     // Close button
     closeBtn?.addEventListener("click", closeModal);
@@ -432,13 +448,6 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
     // Backdrop click
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeModal();
-    });
-
-    // Escape key
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && modal.classList.contains("is-open")) {
-        closeModal();
-      }
     });
 
     // Copy Markdown dynamically from data attribute
@@ -613,10 +622,12 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
           clearTimeout(settleTimer);
           settleTimer = setTimeout(packPills, 140);
         };
+        onPillResize = schedulePack;
         if (typeof ResizeObserver !== "undefined") {
-          new ResizeObserver(() => {
+          pillResizeObserver = new ResizeObserver(() => {
             if (pillWrap.clientWidth) schedulePack();
-          }).observe(pillWrap);
+          });
+          pillResizeObserver.observe(pillWrap);
         }
         window.addEventListener("resize", schedulePack);
       }
@@ -651,6 +662,29 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
         }
       });
     });
+
+    liveCvCleanup = () => {
+      window.removeEventListener("open-living-cv", openModal);
+      window.removeEventListener("keydown", onEscapeKey);
+      if (onPillResize) {
+        window.removeEventListener("resize", onPillResize);
+      }
+      if (pillResizeObserver) {
+        pillResizeObserver.disconnect();
+        pillResizeObserver = null;
+      }
+    };
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        if (liveCvCleanup) {
+          liveCvCleanup();
+          liveCvCleanup = null;
+        }
+      },
+      { once: true }
+    );
   }
 
   document.addEventListener("astro:page-load", initLiveCvModal);
@@ -920,7 +954,8 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
   .master-cv-body {
     padding: 26px 32px 40px;
     overflow-y: auto;
-    max-height: calc(92vh - 90px);
+    flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     gap: 32px;
