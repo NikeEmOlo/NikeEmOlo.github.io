@@ -10427,6 +10427,7 @@ const cv = cvEntry?.data;
     let currentMorph = 0;
     let exitScrollProgress = 0; // 0.0 (fullscreen) to 1.0 (exited)
     let exitSpringAnim: number | null = null;
+    let areFullscreenGesturesBound = false;
 
     function setFullscreenHeader(isFullscreen: boolean) {
       if (headerBackBtn && headerBackText) {
@@ -10589,6 +10590,7 @@ const cv = cvEntry?.data;
       // Lock main document scroll so page background doesn't move/cover desktop
       setPageScrollLocked(true);
       setDesktopStageOnTop(true);
+      bindFullscreenScrollGestures();
 
       if (playWorkflow) {
         if (terminalConsole) {
@@ -13108,6 +13110,7 @@ const cv = cvEntry?.data;
       // Lock main document scroll so page background doesn't move/cover desktop
       setPageScrollLocked(true);
       setDesktopStageOnTop(true);
+      bindFullscreenScrollGestures();
 
       // Reveal terminal icon on taskbar as active
       if (taskbarTerminalBtn) {
@@ -13228,6 +13231,7 @@ const cv = cvEntry?.data;
         }
         setPageScrollLocked(false);
         setDesktopStageOnTop(false);
+        unbindFullscreenScrollGestures();
 
         if (toastNotification && !hasWorkflowTriggered && !hasTerminalRun && !isToastSnoozed) {
           toastNotification.classList.add("is-visible");
@@ -13309,15 +13313,12 @@ const cv = cvEntry?.data;
         }
       }
     }
-    window.addEventListener("wheel", onWheel, { passive: false });
-
     let touchStartY = 0;
     function onTouchStart(e: TouchEvent) {
       if (e.touches && e.touches[0]) {
         touchStartY = e.touches[0].clientY;
       }
     }
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
 
     function onTouchMove(e: TouchEvent) {
       if (!zoomContainer || !zoomContainer.classList.contains("is-fullscreen")) return;
@@ -13352,7 +13353,22 @@ const cv = cvEntry?.data;
         }
       }
     }
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
+
+    function bindFullscreenScrollGestures() {
+      if (areFullscreenGesturesBound) return;
+      areFullscreenGesturesBound = true;
+      window.addEventListener("wheel", onWheel, { passive: false });
+      window.addEventListener("touchstart", onTouchStart, { passive: true });
+      window.addEventListener("touchmove", onTouchMove, { passive: true });
+    }
+
+    function unbindFullscreenScrollGestures() {
+      if (!areFullscreenGesturesBound) return;
+      areFullscreenGesturesBound = false;
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+    }
 
     // Scroll listener: Displays cron toast at 08:00 AM as user scrolls into sticky runway
     function onScroll() {
@@ -14268,9 +14284,7 @@ AI-Assisted Automation, Agentic Workflow Design, OpenClaw, Claude, Node.js, Java
     onScroll();
 
     howItWorksCleanup = () => {
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
+      unbindFullscreenScrollGestures();
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onMorphResize);

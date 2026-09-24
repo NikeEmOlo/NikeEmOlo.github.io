@@ -353,12 +353,12 @@ const subagents = story?.subagents || [];
     </div>
 
     <!-- ============================================================ -->
-    <!-- 04 // MY DEVELOPMENT TEAM: AUTONOMOUS AGENT HIERARCHY        -->
+    <!-- 04 // MY DEVELOPMENT TEAM: AGENTS USED                       -->
     <!-- ============================================================ -->
     <section class="team-hierarchy-section" id="team-section">
       <div class="team-section-container">
         <div class="team-header-box">
-          <span class="team-eyebrow">04 // AUTONOMOUS AGENT HIERARCHY</span>
+          <span class="team-eyebrow">04 // AGENTS USED</span>
           <h2 class="team-main-title">My development team</h2>
         </div>
 
@@ -986,19 +986,6 @@ const subagents = story?.subagents || [];
      case study does it: a label is recognised by its case and tracking,
      not by each section picking its own size and weight.
      ------------------------------------------------------------------ */
-  :global(html.au-snap) {
-    scroll-snap-type: y proximity;
-  }
-
-  :global(html.au-snap) #hero-runway,
-  :global(html.au-snap) #benefitsFrameWrap,
-  :global(html.au-snap) #workflow-steps,
-  :global(html.au-snap) #team-section,
-  :global(html.au-snap) #doom-section,
-  :global(html.au-snap) .story-epilogue {
-    scroll-snap-align: start;
-  }
-
   .height-story-wrap {
     --t-micro: 0.75rem;
     --w-label: 800;
@@ -4412,97 +4399,6 @@ const subagents = story?.subagents || [];
       }, `MobileFaq_${idx}`);
     });
 
-    // Section snapping controller
-    const root = document.documentElement;
-    const snapQuery = window.matchMedia("(min-width: 861px) and (min-height: 600px)");
-
-    function updateSnapMode() {
-      if (snapQuery.matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        root.classList.add("au-snap");
-      } else {
-        root.classList.remove("au-snap");
-      }
-    }
-    updateSnapMode();
-    snapQuery.addEventListener("change", updateSnapMode);
-
-    // Mobile touch flick gesture controller (quick swipe vs natural drag)
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchStartTime = 0;
-
-    function getSnapSections(): HTMLElement[] {
-      const selectors = [
-        "#hero-runway",
-        "#benefitsFrameWrap",
-        "#workflow-steps",
-        "#team-section",
-        "#doom-section",
-        "#mobileFaqsSection",
-        ".story-epilogue",
-      ];
-      return selectors
-        .map((s) => document.querySelector(s) as HTMLElement)
-        .filter((el): el is HTMLElement => !!el && el.offsetHeight > 0);
-    }
-
-    function scrollToSection(direction: "next" | "prev") {
-      const sections = getSnapSections();
-      if (!sections.length) return;
-
-      const buffer = 50;
-
-      if (direction === "next") {
-        const next = sections.find((sec) => {
-          const rect = sec.getBoundingClientRect();
-          return rect.top > buffer;
-        });
-        if (next) {
-          next.scrollIntoView({ behavior: "smooth" });
-        }
-      } else {
-        const prevList = sections.filter((sec) => {
-          const rect = sec.getBoundingClientRect();
-          return rect.top < -buffer;
-        });
-        if (prevList.length > 0) {
-          const prev = prevList[prevList.length - 1];
-          prev.scrollIntoView({ behavior: "smooth" });
-        } else {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-      }
-    }
-
-    function onTouchStart(e: TouchEvent) {
-      if (window.innerWidth > 860) return;
-      if (e.touches.length !== 1) return;
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-      touchStartTime = Date.now();
-    }
-
-    function onTouchEnd(e: TouchEvent) {
-      if (window.innerWidth > 860) return;
-      if (e.changedTouches.length !== 1) return;
-      const deltaX = touchStartX - e.changedTouches[0].clientX;
-      const deltaY = touchStartY - e.changedTouches[0].clientY;
-      const elapsed = Date.now() - touchStartTime;
-
-      const isQuickFlick = elapsed < 320 && Math.abs(deltaY) > 40 && Math.abs(deltaY) > Math.abs(deltaX) * 1.25;
-
-      if (isQuickFlick) {
-        if (deltaY > 0) {
-          scrollToSection("next");
-        } else {
-          scrollToSection("prev");
-        }
-      }
-    }
-
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchend", onTouchEnd, { passive: true });
-
     // Doom loop IntersectionObserver: reveal step tiles cleanly
     const doomOrbit = document.querySelector("[data-doom-orbit]");
     if (doomOrbit && !doomOrbit.hasAttribute("data-doom-bound")) {
@@ -4719,10 +4615,6 @@ const subagents = story?.subagents || [];
       window.removeEventListener("scroll", onBenefitsScroll);
       window.removeEventListener("resize", onBenefitsResize);
       window.removeEventListener("scroll", onScroll);
-      root.classList.remove("au-snap");
-      snapQuery.removeEventListener("change", updateSnapMode);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchend", onTouchEnd);
       if (orbitObserver) {
         orbitObserver.disconnect();
         orbitObserver = null;
