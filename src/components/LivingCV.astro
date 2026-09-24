@@ -258,7 +258,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
                     <path d="M16 6L18 6L18.5 8.5L20.5 9.5L23 8L24.5 9.5L23 12L24 14L26.5 14.5L26.5 16.5L24 17L23 19L24.5 21.5L23 23L20.5 21.5L18.5 22.5L18 25L16 25L15.5 22.5L13.5 21.5L11 23L9.5 21.5L11 19L10 17L7.5 16.5L7.5 14.5L10 14L11 12L9.5 9.5L11 8L13.5 9.5L15.5 8.5L16 6Z" fill="#00B3E3" stroke="#000000" stroke-width="2.2" stroke-linejoin="round" />
                     <circle cx="17" cy="15.5" r="3.5" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
                     <path d="M28 8C33 11 34 18 30 23" stroke="#000000" stroke-width="2.2" stroke-linecap="round" fill="none" />
-                    <path d="M33 23L29 23L31 19" fill="#D1FF00" stroke="#000000" stroke-width="2" stroke-linejoin="round" />
+                    <path d="M33 23L29 23L31 19" fill="#00B3E3" stroke="#000000" stroke-width="2" stroke-linejoin="round" />
                     <path d="M5 6L6 8L8 9L6 10L5 12L4 10L2 9L4 8Z" fill="#FF1F70" stroke="#000000" stroke-width="1" />
                   </svg>
                 )}
@@ -268,10 +268,10 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
                     <rect x="9" y="9" width="10" height="3" rx="1.5" fill="#FFFFFF" opacity="0.8" />
                     <path d="M14 13L11 16L14 19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     <path d="M26 13L29 16L26 19" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <circle cx="19" cy="16" r="1.8" fill="#D1FF00" stroke="#000000" stroke-width="1.2" />
+                    <circle cx="19" cy="16" r="1.8" fill="#00B3E3" stroke="#000000" stroke-width="1.2" />
                     <circle cx="22" cy="16" r="1.8" fill="#FF1F70" stroke="#000000" stroke-width="1.2" />
                     <path d="M12 6L9 2" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-                    <circle cx="8" cy="2" r="1.5" fill="#D1FF00" stroke="#000000" stroke-width="1" />
+                    <circle cx="8" cy="2" r="1.5" fill="#00B3E3" stroke="#000000" stroke-width="1" />
                   </svg>
                 )}
                 {comp.code === "CLIENT_OPS" && (
@@ -286,7 +286,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
                 )}
                 {comp.code === "AGILE_PM" && (
                   <svg class="mcv-doodle-art" viewBox="0 0 40 32" fill="none" aria-hidden="true">
-                    <circle cx="18" cy="16" r="11" fill="#D1FF00" stroke="#000000" stroke-width="2.5" />
+                    <circle cx="18" cy="16" r="11" fill="#7A00FF" stroke="#000000" stroke-width="2.5" />
                     <circle cx="18" cy="16" r="7" fill="#FFFFFF" stroke="#000000" stroke-width="2" />
                     <circle cx="18" cy="16" r="3" fill="#FF1F70" stroke="#000000" stroke-width="1.8" />
                     <path d="M36 4L19 15" stroke="#000000" stroke-width="2.5" stroke-linecap="round" />
@@ -467,7 +467,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
         if (targetId && scrollBody) {
           // Scoped to the modal: these section ids also exist in the OS-sim
           // Master CV window, and getElementById returns whichever comes
-          // first in the document — so this was measuring the wrong element.
+          // first in the document, so this was measuring the wrong element.
           const targetEl = modal.querySelector("#" + targetId);
           if (targetEl) {
             const topOffset = targetEl.offsetTop - scrollBody.offsetTop - 12;
@@ -480,7 +480,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
       });
     });
 
-    // Mobile "Jump to section" menu — same scroll behaviour as the tab row it
+    // Mobile "Jump to section" menu: same scroll behaviour as the tab row it
     // replaces below 860px, but rendered in-page so it is styleable and
     // always appears under its own trigger.
     const jumpWrap = modal.querySelector("[data-cv-jump]");
@@ -549,7 +549,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
         // it opens and rect widths are post-transform, so packing scaled
         // widths against the unscaled container gave a wrong layout.
         // offsetWidth rounds down though, and the accumulated shortfall let
-        // the packer believe one more pill fitted than actually did — which
+        // the packer believe one more pill fitted than actually did, which
         // then wrapped and cost a whole row. Pad each width to stay honest.
         const SAFETY = 0.75;
         const items = pills.map((el, i) => ({
@@ -563,7 +563,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
         const placed = [];
 
         // These two lead the list by request; the packer fills around them.
-        const PINNED = ["Service Delivery & Coordination", "AI Automation"];
+        const PINNED = ["Service Delivery", "AI Automation"];
         let remaining = max;
         let first = true;
         PINNED.forEach((label) => {
@@ -607,7 +607,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
         let settleTimer = null;
         // Debounced: the modal animates open, so the container passes through
         // intermediate widths. Packing against one of those was silently
-        // costing a row — a pill would be judged to fit by a pixel or two and
+        // costing a row: a pill would be judged to fit by a pixel or two and
         // then wrap once the width settled. Wait for it to stop moving.
         const schedulePack = () => {
           clearTimeout(settleTimer);
@@ -735,9 +735,9 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
     font-size: 0.68rem;
     font-weight: 900;
     letter-spacing: 0.08em;
-    background: var(--doodle-lime, #D1FF00);
-    color: #000000;
-    border: 1.5px solid #000000;
+    background: #27272A;
+    color: #FFFFFF;
+    border: 1.5px solid #3F3F46;
     padding: 2px 8px;
     border-radius: 9999px;
     box-shadow: 1.5px 1.5px 0px #000000;
@@ -842,7 +842,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
   .cv-nav-btn.nav-btn-about:hover { background: var(--doodle-yellow, #FFDA00); color: #000000; }
   .cv-nav-btn.nav-btn-exp:hover { background: var(--doodle-cyan, #00B3E3); color: #000000; }
   .cv-nav-btn.nav-btn-comp:hover { background: var(--doodle-purple, #7A00FF); color: #FFFFFF; }
-  .cv-nav-btn.nav-btn-now:hover { background: var(--doodle-lime, #D1FF00); color: #000000; }
+  .cv-nav-btn.nav-btn-now:hover { background: var(--doodle-cyan, #00B3E3); color: #000000; }
   .cv-nav-btn.nav-btn-certs:hover { background: var(--doodle-pink, #FF1F70); color: #FFFFFF; }
 
   .master-cv-top-actions {
@@ -876,7 +876,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
   }
 
   .cv-tool-btn.is-copied {
-    background: var(--doodle-lime, #D1FF00) !important;
+    background: var(--doodle-cyan, #00B3E3) !important;
     color: #000000 !important;
   }
 
@@ -994,9 +994,9 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--doodle-lime, #D1FF00);
+    background: #10B981;
     border: 1.5px solid #000000;
-    box-shadow: 0 0 6px var(--doodle-lime, #D1FF00);
+    box-shadow: 0 0 6px #10B981;
     animation: statusPulse 2s infinite;
   }
 
@@ -1109,7 +1109,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
   }
 
   /* Education Card */
-  /* Still expandable, but the "+ details" badge carries that affordance —
+  /* Still expandable, but the "+ details" badge carries that affordance,
      the card itself does not need to look like a button too. */
   .mcv-edu-plain.mcv-expandable-card {
     background: none;
@@ -1270,10 +1270,12 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
   }
 
   .pop-pink { background: var(--doodle-pink, #FF1F70) !important; color: #FFFFFF !important; }
+  .pop-blue,
   .pop-cyan { background: var(--doodle-cyan, #00B3E3) !important; color: #000000 !important; }
   .pop-lime { background: var(--doodle-lime, #D1FF00) !important; color: #000000 !important; }
   .pop-yellow { background: var(--doodle-yellow, #FFDA00) !important; color: #000000 !important; }
   .pop-purple { background: var(--doodle-purple, #7A00FF) !important; color: #FFFFFF !important; }
+  .pop-white { background: #FFFFFF !important; color: #000000 !important; }
 
   /* Work Experience Timeline */
   .mcv-timeline {
@@ -1448,6 +1450,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
   }
 
   .card-pink { background: #FFF0F5; border-top: 6px solid var(--doodle-pink, #FF1F70); }
+  .card-blue,
   .card-cyan { background: #F0FAFF; border-top: 6px solid var(--doodle-cyan, #00B3E3); }
   .card-lime { background: #F8FFE5; border-top: 6px solid var(--doodle-lime, #D1FF00); }
   .card-yellow { background: #FFFDF0; border-top: 6px solid var(--doodle-yellow, #FFDA00); }
@@ -1552,6 +1555,8 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
     border: 1.5px solid #000000;
   }
 
+  .blue-beacon,
+  .cyan-beacon { background: var(--doodle-cyan, #00B3E3); box-shadow: 0 0 8px rgba(0, 179, 227, 0.8); }
   .lime-beacon { background: var(--doodle-lime, #D1FF00); box-shadow: 0 0 8px rgba(209, 255, 0, 0.9); }
   .purple-beacon { background: var(--doodle-purple, #7A00FF); box-shadow: 0 0 8px rgba(122, 0, 255, 0.7); }
   .yellow-beacon { background: var(--doodle-yellow, #FFDA00); box-shadow: 0 0 8px rgba(255, 218, 0, 0.9); }
@@ -1674,7 +1679,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
 
   /* ---- Live CV, mobile ------------------------------------------------ */
   @media (max-width: 860px) {
-    /* Tab row out, one plain select in. No chrome around it — the Download
+    /* Tab row out, one plain select in. No chrome around it: the Download
        CV button is the thing that should carry weight in this bar. */
     .live-cv-topbar .master-cv-nav {
       display: none !important;
@@ -1834,7 +1839,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
     /* "+ details" sat beside the role, which broke the reading order and
        added yet another pill to a page full of them. Dissolve the role row
        so role, keywords and the toggle become siblings, then order the
-       toggle last — bottom of the card, as plain text. */
+       toggle last: bottom of the card, as plain text. */
     .mcv-tl-right {
       display: flex !important;
       flex-direction: column !important;
@@ -1853,7 +1858,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
       margin: 8px 0 0 !important;
     }
 
-    /* Plain text, not a pill — work experience only. Education and the other
+    /* Plain text, not a pill: work experience only. Education and the other
        expandables keep their badge. */
     .mcv-timeline-item .mcv-expand-toggle-badge {
       background: none !important;
@@ -1990,7 +1995,7 @@ ${cv.certificates.map(c => `- ${c.title} (${c.meta})`).join("\n")}`;
 
     /* Skills: flex-wrap fills strictly in source order, so a long pill can
        strand a half-empty line. Tightening the metrics is the part CSS can
-       actually do — it fits more per line without reordering the list. */
+       actually do, it fits more per line without reordering the list. */
     .mcv-pills {
       gap: 5px !important;
     }

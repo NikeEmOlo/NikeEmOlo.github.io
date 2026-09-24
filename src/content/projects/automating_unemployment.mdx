@@ -25,4 +25,13 @@ story:
       name: "Willow"
       role: "The Builder"
       brief: "Developed the codebase, automated scrapers, local APIs, and Mission Control dashboard on Opus from my prompts."
+  subagents:
+    - glyph: "H"
+      name: "Hiring Manager"
+      role: "The judge"
+      brief: "Reads the tailored CV and the job description to answer the questions \"Would you interview this person based on their CV? Why, why not? How can the CV be improved?\""
+    - glyph: "F"
+      name: "Fact checker"
+      role: "Truth & Evidence Auditor"
+      brief: "Reads the master_cv and the tailored_cv and checks \"Is there anything in here that there is no supporting evidence for in the master_cv?\" If there are clear untruths, these are flagged with Cordy. If there is nothing in the master_cv to confirm or deny, the question gets posed to me and I must confirm / deny or edit manually. This is to keep CVs truthful while allowing the CV to be re-worded to suit different roles."
 ---

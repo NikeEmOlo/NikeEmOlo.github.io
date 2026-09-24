@@ -10,6 +10,7 @@ import Navigation from "../components/Navigation.astro";
 const project = await getEntry("projects", "automating_unemployment");
 const story = project?.data?.story || {};
 const agents = story?.agents || story?.vignette3?.agents || [];
+const subagents = story?.subagents || [];
 ---
 
 <Base>
@@ -59,14 +60,14 @@ const agents = story?.agents || story?.vignette3?.agents || [];
                 <span class="dilemma-punchline">I do.</span>
               </h2>
               <p class="dilemma-sub-lead desktop-sub-lead">
-                You're a career changer who has just moved to London. You want to transition into tech, but you're currently mid-way through your training. Do you:
+                You're a career changer who has just moved to London. You're completing a full-stack development course and you're midway through your training. Do you:
               </p>
             </div>
 
             <!-- Centered Choice Stage: Prompt, Left Option, Center Character, Right Option -->
             <div class="dilemma-decision-stage" data-dilemma-body>
               <p class="dilemma-sub-lead mobile-sub-lead">
-                You're a career changer who has just moved to London. You want to transition into tech, but you're currently mid-way through your training. Do you:
+                You're a career changer who has just moved to London. You're completing a full-stack development course and you're midway through your training. Do you:
               </p>
               
               <!-- Option 1 (Selectable Button Card) -->
@@ -75,7 +76,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
                 id="choiceOption1"
                 data-choice="1"
                 type="button"
-                aria-label="Option 1: Finish your training course which will take months, then apply for jobs in the industry you're training for"
+                aria-label="Option 1: Finish your course (which will take months), then apply for jobs using your new skills"
               >
                 <!-- Corner Doodle Sparks -->
                 <div class="card-doodle-spark top-right" aria-hidden="true">
@@ -90,7 +91,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
                   <span class="choice-hint">Choice A</span>
                 </div>
                 <p class="choice-main-text">
-                  Finish your training course which will take months, then apply for jobs in the industry you're training for
+                  Finish your course (which will take months), then apply for jobs using your new skills
                 </p>
                 <div class="choice-bottom-bar">
                   <span class="choice-pick-pill">Pick this one</span>
@@ -207,7 +208,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
             <div class="benefits-header-group">
               <span class="benefits-eyebrow">Automating Unemployment</span>
               <h2 class="benefits-main-title">
-                This case study details how I designed a multi-agent AI team to automate the job-hunt, freeing up <span class="benefits-highlight-pill">83% of my time</span>.
+                This case study shows how I built my own ETS (Employer Tracking System) to automate the job hunt, using an agentic workflow
               </h2>
             </div>
 
@@ -352,13 +353,13 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     </div>
 
     <!-- ============================================================ -->
-    <!-- 04 // MEET THE TEAM: 2-TIER AUTONOMOUS AGENT HIERARCHY      -->
+    <!-- 04 // MY DEVELOPMENT TEAM: AUTONOMOUS AGENT HIERARCHY        -->
     <!-- ============================================================ -->
     <section class="team-hierarchy-section" id="team-section">
       <div class="team-section-container">
         <div class="team-header-box">
           <span class="team-eyebrow">04 // AUTONOMOUS AGENT HIERARCHY</span>
-          <h2 class="team-main-title">Meet the team</h2>
+          <h2 class="team-main-title">My development team</h2>
         </div>
 
         <!-- Tree Hierarchy Container -->
@@ -414,120 +415,253 @@ const agents = story?.agents || story?.vignette3?.agents || [];
 
           <!-- CONNECTING FORK BUS SVG (FLOWS FROM GILES TO CORDELIA & WILLOW ONLY) -->
           <div class="tree-fork-connector" aria-hidden="true">
-            <svg class="tree-conduit-svg" viewBox="0 0 680 44" fill="none">
-              <path d="M 340 0 L 340 22" stroke="#000000" stroke-width="3" stroke-linecap="round" />
-              <path d="M 340 0 L 340 22" stroke="#D97706" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-stem" />
+            <svg class="tree-conduit-svg" viewBox="0 0 708 44" fill="none">
+              <path d="M 354 0 L 354 22" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+              <path d="M 354 0 L 354 22" stroke="#D97706" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-stem" />
 
-              <path d="M 170 22 L 510 22" stroke="#000000" stroke-width="3" stroke-linecap="round" />
-              <path d="M 170 22 L 510 22" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-split" />
+              <path d="M 170 22 L 538 22" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+              <path d="M 170 22 L 538 22" stroke="#71717A" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-split" />
 
               <path d="M 170 22 L 170 44" stroke="#000000" stroke-width="3" stroke-linecap="round" />
               <path d="M 170 22 L 170 44" stroke="#E11D48" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-left" />
 
-              <path d="M 510 22 L 510 44" stroke="#000000" stroke-width="3" stroke-linecap="round" />
-              <path d="M 510 22 L 510 44" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-right" />
+              <path d="M 538 22 L 538 44" stroke="#000000" stroke-width="3" stroke-linecap="round" />
+              <path d="M 538 22 L 538 44" stroke="#0D9488" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" class="dash-right" />
 
               <circle r="4" fill="#E11D48" stroke="#000000" stroke-width="1.5">
-                <animateMotion path="M 340 0 L 340 22 L 170 22 L 170 44" dur="2.2s" repeatCount="indefinite" />
+                <animateMotion path="M 354 0 L 354 22 L 170 22 L 170 44" dur="2.2s" repeatCount="indefinite" />
                 <animate attributeName="opacity" values="0; 1; 1; 0" keyTimes="0; 0.08; 0.92; 1" dur="2.2s" repeatCount="indefinite" />
               </circle>
 
               <circle r="4" fill="#0D9488" stroke="#000000" stroke-width="1.5">
-                <animateMotion path="M 340 0 L 340 22 L 510 22 L 510 44" dur="2.2s" begin="0.35s" repeatCount="indefinite" />
+                <animateMotion path="M 354 0 L 354 22 L 538 22 L 538 44" dur="2.2s" begin="0.35s" repeatCount="indefinite" />
                 <animate attributeName="opacity" values="0; 1; 1; 0" keyTimes="0; 0.08; 0.92; 1" dur="2.2s" begin="0.35s" repeatCount="indefinite" />
               </circle>
             </svg>
           </div>
 
-          <!-- BOTTOM LEVEL: 2 SUB-AGENTS -->
-          <div class="tree-branches-row">
-            {agents[1] && (
-              <div class="agent-node-card branch-node" style="--node-accent: #E11D48;">
-                <div class="node-chassis-top">
-                  <div class="node-tag-group">
-                    <span class="node-rivet">+</span>
-                    <span class="node-level-id">SUB-AGENT // 01</span>
-                  </div>
-                  <div class="node-status-chip">
-                    <span class="node-live-led" style="background-color: #E11D48;" />
-                    <span class="node-status-label">ANALYZING</span>
-                    <span class="node-rivet">+</span>
-                  </div>
-                </div>
-
-                <div class="node-chassis-body">
-                  <div class="node-icon-col">
-                    <AgentTreeIcons type="tailor" size="48px" />
-                  </div>
-                  <div class="node-info-col">
-                    <div class="node-title-row">
-                      <h3 class="node-agent-name">{agents[1].name}</h3>
-                      <span class="node-chip-badge">TAILOR &amp; VIBE</span>
+          <!-- LOWER LEVEL: CORDY + WILLOW + CORDY'S 2 REVIEWER SUB-AGENTS -->
+          <div class="tree-branches-stage">
+            <!-- LEFT CLUSTER: SUB-AGENTS STACKED TO THE LEFT OF CORDY -->
+            <div class="tree-subagents-cluster">
+              <div class="tree-subagents-col">
+                <span class="subagents-dispatch-tag" aria-hidden="true">&#8627; CORDY REVIEW SQUAD</span>
+                {subagents[0] && (
+                  <div class="agent-node-card subagent-node-card" style="--node-accent: #A855F7;">
+                    <div class="node-chassis-top">
+                      <div class="node-tag-group">
+                        <span class="node-rivet">+</span>
+                        <span class="node-level-id">SUB-AGENT // 01</span>
+                      </div>
+                      <div class="node-status-chip">
+                        <span class="node-live-led" style="background-color: #A855F7;" />
+                        <span class="node-status-label">THE JUDGE</span>
+                        <span class="node-rivet">+</span>
+                      </div>
                     </div>
-                    <span class="node-agent-role" style="color: #E11D48;">{agents[1].role}</span>
-                    <p class="node-brief-text" id="agent-brief-1">{agents[1].brief}</p>
-                    <button
-                      class="node-expand-btn"
-                      type="button"
-                      aria-expanded="false"
-                      aria-controls="agent-brief-1"
-                    >
-                      <span class="node-expand-label">Read more</span>
-                      <span class="node-expand-chevron" aria-hidden="true">&#9662;</span>
-                    </button>
-                  </div>
-                </div>
 
-                <div class="node-telemetry-tray">
-                  <span class="telemetry-item"><strong>PRECISION:</strong> IMPROVES OVER TIME</span>
-                </div>
-              </div>
-            )}
-
-            {agents[2] && (
-              <div class="agent-node-card branch-node" style="--node-accent: #0D9488;">
-                <div class="node-chassis-top">
-                  <div class="node-tag-group">
-                    <span class="node-rivet">+</span>
-                    <span class="node-level-id">SUB-AGENT // 02</span>
-                  </div>
-                  <div class="node-status-chip">
-                    <span class="node-live-led" style="background-color: #0D9488;" />
-                    <span class="node-status-label">READY</span>
-                    <span class="node-rivet">+</span>
-                  </div>
-                </div>
-
-                <div class="node-chassis-body">
-                  <div class="node-icon-col">
-                    <AgentTreeIcons type="developer" size="48px" />
-                  </div>
-                  <div class="node-info-col">
-                    <div class="node-title-row">
-                      <h3 class="node-agent-name">{agents[2].name}</h3>
-                      <span class="node-chip-badge">CODE BUILDER</span>
+                    <div class="node-chassis-body">
+                      <div class="node-icon-col">
+                        <AgentTreeIcons type="judge" size="20px" />
+                      </div>
+                      <div class="node-info-col">
+                        <div class="node-title-row">
+                          <h4 class="node-agent-name subagent-name">{subagents[0].name}</h4>
+                          <span class="node-chip-badge subagent-badge">REVIEWER</span>
+                        </div>
+                        <div class="subagent-role-action-row">
+                          <span class="node-agent-role subagent-role" style="color: #C084FC;">{subagents[0].role}</span>
+                          <button
+                            class="subagent-accordion-btn"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="agent-brief-sub-0"
+                            title="Toggle brief"
+                          >
+                            <span class="subagent-btn-txt">+ more</span>
+                            <span class="subagent-btn-chevron" aria-hidden="true">&#9662;</span>
+                          </button>
+                        </div>
+                        <div class="subagent-drawer" id="agent-brief-sub-0">
+                          <p class="node-brief-text subagent-brief">{subagents[0].brief}</p>
+                        </div>
+                      </div>
                     </div>
-                    <span class="node-agent-role" style="color: #0D9488;">{agents[2].role}</span>
-                    <p class="node-brief-text" id="agent-brief-2">{agents[2].brief}</p>
-                    <button
-                      class="node-expand-btn"
-                      type="button"
-                      aria-expanded="false"
-                      aria-controls="agent-brief-2"
-                    >
-                      <span class="node-expand-label">Read more</span>
-                      <span class="node-expand-chevron" aria-hidden="true">&#9662;</span>
-                    </button>
+
+                    <div class="node-telemetry-tray subagent-telemetry">
+                      <span class="telemetry-item"><strong>ROLE:</strong> INTERVIEW FIT</span>
+                    </div>
+                  </div>
+                )}
+
+                {subagents[1] && (
+                  <div class="agent-node-card subagent-node-card" style="--node-accent: #0284C7;">
+                    <div class="node-chassis-top">
+                      <div class="node-tag-group">
+                        <span class="node-rivet">+</span>
+                        <span class="node-level-id">SUB-AGENT // 02</span>
+                      </div>
+                      <div class="node-status-chip">
+                        <span class="node-live-led" style="background-color: #0284C7;" />
+                        <span class="node-status-label">AUDITING</span>
+                        <span class="node-rivet">+</span>
+                      </div>
+                    </div>
+
+                    <div class="node-chassis-body">
+                      <div class="node-icon-col">
+                        <AgentTreeIcons type="fact_checker" size="20px" />
+                      </div>
+                      <div class="node-info-col">
+                        <div class="node-title-row">
+                          <h4 class="node-agent-name subagent-name">{subagents[1].name}</h4>
+                          <span class="node-chip-badge subagent-badge">VERIFIER</span>
+                        </div>
+                        <div class="subagent-role-action-row">
+                          <span class="node-agent-role subagent-role" style="color: #38BDF8;">{subagents[1].role}</span>
+                          <button
+                            class="subagent-accordion-btn"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="agent-brief-sub-1"
+                            title="Toggle brief"
+                          >
+                            <span class="subagent-btn-txt">+ more</span>
+                            <span class="subagent-btn-chevron" aria-hidden="true">&#9662;</span>
+                          </button>
+                        </div>
+                        <div class="subagent-drawer" id="agent-brief-sub-1">
+                          <p class="node-brief-text subagent-brief">{subagents[1].brief}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="node-telemetry-tray subagent-telemetry">
+                      <span class="telemetry-item"><strong>TRUTH:</strong> MASTER_CV</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <!-- DEDICATED CONNECTOR CONDUIT: FLOWS ONLY FROM CORDY TO SUB-AGENTS -->
+              <div class="tree-cordy-sub-connector" aria-hidden="true">
+                <svg class="tree-sub-conduit-svg" viewBox="0 0 28 244" fill="none" preserveAspectRatio="none">
+                  <path d="M 28 122 L 14 122 L 14 56 L 0 56" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M 28 122 L 14 122 L 14 188 L 0 188" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+                  <path d="M 28 122 L 14 122 L 14 56 L 0 56" stroke="#A855F7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4" class="dash-sub-judge" />
+                  <path d="M 28 122 L 14 122 L 14 188 L 0 188" stroke="#0284C7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4 4" class="dash-sub-fact" />
+
+                  <circle cx="26" cy="122" r="3.5" fill="#E11D48" stroke="#000000" stroke-width="1.5" />
+                  <circle cx="2" cy="56" r="3" fill="#C084FC" stroke="#000000" stroke-width="1.5" />
+                  <circle cx="2" cy="188" r="3" fill="#38BDF8" stroke="#000000" stroke-width="1.5" />
+
+                  <circle r="3.5" fill="#C084FC" stroke="#000000" stroke-width="1.5">
+                    <animateMotion path="M 28 122 L 14 122 L 14 56 L 0 56" dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0; 1; 1; 0" keyTimes="0; 0.1; 0.9; 1" dur="2s" repeatCount="indefinite" />
+                  </circle>
+
+                  <circle r="3.5" fill="#38BDF8" stroke="#000000" stroke-width="1.5">
+                    <animateMotion path="M 28 122 L 14 122 L 14 188 L 0 188" dur="2s" begin="0.4s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0; 1; 1; 0" keyTimes="0; 0.1; 0.9; 1" dur="2s" begin="0.4s" repeatCount="indefinite" />
+                  </circle>
+                </svg>
+              </div>
+            </div>
+
+            <!-- CENTER: 2 MAIN BRANCH AGENTS (CORDY & WILLOW) -->
+            <div class="tree-branches-row">
+              {agents[1] && (
+                <div class="agent-node-card branch-node" style="--node-accent: #E11D48;">
+                  <div class="node-chassis-top">
+                    <div class="node-tag-group">
+                      <span class="node-rivet">+</span>
+                      <span class="node-level-id">AGENT // 02</span>
+                    </div>
+                    <div class="node-status-chip">
+                      <span class="node-live-led" style="background-color: #E11D48;" />
+                      <span class="node-status-label">ANALYZING</span>
+                      <span class="node-rivet">+</span>
+                    </div>
+                  </div>
+
+                  <div class="node-chassis-body">
+                    <div class="node-icon-col">
+                      <AgentTreeIcons type="tailor" size="48px" />
+                    </div>
+                    <div class="node-info-col">
+                      <div class="node-title-row">
+                        <h3 class="node-agent-name">{agents[1].name}</h3>
+                        <span class="node-chip-badge">TAILOR &amp; VIBE</span>
+                      </div>
+                      <span class="node-agent-role" style="color: #E11D48;">{agents[1].role}</span>
+                      <p class="node-brief-text" id="agent-brief-1">{agents[1].brief}</p>
+                      <button
+                        class="node-expand-btn"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls="agent-brief-1"
+                      >
+                        <span class="node-expand-label">Read more</span>
+                        <span class="node-expand-chevron" aria-hidden="true">&#9662;</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="node-telemetry-tray">
+                    <span class="telemetry-item"><strong>PRECISION:</strong> IMPROVES OVER TIME</span>
                   </div>
                 </div>
+              )}
 
-                <div class="node-telemetry-tray">
-                  <span class="telemetry-item"><strong>MODEL:</strong> CLAUDE OPUS</span>
-                  <span class="telemetry-dot">&middot;</span>
-                  <span class="telemetry-item"><strong>SCOPE:</strong> CODEBASE &amp; APIS</span>
+              {agents[2] && (
+                <div class="agent-node-card branch-node" style="--node-accent: #0D9488;">
+                  <div class="node-chassis-top">
+                    <div class="node-tag-group">
+                      <span class="node-rivet">+</span>
+                      <span class="node-level-id">AGENT // 03</span>
+                    </div>
+                    <div class="node-status-chip">
+                      <span class="node-live-led" style="background-color: #0D9488;" />
+                      <span class="node-status-label">READY</span>
+                      <span class="node-rivet">+</span>
+                    </div>
+                  </div>
+
+                  <div class="node-chassis-body">
+                    <div class="node-icon-col">
+                      <AgentTreeIcons type="developer" size="48px" />
+                    </div>
+                    <div class="node-info-col">
+                      <div class="node-title-row">
+                        <h3 class="node-agent-name">{agents[2].name}</h3>
+                        <span class="node-chip-badge">CODE BUILDER</span>
+                      </div>
+                      <span class="node-agent-role" style="color: #0D9488;">{agents[2].role}</span>
+                      <p class="node-brief-text" id="agent-brief-2">{agents[2].brief}</p>
+                      <button
+                        class="node-expand-btn"
+                        type="button"
+                        aria-expanded="false"
+                        aria-controls="agent-brief-2"
+                      >
+                        <span class="node-expand-label">Read more</span>
+                        <span class="node-expand-chevron" aria-hidden="true">&#9662;</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="node-telemetry-tray">
+                    <span class="telemetry-item"><strong>MODEL:</strong> CLAUDE OPUS</span>
+                    <span class="telemetry-dot">&middot;</span>
+                    <span class="telemetry-item"><strong>SCOPE:</strong> CODEBASE &amp; APIS</span>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
+
+            <!-- RIGHT: BALANCING SPACER TO ENSURE DEAD CENTERING OF GILES, CORDY & WILLOW -->
+            <div class="tree-right-balancer" aria-hidden="true"></div>
           </div>
         </div>
       </div>
@@ -564,7 +698,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
           </li>
           <li class="doom-orbit-note note-3" style="--i: 2; --note-accent: var(--doodle-lime, #D1FF00);">
             <span class="doom-note-num">03</span>
-            <p class="doom-note-text">Those filters push the competition higher still. Applicant tracking systems now demand match rates as high as 95% against their requirements, scoring keywords rather than people.</p>
+            <p class="doom-note-text">Those filters push the competition higher still. We begin scrutinising keywords instead of fit and potential.</p>
           </li>
           <li class="doom-orbit-note note-4" style="--i: 3; --note-accent: var(--doodle-yellow, #FFDA00);">
             <span class="doom-note-num">04</span>
@@ -710,6 +844,7 @@ const agents = story?.agents || story?.vignette3?.agents || [];
             <div class="mobile-faq-panel" id="mfaq-content-6" role="region" aria-labelledby="mfaq-header-6" hidden>
               <div class="mfaq-content-inner">
                 <p class="mfaq-p">The agents operate on a virtual computer, completely separated from my personal files. For this task that was considered enough, since the agents have no need to log into accounts or access personal information.</p>
+                <p class="mfaq-p">To manage prompt injection from untrusted job postings, Cordy treats all incoming listing text strictly as passive data. Cordy is anchored to master_cv.md and has zero authority to run shell commands. Every tailored CV requires manual human review and approval in Mission Control before anything is ever sent out.</p>
               </div>
             </div>
           </div>
@@ -1732,11 +1867,12 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     display: flex;
     justify-content: center;
     border-top: 3px solid #000000;
+    overflow-x: clip;
   }
 
   .team-section-container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1420px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1777,7 +1913,8 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: min(94vw, 860px);
+    width: 100%;
+    max-width: 1420px;
     box-sizing: border-box;
   }
 
@@ -1789,8 +1926,8 @@ const agents = story?.agents || story?.vignette3?.agents || [];
   }
 
   .tree-fork-connector {
-    width: 100%;
-    max-width: 680px;
+    width: 708px;
+    max-width: 100%;
     height: 44px;
     display: flex;
     align-items: center;
@@ -1819,18 +1956,379 @@ const agents = story?.agents || story?.vignette3?.agents || [];
     }
   }
 
-  .tree-branches-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(20px, 3.5vw, 40px);
+  /* Stage containing subagents on left, Cordy and Willow in center, and balancer on right */
+  .tree-branches-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    max-width: 780px;
+    position: relative;
     z-index: 2;
   }
 
-  @media (max-width: 680px) {
+  .tree-subagents-cluster {
+    display: flex;
+    align-items: center;
+    flex: 0 0 328px;
+    width: 328px;
+    justify-content: flex-end;
+  }
+
+  .tree-subagents-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 300px;
+    flex-shrink: 0;
+  }
+
+  .subagents-dispatch-tag {
+    display: none;
+    font-family: monospace;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #E11D48;
+    margin-bottom: 2px;
+  }
+
+  .tree-cordy-sub-connector {
+    width: 28px;
+    height: 244px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    margin-right: -2px;
+  }
+
+  .tree-sub-conduit-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .dash-sub-judge,
+  .dash-sub-fact {
+    animation: treeConduitDash 1.5s linear infinite;
+  }
+
+  .tree-branches-row {
+    display: grid;
+    grid-template-columns: 340px 340px;
+    gap: 28px;
+    width: 708px;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+
+  .tree-right-balancer {
+    flex: 0 0 328px;
+    width: 328px;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  /* Subagent specific card overrides: proportional compact scale */
+  .subagent-node-card {
+    border-radius: 10px;
+    width: 300px;
+    box-shadow:
+      3px 3px 0px #000000,
+      0 4px 12px rgba(0, 0, 0, 0.4);
+    transition:
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s ease,
+      border-color 0.2s ease;
+  }
+
+  .subagent-node-card.is-open {
+    border-color: var(--node-accent, #A855F7);
+    box-shadow:
+      4px 4px 0px #000000,
+      0 6px 18px rgba(0, 0, 0, 0.5);
+  }
+
+  .subagent-node-card .node-chassis-top {
+    padding: 3px 8px;
+    min-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+
+  .subagent-node-card .node-tag-group,
+  .subagent-node-card .node-status-chip {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .subagent-node-card .node-level-id {
+    font-size: 0.50rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #A1A1AA;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .subagent-node-card .node-status-label {
+    font-size: 0.48rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #A1A1AA;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .subagent-node-card .node-rivet {
+    font-size: 7px;
+    color: #71717A;
+    line-height: 1;
+  }
+
+  .subagent-node-card .node-live-led {
+    width: 5px;
+    height: 5px;
+    border: 1px solid #000000;
+  }
+
+  .subagent-node-card .node-chassis-body {
+    padding: 6px 8px;
+    gap: 6px;
+    align-items: flex-start;
+  }
+
+  .subagent-node-card .node-icon-col {
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 1px;
+  }
+
+  .subagent-node-card .node-info-col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .subagent-node-card .node-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+
+  .subagent-name {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .subagent-badge {
+    font-size: 0.44rem;
+    font-weight: 800;
+    padding: 1.5px 4.5px;
+    border-radius: 3px;
+    border: 1px solid #FFD233;
+    color: #FFD233;
+    background: #000000;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+    line-height: 1.1;
+  }
+
+  .subagent-role-action-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 2px;
+    min-width: 0;
+  }
+
+  .subagent-role {
+    font-size: 0.56rem;
+    font-family: monospace;
+    font-weight: 700;
+    margin: 0 !important;
+    white-space: nowrap;
+    line-height: 1.2;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .subagent-accordion-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: #27272A;
+    border: 1px solid #3F3F46;
+    border-radius: 3px;
+    color: #D4D4D8;
+    font-family: monospace;
+    font-size: 0.48rem;
+    font-weight: 700;
+    padding: 1.5px 5px;
+    cursor: pointer;
+    flex-shrink: 0;
+    line-height: 1.2;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .subagent-accordion-btn:hover {
+    background: #3F3F46;
+    border-color: #71717A;
+    color: #FFFFFF;
+  }
+
+  .subagent-btn-chevron {
+    font-size: 0.46rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+
+  .subagent-node-card.is-open .subagent-btn-chevron {
+    transform: rotate(180deg);
+  }
+
+  .subagent-drawer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s cubic-bezier(0.16, 1, 0.3, 1), margin-top 0.25s ease;
+    overflow: hidden;
+    margin-top: 0;
+  }
+
+  .subagent-drawer > .subagent-brief {
+    min-height: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    margin: 0;
+    font-size: 0.64rem;
+    line-height: 1.35;
+    color: #D4D4D8;
+  }
+
+  .subagent-node-card.is-open .subagent-drawer {
+    grid-template-rows: 1fr;
+    margin-top: 5px;
+    padding-top: 4px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.12);
+  }
+
+  .subagent-node-card.is-open .subagent-drawer > .subagent-brief {
+    opacity: 1;
+  }
+
+  .subagent-telemetry {
+    padding: 2px 6px;
+    font-size: 0.50rem;
+    background: #18181B;
+    border-top: 1.5px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .subagent-telemetry .telemetry-item {
+    font-family: monospace;
+    font-size: 0.54rem;
+    color: #A1A1AA;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .subagent-telemetry .telemetry-item strong {
+    color: #71717A;
+    font-weight: 800;
+    margin-right: 4px;
+  }
+
+  @media (max-width: 1420px) {
+    .tree-fork-connector {
+      display: none !important;
+    }
+
+    .tree-branches-stage {
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .tree-right-balancer {
+      display: none !important;
+    }
+
     .tree-branches-row {
-      grid-template-columns: 1fr;
+      display: contents !important;
+    }
+
+    .tree-branches-row > .agent-node-card:first-child {
+      order: 1;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .tree-subagents-cluster {
+      order: 2;
+      width: 100%;
+      max-width: 480px;
+      flex: 0 1 auto;
+      justify-content: flex-start;
+      margin: 8px 0;
+    }
+
+    .tree-cordy-sub-connector {
+      display: none !important;
+    }
+
+    .tree-subagents-col {
+      width: 100%;
+      box-sizing: border-box;
+      border-left: 2.5px dashed #E11D48;
+      padding-left: 16px;
+      margin-left: 12px;
+      gap: 12px;
+    }
+
+    .subagent-node-card {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .subagents-dispatch-tag {
+      display: block;
+    }
+
+    .tree-branches-row > .agent-node-card:last-child {
+      order: 3;
+      width: 100%;
+      max-width: 480px;
     }
   }
 
@@ -3268,13 +3766,61 @@ const agents = story?.agents || story?.vignette3?.agents || [];
       display: none !important;
     }
 
-    .tree-root-row,
-    .tree-branches-row {
+    .tree-root-row {
       display: flex !important;
       flex-direction: column !important;
-      grid-template-columns: 1fr !important;
-      gap: 14px !important;
+      width: 100% !important;
       margin: 0 !important;
+    }
+
+    .tree-branches-stage {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      gap: 14px !important;
+    }
+
+    .tree-right-balancer {
+      display: none !important;
+    }
+
+    .tree-branches-row {
+      display: contents !important;
+    }
+
+    .tree-branches-row > .agent-node-card:first-child {
+      order: 1 !important;
+      width: 100% !important;
+    }
+
+    .tree-subagents-cluster {
+      order: 2 !important;
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      margin: 0 !important;
+    }
+
+    .tree-cordy-sub-connector {
+      display: none !important;
+    }
+
+    .tree-subagents-col {
+      width: 100% !important;
+      box-sizing: border-box !important;
+      border-left: 2.5px dashed #E11D48 !important;
+      padding-left: 14px !important;
+      margin-left: 10px !important;
+      gap: 12px !important;
+    }
+
+    .subagents-dispatch-tag {
+      display: block !important;
+    }
+
+    .tree-branches-row > .agent-node-card:last-child {
+      order: 3 !important;
+      width: 100% !important;
     }
 
     .agent-node-card {
@@ -3967,6 +4513,53 @@ const agents = story?.agents || story?.vignette3?.agents || [];
         const label = btn.querySelector(".node-expand-label");
         if (label) label.textContent = open ? "Read less" : "Read more";
       });
+    });
+
+    // Sub-agent accordion handler: only one sub-agent card opens at a time
+    const subagentCards = document.querySelectorAll(".subagent-node-card");
+    subagentCards.forEach((card) => {
+      if (card.hasAttribute("data-subagent-bound")) return;
+      card.setAttribute("data-subagent-bound", "1");
+
+      const btn = card.querySelector(".subagent-accordion-btn");
+      const label = btn ? btn.querySelector(".subagent-btn-txt") : null;
+
+      const toggleCard = (e) => {
+        if (e.target.closest("a")) return;
+        const willOpen = !card.classList.contains("is-open");
+
+        // Accordion constraint: close any other open sub-agent card
+        subagentCards.forEach((c) => {
+          c.classList.remove("is-open");
+          const cBtn = c.querySelector(".subagent-accordion-btn");
+          if (cBtn) {
+            cBtn.setAttribute("aria-expanded", "false");
+            const cLabel = cBtn.querySelector(".subagent-btn-txt");
+            if (cLabel) cLabel.textContent = "+ more";
+          }
+        });
+
+        if (willOpen) {
+          card.classList.add("is-open");
+          if (btn) {
+            btn.setAttribute("aria-expanded", "true");
+            if (label) label.textContent = "- less";
+          }
+        }
+      };
+
+      if (btn) {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          toggleCard(e);
+        });
+      }
+
+      const chassisTop = card.querySelector(".node-chassis-top");
+      if (chassisTop) {
+        chassisTop.style.cursor = "pointer";
+        chassisTop.addEventListener("click", toggleCard);
+      }
     });
 
     window.addEventListener("scroll", onScroll, { passive: true });
